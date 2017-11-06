@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	
+	<!-- 어노테이션을 사용하기 위한 작업 -->
+	<context:annotation-config />
+	
+	<!-- 오라클 컨넥션 풀 설정 -->
+	<bean id="BaseBDDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@192.168.137.54:1521:orcl" />
+		<property name="username" value="scott" />
+		<property name="password" value="tiger" />
+	</bean>
+	
+	<!-- myBatis 환경설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 기존방식일때 사용 / mapper XML 경로를 잡아준다. -->
+		<property name="configLocation" value="classpath:/mapper/myBatis-config.xml" />
+		<!-- 사용할 컨넥션 풀과 연결 -->
+		<property name="dataSource" ref="BaseBDDataSource" />
+		
+		<!-- 
+			새로운 방식 / 자동 Alias 설정  
+			-	해당 패키지안에 VO를 만들면 자동 Alias가 생성된다.
+			-	MemberVO -> MemberVO or membervo 로 사용가능
+		-->
+		<property name="typeAliasesPackage" value="com.jjack.web.common.vo"/>
+		<!-- SQL.xml 문서들이 정의된 경로를 지정한다. -->
+		<property name="mapperLocations" value="classpath:sql/*DAO.xml" />
+	</bean>
+	
+	<!-- 새로운 방식일때 사용 / dao 스캔 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- DAO 인터페이스가 선언된 패키지 지정한다. -->
+		<!-- DAO 인터페이스와 SQL.xml 파일 맵핑하기 위한 작업 -->
+		<property name="basePackage" value="com.jjack.web.*.dao" />
+	</bean>
+	
+	<!-- 기존방식일때 / myBatis를 이용해서 컨넥션을 처리할 빈 처리 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+	
+	<!--
+		★★★	 
+		- 기존방식 사용시 Bean 차리 예시
+		- 새로운 방식을 사용할 경우 작성할 필요가 없다!!
+		
+	만들어진 DAO를 자동 주입하기 위한 bean 선언 
+	<bean id="testdDAO" class="com.jjack.web.test.dao.TestDAO">
+		자동 주입을 할때 위에서 설정한 컨넥션을 필요로 하고 있기 때문에 이것을 등록해서 주입되도록 해 놓는다.
+		<property name="sqlSessionTemplate" ref="sqlSession" />
+	</bean>
+	
+	만들어진 Service를 자동 주입하기 위한 bean 선언
+	<bean id="boardService" class="com.jjack.web.test.service.TestService">
+	</bean>
+	 --> 
+	
+	
+</beans>
