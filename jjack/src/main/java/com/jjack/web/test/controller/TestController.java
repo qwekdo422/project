@@ -19,7 +19,7 @@ import com.jjack.web.test.service.TestService;
 public class TestController {
 	
 	@Autowired private TestService tService;
-	
+
 	@RequestMapping("/testMember")
 	public String test (@RequestParam int no, Model model) {
 		TestVO vo = tService.getMember(no);

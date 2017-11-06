@@ -9,7 +9,7 @@ package com.jjack.web.common.vo;
 public class TestVO {
 	private int no;
 	private String name;
-
+	//1
 	public TestVO() {}
 
 	public int getNo() {
