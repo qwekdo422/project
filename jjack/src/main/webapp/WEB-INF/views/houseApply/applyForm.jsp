@@ -24,15 +24,6 @@
 
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
-<script>
-	$(document).ready(function(){
-		$("#calendar-month-next").click(function(){
-			
-		});
-		
-		
-	});
-</script>
 </head>
 
 <body>
@@ -44,7 +35,7 @@
 		<div id="main">
 			<jsp:include page="./calendar.jsp" />
 			
-			<div class="" style="margin: 0 auto;">
+			<div class="">
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">

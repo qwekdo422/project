@@ -1,497 +1,269 @@
-function CalendarApp(date) {
-  
-  if (!(date instanceof Date)) {
-    date = new Date();
-  }
-  
-  this.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  this.quotes = ['Whatever the mind of man can conceive and believe, it can achieve. –Napoleon Hill', 'Strive not to be a success, but rather to be of value. –Albert Einstein', 'Two roads diverged in a wood, and I—I took the one less traveled by, And that has made all the difference.  –Robert Frost', 'I attribute my success to this: I never gave or took any excuse. –Florence Nightingale', 'You miss 100% of the shots you don’t take. –Wayne Gretzky', 'The most difficult thing is the decision to act, the rest is merely tenacity. –Amelia Earhart', 'Every strike brings me closer to the next home run. –Babe Ruth', 'Definiteness of purpose is the starting point of all achievement. –W. Clement Stone', 'Life isn’t about getting and having, it’s about giving and being. –Kevin Kruse', 'Life is what happens to you while you’re busy making other plans. –John Lennon', 'We become what we think about. –Earl Nightingale', 'Life is 10% what happens to me and 90% of how I react to it. –Charles Swindoll', 'The most common way people give up their power is by thinking they don’t have any. –Alice Walker', 'The mind is everything. What you think you become.  –Buddha', 'Winning isn’t everything, but wanting to win is. –Vince Lombardi', 'Every child is an artist.  The problem is how to remain an artist once he grows up. –Pablo Picasso', ' You can never cross the ocean until you have the courage to lose sight of the shore. –Christopher Columbus', 'I’ve learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel. –Maya Angelou', 'Either you run the day, or the day runs you. –Jim Rohn', 'Whether you think you can or you think you can’t, you’re right. –Henry Ford', 'The two most important days in your life are the day you are born and the day you find out why. –Mark Twain', 'Whatever you can do, or dream you can, begin it.  Boldness has genius, power and magic in it. –Johann Wolfgang von Goethe', 'The best revenge is massive success. –Frank Sinatra', 'People often say that motivation doesn’t last. Well, neither does bathing.  That’s why we recommend it daily. –Zig Ziglar', 'Life shrinks or expands in proportion to one’s courage. –Anais Nin', 'If you hear a voice within you say “you cannot paint,” then by all means paint and that voice will be silenced. –Vincent Van Gogh', 'There is only one way to avoid criticism: do nothing, say nothing, and be nothing. –Aristotle', 'Ask and it will be given to you; search, and you will find; knock and the door will be opened for you. –Jesus', 'The only person you are destined to become is the person you decide to be. –Ralph Waldo Emerson', 'Go confidently in the direction of your dreams.  Live the life you have imagined. –Henry David Thoreau',  'Few things can help an individual more than to place responsibility on him, and to let him know that you trust him.  –Booker T. Washington'];
-  this.apts = [
-    {
-      name: 'Finish this web app',
-      endTime: new Date(2016, 4, 30, 23),
-      startTime: new Date(2016, 4, 30, 21),
-      day: new Date(2016, 4, 30).toString()
-    },
-     {
-      name: 'My Birthday!',
-      endTime: new Date(2016, 4, 1, 23, 59),
-      startTime: new Date(2016, 4, 1, 0),
-      day: new Date(2016, 4, 1).toString()
-    },
-    
-  ];
-  
-  this.aptDates = [new Date(2016, 4, 30).toString(),new Date(2016, 4, 1).toString()];
-  this.eles = {
-  };
-  this.calDaySelected = null;
-  
-  this.calendar = document.getElementById("calendar-app");
-  
-  this.calendarView = document.getElementById("dates");
-  
-  this.calendarMonthDiv = document.getElementById("calendar-month");
-  this.calendarMonthLastDiv = document.getElementById("calendar-month-last");
-  this.calendarMonthNextDiv = document.getElementById("calendar-month-next");
-  
-  this.dayInspirationalQuote = document.getElementById("inspirational-quote");
-   
-  this.todayIsSpan = document.getElementById("footer-date");
-  // this.eventsCountSpan = document.getElementById("footer-events");
-  this.dayViewEle = document.getElementById("day-view");
-  this.dayViewExitEle = document.getElementById("day-view-exit");
-  this.dayViewDateEle = document.getElementById("day-view-date");
-  this.addDayEventEle = document.getElementById("add-event");
-  this.dayEventsEle = document.getElementById("day-events");
-  
-  this.dayEventAddForm = {
-    cancelBtn: document.getElementById("add-event-cancel"),
-    addBtn: document.getElementById("add-event-save"),
-    nameEvent:  document.getElementById("input-add-event-name"),
-    startTime:  document.getElementById("input-add-event-start-time"),
-    endTime:  document.getElementById("input-add-event-end-time"),
-    startAMPM:  document.getElementById("input-add-event-start-ampm"),
-    endAMPM:  document.getElementById("input-add-event-end-ampm")
-  };
-  this.dayEventsList = document.getElementById("day-events-list");
-  this.dayEventBoxEle = document.getElementById("add-day-event-box");
-  
-  /* Start the app */
-  this.showView(date);
-  this.addEventListeners();
-  this.todayIsSpan.textContent = "Today is " + this.months[date.getMonth()] + " " + date.getDate();  
-}
-
-CalendarApp.prototype.addEventListeners = function(){
-  
-  this.calendar.addEventListener("click", this.mainCalendarClickClose.bind(this));
-  this.todayIsSpan.addEventListener("click", this.showView.bind(this));
-  this.calendarMonthLastDiv.addEventListener("click", this.showNewMonth.bind(this));
-  this.calendarMonthNextDiv.addEventListener("click", this.showNewMonth.bind(this));
-  this.dayViewExitEle.addEventListener("click", this.closeDayWindow.bind(this));
-  this.dayViewDateEle.addEventListener("click", this.showNewMonth.bind(this));
-  this.addDayEventEle.addEventListener("click", this.addNewEventBox.bind(this));
-  this.dayEventAddForm.cancelBtn.addEventListener("click", this.closeNewEventBox.bind(this));
-  this.dayEventAddForm.cancelBtn.addEventListener("keyup", this.closeNewEventBox.bind(this));
-  
-  this.dayEventAddForm.startTime.addEventListener("keyup",this.inputChangeLimiter.bind(this));
-  this.dayEventAddForm.startAMPM.addEventListener("keyup",this.inputChangeLimiter.bind(this));
-  this.dayEventAddForm.endTime.addEventListener("keyup",this.inputChangeLimiter.bind(this));
-  this.dayEventAddForm.endAMPM.addEventListener("keyup",this.inputChangeLimiter.bind(this));
-  this.dayEventAddForm.addBtn.addEventListener("click",this.saveAddNewEvent.bind(this));
-
-};
-CalendarApp.prototype.showView = function(date){
-  if ( !date || (!(date instanceof Date)) ) date = new Date();
-  var now = new Date(date),
-      y = now.getFullYear(),
-      m = now.getMonth();
-  var today = new Date();
-  
-  var lastDayOfM = new Date(y, m + 1, 0).getDate();
-  var startingD = new Date(y, m, 1).getDay();
-  var lastM = new Date(y, now.getMonth()-1, 1);
-  var nextM = new Date(y, now.getMonth()+1, 1);
- 
-  this.calendarMonthDiv.classList.remove("cview__month-activate");
-  this.calendarMonthDiv.classList.add("cview__month-reset");
-  
-  while(this.calendarView.firstChild) {
-    this.calendarView.removeChild(this.calendarView.firstChild);
-  }
-  
-  // build up spacers
-  for ( var x = 0; x < startingD; x++ ) {
-    var spacer = document.createElement("div");
-    spacer.className = "cview--spacer";
-    this.calendarView.appendChild(spacer);
-  }
-  
-  for ( var z = 1; z <= lastDayOfM; z++ ) {
-   
-    var _date = new Date(y, m ,z);
-    var day = document.createElement("div");
-    day.className = "cview--date";
-    day.textContent = z;
-    day.setAttribute("data-date", _date);
-    day.onclick = this.showDay.bind(this);
-    
-    // check if todays date
-    if ( z == today.getDate() && y == today.getFullYear() && m == today.getMonth() ) {
-      day.classList.add("today");
+var $currentPopover = null;
+  $(document).on('shown.bs.popover', function (ev) {
+    var $target = $(ev.target);
+    if ($currentPopover && ($currentPopover.get(0) != $target.get(0))) {
+      $currentPopover.popover('toggle');
     }
-    
-     // check if has events to show
-    if ( this.aptDates.indexOf(_date.toString()) !== -1 ) {
-      day.classList.add("has-events");
+    $currentPopover = $target;
+  }).on('hidden.bs.popover', function (ev) {
+    var $target = $(ev.target);
+    if ($currentPopover && ($currentPopover.get(0) == $target.get(0))) {
+      $currentPopover = null;
     }
-    
-    this.calendarView.appendChild(day);
-  }
-  
-  var _that = this;
-  setTimeout(function(){
-    _that.calendarMonthDiv.classList.add("cview__month-activate");
-  }, 50);
-  
-  this.calendarMonthDiv.textContent = this.months[now.getMonth()] + " " + now.getFullYear();
-  this.calendarMonthDiv.setAttribute("data-date", now);
-
-  
-  this.calendarMonthLastDiv.textContent = "← " + this.months[lastM.getMonth()];
-  this.calendarMonthLastDiv.setAttribute("data-date", lastM);
-  
-  this.calendarMonthNextDiv.textContent = this.months[nextM.getMonth()] + " →";
-  this.calendarMonthNextDiv.setAttribute("data-date", nextM);
-  
-}
-CalendarApp.prototype.showDay = function(e, dayEle) {
-  e.stopPropagation();
-  if ( !dayEle ) {
-    dayEle = e.currentTarget;
-  }
-  var dayDate = new Date(dayEle.getAttribute('data-date'));
-  
-  this.calDaySelected = dayEle;
-  
-  this.openDayWindow(dayDate);
-  
-
-  
-};
-CalendarApp.prototype.openDayWindow = function(date){
-  
-  var now = new Date();
-  var day = new Date(date);
-  this.dayViewDateEle.textContent = this.days[day.getDay()] + ", " + this.months[day.getMonth()] + " " + day.getDate() + ", " + day.getFullYear();
-  this.dayViewDateEle.setAttribute('data-date', day);
-  this.dayViewEle.classList.add("calendar--day-view-active");
-  
-  /* Contextual lang changes based on tense. Also show btn for scheduling future events */
-  var _dayTopbarText = '';
-  if ( day < new Date(now.getFullYear(), now.getMonth(), now.getDate())) {
-    _dayTopbarText = "had ";
-    this.addDayEventEle.style.display = "none";
-  } else {
-     _dayTopbarText = "have ";
-     this.addDayEventEle.style.display = "inline";
-  }
-  this.addDayEventEle.setAttribute("data-date", day);
-  
-  var eventsToday = this.showEventsByDay(day);
-  if ( !eventsToday ) {
-    _dayTopbarText += "no ";
-    var _rand = Math.round(Math.random() * ((this.quotes.length - 1 ) - 0) + 0);
-    this.dayInspirationalQuote.textContent = this.quotes[_rand];
-  } else {
-    _dayTopbarText += eventsToday.length + " ";
-    this.dayInspirationalQuote.textContent = null;
-  }
-  //this.dayEventsList.innerHTML = this.showEventsCreateHTMLView(eventsToday);
-  while(this.dayEventsList.firstChild) {
-    this.dayEventsList.removeChild(this.dayEventsList.firstChild);
-  }
-  
-  this.dayEventsList.appendChild(this.showEventsCreateElesView(eventsToday));
-  
-  
-  this.dayEventsEle.textContent = _dayTopbarText + "events on " + this.months[day.getMonth()] + " " + day.getDate() + ", " + day.getFullYear();
-  
-  
-};
-
-CalendarApp.prototype.showEventsCreateElesView = function(events) {
-  var ul = document.createElement("ul");
-  ul.className = 'day-event-list-ul';
-  events = this.sortEventsByTime(events);
-  var _this = this;
-  events.forEach(function(event){
-    var _start = new Date(event.startTime);
-    var _end = new Date(event.endTime);
-    var idx = event.index;
-    var li = document.createElement("li");
-    li.className = "event-dates";
-    // li.innerHtml
-    var html = "<span class='start-time'>" + _start.toLocaleTimeString(navigator.language,{hour: '2-digit', minute:'2-digit'}) + "</span> <small>through</small> ";
-    html += "<span class='end-time'>" + _end.toLocaleTimeString(navigator.language,{hour: '2-digit', minute:'2-digit'}) + ( (_end.getDate() != _start.getDate()) ? ' <small>on ' + _end.toLocaleDateString() + "</small>" : '') +"</span>";
-    
-
-    html += "<span class='event-name'>" + event.name + "</span>";
-    
-    var div = document.createElement("div");
-    div.className = "event-dates";
-    div.innerHTML = html;
-    
-    var deleteBtn = document.createElement("span");
-    var deleteText = document.createTextNode("delete");
-    deleteBtn.className = "event-delete";
-    deleteBtn.setAttribute("data-idx", idx);
-    deleteBtn.appendChild(deleteText);
-    deleteBtn.onclick = _this.deleteEvent.bind(_this);
-    
-    div.appendChild(deleteBtn);
-    
-    li.appendChild(div);
-    ul.appendChild(li);
   });
-  return ul;
-};
-CalendarApp.prototype.deleteEvent = function(e) {
-  var deleted = this.apts.splice(e.currentTarget.getAttribute("data-idx"),1);
-  var deletedDate = new Date(deleted[0].day);
-  var anyDatesLeft = this.showEventsByDay(deletedDate);
-  if ( anyDatesLeft === false ) {
-    // safe to remove from array
-    var idx = this.aptDates.indexOf(deletedDate.toString());
-    if (idx >= 0) {
-       this.aptDates.splice(idx,1);
-      // remove dot from calendar view
-      var ele = document.querySelector('.cview--date[data-date="'+ deletedDate.toString() +'"]');
-      if ( ele ) {
-        ele.classList.remove("has-events");
+
+
+//quicktmpl is a simple template language I threw together a while ago; it is not remotely secure to xss and probably has plenty of bugs that I haven't considered, but it basically works
+//the design is a function I read in a blog post by John Resig (http://ejohn.org/blog/javascript-micro-templating/) and it is intended to be loosely translateable to a more comprehensive template language like mustache easily
+$.extend({
+    quicktmpl: function (template) {return new Function("obj","var p=[],print=function(){p.push.apply(p,arguments);};with(obj){p.push('"+template.replace(/[\r\t\n]/g," ").split("{{").join("\t").replace(/((^|\}\})[^\t]*)'/g,"$1\r").replace(/\t:(.*?)\}\}/g,"',$1,'").split("\t").join("');").split("}}").join("p.push('").split("\r").join("\\'")+"');}return p.join('');")}
+});
+
+$.extend(Date.prototype, {
+  //provides a string that is _year_month_day, intended to be widely usable as a css class
+  toDateCssClass:  function () { 
+    return '_' + this.getFullYear() + '_' + (this.getMonth() + 1) + '_' + this.getDate(); 
+  },
+  //this generates a number useful for comparing two dates; 
+  toDateInt: function () { 
+    return ((this.getFullYear()*12) + this.getMonth())*32 + this.getDate(); 
+  },
+  toTimeString: function() {
+    var hours = this.getHours(),
+        minutes = this.getMinutes(),
+        hour = (hours > 12) ? (hours - 12) : hours,
+        ampm = (hours >= 12) ? ' pm' : ' am';
+    if (hours === 0 && minutes===0) { return ''; }
+    if (minutes > 0) {
+      return hour + ':' + minutes + ampm;
+    }
+    return hour + ampm;
+  }
+});
+
+
+(function ($) {
+
+  //t here is a function which gets passed an options object and returns a string of html. I am using quicktmpl to create it based on the template located over in the html block
+  var t = $.quicktmpl($('#tmpl').get(0).innerHTML);
+  
+  function calendar($el, options) {
+    //actions aren't currently in the template, but could be added easily...
+    $el.on('click', '.js-cal-prev', function () {
+      switch(options.mode) {
+      case 'year': options.date.setFullYear(options.date.getFullYear() - 1); break;
+      case 'month': options.date.setMonth(options.date.getMonth() - 1); break;
+      case 'week': options.date.setDate(options.date.getDate() - 7); break;
+      case 'day':  options.date.setDate(options.date.getDate() - 1); break;
+      }
+      draw();
+    }).on('click', '.js-cal-next', function () {
+      switch(options.mode) {
+      case 'year': options.date.setFullYear(options.date.getFullYear() + 1); break;
+      case 'month': options.date.setMonth(options.date.getMonth() + 1); break;
+      case 'week': options.date.setDate(options.date.getDate() + 7); break;
+      case 'day':  options.date.setDate(options.date.getDate() + 1); break;
+      }
+      draw();
+    }).on('click', '.js-cal-option', function () {
+      var $t = $(this), o = $t.data();
+      if (o.date) { o.date = new Date(o.date); }
+      $.extend(options, o);
+      draw();
+    }).on('click', '.js-cal-years', function () {
+      var $t = $(this), 
+          haspop = $t.data('popover'),
+          s = '', 
+          y = options.date.getFullYear() - 2, 
+          l = y + 5;
+      if (haspop) { return true; }
+      for (; y < l; y++) {
+        s += '<button type="button" class="btn btn-default btn-lg btn-block js-cal-option" data-date="' + (new Date(y, 1, 1)).toISOString() + '" data-mode="year">'+y + '</button>';
+      }
+      $t.popover({content: s, html: true, placement: 'auto top'}).popover('toggle');
+      return false;
+    }).on('click', '.event', function () {
+      var $t = $(this), 
+          index = +($t.attr('data-index')), 
+          haspop = $t.data('popover'),
+          data, time;
+          
+      if (haspop || isNaN(index)) { return true; }
+      data = options.data[index];
+      time = data.start.toTimeString();
+      if (time && data.end) { time = time + ' - ' + data.end.toTimeString(); }
+      $t.data('popover',true);
+      $t.popover({content: '<p><strong>' + time + '</strong></p>'+data.text, html: true, placement: 'auto left'}).popover('toggle');
+      return false;
+    });
+    function dayAddEvent(index, event) {
+      if (!!event.allDay) {
+        monthAddEvent(index, event);
+        return;
+      }
+      var $event = $('<div/>', {'class': 'event', text: event.title, title: event.title, 'data-index': index}),
+          start = event.start,
+          end = event.end || start,
+          time = event.start.toTimeString(),
+          hour = start.getHours(),
+          timeclass = '.time-22-0',
+          startint = start.toDateInt(),
+          dateint = options.date.toDateInt(),
+          endint = end.toDateInt();
+      if (startint > dateint || endint < dateint) { return; }
+      
+      if (!!time) {
+        $event.html('<strong>' + time + '</strong> ' + $event.html());
+      }
+      $event.toggleClass('begin', startint === dateint);
+      $event.toggleClass('end', endint === dateint);
+      if (hour < 6) {
+        timeclass = '.time-0-0';
+      }
+      if (hour < 22) {
+        timeclass = '.time-' + hour + '-' + (start.getMinutes() < 30 ? '0' : '30');
+      }
+      $(timeclass).append($event);
+    }
+    
+    function monthAddEvent(index, event) {
+      var $event = $('<div/>', {'class': 'event', text: event.title, title: event.title, 'data-index': index}),
+          e = new Date(event.start),
+          dateclass = e.toDateCssClass(),
+          day = $('.' + e.toDateCssClass()),
+          empty = $('<div/>', {'class':'clear event', html:'&nbsp;'}), 
+          numbevents = 0, 
+          time = event.start.toTimeString(),
+          endday = event.end && $('.' + event.end.toDateCssClass()).length > 0,
+          checkanyway = new Date(e.getFullYear(), e.getMonth(), e.getDate()+40),
+          existing,
+          i;
+      $event.toggleClass('all-day', !!event.allDay);
+      if (!!time) {
+        $event.html('<strong>' + time + '</strong> ' + $event.html());
+      }
+      if (!event.end) {
+        $event.addClass('begin end');
+        $('.' + event.start.toDateCssClass()).append($event);
+        return;
+      }
+            
+      while (e <= event.end && (day.length || endday || options.date < checkanyway)) {
+        if(day.length) { 
+          existing = day.find('.event').length;
+          numbevents = Math.max(numbevents, existing);
+          for(i = 0; i < numbevents - existing; i++) {
+            day.append(empty.clone());
+          }
+          day.append(
+            $event.
+            toggleClass('begin', dateclass === event.start.toDateCssClass()).
+            toggleClass('end', dateclass === event.end.toDateCssClass())
+          );
+          $event = $event.clone();
+          $event.html('&nbsp;');
+        }
+        e.setDate(e.getDate() + 1);
+        dateclass = e.toDateCssClass();
+        day = $('.' + dateclass);
       }
     }
-  }
-  this.openDayWindow(deletedDate);;
-};
-CalendarApp.prototype.sortEventsByTime = function(events) {
-  if (!events) return [];
-  return events.sort(function compare(a, b) {
-    if (new Date(a.startTime) < new Date(b.startTime)) {
-      return -1;
-    }
-    if (new Date(a.startTime) > new Date(b.startTime)) {
-      return 1;
-    }
-    // a must be equal to b
-    return 0;
-  });
-};
-CalendarApp.prototype.showEventsByDay = function(day) {
-  var _events = [];
-  this.apts.forEach(function(apt, idx){
-    if ( day.toString() == apt.day.toString() ) {
-      apt.index = idx;
-      _events.push(apt);
-    }
-  });
-  return (_events.length) ? _events : false;
-};
-CalendarApp.prototype.closeDayWindow = function(){
-  this.dayViewEle.classList.remove("calendar--day-view-active");
-  this.closeNewEventBox();
-};
-CalendarApp.prototype.mainCalendarClickClose = function(e){
-  if ( e.currentTarget != e.target ) {
-    return;
-  }
-  
-  this.dayViewEle.classList.remove("calendar--day-view-active");
-  this.closeNewEventBox();
-};
-CalendarApp.prototype.addNewEventBox = function(e){
-  var target = e.currentTarget;
-  this.dayEventBoxEle.setAttribute("data-active", "true"); 
-  this.dayEventBoxEle.setAttribute("data-date", target.getAttribute("data-date"));
-  
-};
-CalendarApp.prototype.closeNewEventBox = function(e){
-  
-  if (e && e.keyCode && e.keyCode != 13) return false;
-  
-  this.dayEventBoxEle.setAttribute("data-active", "false");
-  // reset values
-  this.resetAddEventBox();
-  
-};
-CalendarApp.prototype.saveAddNewEvent = function() {
-  var saveErrors = this.validateAddEventInput();
-  if ( !saveErrors ) {
-    this.addEvent();
-  }
-};
-
-CalendarApp.prototype.addEvent = function() {
-  
-  var name = this.dayEventAddForm.nameEvent.value.trim();
-  var dayOfDate = this.dayEventBoxEle.getAttribute("data-date");
-  var dateObjectDay =  new Date(dayOfDate);
-  var cleanDates = this.cleanEventTimeStampDates();
-  
-  this.apts.push({
-    name: name,
-    day: dateObjectDay,
-    startTime: cleanDates[0],
-    endTime: cleanDates[1]
-  });
-  this.closeNewEventBox();
-  this.openDayWindow(dayOfDate);
-  this.calDaySelected.classList.add("has-events");
-  // add to dates
-  if ( this.aptDates.indexOf(dateObjectDay.toString()) === -1 ) {
-    this.aptDates.push(dateObjectDay.toString());
-  }
-  
-};
-CalendarApp.prototype.convertTo23HourTime = function(stringOfTime, AMPM) {
-  // convert to 0 - 23 hour time
-  var mins = stringOfTime.split(":");
-  var hours = stringOfTime.trim();
-  if ( mins[1] && mins[1].trim() ) {
-    hours = parseInt(mins[0].trim());
-    mins = parseInt(mins[1].trim());
-  } else {
-    hours = parseInt(hours);
-    mins = 0;
-  }
-  hours = ( AMPM == 'am' ) ? ( (hours == 12) ? 0 : hours ) : (hours <= 11) ? parseInt(hours) + 12 : hours;
-  return [hours, mins];
-};
-CalendarApp.prototype.cleanEventTimeStampDates = function() {
-  
-  var startTime = this.dayEventAddForm.startTime.value.trim() || this.dayEventAddForm.startTime.getAttribute("placeholder") || '8';
-  var startAMPM = this.dayEventAddForm.startAMPM.value.trim() || this.dayEventAddForm.startAMPM.getAttribute("placeholder") || 'am';
-  startAMPM = (startAMPM == 'a') ? startAMPM + 'm' : startAMPM;
-  var endTime = this.dayEventAddForm.endTime.value.trim() || this.dayEventAddForm.endTime.getAttribute("placeholder") || '9';
-  var endAMPM = this.dayEventAddForm.endAMPM.value.trim() || this.dayEventAddForm.endAMPM.getAttribute("placeholder") || 'pm';
-  endAMPM = (endAMPM == 'p') ? endAMPM + 'm' : endAMPM;
-  var date = this.dayEventBoxEle.getAttribute("data-date");
-  
-  var startingTimeStamps = this.convertTo23HourTime(startTime, startAMPM);
-  var endingTimeStamps = this.convertTo23HourTime(endTime, endAMPM);
-  
-  var dateOfEvent = new Date(date);
-  var startDate = new Date(dateOfEvent.getFullYear(), dateOfEvent.getMonth(), dateOfEvent.getDate(), startingTimeStamps[0], startingTimeStamps[1]);
-  var endDate = new Date(dateOfEvent.getFullYear(), dateOfEvent.getMonth(), dateOfEvent.getDate(), endingTimeStamps[0], endingTimeStamps[1]);
-  
-  // if end date is less than start date - set end date back another day
-  if ( startDate > endDate ) endDate.setDate(endDate.getDate() + 1);
-  
-  return [startDate, endDate];
-  
-};
-CalendarApp.prototype.validateAddEventInput = function() {
-
-  var _errors = false;
-  var name = this.dayEventAddForm.nameEvent.value.trim();
-  var startTime = this.dayEventAddForm.startTime.value.trim();
-  var startAMPM = this.dayEventAddForm.startAMPM.value.trim();
-  var endTime = this.dayEventAddForm.endTime.value.trim();
-  var endAMPM = this.dayEventAddForm.endAMPM.value.trim();
-  
-  if (!name || name == null) {
-    _errors = true;
-    this.dayEventAddForm.nameEvent.classList.add("add-event-edit--error");
-    this.dayEventAddForm.nameEvent.focus();
-  } else {
-     this.dayEventAddForm.nameEvent.classList.remove("add-event-edit--error");
-  }
-  
-//   if (!startTime || startTime == null) {
-//     _errors = true;
-//     this.dayEventAddForm.startTime.classList.add("add-event-edit--error");
-//   } else {
-//      this.dayEventAddForm.startTime.classList.remove("add-event-edit--error");
-//   }
-  
-  return _errors;
-  
-  
-};
-var timeOut = null;
-var activeEle = null;
-CalendarApp.prototype.inputChangeLimiter = function(ele) {
-  
-  if ( ele.currentTarget ) {
-    ele = ele.currentTarget;
-  }
-  if (timeOut && ele == activeEle){
-    clearTimeout(timeOut);
-  }
-  
-  var limiter = CalendarApp.prototype.textOptionLimiter;
-
-  var _options = ele.getAttribute("data-options").split(",");
-  var _format = ele.getAttribute("data-format") || 'text';
-  timeOut = setTimeout(function(){
-    ele.value = limiter(_options, ele.value, _format);
-  }, 600);
-  activeEle = ele;
-  
-};
-CalendarApp.prototype.textOptionLimiter = function(options, input, format){
-  if ( !input ) return '';
-  
-  if ( input.indexOf(":") !== -1 && format == 'datetime' ) {
- 
-    var _splitTime = input.split(':', 2);
-    if (_splitTime.length == 2 && !_splitTime[1].trim()) return input;
-    var _trailingTime = parseInt(_splitTime[1]);
-    /* Probably could be coded better -- a block to clean up trailing data */
-    if (options.indexOf(_splitTime[0]) === -1) {
-      return options[0];
-    }
-    else if (_splitTime[1] == "0" ) {
-      return input;
-    }
-    else if (_splitTime[1] == "00" ) {
-      return _splitTime[0] +  ":00";
-    }
-    else if (_trailingTime < 10 ) {
-      return _splitTime[0] + ":" + "0" + _trailingTime;
-    }
-    else if ( !Number.isInteger(_trailingTime) || _trailingTime < 0 || _trailingTime > 59 )  {
-      return _splitTime[0];
-    } 
-    return _splitTime[0] + ":" + _trailingTime;
-  }
-  if ((input.toString().length >= 3) ) {
-    var pad = (input.toString().length - 4) * -1;
-    var _hour, _min;
-    if (pad == 1) {
-      _hour = input[0];
-      _min = input[1] + input[2];
-    } else {
-      _hour = input[0] + input[1];
-      _min = input[2] + input[3];
+    function yearAddEvents(events, year) {
+      var counts = [0,0,0,0,0,0,0,0,0,0,0,0];
+      $.each(events, function (i, v) {
+        if (v.start.getFullYear() === year) {
+            counts[v.start.getMonth()]++;
+        }
+      });
+      $.each(counts, function (i, v) {
+        if (v!==0) {
+            $('.month-'+i).append('<span class="badge">'+v+'</span>');
+        }
+      });
     }
     
-    _hour = Math.max(1,Math.min(12,(_hour)));
-    _min = Math.min(59,(_min));
-    if ( _min < 10 ) { 
-      _min = "0" + _min;
+    function draw() {
+      $el.html(t(options));
+      //potential optimization (untested), this object could be keyed into a dictionary on the dateclass string; the object would need to be reset and the first entry would have to be made here
+      $('.' + (new Date()).toDateCssClass()).addClass('today');
+      if (options.data && options.data.length) {
+        if (options.mode === 'year') {
+            yearAddEvents(options.data, options.date.getFullYear());
+        } else if (options.mode === 'month' || options.mode === 'week') {
+            $.each(options.data, monthAddEvent);
+        } else {
+            $.each(options.data, dayAddEvent);
+        }
+      }
     }
-    _min = (isNaN(_min)) ? '00' : _min;
-    _hour = (isNaN(_hour)) ? '9' : _hour ;
-
-    return _hour + ":" + _min;
     
-  }
-
-  if (options.indexOf(input) === -1) {
-    return options[0];
+    draw();    
   }
   
-  return input;
-};
-CalendarApp.prototype.resetAddEventBox = function(){
-  this.dayEventAddForm.nameEvent.value = '';
-  this.dayEventAddForm.nameEvent.classList.remove("add-event-edit--error");
-  this.dayEventAddForm.endTime.value = '';
-  this.dayEventAddForm.startTime.value = '';
-  this.dayEventAddForm.endAMPM.value = '';
-  this.dayEventAddForm.startAMPM.value = '';
-};
-CalendarApp.prototype.showNewMonth = function(e){
-  var date = e.currentTarget.dataset.date;
-  var newMonthDate = new Date(date);
-  this.showView(newMonthDate);
-  this.closeDayWindow();
-  return true;
-};
+  ;(function (defaults, $, window, document) {
+    $.extend({
+      calendar: function (options) {
+        return $.extend(defaults, options);
+      }
+    }).fn.extend({
+      calendar: function (options) {
+        options = $.extend({}, defaults, options);
+        return $(this).each(function () {
+          var $this = $(this);
+          calendar($this, options);
+        });
+      }
+    });
+  })({
+    days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    date: (new Date()),
+        daycss: ["c-sunday", "", "", "", "", "", "c-saturday"],
+        todayname: "Today",
+        thismonthcss: "current",
+        lastmonthcss: "outside",
+        nextmonthcss: "outside",
+    mode: "month",
+    data: []
+  }, jQuery, window, document);
+    
+})(jQuery);
 
-var calendar = new CalendarApp();
-console.log(calendar);
+var data = [],
+    date = new Date(),
+    d = date.getDate(),
+    d1 = d,
+    m = date.getMonth(),
+    y = date.getFullYear(),
+    i,
+    end, 
+    j, 
+    c = 1063, 
+    c1 = 3329,
+    h, 
+    m,
+    names = ['All Day Event', 'Long Event', 'Birthday Party', 'Repeating Event', 'Training', 'Meeting', 'Mr. Behnke', 'Date', 'Ms. Tubbs'],
+    slipsum = ["Now that we know who you are, I know who I am. I'm not a mistake! It all makes sense! In a comic, you know how you can tell who the arch-villain's going to be? He's the exact opposite of the hero. And most times they're friends, like you and me! I should've known way back when... You know why, David? Because of the kids. They called me Mr Glass.", "You see? It's curious. Ted did figure it out - time travel. And when we get back, we gonna tell everyone. How it's possible, how it's done, what the dangers are. But then why fifty years in the future when the spacecraft encounters a black hole does the computer call it an 'unknown entry event'? Why don't they know? If they don't know, that means we never told anyone. And if we never told anyone it means we never made it back. Hence we die down here. Just as a matter of deductive logic.", "Your bones don't break, mine do. That's clear. Your cells react to bacteria and viruses differently than mine. You don't get sick, I do. That's also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We're on the same curve, just on opposite ends.", "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing.", "Yeah, I like animals better than people sometimes... Especially dogs. Dogs are the best. Every time you come home, they act like they haven't seen you in a year. And the good thing about dogs... is they got different dogs for different people. Like pit bulls. The dog of dogs. Pit bull can be the right man's best friend... or the wrong man's worst enemy. You going to give me a dog for a pet, give me a pit bull. Give me... Raoul. Right, Omar? Give me Raoul.", "Like you, I used to think the world was this great place where everybody lived by the same standards I did, then some kid with a nail showed me I was living in his world, a world where chaos rules not order, a world where righteousness is not rewarded. That's Cesar's world, and if you're not willing to play by his rules, then you're gonna have to pay the price.", "You think water moves fast? You should see ice. It moves like it has a mind. Like it knows it killed the world once and got a taste for murder. After the avalanche, it took us a week to climb out. Now, I don't know exactly when we turned on each other, but I know that seven of us survived the slide... and only five made it out. Now we took an oath, that I'm breaking now. We said we'd say it was the snow that killed the other two, but it wasn't. Nature is lethal but it doesn't hold a candle to man.", "You see? It's curious. Ted did figure it out - time travel. And when we get back, we gonna tell everyone. How it's possible, how it's done, what the dangers are. But then why fifty years in the future when the spacecraft encounters a black hole does the computer call it an 'unknown entry event'? Why don't they know? If they don't know, that means we never told anyone. And if we never told anyone it means we never made it back. Hence we die down here. Just as a matter of deductive logic.", "Like you, I used to think the world was this great place where everybody lived by the same standards I did, then some kid with a nail showed me I was living in his world, a world where chaos rules not order, a world where righteousness is not rewarded. That's Cesar's world, and if you're not willing to play by his rules, then you're gonna have to pay the price.", "You think water moves fast? You should see ice. It moves like it has a mind. Like it knows it killed the world once and got a taste for murder. After the avalanche, it took us a week to climb out. Now, I don't know exactly when we turned on each other, but I know that seven of us survived the slide... and only five made it out. Now we took an oath, that I'm breaking now. We said we'd say it was the snow that killed the other two, but it wasn't. Nature is lethal but it doesn't hold a candle to man."];
 
+  for(i = 0; i < 500; i++) {
+    j = Math.max(i % 15 - 10, 0);
+    //c and c1 jump around to provide an illusion of random data
+    c = (c * 1063) % 1061; 
+    c1 = (c1 * 3329) % 3331;
+    d = (d1 + c + c1) % 839 - 440;
+    h = i % 36;
+    m = (i % 4) * 15;
+    if (h < 18) { h = 0; m = 0; } else { h = Math.max(h - 24, 0) + 8; }
+    end = !j ? null : new Date(y, m, d + j, h + 2, m);
+    data.push({ title: names[c1 % names.length], start: new Date(y, m, d, h, m), end: end, allDay: !(i % 6), text: slipsum[c % slipsum.length ]  });
+  }
+  
+  data.sort(function(a,b) { return (+a.start) - (+b.start); });
+  
+//data must be sorted by start date
+
+//Actually do everything
+$('#holder').calendar({
+  data: data
+});
