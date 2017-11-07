@@ -70,9 +70,9 @@
 		<div class="cview__header">Sat</div>
 		<div class="calendar--view" id="dates"></div>
 	</div>
-	<div class="footer">
-		<span><span id="footer-date" class="footer__link">Today
-				is May 30</span></span>
+	<div class="footer_c" align="center" style="margin-top:10px;">
+		<span id="footer-date" class="footer__link">Today
+				is May 30</span>
 	</div>
 </div>
 <script src="../js/houseApply/calendar.js"></script>
