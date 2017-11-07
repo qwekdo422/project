@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since : 2017. 10. 31.	
  */
 @Controller
-@RequestMapping("/main")
 public class MainController {
 	
 	/**
@@ -20,9 +19,10 @@ public class MainController {
 	 * @param :  
 	 * @return : 
 	 */
-	@RequestMapping("/mainForm")
-	public void mainForm () {
-		
+	@RequestMapping("/main/mainForm")
+	public String mainForm () {
+		System.out.println("mainForm 함수");
+		return "main/mainForm";
 	}
 	
 }
