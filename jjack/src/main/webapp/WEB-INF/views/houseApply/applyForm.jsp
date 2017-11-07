@@ -27,7 +27,7 @@
 <script>
 	$(document).ready(function(){
 		$("#calendar-month-next").click(function(){
-			alert(1);
+			
 		});
 		
 		
