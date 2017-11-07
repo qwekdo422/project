@@ -1,13 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>짝 게스트하우스</title>
-    
-
+<title>메인화면</title>
+<%-- ====================== 필수  ======================  --%>
+<link rel="stylesheet" href="../css/common/header.css" />
+<link rel="stylesheet" href="../css/common/footer.css" />
+<link rel="stylesheet" href="../css/alert/alertify.core.css" />
+<link rel="stylesheet" href="../css/alert/alertify.default.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../js/alert/alertify.min.js"></script>
+<%-- ====================== 필수  ======================  --%>
 </head>
 <body>
 
@@ -18,32 +24,6 @@
 
 	<div id="main">
 
-		<!-- Navigation -->
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-			<div class="container">
-				<a class="navbar-brand" href="#">짝 ♥ 게스트하우스</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarResponsive" aria-controls="navbarResponsive"
-					aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarResponsive">
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item active"><a class="nav-link" href="#">소개
-								<span class="sr-only">(current)</span>
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">애정촌입소신청</a>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="#">짝짓기</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">데이트코스</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">후기</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">공지</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
 
 		<!-- Page Content -->
 		<div class="container">
@@ -222,8 +202,8 @@
 
 
 		<!-- Bootstrap core JavaScript -->
-		<script src="vendor/jquery/jquery.min.js"></script>
-		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="../js/main/jquery.min.js"></script>
+		<script src="../js/main/bootstrap.bundle.min.js"></script>
 	</div>
 
 

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<link href="../css/common/bootstrap.min.css" rel="stylesheet">
-
+	
+<link rel="stylesheet" href="../css/common/bootstrap.min.css" />
 <div id="top">
+	<img src="../img/main.jpg">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="#">짝 ♥ 게스트하우스</a>
+			<a class="navbar-brand" href="../main/mainForm.do">짝 ♥ 게스트하우스</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive" aria-controls="navbarResponsive"
 				aria-expanded="false" aria-label="Toggle navigation">

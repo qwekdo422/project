@@ -6,25 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>입소신청</title>
+<%-- ====================== 필수  ======================  --%>
 <link rel="stylesheet" href="../css/common/header.css" />
 <link rel="stylesheet" href="../css/common/footer.css" />
-<link rel="stylesheet" href="../css/common/mainBody.css" />
 <link rel="stylesheet" href="../css/alert/alertify.core.css" />
 <link rel="stylesheet" href="../css/alert/alertify.default.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../js/alert/alertify.min.js"></script>
+<%-- ====================== 필수  ======================  --%>
+
 <%-- 캘린더  --%>
 <link rel="stylesheet" href="../css/houseApply/calendar.css" />
 <%-- 입서신청 폼 --%>
 <link rel="stylesheet" href="../css/houseApply/applyForm.css" />
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="../js/alert/alertify.min.js"></script>
-
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
 </head>
 
 <body>
+	
 	<div id="wrap">
 		<div id="header">
 			<jsp:include page="../common/header.jsp" />
