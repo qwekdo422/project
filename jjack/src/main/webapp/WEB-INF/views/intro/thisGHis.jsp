@@ -5,7 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <title>짝 게스트하우스</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <%-- ====================== 필수  ======================  --%>
+	<link rel="stylesheet" href="../css/common/header.css" />
+	<link rel="stylesheet" href="../css/common/footer.css" />
+	<link rel="stylesheet" href="../css/alert/alertify.core.css" />
+	<link rel="stylesheet" href="../css/alert/alertify.default.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="../js/alert/alertify.min.js"></script>
+	<%-- ====================== 필수  ======================  --%>
     <style>
     	#introBody {
     		margin: 0px;
@@ -66,7 +73,7 @@
     <script>
     	$(document).ready(function(){
     		$("#intro1").click(function(){
-    			location.href("../schedule.do");
+    			location.href("../intro/schedule.do");
     		});
     		
     		
@@ -77,7 +84,15 @@
     	});
     </script>
 </head>
-<body id="introBody">
+<body style="margin: 0 auto;">
+	<div id="wrap">
+		<div id="header">
+			<jsp:include page="../common/header.jsp" />
+		</div>
+
+		<div id="main">
+		
+		
 	<nav id="introNav">
  		<div id="intro1">
 			<div id="introfloater1"></div>
@@ -99,6 +114,13 @@
 제주도의 매력넘치는 자연 속에서 독특한 방식의 미팅으로 인연을 찾아보세요.
 애정촌에서의 여러 프로그램들은 메마른 도시인들의 감성에서도 사랑을 틔워
 낼 수 있습니다. 사랑 가득한 제주의 애정촌이 당신의 운명같은 짝을 짝지어줍니다.</pre>
+	</div>
+			</div>
+
+
+		<div id="footer">
+			<jsp:include page="../common/footer.jsp" />
+		</div>
 	</div>
 </body>
 </html>
