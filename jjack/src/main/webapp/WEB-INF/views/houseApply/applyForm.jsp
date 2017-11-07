@@ -17,7 +17,6 @@
 <link rel="stylesheet" href="../css/houseApply/calendar.css" />
 <%-- 입서신청 폼 --%>
 <link rel="stylesheet" href="../css/houseApply/applyForm.css" />
-ㄴ
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -25,7 +24,17 @@
 
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#calendar-month-next").click(function(){
+			alert(1);
+		});
+		
+		
+	});
+</script>
 </head>
+
 <body>
 	<div id="wrap">
 		<div id="header">
