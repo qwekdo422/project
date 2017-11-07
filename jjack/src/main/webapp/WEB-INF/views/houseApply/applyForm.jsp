@@ -5,19 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>짝 게스트하우스</title>
+<title>입소신청</title>
 <link rel="stylesheet" href="../css/common/header.css" />
 <link rel="stylesheet" href="../css/common/footer.css" />
 <link rel="stylesheet" href="../css/common/mainBody.css" />
 <link rel="stylesheet" href="../css/alert/alertify.core.css" />
 <link rel="stylesheet" href="../css/alert/alertify.default.css" />
+<%-- 캘린더  --%>
+<link rel="stylesheet" href="../css/houseApply/calendar.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
-<script>
-function abc() {
-	alertify.alert("aa");
-}
-</script>
+<%-- 캘린더 --%>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
 </head>
 <body>
 	<div id="wrap">
@@ -26,13 +26,7 @@ function abc() {
 		</div>
 		
 		<div id="main">
-			메인화면 body
-			<br>
-			<button onclick="abc();">알럿 테스트</button>
-			<br>
-			<a href="../test/testMember.do?no=15">DB테스트</a> <br>
-			<a href="../houseApply/applyForm.do">입소신청</a> <br>
-						
+			<jsp:include page="./calendar.jsp" />
 		</div>
 
 		<div id="footer">
