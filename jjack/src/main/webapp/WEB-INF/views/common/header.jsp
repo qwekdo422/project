@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<link href="../css/common/bootstrap.min.css" rel="stylesheet">
 
-
-<link href="..css/shop-homepage.css" rel="stylesheet">
-<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <div id="top">
-	
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
 			<a class="navbar-brand" href="#">짝 ♥ 게스트하우스</a>
@@ -20,7 +17,7 @@
 					<li class="nav-item active"><a class="nav-link" href="#">소개
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">애정촌입소신청</a>
+					<li class="nav-item"><a class="nav-link" href="../houseApply/applyForm.do">애정촌입소신청</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#">짝짓기</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">데이트코스</a></li>

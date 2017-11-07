@@ -11,8 +11,6 @@
 <link rel="stylesheet" href="../css/common/mainBody.css" />
 <link rel="stylesheet" href="../css/alert/alertify.core.css" />
 <link rel="stylesheet" href="../css/alert/alertify.default.css" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <%-- 캘린더  --%>
 <link rel="stylesheet" href="../css/houseApply/calendar.css" />
 <%-- 입서신청 폼 --%>
