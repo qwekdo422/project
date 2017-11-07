@@ -10,28 +10,11 @@
 
 </head>
 <body>
-<<<<<<< HEAD
+
     
 	<div id="header">
 		<jsp:include page="../common/header.jsp" />
 	</div>
-	<!-------------------------------------------->
-=======
-	<div id="wrap">
-		<div id="header">
-			<jsp:include page="../common/header.jsp" />
-		</div>
-		
-		<div id="main">
-			메인화면 body
-			<br>
-			<button onclick="abc();">알럿 테스트</button>
-			<br>
-			<a href="../test/testMember.do?no=15">DB테스트</a> <br>
-			<a href="../houseApply/applyForm.do">입소신청</a> <br>
-						
-		</div>
->>>>>>> branch 'branche' of https://github.com/qwekdo422/project.git
 
 	<div id="main">
 
