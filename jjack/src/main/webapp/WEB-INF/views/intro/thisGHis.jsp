@@ -14,48 +14,25 @@
 	<script src="../js/alert/alertify.min.js"></script>
 	<%-- ====================== 필수  ======================  --%>
     <style>
-    	#introBody {
-    		margin: 0px;
-    		font-size:16px;
-    	}
-    	
     	/* 메뉴 */
     	#introNav {
     		float:left;
-    		background-color:#aee5f6;
     		width:180px;
     		font-size:20px;
     	}
-    	#introNav div {
-    		box-sizing: border-box;
+    	#inrtoMenu {
+    	    box-sizing: border-box;
     		-webkit-box-sizing: border-box;
     		-moz-box-sizing: border-box;
     		border-bottom:1px solid black;
-    		height:100px;
+    		list-style-type : none;
+    		background-color:#aee5f6;
+    		padding-left:0px;
+    		border:2px solid black;
+    	}
+    	#inrtoMenu li {
     		text-align:right;
-    		padding-right:10px;
-    	}
-    	#navFloat1{
-    		float: left;
-			height: 50%;
-			margin-bottom: -60px; /* navMenu 높이의 절반 */
-    	}
-    	#introNav div:first-child {
-    		box-sizing: border-box;
-    		-webkit-box-sizing: border-box;
-    		-moz-box-sizing: border-box;
-    		border-bottom:1px solid black;
-    		height:120px;
-    	}
-    	.navFloat{
-    		float: left;
-			height: 50%;
-			margin-bottom: -25px; /* navMenu 높이의 절반 */
-    	}
-    	.navMenu {
-    		clear: both;
-			position: relative;
-			height:50px;
+    		border:1px solid black;
     	}
     	#introLogo {
     		width:35px;
@@ -72,8 +49,8 @@
     </style>
     <script>
     	$(document).ready(function(){
-    		$("#intro1").click(function(){
-    			location.href("../intro/schedule.do");
+    		$("#intro2").click(function(){
+    			location.href ="../intro/schedule.do";
     		});
     		
     		
@@ -88,21 +65,26 @@
 			<jsp:include page="../common/header.jsp" />
 		</div>
 		<div id="main">
-			<nav id="introNav">
-		 		<div id="intro1">
-					<div id="introfloater1"></div>
-					<div id="nav_GH" class="navMenu"><img src="../img/logo.png" id="introLogo"><br>게스트하우스는</div>
+			<div class="container jumbotron">
+				<div class="row col-lg-3">
+					<br> <br>
+					<h2 class="my-4">소개</h2>
+					<div class="list-group">
+						<a href="#" class="list-group-item">데이트 코스1</a> 
+						<a href="#" class="list-group-item">데이트 코스2</a> 
+						<a href="#" class="list-group-item">데이트 코스3</a>
+					</div>
 				</div>
-				<div id="intro2">
-					<div class="introfloater"></div>
-					<div id="nav_schedule">애정촌 일정</div>
-				</div>
-				<div id="intro3">
-					<div class="introfloater"></div>
-					<div id="nav_rules">애정촌 십계명</div>
-				</div>
-			</nav>
-			<div id="introMain">
+			</div>
+		
+<!-- 			<nav id="introNav">
+				<ul id="inrtoMenu">
+					<li id="intro1"><a href="../intro/thisGHis.do"><img src="../img/logo.png" id="introLogo"><br>게스트하우스는</a></li>
+					<li id="intro2">애정촌 일정</li>
+					<li id="intro3">애정촌 십계명</li>
+				</ul>
+			</nav> -->
+			<div id="introMain" class="col-lg-9">
 				<img id="thisGHis" src="../img/JjakGH.jpg">
 				<h3>짝 게스트하우스에 오신 걸 환영합니다!</h3>
 				<pre>TV에서 보신 인연찾기 프로그램 짝! 그 ‘짝’을 실제로 경험할 수 있는 곳이 제주도에 있습니다.
