@@ -15,7 +15,7 @@
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
 </head>
-<body>
+<body style="margin: 0 auto;">
 
     
 	<div id="header">
