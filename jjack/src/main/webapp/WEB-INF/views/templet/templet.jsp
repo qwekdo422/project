@@ -17,7 +17,7 @@
 
 </head>
 
-<body>
+<body style="margin: 0 auto;">
 	
 	<div id="wrap">
 		<div id="header">
