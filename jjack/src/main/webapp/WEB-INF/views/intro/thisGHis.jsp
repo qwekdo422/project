@@ -1,10 +1,10 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>짝 게스트하우스</title>
+	<meta charset="UTF-8">
+	<title>짝 게스트하우스</title>
     <%-- ====================== 필수  ======================  --%>
 	<link rel="stylesheet" href="../css/common/header.css" />
 	<link rel="stylesheet" href="../css/common/footer.css" />
@@ -79,8 +79,6 @@
     		
     		
     		
-    		
-    		
     	});
     </script>
 </head>
@@ -89,35 +87,30 @@
 		<div id="header">
 			<jsp:include page="../common/header.jsp" />
 		</div>
-
 		<div id="main">
-		
-		
-	<nav id="introNav">
- 		<div id="intro1">
-			<div id="introfloater1"></div>
-			<div id="nav_GH" class="navMenu"><img src="../img/logo.png" id="introLogo"><br>게스트하우스는</div>
-		</div>
-		<div id="intro2">
-			<div class="introfloater"></div>
-			<div id="nav_schedule">애정촌 일정</div>
-		</div>
-		<div id="intro3">
-			<div class="introfloater"></div>
-			<div id="nav_rules">애정촌 십계명</div>
-		</div>
-	</nav>
-	<div id="introMain">
-		<img id="thisGHis" src="../img/JjakGH.jpg">
-		<h3>짝 게스트하우스에 오신 걸 환영합니다!</h3>
-		<pre>TV에서 보신 인연찾기 프로그램 짝! 그 ‘짝’을 실제로 경험할 수 있는 곳이 제주도에 있습니다.
+			<nav id="introNav">
+		 		<div id="intro1">
+					<div id="introfloater1"></div>
+					<div id="nav_GH" class="navMenu"><img src="../img/logo.png" id="introLogo"><br>게스트하우스는</div>
+				</div>
+				<div id="intro2">
+					<div class="introfloater"></div>
+					<div id="nav_schedule">애정촌 일정</div>
+				</div>
+				<div id="intro3">
+					<div class="introfloater"></div>
+					<div id="nav_rules">애정촌 십계명</div>
+				</div>
+			</nav>
+			<div id="introMain">
+				<img id="thisGHis" src="../img/JjakGH.jpg">
+				<h3>짝 게스트하우스에 오신 걸 환영합니다!</h3>
+				<pre>TV에서 보신 인연찾기 프로그램 짝! 그 ‘짝’을 실제로 경험할 수 있는 곳이 제주도에 있습니다.
 제주도의 매력넘치는 자연 속에서 독특한 방식의 미팅으로 인연을 찾아보세요.
 애정촌에서의 여러 프로그램들은 메마른 도시인들의 감성에서도 사랑을 틔워
 낼 수 있습니다. 사랑 가득한 제주의 애정촌이 당신의 운명같은 짝을 짝지어줍니다.</pre>
-	</div>
 			</div>
-
-
+		</div>
 		<div id="footer">
 			<jsp:include page="../common/footer.jsp" />
 		</div>
