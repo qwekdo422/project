@@ -24,7 +24,6 @@
 
 	<div id="main">
 
-
 		<!-- Page Content -->
 		<div class="container">
 
