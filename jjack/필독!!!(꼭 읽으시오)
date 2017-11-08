@@ -1,0 +1,90 @@
+★★★	
+수업시간에 배운 방식과 새로운 방식을 모두 적용할 수 있도록 셋팅했으니
+새로운 방식을  사용하고 싶으면 김대오에게 문의하세요.
+
+★★★
+프로젝트 기본 설정은 UTF-8로 설정합시다!!!
+window -> preference -> general -> workspace -> other (UTF-8) 
+window -> preference -> web -> HTML Files -> Encoding : ISO 10646/Unicode(UTF-8)
+window -> preference -> web -> JSP Files -> Encoding : ISO 10646/Unicode(UTF-8)
+
+1.	톰캣서버 수정
+server.xml에 아래내용  추가
+==>	<Context docBase="jjack" path="/jjack" reloadable="true" source="org.eclipse.jst.jee.server:jjack"/>
+==>	http://localhost:8080/jjack 인덱스 입니다.
+==>	모든 요청은 .do로 합시다. 
+	http://localhost:8080/jjack/test/testProc.do
+
+
+2.	패키지  or 클래스 생성 규칙 (패키지명 소문자로 합시다.)
+생성경로 : src/main/java
+Controller
+패키지	com.jjack.web.기능이름.controller
+클래스	TestController
+		-	class 위에  @Controller 어노테이션 달기
+
+Service
+패키지	com.jjack.web.기능이름.service
+인터페이스	TestService
+
+Service implements
+패키지	com.jjack.web.기능이름.service.impl
+클래스	TestServiceImpl (TestService 재정의 하는 클래스)
+		-	class 위에 @Service 어노테이션 달기
+
+VO
+패키지	com.jjack.web.기능이름.vo
+클래스	TestVO
+
+VO
+★★★ 추가기능
+VO 알리아스 자동 생성되게 만들고 싶으면.
+패키지	com.jjack.common.vo 
+		-	패키지 안에 VO 생성하세요.
+		-	TestVO 로 VO를 생성하였으면 SQL.xml에서 
+		-	returnType="TestVO" or 
+		-	returnType="testvo" 로 사용하면 됨  (따로 알리아스 설정 안해도 됨)
+
+DAO
+- 기존 선생님 방식일 경우
+패키지	com.jjack.web.기능이름.dao
+클래스	TestDAO
+		-	SqlSessionDaoSupport 상속받기
+
+3. XML 보관장소 
+	-	src/main/resources 아래에 만든다.
+	
+매퍼XML	mapper 폴더안에 myBatis-config.xml 파일 존재
+sqlXML	sql	폴더안에 ????.xml 만드시면 됩니다.
+
+
+4.	모든 css,js,imags파일은 /src/main/webapp/resources 아래 경로에 저장한다.
+
+=========================== 새로운 방식  ============================
+★★★	DAO 와 쿼리작성하는 XML 파일 설정이 다르다.	
+DAO		
+인터페이스	TestDAO
+		-	뒤에붙는 DAO 대문자로 통일합시다.
+		-	인터페이스로 만든다.
+		-	myBatis와 연결은 추상 메서드가 한다.
+		-	SqlSessionDaoSupport 상속 받지 않는다.
+		-	implements로 재정의 하지 않는다.
+		예>	public interface Test {
+				public void insert(MemberVO vo);
+				public int getTotalCnt();
+				public MemberVO getView(int no);
+			}
+자동 맵핑
+- 	src/main/resources 경로안에 mapper/myBatis-config.xml 파일을 손대지 않아도 된다.
+-	src/main/resources 경로안에 sql 파일안에 xml파알(쿼리작성)
+	인터페이스로 구현한 DAO이름과 동일하게 XML을 만든다.
+	예>	인터페이스가 TestDAO.java 이면 TestDAO.xml 로 만든다.
+-	namespace는 DAO인터페이스가 존재하는 패키지명.인터페이스명  으로 작성한다.
+	<mapper namespace="com.jjack.web.test.dao.TestDAO"></mapper>
+-	질의태그 id는 인터페이스에 만든 함수명을 적는다.
+	예>	<select id="getTotalCount"></select>
+		public int getTotalCount ();
+=========================== 새로운 방식  ============================
+
+
+	
