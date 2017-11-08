@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>짝 게스트하우스</title>
+<title>메인화면</title>
 <%-- ====================== 필수  ======================  --%>
 <link rel="stylesheet" href="../css/common/header.css" />
 <link rel="stylesheet" href="../css/common/footer.css" />
@@ -15,7 +15,7 @@
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
 </head>
-<body style="margin: 0 auto;">
+<body>
 
     
 	<div id="header">
@@ -23,6 +23,7 @@
 	</div>
 
 	<div id="main">
+
 
 		<!-- Page Content -->
 		<div class="container">

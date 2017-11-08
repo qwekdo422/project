@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>입소신청</title>
+<title>짝 게스트하우스</title>
 <%-- ====================== 필수  ======================  --%>
 <link rel="stylesheet" href="../css/common/header.css" />
 <link rel="stylesheet" href="../css/common/footer.css" />
@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="../css/houseApply/applyForm.css" />
 </head>
 
-<body>
+<body style="margin: 0 auto;">
 	
 	<div id="wrap">
 		<div id="header">
@@ -30,6 +30,7 @@
 
 		<div id="main">
 			<jsp:include page="./calendar.jsp" />
+			
 			
 			<div class="">
 				<div class="row">
