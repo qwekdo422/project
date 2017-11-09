@@ -1,8 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-	
+<script>
+    // Picture element HTML5 shiv
+    document.createElement( "picture" );
+</script>
+<script src="../js/main/picturefill.min.js" async></script>
 <link rel="stylesheet" href="../css/common/bootstrap.min.css" />
 <div id="top">
-	<a href="../main/mainForm.do"><img src="../img/main.jpg" id="headerImg"></a>
+	<!-- <a href="../main/mainForm.do"><img src="../img/main.jpg" id="headerImg"></a> -->
+	<a href="../main/mainForm.do">
+		<picture>
+			<source srcset="../img/header.jpg" media="(min-width:768px)" class="headerImg">
+			<source srcset="../img/header_tab.jpg" media="(min-width:414px)" class="headerImg">
+			<img srcset="../img/header_mobile.jpg" class="headerImg">
+		</picture>
+	</a>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark position-relative">
 			<a class="navbar-brand" href="../main/mainForm.do">짝 ♥ 게스트하우스</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"

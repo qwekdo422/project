@@ -1,9 +1,11 @@
 body {
 	max-width: 1100px;
 }
-#headerImg {
+.headerImg {
 	max-width: 100%;
 	width /***/: auto; /* IE8 */
     height: auto;
     vertical-align: bottom;
 }
+
+
