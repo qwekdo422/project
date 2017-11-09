@@ -8,7 +8,7 @@ var totalEvent =
 		end:'2017-11-13',
 		url: 'https://google.com/'
 	}
-var test = $('#calendar').fullCalendar({
+$('#calendar').fullCalendar({
 	header : {
 		left : 'prev,next today',
 		center : 'title',
@@ -17,7 +17,8 @@ var test = $('#calendar').fullCalendar({
 	defaultDate : /*'2017-11-08'*/date.getTime(),
 	editable : false,
 	eventLimit : true, // allow "more" link when too many events
-	events : [ totalEvent ],
+	events : totalEvent,
+	/*events : [ totalEvent ],*/
 /*
 $('#calendar').fullCalendar({
 	header : {
