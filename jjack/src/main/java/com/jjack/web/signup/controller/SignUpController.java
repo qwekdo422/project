@@ -21,15 +21,15 @@ public class SignUpController {
 	 * @author : 정준일
 	 * @since : 2017. 11.08.
 	 * @param :  없음
-	 * @return : ModelandView
+	 * @return : String
 	 */
 	@RequestMapping("/SignUpForm")
-	public ModelAndView SignUpForm(){
-		ModelAndView mv= new ModelAndView(); 
-		mv.setViewName("SignUp/SignUpForm");
-		
-		return mv; 
+	public String SignUpForm(){
+		return "SignUp/SignUpForm"; 
 	}
+	
+	
+	
 	
 	/**
 	 * 아이디 중복검사 실행 함수 
@@ -53,16 +53,18 @@ public class SignUpController {
 	 */
 	@RequestMapping("/SignUpProc")
 	public ModelAndView SignUpProc(ProfileVO pVO){
-		System.out.println("아이디 = "+pVO.getBirth());
-		sService.SignUpProc(pVO);
-		//뷰를 뷰른다. 
 
-		
 		//모델 입력 
+		//회원가입을 하면 로그인 창으로 가고싶다.
+		//그러면 일단 로그인 창을 만들어야 하겠구나 : 만들었고 
+		//회원가입 버튼을 누르면 alert창을 띄워서 가입이 완료되었습니다 라고 띄운 후 
+		//로그인 폼이 뜨게끔 만들고 싶다. 
+		
 		ModelAndView	mv = new ModelAndView();
+		mv.addObject("id", pVO.getId()); 
 
 		return mv;
-		
+	
 		 
 	}
 	

@@ -1,4 +1,4 @@
-package com.jjack.web.login.dao;
+package com.jjack.web.signup.dao;
 
 import com.jjack.web.common.vo.ProfileVO;
 

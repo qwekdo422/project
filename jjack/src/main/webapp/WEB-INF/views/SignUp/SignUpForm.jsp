@@ -28,8 +28,8 @@
 
 	</script>
 </head>	
-<body class="container">
-<!-- <body style="margin: 0 auto;"> -->	
+
+<body style="margin: 0 auto;">	
 	<div id="wrap">
 		<div id="header">
 			<jsp:include page="../common/header.jsp" />

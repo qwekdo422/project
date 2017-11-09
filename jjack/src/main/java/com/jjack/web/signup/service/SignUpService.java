@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jjack.web.common.vo.ProfileVO;
-import com.jjack.web.login.dao.SignUpDAO;
+import com.jjack.web.signup.dao.SignUpDAO;
 
 @Service
 public class SignUpService{

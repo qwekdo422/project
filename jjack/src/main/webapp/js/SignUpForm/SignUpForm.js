@@ -100,7 +100,7 @@ $(document).ready(function(){
 		//버튼을 누르면 -> 폼에 저장한 데이터를 가지고 와서 -> 질의문을 검색하고 -> 존재하면 1을 반환시키고 존재하지 않으면 0을 반환시킨다. 
 		$("#oBtn").click(function(){
 	
-		window.open("http://www.naver.com",width=30,height=30,left=0,top=0,); 
+		window.open("http://www.naver.com",width=30,height=30,left=0,top=0); 
 		});
 		
 	

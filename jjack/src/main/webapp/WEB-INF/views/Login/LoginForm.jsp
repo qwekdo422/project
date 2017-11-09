@@ -25,7 +25,23 @@
 		</div>
 
 		<div id="main">
-			<%-- 여기에 작업하세요. --%>
+	<form method="POST" id="lfrm" action="">
+	<table width="500" align="center" board="1">
+		<tr>
+			<td>아이디</td>
+			<td><input type="text" id="id" name="id"></td>
+		</tr>
+		<tr>
+			<td>비밀번호</td>
+			<td><input type="password" id="pw" name="pw"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+				<input type="button" id="lBtn" value="로그인">
+			</td>		
+		</tr>
+	</table>
+	</form>
 		</div>
 
 
