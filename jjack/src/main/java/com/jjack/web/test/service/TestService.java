@@ -9,6 +9,12 @@ import com.jjack.web.common.vo.TestVO;
  */
 public interface TestService {
 	
-	//	member 테이블에서 name을 얻어온다.
+	//member 테이블에서 name을 얻어온다.
 	public TestVO getMember(int no);
+	
+	//test
+	//테이블에서 회원가입 정보를 insert시켜보자. 
+	
+	
+	
 }

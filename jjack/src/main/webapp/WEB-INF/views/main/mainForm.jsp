@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>짝 게스트하우스</title>
+<title>메인화면</title>
 <%-- ====================== 필수  ======================  --%>
 <link rel="stylesheet" href="../css/common/header.css" />
 <link rel="stylesheet" href="../css/common/footer.css" />
@@ -15,25 +15,19 @@
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
 </head>
-<body style="margin: 0 auto;">
-
-    
+<body class="container">
 	<div id="header">
 		<jsp:include page="../common/header.jsp" />
 	</div>
-
-	<div id="main">
-
-		<!-- Page Content -->
 		<div class="container">
-
+		<!-- Page Content -->
 			<div class="row">
 
 				<div class="col-lg-3">
 					<br> <br>
 					<h2 class="my-4">데이트 코스</h2>
 					<div class="list-group">
-						<a href="#" class="list-group-item">데이트 코스1</a> 
+						<a href="./datecourse/datecourse1.do" class="list-group-item">데이트 코스1</a> 
 						<a href="#" class="list-group-item">데이트 코스2</a> 
 						<a href="#"	class="list-group-item">데이트 코스3</a>
 					</div>
@@ -53,14 +47,14 @@
 						</ol>
 						<div class="carousel-inner" role="listbox">
 							<div class="carousel-item active">
-								<img class="d-block img-fluid" src="=http://placehold.it/900x350" alt="First slide">
+								<img class="d-block img-fluid" src="../img/guest1.jpg" alt="First slide">
 							</div>
 							<div class="carousel-item">
-								<img class="d-block img-fluid" src="http://placehold.it/900x350"
+								<img class="d-block img-fluid" src="../img/guest2.jpg"
 									alt="Second slide">
 							</div>
 							<div class="carousel-item">
-								<img class="d-block img-fluid" src="http://placehold.it/900x350"
+								<img class="d-block img-fluid" src="../img/guest3.jpg"
 									alt="Third slide">
 							</div>
 						</div>
@@ -85,13 +79,10 @@
 									<h4 class="card-title">
 										<a href="#">남자1호 ♥ 여자2호</a>
 									</h4>
-									<h5>2017년 8월 25일</h5>
+									<h5>2017년 11월 25일</h5>
 									<p class="card-text">제주도와서 나의 반쪽을 만나서 너무 좋아요! ^^</p>
 								</div>
-								<div class="card-footer">
-									<small class="text-muted">&#9733; &#9733; &#9733;
-										&#9733; &#9734;</small>
-								</div>
+							
 							</div>
 						</div>
 
@@ -105,12 +96,8 @@
 									<h4 class="card-title">
 										<a href="#">남자3호 ♥ 여자1호</a>
 									</h4>
-									<h5>2017년 9월 25일</h5>
-									<p class="card-text">제주도와서 나의 반쪽을 만나서 너무 좋아요! ^^</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted">&#9733; &#9733; &#9733;
-										&#9733; &#9734;</small>
+									<h5>2017년 11월 18일</h5>
+									<p class="card-text">올해 드디어 제주도에서 솔로 탈출했어요! ^^</p>
 								</div>
 							</div>
 						</div>
@@ -123,12 +110,8 @@
 									<h4 class="card-title">
 										<a href="#">남자5호 ♥ 여자3호</a>
 									</h4>
-									<h5>2017년 9월 25일</h5>
-									<p class="card-text">제주도와서 나의 반쪽을 만나서 너무 좋아요! ^^</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted">&#9733; &#9733; &#9733;
-										&#9733; &#9734;</small>
+									<h5>2017년 11월 15일</h5>
+									<p class="card-text">사랑은 제주도 짝 게스트하우스에서... ^^</p>
 								</div>
 							</div>
 						</div>
@@ -141,12 +124,8 @@
 									<h4 class="card-title">
 										<a href="#">남자5호 ♥ 여자3호</a>
 									</h4>
-									<h5>2017년 10월 25일</h5>
-									<p class="card-text">사랑은 제주도 짝 게스트하우스에서... ^^</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted">&#9733; &#9733; &#9733;
-										&#9733; &#9734;</small>
+									<h5>2017년 11월 9일</h5>
+									<p class="card-text">저희 오늘부터 1일이에요! ㅎㅎ</p>
 								</div>
 							</div>
 						</div>
@@ -160,11 +139,7 @@
 										<a href="#">남자4호 ♥ 여자5호</a>
 									</h4>
 									<h5>2017년 10월 30일</h5>
-									<p class="card-text">사랑은 제주도 짝 게스트하우스에서... ^^</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted">&#9733; &#9733; &#9733;
-										&#9733; &#9734;</small>
+									<p class="card-text">처음처럼 사랑은 짝게스트하우스에서...</p>
 								</div>
 							</div>
 						</div>
@@ -178,11 +153,7 @@
 										<a href="#">남자1호 ♥ 여자2호</a>
 									</h4>
 									<h5>2017년 11월 2일</h5>
-									<p class="card-text">사랑은 제주도 짝 게스트하우스에서... ^^</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted">&#9733; &#9733; &#9733;
-										&#9733; &#9734;</small>
+									<p class="card-text">사랑은 사다리게임으로 시작해요..^^</p>
 								</div>
 							</div>
 						</div>
@@ -195,15 +166,11 @@
 
 			</div>
 			<!-- /.row -->
-
 		</div>
-		<!-- /.container -->
-
-
+		<!--  /.container -->
 		<!-- Bootstrap core JavaScript -->
 		<script src="../js/main/jquery.min.js"></script>
 		<script src="../js/main/bootstrap.bundle.min.js"></script>
-	</div>
 
 
 	<!---------------------------------------------->

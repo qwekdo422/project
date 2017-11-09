@@ -9,7 +9,6 @@
 		<setting name="defaultExecutorType" value="REUSE" />
 	</settings>
 	<typeAliases>
-	
 	</typeAliases>
 	<mappers>
 		<!-- <mapper resource="/sql/BoardSQL.xml"/> -->
