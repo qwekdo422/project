@@ -15,10 +15,27 @@
 <%-- ====================== 필수  ======================  --%>
 <link rel="stylesheet" href="../css/intro/intro.css" />
 	<script>
-		$(document).ready(function(){
-			$("#scheduleTab a").click(function(e){
-				e.preventDefault(); // 클릭시 화면 위로 가는걸 방지
-				$(this).tab("show");
+ 		$(document).ready(function(){
+/* 			$('.nav-tabs a').on('click', function (e) {
+				  e.preventDefault();	// 클릭시 화면 위로 가는걸 방지
+				  $(this).tab('show');
+				}); */
+			var day12=1;
+			$('#day2').hide();
+			$('#day1Btn').click(function(){
+				if(day12==2) {
+					$('#day2').hide();
+					$('#day1').show();
+					day12=1;
+				}
+			});
+
+			$('#day2Btn').click(function(){
+				if(day12==1) {
+					$('#day1').hide();
+					$('#day2').show();
+					day12=2;
+				}
 			});
 		});
 	
@@ -48,26 +65,39 @@
 				<p>애정촌의 짝 프로그램은 주로 토, 일 이틀간 진행합니다.<br>
 						짝을 찾아온 입소자들은 다음과 같은 일정 속에서 사랑을 찾게 됩니다.
 				</p><br><br>
-				<ul class="nav nav-tabs" id="scheduleTab">
+				<ul class="nav nav-tabs">
 					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" id="day1Btn">첫째날</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" id="day2Btn">둘째날</a>
+					</li> 
+				</ul>
+				
+				<!-- 포기. 그냥 j쿼리로 구현 -->	
+				<!--
+ 					<li class="nav-item">
 						<a class="nav-link active" data-toggle="tab" href="#day1">첫째날</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" data-toggle="tab" href="#day2">둘째날</a>
-					</li>
+					</li> 
 				</ul>
-				<div class="tab-content">
-					<div class="tab-pane fade show active" id="day1">
+<!-- 				<div class="tab-content">
+					<div class="tab-pane fade show active" id="day1" role="tabpanel">
 						<img src="../img/intro/schedule1.png" class="introImg">
 					</div>
-					<div class="tab-pane fade" id="day2" class="introImg">
-						<img src="../img/intro/schedule2.png">
+					<div class="tab-pane fade" id="day2" role="tabpanel">
+						<img src="../img/intro/schedule2.png" class="introImg">
 					</div>
-				</div>
+				</div> -->
 
-				
-				
-				
+				<div id="day1">
+					<img src="../img/intro/schedule1.png" class="introImg">
+				</div>
+				<div id="day2">
+					<img src="../img/intro/schedule2.png" class="introImg">
+				</div>
 			</div>
 			<!-- 본 화면 -->
 		</div>

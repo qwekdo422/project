@@ -3,15 +3,16 @@
     // Picture element HTML5 shiv
     document.createElement( "picture" );
 </script>
+<script src="../js/main/bootstrap.min.js"></script>
 <script src="../js/main/picturefill.min.js" async></script>
 <link rel="stylesheet" href="../css/common/bootstrap.min.css" />
 <div id="top">
 	<!-- <a href="../main/mainForm.do"><img src="../img/main.jpg" id="headerImg"></a> -->
 	<a href="../main/mainForm.do">
 		<picture>
-			<source srcset="../img/header.jpg" media="(min-width:768px)" class="headerImg">
-			<source srcset="../img/header_tab.jpg" media="(min-width:550px)" class="headerImg">
-			<img srcset="../img/header_mobile.jpg" class="headerImg">
+			<source srcset="../img/common/header.jpg" media="(min-width:768px)" class="headerImg">
+			<source srcset="../img/common/header_tab.jpg" media="(min-width:550px)" class="headerImg">
+			<img srcset="../img/common/header_mobile.jpg" class="headerImg">
 		</picture>
 	</a>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark position-relative">
@@ -23,9 +24,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="../intro/thisGHis.do">소개
-							<span class="sr-only">(current)</span>
-					</a></li>
+					<li class="nav-item"><a class="nav-link" href="../intro/thisGHis.do">소개</a></li>
 					<li class="nav-item"><a class="nav-link" href="../houseApply/applyForm.do">애정촌입소신청</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#">짝짓기</a></li>
