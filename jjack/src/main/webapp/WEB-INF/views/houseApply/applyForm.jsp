@@ -24,13 +24,13 @@
 <link rel="stylesheet" href="../css/houseApply/applyForm.css" />
 </head>
 
-<body class="container">
+<body style="margin: 0 auto;">
 	
-	<div id="wrap">
 		<div id="header">
 			<jsp:include page="../common/header.jsp" />
 		</div>
-		<div id="main">
+		
+		<div class="container">
 			<a href="./test.do">구글 달력 테스트</a>
 			<%-- ================ 달력 =============== --%>
 			<%-- <jsp:include page="./calendar.jsp" /> --%>
@@ -83,6 +83,5 @@
 		<div id="footer">
 			<jsp:include page="../common/footer.jsp" />
 		</div>
-	</div>
 </body>
 </html>
