@@ -15,48 +15,18 @@
 	<%-- ====================== 필수  ======================  --%>
     <style>
     	/* 메뉴 */
-    	#introNav {
-    		float:left;
-    		width:180px;
-    		font-size:20px;
-    	}
-    	#inrtoMenu {
-    	    box-sizing: border-box;
-    		-webkit-box-sizing: border-box;
-    		-moz-box-sizing: border-box;
-    		border-bottom:1px solid black;
-    		list-style-type : none;
-    		background-color:#aee5f6;
-    		padding-left:0px;
-    		border:2px solid black;
-    	}
-    	#inrtoMenu li {
-    		text-align:right;
-    		border:1px solid black;
-    	}
     	#introLogo {
     		width:35px;
     	}
     	
     	/* 본문 */
-    	#introMain {
-    		margin:50px 200px;
+    	#jjGH {
+    		max-width: 760px;
     	}
     	
-    	
-    	
-    
     </style>
     <script>
-    	$(document).ready(function(){
-    		$("#intro2").click(function(){
-    			location.href ="../intro/schedule.do";
-    		});
-    		
-    		
-    		
-    		
-    	});
+
     </script>
 </head>
 <body style="margin: 0 auto;">
@@ -65,7 +35,7 @@
 			<jsp:include page="../common/header.jsp" />
 		</div>
 		<div id="main">
-			<div class="container jumbotron">
+			<!-- <div class="jumbotron">
 				<div class="row col-lg-3">
 					<br> <br>
 					<h2 class="my-4">소개</h2>
@@ -76,7 +46,7 @@
 					</div>
 				</div>
 			</div>
-		
+		 -->
 <!-- 			<nav id="introNav">
 				<ul id="inrtoMenu">
 					<li id="intro1"><a href="../intro/thisGHis.do"><img src="../img/logo.png" id="introLogo"><br>게스트하우스는</a></li>
@@ -85,7 +55,7 @@
 				</ul>
 			</nav> -->
 			<div id="introMain" class="col-lg-9">
-				<img id="thisGHis" src="../img/JjakGH.jpg">
+				<img id="jjGH" src="../img/JjakGH.jpg">
 				<h3>짝 게스트하우스에 오신 걸 환영합니다!</h3>
 				<pre>TV에서 보신 인연찾기 프로그램 짝! 그 ‘짝’을 실제로 경험할 수 있는 곳이 제주도에 있습니다.
 제주도의 매력넘치는 자연 속에서 독특한 방식의 미팅으로 인연을 찾아보세요.
