@@ -1,0 +1,43 @@
+회원가입 테이블 
+create table TB_MEMBER(
+m_no NUMBER(10) not null,
+m_id varchar2(32) not null,
+m_pw varchar2(32) not null,
+m_name varchar2(20) not null,
+m_sex char(1) not null,
+m_birth date not null,
+m_email varchar2(100), 
+m_loc varchar2(16) not null, 
+m_joindate date default sysdate
+); 
+
+
+
+
+
+#회원가입 폼
+요청 http://localhost:8080/jjack/Login/SignUpForm.do
+컨트롤러 :  com.jjack.web.main.controller
+함수  : public ModelAndView SignUpForm()
+파라메터 : 없음
+-----------------------------------------------------------------------------------------------------------
+
+
+
+
+#회원가입 실행 
+요청 http://localhost:8080/jjack/Login/SignUpProc.do
+컨트롤러 :  com.jjack.web.main.controller
+함수  :	public ModelAndView SignUpProc()
+파라메터 : ProfileVO 전체 
+-----------------------------------------------------------------------------------------------------------
+
+
+
+
+#id 중복검사 실행
+요청 http://localhost:8080/jjack/Login/Overlap.do
+컨트롤러 :  com.jjack.web.main.controller
+함수  :	public ModelAndView OverlapProc()
+파라메터 : id
+-----------------------------------------------------------------------------------------------------------

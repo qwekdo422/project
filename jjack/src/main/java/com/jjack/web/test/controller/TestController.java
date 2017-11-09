@@ -24,6 +24,8 @@ public class TestController {
 	public String test (@RequestParam int no, Model model) {
 		TestVO vo = tService.getMember(no);
 		model.addAttribute("member", vo);
-		return "test/testForm";
+	return "test/testForm";
+		
+	
 	}
 }

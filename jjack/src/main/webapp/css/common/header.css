@@ -1,3 +1,7 @@
-body {
+/* body {
 	max-width: 1100px;
+} */
+
+#headerImg {
+	min-width: 1100px;
 }
