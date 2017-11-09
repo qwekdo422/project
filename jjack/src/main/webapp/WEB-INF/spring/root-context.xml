@@ -31,6 +31,8 @@
 			-	MemberVO -> MemberVO or membervo 로 사용가능
 		-->
 		<property name="typeAliasesPackage" value="com.jjack.web.common.vo"/>
+		
+		
 		<!-- SQL.xml 문서들이 정의된 경로를 지정한다. -->
 		<property name="mapperLocations" value="classpath:sql/*DAO.xml" />
 	</bean>
@@ -49,7 +51,7 @@
 	
 	<!--
 		★★★	 
-		- 기존방식 사용시 Bean 차리 예시
+		- 기존방식 사용시 Bean 처리 예시
 		- 새로운 방식을 사용할 경우 작성할 필요가 없다!!
 		
 	만들어진 DAO를 자동 주입하기 위한 bean 선언 
