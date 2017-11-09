@@ -4,6 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace는 연결할 DAO 인터페이스경로.클래스명 -->	
 <mapper namespace="com.jjack.web.test.dao.TestDAO">
+
 	<!-- id는 연결할 함수명 -->
 	<select id="testMember" parameterType="int" resultType="testvo">
 		select 

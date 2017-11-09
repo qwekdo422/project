@@ -23,8 +23,8 @@
 					<li class="nav-item"><a class="nav-link" href="#">데이트코스</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">후기</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">공지</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
+					<li class="nav-item"><a class="nav-link" href="../Login/SignUpForm.do">회원가입</a></li>
+					<li class="nav-item"><a class="nav-link" href="../Login/LoginForm.do">로그인</a></li>
 				</ul>
 			</div>
 		</div>
