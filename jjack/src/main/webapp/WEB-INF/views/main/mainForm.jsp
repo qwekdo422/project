@@ -27,7 +27,6 @@
 					<br> <br>
 					<h2 class="my-4">데이트 코스</h2>
 					<div class="list-group">
-
 						<a href="./datecourse/datecourse1.do" class="list-group-item">데이트 코스1</a> 
 						<a href="#" class="list-group-item">데이트 코스2</a> 
 						<a href="#"	class="list-group-item">데이트 코스3</a>
