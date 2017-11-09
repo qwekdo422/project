@@ -17,21 +17,33 @@
 
 <%-- 캘린더  --%>
 <link rel="stylesheet" href="../css/houseApply/calendar.css" />
-<%-- 입서신청 폼 --%>
+<link rel='stylesheet prefetch' href='https://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.css'>
+<link rel='stylesheet prefetch' href='http://dimsemenov.com/plugins/magnific-popup/site-assets/all.min.css?v=0.9.9'>
+
+<%-- 입소신청 폼 --%>
 <link rel="stylesheet" href="../css/houseApply/applyForm.css" />
 </head>
 
-<body style="margin: 0 auto;">
+<body class="container">
 	
 	<div id="wrap">
 		<div id="header">
 			<jsp:include page="../common/header.jsp" />
 		</div>
-
 		<div id="main">
-			<jsp:include page="./calendar.jsp" />
+			<a href="./test.do">구글 달력 테스트</a>
+			<%-- ================ 달력 =============== --%>
+			<%-- <jsp:include page="./calendar.jsp" /> --%>
+			<div id='calendar'></div>
+				<script src='https://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
+				<script src='https://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>
+				<script src='https://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
+				<script src='http://dimsemenov.com/plugins/magnific-popup/dist/jquery.magnific-popup.min.js?v=0.9.9'></script>
+				<script src="../js/houseApply/calendar.js"></script>
+			<%-- ================ 달력  =============== --%>
 			
 			
+			<%-- ================ 입소신청 =============== --%>
 			<div class="">
 				<div class="row">
 					<div class="col-md-4">
@@ -64,7 +76,7 @@
 					</div>
 				</div>
 			</div>
-
+			<%-- ================ 입소신청 =============== --%>
 		</div>
 
 

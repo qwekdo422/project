@@ -16,4 +16,9 @@ public class HouseApplyController {
 	public String applyForm() {
 		return "./houseApply/applyForm";
 	}
+
+	@RequestMapping("/test")
+	public void calendarTest() {
+	}
+	
 }
