@@ -10,7 +10,7 @@
 	<a href="../main/mainForm.do">
 		<picture>
 			<source srcset="../img/header.jpg" media="(min-width:768px)" class="headerImg">
-			<source srcset="../img/header_tab.jpg" media="(min-width:414px)" class="headerImg">
+			<source srcset="../img/header_tab.jpg" media="(min-width:550px)" class="headerImg">
 			<img srcset="../img/header_mobile.jpg" class="headerImg">
 		</picture>
 	</a>
