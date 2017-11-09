@@ -1,5 +1,4 @@
 var date = new Date();
-
 /* 이벤트 날짜 등록 */
 var totalEvent = 
 	{
@@ -17,7 +16,7 @@ $('#calendar').fullCalendar({
 	defaultDate : /*'2017-11-08'*/date.getTime(),
 	editable : false,
 	eventLimit : true, // allow "more" link when too many events
-	events : totalEvent,
+	events : tEvent,
 	/*events : [ totalEvent ],*/
 /*
 $('#calendar').fullCalendar({

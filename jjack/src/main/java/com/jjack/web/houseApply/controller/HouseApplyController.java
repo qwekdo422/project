@@ -24,10 +24,10 @@ public class HouseApplyController {
 	@RequestMapping("/applyForm")
 	public String applyForm(Model model) {
 		JSONArray  cList = null;	
-/*		try {
+		try {
 			cList = cService.getCalendar();
 		} catch (IOException e) {e.printStackTrace();}
-		model.addAttribute("CALENDAR", cList);*/
+		model.addAttribute("CALENDAR", cList);
 		return "./houseApply/applyForm";
 	}
 

@@ -22,6 +22,9 @@
 
 <%-- 입소신청 폼 --%>
 <link rel="stylesheet" href="../css/houseApply/applyForm.css" />
+<script type="text/javascript">
+var tEvent = ${CALENDAR};
+</script>
 </head>
 
 <body style="margin: 0 auto;">
@@ -34,18 +37,16 @@
 			<%-- ================ 달력 =============== --%>
 			<%-- <jsp:include page="./calendar.jsp" /> --%>
 			<div id='calendar'></div>
-				<script src='https://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js' ></script>
-				<script src='https://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>
-				<script src='https://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
-				<script src='http://dimsemenov.com/plugins/magnific-popup/dist/jquery.magnific-popup.min.js?v=0.9.9'></script>
+				<script src='../js/houseApply/moment.min.js'></script>
+				<script src='../js/houseApply/fullcalendar-2.1.1.js'></script>
+				<script src='../js/houseApply/fullcalendar.min.js'></script>
+				<script src='../js/houseApply/jquery.magnific-popup.min.js'></script>
 				<script src="../js/houseApply/calendar.js"></script>
 			<%-- ================ 달력  =============== --%>
 			
 			
 			<%-- ================ 입소신청 =============== --%>
 			<div class="">
-				<div class="row">
-					<div class="col-md-4">
 						<div class="form-group">
 					    	<label for="name">이름:</label>
 					    	<input type="text" class="form-control" name="name" value="홍길동" readonly="readonly">
@@ -73,8 +74,6 @@
 					    	<input type="text" class="form-control" name="inDay">
 					 	</div>
 					</div>
-				</div>
-			</div>
 			<%-- ================ 입소신청 =============== --%>
 		</div>
 
