@@ -16,18 +16,11 @@
 <%-- ====================== 필수  ======================  --%>
 </head>
 <body class="container">
-
-    
 	<div id="header">
 		<jsp:include page="../common/header.jsp" />
 	</div>
-
-	<div id="main">
-
-
-		<!-- Page Content -->
 		<div class="container">
-
+		<!-- Page Content -->
 			<div class="row">
 
 				<div class="col-lg-3">
@@ -174,15 +167,11 @@
 
 			</div>
 			<!-- /.row -->
-
 		</div>
-		<!-- /.container -->
-
-
+		<!--  /.container -->
 		<!-- Bootstrap core JavaScript -->
 		<script src="../js/main/jquery.min.js"></script>
 		<script src="../js/main/bootstrap.bundle.min.js"></script>
-	</div>
 
 
 	<!---------------------------------------------->

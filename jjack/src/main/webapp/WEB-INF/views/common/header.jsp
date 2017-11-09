@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	
 <link rel="stylesheet" href="../css/common/bootstrap.min.css" />
 <div id="top">
-	<a href="../main/mainForm.do"><img src="../img/main.jpg"></a>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark position-relative">
-		<div class="container">
+	<a href="../main/mainForm.do"><img src="../img/main.jpg" id="headerImg"></a>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-info position-relative">
 			<a class="navbar-brand" href="../main/mainForm.do">짝 ♥ 게스트하우스</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive" aria-controls="navbarResponsive"
@@ -27,7 +25,5 @@
 					<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
 				</ul>
 			</div>
-		</div>
 	</nav>
-	
 </div>
