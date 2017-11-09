@@ -167,11 +167,6 @@
 			<!-- /.row -->
 		</div>
 		<!--  /.container -->
-		<!-- Bootstrap core JavaScript -->
-		<script src="../js/main/jquery.min.js"></script>
-		<script src="../js/main/bootstrap.bundle.min.js"></script>
-
-
 	<!---------------------------------------------->
 	<div id="footer">
 		<jsp:include page="../common/footer.jsp" />
