@@ -29,11 +29,11 @@
 	</script>
 </head>	
 
-<body style="margin: 0 auto;">	
-	<div id="wrap">
-		<div id="header">
-			<jsp:include page="../common/header.jsp" />
-		</div>
+<body style="margin:0 auto;">
+   <div id="header">
+      <jsp:include page="../common/header.jsp" />
+   </div>
+      <div class="container">
 
 		<div id="main">
 				<form method="post" action="../SignUp/SignUpProc.do" id="Sfrm">
@@ -89,12 +89,8 @@
 			</form>
 
 		</div>
-
-
-		<div id="footer">
-			<jsp:include page="../common/footer.jsp" />
-		</div>
-
-	</div>
+   <div id="footer">
+      <jsp:include page="../common/footer.jsp" />
+   </div>
 </body>
 </html>

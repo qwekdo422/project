@@ -103,6 +103,8 @@ $(document).ready(function(){
 		window.open("http://www.naver.com",width=30,height=30,left=0,top=0); 
 		});
 		
+		
+		
 	
 	
 		
