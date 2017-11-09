@@ -15,7 +15,7 @@
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
 </head>
-<body>
+<body class="container">
 
     
 	<div id="header">
@@ -34,7 +34,8 @@
 					<br> <br>
 					<h2 class="my-4">데이트 코스</h2>
 					<div class="list-group">
-						<a href="#" class="list-group-item">데이트 코스1</a> 
+
+						<a href="./datecourse/datecourse1.do" class="list-group-item">데이트 코스1</a> 
 						<a href="#" class="list-group-item">데이트 코스2</a> 
 						<a href="#"	class="list-group-item">데이트 코스3</a>
 					</div>
