@@ -17,7 +17,7 @@ m_joindate date default sysdate
 
 #회원가입 폼
 요청 http://localhost:8080/jjack/SignUp/SignUpForm.do
-컨트롤러 :  com.jjack.web.main.controller
+컨트롤러 :  com.jjack.web.signup.controller
 함수  : public ModelAndView SignUpForm()
 파라메터 : 없음
 -----------------------------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ m_joindate date default sysdate
 
 #회원가입 실행 
 요청 http://localhost:8080/jjack/SignUp/SignUpProc.do
-컨트롤러 :  com.jjack.web.main.controller
+컨트롤러 :  com.jjack.web.signup.controller
 함수  :	public ModelAndView SignUpProc()
 파라메터 : ProfileVO 전체 
 -----------------------------------------------------------------------------------------------------------
@@ -37,7 +37,37 @@ m_joindate date default sysdate
 
 #id 중복검사 실행
 요청 http://localhost:8080/jjack/Login/Overlap.do
-컨트롤러 :  com.jjack.web.main.controller
+컨트롤러 : 
 함수  :	public ModelAndView OverlapProc()
 파라메터 : id
 -----------------------------------------------------------------------------------------------------------
+
+
+
+#로그인 폼
+요청 http://localhost:8080/jjack/Login/LoginForm.do
+컨트롤러 :com.jjack.web.login.controller
+함수  :	public ModelAndView LoginForm()
+파라메터 : 없음
+
+-----------------------------------------------------------------------------------------------------------
+
+
+
+#로그인 실행
+요청 http://localhost:8080/jjack/Login/LoginProc.do
+컨트롤러 :com.jjack.web.login.controller
+함수  :	public ModelAndView LoginProc()
+파라메터 : HttpServletRequest req, HttpSession session
+
+-----------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+

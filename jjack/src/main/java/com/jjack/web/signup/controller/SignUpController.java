@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.jjack.web.common.vo.ProfileVO;
 import com.jjack.web.signup.service.SignUpService;
@@ -38,7 +39,7 @@ public class SignUpController {
 	 * @param : id
 	 * @return : ModelandView
 	 */
-	@RequestMapping("/Login/Overlap")
+	@RequestMapping("/Overlap")
 	public ModelAndView OverlapProc(){
 		
 		return null; 
@@ -53,15 +54,22 @@ public class SignUpController {
 	 */
 	@RequestMapping("/SignUpProc")
 	public ModelAndView SignUpProc(ProfileVO pVO){
-
+		System.out.println("회원가입 실행함수");
+		
 		//모델 입력 
 		//회원가입을 하면 로그인 창으로 가고싶다.
 		//그러면 일단 로그인 창을 만들어야 하겠구나 : 만들었고 
 		//회원가입 버튼을 누르면 alert창을 띄워서 가입이 완료되었습니다 라고 띄운 후 
-		//로그인 폼이 뜨게끔 만들고 싶다. 
+		//로그인 폼을 띄우되 그 회원가입한 아이디가 미리 로그인폼으로 들어가서 수행하고 싶다. 
+		
+		
+		sService.SignUpProc(pVO); //회원가입 폼 데이터 DB에 넣는 로직 수행 
+		
 		
 		ModelAndView	mv = new ModelAndView();
 		mv.addObject("id", pVO.getId()); 
+		System.out.println("id 값 받았니?"+pVO.getId());
+		mv.setViewName("Login/SubLoginForm");
 
 		return mv;
 	

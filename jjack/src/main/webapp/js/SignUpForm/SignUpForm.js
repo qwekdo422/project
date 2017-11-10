@@ -1,6 +1,8 @@
 $(document).ready(function(){
- 
+	number=0;  //전역번수
+	
 	$("#sBtn").click(function(){
+		
 		var id=$("#id").val();
 		var pw=$("#pw").val();
 		var cpw=$("#cpw").val();
@@ -9,7 +11,7 @@ $(document).ready(function(){
 		var birth=$("#birth").val();
 		var email=$("#email").val();
 		var loc=$("#loc").val();
-			
+		
 	
 		if(id==""){
 			alert("아이디를 입력하십시오");
@@ -17,10 +19,11 @@ $(document).ready(function(){
 			return; 	
 		}
 		
-		
-		
-		
-		if(pw==""){
+
+	
+
+				
+		if(pw==""){ //pw가 "" 일 때만....
 			alert("비밀번호를 입력하십시오");
 			$("#pw").focus(); 
 			return; 	
@@ -38,14 +41,15 @@ $(document).ready(function(){
 			$("#cpw").val("");//천재
 			return; 
 		}
+		//즉 여기서 중복확인을 해야겠지 
+		//아이디를 입력하기도전에 중복검사 버튼을 누르면 
+		//"아이디를 입력하십시오" 라고 만들고 싶어 .
 		
 		if(name==""){
 			alert("이름을 입력하십시오");
 			$("#name").focus(); 
 			return; 	
 		}
-		
-		
 		
 		
 		//var sex=$(':input[name=sex]:radio:checked'); 
@@ -75,9 +79,22 @@ $(document).ready(function(){
 			return; 	
 		}
 		
-		$("#Sfrm").submit(); 
-	});// $("#sBtn").click(function() 함수 종료 
 
+
+
+			
+			if(number==0){
+			//number가 0이라면 중복확인 이 버튼을 단한번도 누르지 않았다는 의미이므로...
+				alert("ID 중복검사를 해 주십시오"); 
+				return; 
+			}else{
+			//number가 0이 아니면 중복확인을 했다는 의미가 된다. 
+				$("#Sfrm").submit(); 
+				alert("회원 가입이 완료되었습니다."); 
+				return; 
+			}
+		
+	});// $("#sBtn").click(function() 함수 종료 
 	
 		//생일 폼에 달력뜨게끔 해주는 코드 
 		$("#birth").datepicker({
@@ -97,13 +114,20 @@ $(document).ready(function(){
 
 	
 		//중복검사 함수 		
-		//버튼을 누르면 -> 폼에 저장한 데이터를 가지고 와서 -> 질의문을 검색하고 -> 존재하면 1을 반환시키고 존재하지 않으면 0을 반환시킨다. 
 		$("#oBtn").click(function(){
-	
-		window.open("http://www.naver.com",width=30,height=30,left=0,top=0); 
-		});
-		
-		
+			number++; 
+			var id=$("#id").val();
+			
+			if(id==""){
+				alert("아이디를 입력하십시오"); 
+				return; 
+			}
+			
+			if(id !=""){
+				window.open("http://www.naver.com"); 
+				return; 
+			}
+});
 		
 	
 	

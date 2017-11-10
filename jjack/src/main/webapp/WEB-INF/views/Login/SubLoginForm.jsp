@@ -19,8 +19,36 @@
       <jsp:include page="../common/header.jsp" />
    </div>
       <div class="container">
-		
-			<%-- 여기에 작업하세요. --%>
+<!--  	
+<c:if test="${null ne id}">
+<c:redirect url="../Login/LoginForm.do">
+<c:param name="ID" value="${id}"></c:param>
+</c:redirect>
+</c:if>
+-->
+
+<!-- 로그인에 성공한 경우 -->
+<c:if test="${OBJECT eq 1}">
+<input type="hidden" id="uid" value="${UID}">
+<script>
+var uid =document.getElementById("uid").value; //그 폼의 value값을 가져와서 변수에다 저장함
+alert(uid +"님 환영합니다"); 
+document.location.href="../main/mainForm.do";
+</script>
+</c:if>
+
+
+<!-- 로그인에 실패한 경우  -->
+<c:if test="${OBJECT eq 0}">
+<script>
+alert("아이디와 비밀번호가 유효하지 않습니다.");
+document.location.href="../Login/LoginForm.do"; 
+</script>
+</c:if> 
+
+
+
+
 			
 		</div>
    <div id="footer">
