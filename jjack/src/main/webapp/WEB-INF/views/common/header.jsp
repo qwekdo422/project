@@ -27,7 +27,7 @@
 					<li class="nav-item"><a class="nav-link" href="../intro/thisGHis.do">소개</a></li>
 					<li class="nav-item"><a class="nav-link" href="../houseApply/applyForm.do">애정촌입소신청</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#">짝짓기</a></li>
+					<li class="nav-item"><a class="nav-link" href="../mating/forLunch.do">짝짓기</a></li>
 					<li class="nav-item"><a class="nav-link" href="../datecourse/datecourse1.do">데이트코스</a>
 					<li class="nav-item"><a class="nav-link" href="#">후기</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">공지</a></li>

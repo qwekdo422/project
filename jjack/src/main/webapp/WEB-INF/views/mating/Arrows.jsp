@@ -19,9 +19,28 @@
 		<jsp:include page="../common/header.jsp" />
 	</div>
 	<div class="container">
-		
-			<%-- 여기에 작업하세요. --%>
-			
+		<!-- Page Content -->
+		<div class="row mt-4">
+ 			<!-- 서브메뉴 -->
+			<div class="col-lg-3">
+				<h2>짝짓기</h2><br />
+				<div class="list-group text-right">
+					<a href="../mating/forLunch.do" class="list-group-item">도시락 사다리</a> 
+					<a href="../mating/Arrows.do" class="list-group-item">사랑의 작대기</a>
+					<a href="../mating/myLove.do" class="list-group-item">[임시]짝선택</a>
+				</div>
+			</div>
+			<!-- 본 화면 -->
+		 	<div id="introMain" class="col-lg-9">
+				
+				
+				<!-- 여기에 사랑의 작대기 -->
+				
+				
+			</div>
+			<!-- 본 화면 -->
+		</div>
+		<!-- 전체 화면 -->
 	</div>
 	<!--  /.container -->
 	<!---------------------------------------------->

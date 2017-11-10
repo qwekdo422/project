@@ -24,8 +24,4 @@ public class introController {
 	public void rules(){
 		
 	}
-	@RequestMapping("/test")
-	public void test(){
-		
-	}
 }
