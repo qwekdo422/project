@@ -26,7 +26,7 @@
 			<div class="col-lg-3">
 				<h2>소개</h2><br />
 				<div class="list-group text-right">
-					<a href="../intro/thisGHis.do" class="list-group-item"><img src="../img/logo.png" id="introLogo"><br>게스트하우스는</a> 
+					<a href="../intro/thisGHis.do" class="list-group-item"><img src="../img/common/logo.png" id="introLogo"><br>게스트하우스는</a> 
 					<a href="../intro/schedule.do" class="list-group-item">애정촌 일정</a> 
 					<a href="../intro/rules.do" class="list-group-item active">애정촌 십계명</a>
 				</div>
