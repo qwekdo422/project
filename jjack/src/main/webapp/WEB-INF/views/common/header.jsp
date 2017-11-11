@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<script>
-    // Picture element HTML5 shiv
-    document.createElement( "picture" );
-</script>
 <script src="../js/main/bootstrap.min.js"></script>
-<script src="../js/main/picturefill.min.js" async></script>
+<script src="../js/common/header.js"></script>
 <link rel="stylesheet" href="../css/common/bootstrap.min.css" />
 <div id="top">
-	<!-- <a href="../main/mainForm.do"><img src="../img/main.jpg" id="headerImg"></a> -->
 	<a href="../main/mainForm.do">
 		<picture>
 			<source srcset="../img/common/header.jpg" media="(min-width:768px)" class="headerImg">
@@ -24,8 +19,9 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="../intro/thisGHis.do">소개</a></li>
+					<li class="nav-item"><a class="nav-link" href="../intro/thisGHis.do" id="dropIntro">소개</a></li>
 					<li class="nav-item"><a class="nav-link" href="../houseApply/applyForm.do">애정촌입소신청</a></li>
+					<li class="nav-item"><a class="nav-link" href="../houseApply/applicantList.do">[관리]</a></li>
 					<li class="nav-item"><a class="nav-link" href="../mating/forLunch.do">짝짓기</a></li>
 					<li class="nav-item"><a class="nav-link" href="../datecourse/datecourse1.do">데이트코스</a>
 					<li class="nav-item"><a class="nav-link" href="#">후기</a></li>
