@@ -25,8 +25,8 @@ CREATE TABLE TB_Apply (
 	a_tel VARCHAR2(20) NOT NULL, -- 전화번호 
 	e_eventdate VARCHAR(8) NOT NULL, -- 입소날짜
 	CONSTRAINT acond_ck CHECK(a_cond BETWEEN 1 AND 10),
-	CONSTRAINT amno_fk FOREIGN KEY m_no REFERENCES TB_Member(m_no),
-	CONSTRAINT aeevent_fk FOREIGN KEY e_eventdate REFERENCES TB_Event(e_eventdate)
+	CONSTRAINT amno_fk FOREIGN KEY(m_no) REFERENCES TB_Member(m_no),
+	CONSTRAINT aeevent_fk FOREIGN KEY(e_eventdate) REFERENCES TB_Event(e_eventdate)
 );
 
 
@@ -47,7 +47,8 @@ CREATE TABLE TB_Guest (
 
 -- 행사정보 
 CREATE TABLE TB_Event (
-	e_eventdate VARCHAR(8) CONSTRAINT eeventdate_pk PRIMARY KEY, -- 행사날짜 
+	e_eventdate VARCHAR(8) CONSTRAINT eeventdate_pk PRIMARY KEY, -- 행사날짜
+	e_days NUMBER(2) DEFAULT 2 NOT NULL, -- 행사기간
 	e_loc VARCHAR2(16), -- 대상 거주지역 
 	e_age VARCHAR2(10), -- 대상 연령대 
 	e_title VARCHAR2(50) NOT NULL, -- 행사 제목 
