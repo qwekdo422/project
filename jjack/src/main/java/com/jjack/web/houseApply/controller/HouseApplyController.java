@@ -31,6 +31,11 @@ public class HouseApplyController {
 		return "./houseApply/applyForm";
 	}
 
+	@RequestMapping("/applicantList")
+	public void applicantList(ApplicantList al) {
+		al.applist();
+	}
+	
 	@RequestMapping("/test")
 	public String calendarTest(Model model) {
 		JSONArray  cList = null;	

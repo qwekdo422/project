@@ -35,6 +35,8 @@
 					$("#day1Btn").attr("class", "nav-link active");
 					$('#day1Btn').css('color', '#007bff');
 					$('#day2Btn').css('color', '#212529');
+					$('#day1Btn').css('cursor', 'Default');
+					$('#day2Btn').css('cursor', 'Pointer');
 					$("#day2Btn").attr("class", "nav-link");
 					$('#day1').show();
 					day12=1;
@@ -47,6 +49,8 @@
 					$("#day2Btn").attr("class", "nav-link active");
 					$('#day2Btn').css('color', '#007bff');
 					$('#day1Btn').css('color', '#212529');
+					$('#day2Btn').css('cursor', 'Default');
+					$('#day1Btn').css('cursor', 'Pointer');
 					$("#day1Btn").attr("class", "nav-link");
 					$('#day2').show();
 					day12=2;
@@ -81,7 +85,7 @@
 				</p><br><br>
 				<ul class="nav nav-tabs">
 					<li class="nav-item">
-						<a class="nav-link active" data-toggle="tab" id="day1Btn" style="color:#007bff;">첫째날</a>
+						<a class="nav-link active" data-toggle="tab" id="day1Btn">첫째날</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" data-toggle="tab" id="day2Btn">둘째날</a>

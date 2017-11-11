@@ -17,3 +17,13 @@
 	margin:0 auto;
 	width:88%;
 }
+
+
+/* 애정촌 일정 */
+#day2Btn {
+	cursor:pointer;
+}
+#day1Btn {
+	cursor:default;
+	color:#007bff;
+}
