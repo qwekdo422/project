@@ -15,50 +15,7 @@
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
 <link rel="stylesheet" href="../css/intro/intro.css" />
-	<script>
- 		$(document).ready(function(){
- 			
- 			/* 
- 			// 일정그림 보여주기 부트스트랩 방식
- 			$('.nav-tabs a').on('click', function (e) {
-				  e.preventDefault();	// 클릭시 화면 위로 가는걸 방지
-				  $(this).tab('show');
-				});
-			*/
-				
- 			// 일정그림 보여주기 jQuery 방식
-			var day12=1;
-			$('#day2').hide();
-			$('#day1Btn').click(function(){
-				if(day12==2) {
-					$('#day2').hide();
-					$("#day1Btn").attr("class", "nav-link active");
-					$('#day1Btn').css('color', '#007bff');
-					$('#day2Btn').css('color', '#212529');
-					$('#day1Btn').css('cursor', 'Default');
-					$('#day2Btn').css('cursor', 'Pointer');
-					$("#day2Btn").attr("class", "nav-link");
-					$('#day1').show();
-					day12=1;
-				}
-			});
-
-			$('#day2Btn').click(function(){
-				if(day12==1) {
-					$('#day1').hide();
-					$("#day2Btn").attr("class", "nav-link active");
-					$('#day2Btn').css('color', '#007bff');
-					$('#day1Btn').css('color', '#212529');
-					$('#day2Btn').css('cursor', 'Default');
-					$('#day1Btn').css('cursor', 'Pointer');
-					$("#day1Btn").attr("class", "nav-link");
-					$('#day2').show();
-					day12=2;
-				}
-			});
-		});
-	
-	</script>
+<script src="../js/intro/schedule.js"></script>
 </head>
 <body style="margin:0 auto;">
 	<div id="header">
@@ -85,10 +42,10 @@
 				</p><br><br>
 				<ul class="nav nav-tabs">
 					<li class="nav-item">
-						<a class="nav-link active" data-toggle="tab" id="day1Btn">첫째날</a>
+						<a class="nav-link active" data-toggle="tab" id="day1Btn" class="dayBtn">첫째날</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" data-toggle="tab" id="day2Btn">둘째날</a>
+						<a class="nav-link" data-toggle="tab" id="day2Btn" class="dayBtn">둘째날</a>
 					</li> 
 				</ul>
 				<div id="day1">
