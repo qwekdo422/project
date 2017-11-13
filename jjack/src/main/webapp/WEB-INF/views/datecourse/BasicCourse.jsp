@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			<!-- 본 화면 -->
-		 	<div id="introMain" class="col-lg-9">
+		 	<div id="BasicMain" class="col-lg-9">
 				
 				
 				<img src="../img/datecourse/basic_course.png">

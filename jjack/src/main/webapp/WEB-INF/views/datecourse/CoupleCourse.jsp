@@ -10,14 +10,24 @@
 <link rel="stylesheet" href="../css/common/footer.css" />
 <link rel="stylesheet" href="../css/alert/alertify.core.css" />
 <link rel="stylesheet" href="../css/alert/alertify.default.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-$(function(){
-	$('.eastcourse').click(function(){
-		alert('test');
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../js/alert/alertify.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$(".list-group-item").click(function(){
+		alert('menu');	
 	});
 });
+
+function open_in_frame(url){
+	alert('test');
+	$('#map_frame').attr('src',url);
+}
+
+
 </script>
-<script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
 
 
@@ -40,23 +50,32 @@ $(function(){
 				</div>
 			</div>
 			<!-- 본 화면 -->
-		 	<div id="introMain" class="col-lg-9">
+		 	<div id="CoupleMain" class="col-lg-9">
 				
-				<div class="eastcourse" >
-					<img id="east_image" src="../img/datecourse/east_course.png"> 
+				<!-- 
+				<button class="btn_east_course" style="padding:0px"><img src="../img/datecourse/east_course.png"></button>
+				 -->
+				<button onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1z5yQJh_pAHZ8F8dbyF2qNvtJ1vGTg2r3")'><img src="../img/datecourse/east_course.png"></button>
+				<br>
+				<br>
+				<!-- 
+				<button class="btn_west_course" style="padding:0px"><img src="../img/datecourse/west_course.png"></button>
+				 -->
+				 <button onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1BNuO89rX3ZuCRCND53p6Gj9pTnzBSzCU")'><img src="../img/datecourse/west_course.png"></button>
+				<br>
+				<br>
+				<!-- 
+				<button class="btn_south_course" style="padding:0px"><img src="../img/datecourse/south_course.png"></button>
+				 -->
+				 <button onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=124b3u065zmVLoVFXD6rzHq5kMqsSum89")'><img src="../img/datecourse/south_course.png"></button>
+				<br>
+				<br>
+
+				<div class="map_class">
+				  <iframe id ="map_frame" width="530" height="450"></iframe>
 				</div>
-				<br>
-				<div class="westcourse">
-					<img src="../img/datecourse/west_course.png">
-				</div>
-				<br>
-				<div class="southcourse">
-					<img src="../img/datecourse/south_course.png">
-				</div>
-				<br>
-				<br>
-				<iframe src="https://www.google.com/maps/d/embed?mid=1sFbzJGA5CMHBDilCXopV6-lB3ww" width="530" height="450"></iframe>
 				
+			
 			</div>
 			<!-- 본 화면 -->
 		</div>
