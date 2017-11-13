@@ -33,50 +33,52 @@ var tEvent = ${CALENDAR};
 			<jsp:include page="../common/header.jsp" />
 		</div>
 		
-		<div class="container">
+		<div class="container mt-4">
+			<div class="row">
 			<%-- ================ 달력 =============== --%>
-			<%-- <jsp:include page="./calendar.jsp" /> --%>
-			<div id='calendar'></div>
-				<script src='../js/houseApply/moment.min.js'></script>
-				<script src='../js/houseApply/fullcalendar-2.1.1.js'></script>
-				<script src='../js/houseApply/fullcalendar.min.js'></script>
-				<script src='../js/houseApply/jquery.magnific-popup.min.js'></script>
-				<script src="../js/houseApply/calendar.js"></script>
+				<div class="col-md-8">
+					<div id='calendar'></div>
+					<script src='../js/houseApply/moment.min.js'></script>
+					<script src='../js/houseApply/fullcalendar-2.1.1.js'></script>
+					<script src='../js/houseApply/fullcalendar.min.js'></script>
+					<script src='../js/houseApply/jquery.magnific-popup.min.js'></script>
+					<script src="../js/houseApply/calendar.js"></script>
+				</div>
 			<%-- ================ 달력  =============== --%>
 			
 			
 			<%-- ================ 입소신청 =============== --%>
-			<div class="">
-						<div class="form-group">
-					    	<label for="name">이름:</label>
-					    	<input type="text" class="form-control" name="name" value="홍길동" readonly="readonly">
-					  	</div>
-					  	<div class="form-group">
-					    	<label for="age">나이:</label>
-					    	<input type="text" class="form-control" name="age" value="99" readonly="readonly">
-					 	</div>
-					  	<div class="form-group">
-					    	<label for="addr">거주지:</label>
-					    	<input type="text" class="form-control" name="addr">
-					 	</div>
-						<div class="form-group">
-							<label for="sel1">관심사:</label> 
-							<select class="form-control" id="sel1">
-								<option>== 선택하세요 ==</option>
-								<option>사진</option>
-								<option>바다</option>
-								<option>절경</option>
-								<option>올레길</option>
-							</select>
-						</div>
-					  	<div class="form-group">
-					    	<label for="inDay">입소일:</label>
-					    	<input type="text" class="form-control" name="inDay">
-					 	</div>
+				<div class="col-md-4">
+					<div class="form-group">
+				    	<label for="name">이름:</label>
+				    	<input type="text" class="form-control" name="name" value="홍길동" readonly="readonly">
+				  	</div>
+				  	<div class="form-group">
+				    	<label for="age">나이:</label>
+				    	<input type="text" class="form-control" name="age" value="99" readonly="readonly">
+				 	</div>
+				  	<div class="form-group">
+				    	<label for="addr">거주지:</label>
+				    	<input type="text" class="form-control" name="addr">
+				 	</div>
+					<div class="form-group">
+						<label for="sel1">관심사:</label> 
+						<select class="form-control" id="sel1">
+							<option>== 선택하세요 ==</option>
+							<option>사진</option>
+							<option>바다</option>
+							<option>절경</option>
+							<option>올레길</option>
+						</select>
 					</div>
+				  	<div class="form-group">
+				    	<label for="inDay">입소일:</label>
+				    	<input type="text" class="form-control" name="inDay">
+				 	</div>
+				</div>
+			</div>
 			<%-- ================ 입소신청 =============== --%>
 		</div>
-
 
 		<div id="footer">
 			<jsp:include page="../common/footer.jsp" />
