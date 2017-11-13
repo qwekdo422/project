@@ -18,13 +18,13 @@ public class DateCourseController {
 	}
 	@RequestMapping("/CoupleCourse")
 	public String coupleCourse(){
-		System.out.println("BasicCourse");
+		System.out.println("CoupleCourse");
 		return "datecourse/CoupleCourse";
 	}
 	@RequestMapping("/SoloCourse")
 	public String soloCourse(){
-		System.out.println("BasicCourse");
-		return "datecourse/BasicCourse";
+		System.out.println("SoloCourse");
+		return "datecourse/SoloCourse";
 	}
 	
 }

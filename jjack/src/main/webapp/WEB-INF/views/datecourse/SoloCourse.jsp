@@ -23,7 +23,7 @@
 		<div class="row mt-4">
  			<!-- 서브메뉴 -->
 			<div class="col-lg-3">
-				<h2>데이트 코스</h2><br />
+				<h2><데이트 코스></h2><br />
 				<div class="list-group text-right">
 					<a href="../datecourse/BasicCourse.do" class="list-group-item">기본 데이트 코스</a> 
 					<a href="../datecourse/CoupleCourse.do" class="list-group-item">커풀 데이트 코스</a>
@@ -34,7 +34,7 @@
 		 	<div id="introMain" class="col-lg-9">
 				
 				
-				<h3>솔로 데이트 코스</h3>
+				<h3>솔로 데이트 코스3</h3>
 				
 				
 			</div>
