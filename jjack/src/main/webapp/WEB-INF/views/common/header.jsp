@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<script src="../js/main/bootstrap.min.js"></script>
-<script src="../js/common/header.js"></script>
 <link rel="stylesheet" href="../css/common/bootstrap.min.css" />
 <div id="top">
 	<a href="../main/mainForm.do">
@@ -32,3 +30,5 @@
 			</div>
 	</nav>
 </div>
+<script src="../js/common/header.js"></script>
+<script src="../js/main/bootstrap.bundle.min.js"></script>
