@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 	
 	//로그인 무결성 검사 처리 

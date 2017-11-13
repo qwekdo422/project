@@ -19,13 +19,13 @@
       <jsp:include page="../common/header.jsp" />
    </div>
       <div class="container">
-<!--  	
-<c:if test="${null ne id}">
+
+<c:if test="${null ne id}"><!-- id가 null이 아니면 -->
 <c:redirect url="../Login/LoginForm.do">
 <c:param name="ID" value="${id}"></c:param>
 </c:redirect>
 </c:if>
--->
+
 
 <!-- 로그인에 성공한 경우 -->
 <c:if test="${OBJECT eq 1}">

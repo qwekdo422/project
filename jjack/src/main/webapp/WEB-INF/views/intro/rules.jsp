@@ -13,7 +13,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
+<link rel="stylesheet" href="../css/intro/intro.css" />
 </head>
+<<<<<<< HEAD
 <body>
 	<div id="wrap">
 		<div id="header">
@@ -22,11 +24,35 @@
 		<div id="main">
 			<div> 
 				<img src="../img/Commandments.jpg" alt="">
+=======
+<body style="margin:0 auto;">
+	<div id="header">
+		<jsp:include page="../common/header.jsp" />
+	</div>
+	<div class="container">
+		<!-- Page Content -->
+		<div class="row mt-4">
+ 			<!-- 서브메뉴 -->
+			<div class="col-lg-3">
+				<h2>소개</h2><br />
+				<div class="list-group text-right">
+					<a href="../intro/thisGHis.do" class="list-group-item"><img src="../img/common/logo.png" id="introLogo"><br>게스트하우스는</a> 
+					<a href="../intro/schedule.do" class="list-group-item">애정촌 일정</a> 
+					<a href="../intro/rules.do" class="list-group-item active">애정촌 십계명</a>
+				</div>
+>>>>>>> branch 'branche' of https://github.com/qwekdo422/project.git
 			</div>
+			<!-- 본 화면 -->
+		 	<div id="introMain" class="col-lg-9">
+				<img id="rules" src="../img/intro/rules.jpg" class="introImg mb-4">
+			</div>
+			<!-- 본 화면 -->
 		</div>
-		<div id="footer">
-			<jsp:include page="../common/footer.jsp" />
-		</div>
+		<!-- 전체 화면 -->
+	</div>
+	<!--  /.container -->
+	<div id="footer">
+		<jsp:include page="../common/footer.jsp" />
 	</div>
 </body>
 </html>

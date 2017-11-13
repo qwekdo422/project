@@ -11,9 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/datecourse")
 public class DateCourseController {
-	@RequestMapping("/datecourse1")
-	public String datecourseone(){
-		System.out.println("DateCouseController");
-		return "datecourse/datecourse1";
+	@RequestMapping("/BasicCourse")
+	public String basicCourse(){
+		System.out.println("BasicCourse");
+		return "datecourse/BasicCourse";
 	}
+	@RequestMapping("/CoupleCourse")
+	public String coupleCourse(){
+		System.out.println("CoupleCourse");
+		return "datecourse/CoupleCourse";
+	}
+	@RequestMapping("/SoloCourse")
+	public String soloCourse(){
+		System.out.println("SoloCourse");
+		return "datecourse/SoloCourse";
+	}
+	
 }
