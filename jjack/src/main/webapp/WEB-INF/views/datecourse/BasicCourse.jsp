@@ -34,7 +34,7 @@
 		 	<div id="introMain" class="col-lg-9">
 				
 				
-				<h3>기본 데이트 코스1</h3>
+				<h3>기본 데이트 코스1번</h3>
 				
 				
 			</div>
