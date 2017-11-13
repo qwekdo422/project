@@ -33,7 +33,7 @@ var tEvent = ${CALENDAR};
 			<jsp:include page="../common/header.jsp" />
 		</div>
 		
-		<div class="container mt-4">
+		<div class="container mt-4 lDiv">
 			<div class="row">
 			<%-- ================ 달력 =============== --%>
 				<div class="col-md-8">
@@ -48,7 +48,44 @@ var tEvent = ${CALENDAR};
 			
 			
 			<%-- ================ 입소신청 =============== --%>
-				<div class="col-md-4">
+				<div class="col-md-4 rDiv">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+						    	<input type="file" name="imageUpload" id="imageUpload" style="display: none;"/> 
+								<label for="imageUpload" class="btn btn-info">사진등록</label>
+							</div> 
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<img src="../img/houseApply/basic.jpg" id="imagePreview" alt="Preview Image" width="100px" height="100px;"/>
+							</div>
+						</div> 
+					</div>
+					<!-- 
+					<div class="form-group">
+				    	<input type="file" name="imageUpload" id="imageUpload" style="display: none;"/> 
+						<img src="../img/houseApply/basic.jpg" id="imagePreview" alt="Preview Image" width="100px" height="100px;"/> 
+						<label for="imageUpload" class="btn btn-info">사진등록</label>
+				  	</div>
+				  	 -->
+				  	<script>
+				  	$(document).ready(function () {
+				  		
+					  	$('#imageUpload').change(function(){			
+							readImgUrlAndPreview(this);
+							function readImgUrlAndPreview(input){
+								 if (input.files && input.files[0]) {
+							            var reader = new FileReader();
+							            reader.onload = function (e) {			            	
+							                $('#imagePreview').attr('src', e.target.result);
+											}
+							          };
+							          reader.readAsDataURL(input.files[0]);
+							     }	
+						});
+				  	});
+				  	</script>
 					<div class="form-group">
 				    	<label for="name">이름:</label>
 				    	<input type="text" class="form-control" name="name" value="홍길동" readonly="readonly">
