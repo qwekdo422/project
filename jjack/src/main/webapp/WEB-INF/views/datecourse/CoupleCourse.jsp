@@ -34,7 +34,7 @@
 		 	<div id="introMain" class="col-lg-9">
 				
 				
-				<!-- 여기에 사랑의 작대기 -->
+				<h3>커풀 데이트 코스</h3>
 				
 				
 			</div>
