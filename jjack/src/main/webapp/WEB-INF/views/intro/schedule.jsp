@@ -11,7 +11,6 @@
 <link rel="stylesheet" href="../css/alert/alertify.core.css" />
 <link rel="stylesheet" href="../css/alert/alertify.default.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="../js/main/bootstrap.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
 <link rel="stylesheet" href="../css/intro/intro.css" />
@@ -41,29 +40,12 @@
 						짝을 찾아온 입소자들은 다음과 같은 일정 속에서 사랑을 찾게 됩니다.
 				</p><br><br>
 				<ul class="nav nav-tabs">
-					<li class="nav-item">
-						<a class="nav-link active" data-toggle="tab" id="day1Btn" class="dayBtn">첫째날</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" data-toggle="tab" id="day2Btn" class="dayBtn">둘째날</a>
-					</li> 
-				</ul>
-				<div id="day1">
-					<img src="../img/intro/schedule1.png" class="introImg">
-				</div>
-				<div id="day2">
-					<img src="../img/intro/schedule2.png" class="introImg">
-				</div>
-				<br><br>
-				
-				<!-- 
-				이건 부트스트랩 방식. 포기하고 그냥 j쿼리로 구현	
  					<li class="nav-item">
 						<a class="nav-link active" data-toggle="tab" href="#day1">첫째날</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" data-toggle="tab" href="#day2">둘째날</a>
-					</li> 
+					</li>
 				</ul>
  				<div class="tab-content">
 					<div class="tab-pane fade show active" id="day1" role="tabpanel">
@@ -73,8 +55,7 @@
 						<img src="../img/intro/schedule2.png" class="introImg">
 					</div>
 				</div> 
- -->
-				
+				<br><br>
 			</div>
 			<!-- 본 화면 -->
 		</div>

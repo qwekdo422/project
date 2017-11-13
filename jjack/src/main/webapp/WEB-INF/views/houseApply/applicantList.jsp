@@ -13,20 +13,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
-	<script src="../js/main/bootstrap.min.js"></script>
-	<script>
-		$(document).ready(function(){
-			/* 
-			$("a[data-toggle='tooltip']").tooltip({
-			    animated: 'fade',
-			    placement: 'left',
-			    html:true;
-			});
-			 */
-			$('[data-toggle="tooltip"]').tooltip();
-			 
-		});
-	</script>
+<link rel="stylesheet" href="../css/houseApply/applicantList.css" />
+<script src="../js/houseApply/applicantList.js"></script>
 </head>
 <body style="margin:0 auto;">
 	<div id="header">
@@ -36,22 +24,18 @@
 		<h2 class="mt-4">입소신청자 관리</h2>
 		<select class="form-control">
 			<!-- 임시. 동적으로 바꿀 부분 -->
-			<option value="">2017/11/11 : 100기</option>
-			<option value="">2017/11/4 : 99기</option>
-			<option value="">2017/10/28 : 98기</option>
-			<option value="">2017/10/21 : 97기</option>
-			<option value="">2017/10/14 : 96기</option>
-			<option value="">2017/10/7 : 95기</option>
-			<option value="">2017/9/30 : 94기</option>
+			<option value="">2017-11-11 : 100기</option>
+			<option value="">2017-11-4 : 99기</option>
+			<option value="">2017-10-28 : 98기</option>
+			<option value="">2017-10-21 : 97기</option>
+			<option value="">2017-10-14 : 96기</option>
+			<option value="">2017-10-7 : 95기</option>
+			<option value="">2017-9-30 : 94기</option>
 		</select>
 		<hr>
 		<div class="container">
-		<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-  Tooltip on top
-</button>
-<button type="button" class="btn btn-secondary">Tooltip on top</button>
 			<h3>승인대기자(3)</h3>
-			<table class="table table-striped table-hover table-bordered">
+			<table class="table table-striped table-hover table-bordered mb-4">
 				<thead>
 					<tr>
 						<th>#</th>
@@ -72,7 +56,7 @@
 					<tr>
 						<td>1</td>
 						<td>aaa</td>
-						<td>김김김</td>
+						<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/32.jpg' />">김김김</a></td>
 						<td>남자</td>
 						<td>33</td>
 						<td>수도권</td>
@@ -85,7 +69,7 @@
 					<tr>
 						<td>2</td>
 						<td>bbb</td>
-						<td>이이이</td>
+						<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/16.jpg' />">이이이</a></td>
 						<td>여자</td>
 						<td>25</td>
 						<td>수도권</td>
@@ -98,7 +82,7 @@
 					<tr>
 						<td>3</td>
 						<td>ccc</td>
-						<td>박박박</td>
+						<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/14.jpg' />">박박박</a></td>
 						<td>여자</td>
 						<td>26</td>
 						<td>수도권</td>
@@ -141,7 +125,7 @@
 					<tr>
 						<td>2호</td>
 						<td>qwedao1111</td>
-						<td>김대륙</td>
+						<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/20.jpg' />">김대륙</a></td>
 						<td>31</td>
 						<td>010-1234-5678</td>
 						<td>바다</td>
@@ -152,7 +136,7 @@
 					<tr>
 						<td>3호</td>
 						<td>qwedao1111</td>
-						<td>김대칠</td>
+						<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/25.jpg' />">김대칠</a></td>
 						<td>31</td>
 						<td>010-1234-5678</td>
 						<td>바다</td>
@@ -181,7 +165,7 @@
 					<tr>
 						<td>1호</td>
 						<td>qwedao1111</td>
-						<td>김대순</td>
+						<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/03.jpg' />">김대순</a></td>
 						<td>31</td>
 						<td>010-1234-5678</td>
 						<td>바다</td>
@@ -192,7 +176,7 @@
 					<tr>
 						<td>2호</td>
 						<td>qwedao1111</td>
-						<td>김중순</td>
+						<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/04.jpg' />">김중순</a></td>
 						<td>31</td>
 						<td>010-1234-5678</td>
 						<td>바다</td>
@@ -203,7 +187,7 @@
 					<tr>
 						<td>3호</td>
 						<td>qwedao1111</td>
-						<td>김소순</td>
+						<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/12.jpg' />">김소순</a></td>
 						<td>31</td>
 						<td>010-1234-5678</td>
 						<td>바다</td>
@@ -214,7 +198,7 @@
 				</tbody>
 			</table>
 			<hr>
-			<h3>입소 거부(3)</h3>
+			<h3>입소 거부(4)</h3>
 			<table class="table table-striped table-hover table-bordered mb-4">
 				<thead>
 					<tr>
@@ -233,7 +217,7 @@
 					<tr>
 						<td>1</td>
 						<td>qwedao1111</td>
-						<td>김대팔</td>
+						<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/27.jpg' />">김대팔</a></td>
 						<td>31</td>
 						<td>남자</td>
 						<td>010-1234-5678</td>
@@ -244,7 +228,7 @@
 					<tr>
 						<td>2</td>
 						<td>qwedao1111</td>
-						<td>김대구</td>
+						<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/32.jpg' />">김대구</a></td>
 						<td>31</td>
 						<td>남자</td>
 						<td>010-1234-5678</td>
@@ -255,7 +239,7 @@
 					<tr>
 						<td>3</td>
 						<td>qwedao1111</td>
-						<td>김초순</td>
+						<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/14.jpg' />">김초순</a></td>
 						<td>31</td>
 						<td>여자</td>
 						<td>010-1234-5678</td>
@@ -266,7 +250,7 @@
 					<tr>
 						<td>4</td>
 						<td>qwedao1111</td>
-						<td>김하순</td>
+						<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/16.jpg' />">김하순</a></td>
 						<td>31</td>
 						<td>여자</td>
 						<td>010-1234-5678</td>
