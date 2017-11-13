@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="../css/common/bootstrap.min.css" />
 <div id="top">
 	<a href="../main/mainForm.do">
@@ -25,7 +26,12 @@
 					<li class="nav-item"><a class="nav-link" href="#" id="mReview">후기</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" id="mNotice">공지</a></li>
 					<li class="nav-item" style="margin-left:30px"><a class="nav-link" href="../SignUp/SignUpForm.do" id="mSignUp">회원가입</a></li>
-					<li class="nav-item"><a class="nav-link" href="#" id="mLogIn">로그인</a></li>
+					<c:if test="${empty sessionScope.UID }">
+						<li class="nav-item"><a class="nav-link" href="#" id="mLogIn">로그인</a></li>
+					</c:if>
+					<c:if test="${!empty sessionScope.UID }">
+						<li class="nav-item"><a class="nav-link" href="#" id="mLogIn">로그아웃</a></li>
+					</c:if>
 				</ul>
 			</div>
 	</nav>

@@ -53,6 +53,7 @@ public class LoginController {
 		int result=lService.login(id, pw);  //그 아이디가 있으면 1을 반환한다. 
 		
 		if(result==1){
+			// 회원번호 조회해서 세션에 저장
 			
 			session.setAttribute("UID", id);//세션을 부여하겠다는 의미이다.
 			mv.addObject("OBJECT",result); 
