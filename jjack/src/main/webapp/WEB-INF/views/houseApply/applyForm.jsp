@@ -55,12 +55,10 @@ var tEvent = ${CALENDAR};
 						    	<input type="file" name="imageUpload" id="imageUpload" style="display: none;"/> 
 								<label for="imageUpload" class="btn btn-info">사진등록</label>
 							</div> 
-						</div>
-						<div class="row">
 							<div class="col-md-12">
 								<img src="../img/houseApply/basic.jpg" id="imagePreview" alt="Preview Image" width="100px" height="100px;"/>
 							</div>
-						</div> 
+						</div>
 					</div>
 					<!-- 
 					<div class="form-group">
