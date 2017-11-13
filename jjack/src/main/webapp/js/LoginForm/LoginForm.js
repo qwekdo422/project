@@ -13,9 +13,11 @@ $(document).ready(function(){
 			return; 
 		}
 		
+	
+		
 		if(pw==""){
 			alert("비밀번호를 입력하십시오"); 
-			$("#pw").focus(); 
+		
 			return ; 
 		}
 		
