@@ -10,9 +10,18 @@
 <link rel="stylesheet" href="../css/common/footer.css" />
 <link rel="stylesheet" href="../css/alert/alertify.core.css" />
 <link rel="stylesheet" href="../css/alert/alertify.default.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+$(function(){
+	$('.eastcourse').click(function(){
+		alert('test');
+	});
+});
+</script>
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
+
+
+
 </head>
 <body style="margin:0 auto;">
 	<div id="header">
@@ -25,17 +34,28 @@
 			<div class="col-lg-3">
 				<h2><데이트 코스></h2><br />
 				<div class="list-group text-right">
-					<a href="../datecourse/BasicCourse.do" class="list-group-item">기본 데이트 코스</a> 
+					<a href="../datecourse/BasicCourse.do" class="list-group-item">기본 코스</a> 
 					<a href="../datecourse/CoupleCourse.do" class="list-group-item">커풀 데이트 코스</a>
-					<a href="../datecourse/SoloCourse.do" class="list-group-item">솔로 데이트 코스</a>
+					<a href="../datecourse/SoloCourse.do" class="list-group-item">솔로 코스</a>
 				</div>
 			</div>
 			<!-- 본 화면 -->
 		 	<div id="introMain" class="col-lg-9">
 				
-				
-				<h3>커풀 데이트 코스2</h3>
-				
+				<div class="eastcourse" >
+					<img id="east_image" src="../img/datecourse/east_course.png"> 
+				</div>
+				<br>
+				<div class="westcourse">
+					<img src="../img/datecourse/west_course.png">
+				</div>
+				<br>
+				<div class="southcourse">
+					<img src="../img/datecourse/south_course.png">
+				</div>
+				<br>
+				<br>
+				<iframe src="https://www.google.com/maps/d/embed?mid=1sFbzJGA5CMHBDilCXopV6-lB3ww" width="530" height="450"></iframe>
 				
 			</div>
 			<!-- 본 화면 -->
