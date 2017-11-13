@@ -26,4 +26,5 @@ public class DateCourseController {
 		System.out.println("BasicCourse");
 		return "datecourse/BasicCourse";
 	}
+	
 }
