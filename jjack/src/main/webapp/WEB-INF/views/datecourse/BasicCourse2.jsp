@@ -69,9 +69,20 @@
 			<jsp:include page="../common/header.jsp" />
 		</div>
 
+
 		<div id="main">
+		  <div class="col-lg-3">
+			<br> <br>
+			<h2 class="my-4">데이트 코스</h2>
+			<div class="list-group">
+				<a href="./datecourse/BasicCourse.do" class="list-group-item">데이트 코스1</a> 
+				<a href="#" class="list-group-item">데이트 코스2</a> 
+				<a href="#"	class="list-group-item">데이트 코스3</a>
+			</div>
+
+		 </div> 
 		
-			<div id="map_canvas" style="width:600px; height:400px;"></div> 
+		 <div id="map_canvas" style="width:600px; height:400px;"></div> 
 
 		</div>
 

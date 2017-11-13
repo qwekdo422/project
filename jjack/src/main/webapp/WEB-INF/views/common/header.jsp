@@ -23,7 +23,7 @@
 					<li class="nav-item"><a class="nav-link" href="../houseApply/applyForm.do" id="mHouseApply">애정촌입소신청</a></li>
 					<li class="nav-item"><a class="nav-link" href="../houseApply/applicantList.do">[관리]</a></li>
 					<li class="nav-item"><a class="nav-link" href="../mating/forLunch.do" id="mMating">짝짓기</a></li>
-					<li class="nav-item"><a class="nav-link" href="../datecourse/datecourse1.do" id="mDatecourse">데이트코스</a>
+					<li class="nav-item"><a class="nav-link" href="../datecourse/BasicCourse.do" id="mDatecourse">데이트코스</a>
 					<li class="nav-item"><a class="nav-link" href="#" id="mReview">후기</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" id="mNotice">공지</a></li>
 					<li class="nav-item" style="margin-left:30px"><a class="nav-link" href="../SignUp/SignUpForm.do" id="mSignUp">회원가입</a></li>
