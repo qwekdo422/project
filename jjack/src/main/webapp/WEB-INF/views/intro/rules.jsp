@@ -15,16 +15,6 @@
 <%-- ====================== 필수  ======================  --%>
 <link rel="stylesheet" href="../css/intro/intro.css" />
 </head>
-<<<<<<< HEAD
-<body>
-	<div id="wrap">
-		<div id="header">
-			<jsp:include page="../common/header.jsp" />
-		</div>
-		<div id="main">
-			<div> 
-				<img src="../img/Commandments.jpg" alt="">
-=======
 <body style="margin:0 auto;">
 	<div id="header">
 		<jsp:include page="../common/header.jsp" />
@@ -40,7 +30,6 @@
 					<a href="../intro/schedule.do" class="list-group-item">애정촌 일정</a> 
 					<a href="../intro/rules.do" class="list-group-item active">애정촌 십계명</a>
 				</div>
->>>>>>> branch 'branche' of https://github.com/qwekdo422/project.git
 			</div>
 			<!-- 본 화면 -->
 		 	<div id="introMain" class="col-lg-9">
