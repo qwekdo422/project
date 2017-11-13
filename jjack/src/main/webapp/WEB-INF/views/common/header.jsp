@@ -31,4 +31,4 @@
 	</nav>
 </div>
 <script src="../js/common/header.js"></script>
-<!-- <script src="../js/main/bootstrap.min.js"></script> -->
+<script src="../js/main/bootstrap.bundle.min.js"></script>
