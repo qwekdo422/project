@@ -36,8 +36,4 @@ public class HouseApplyController {
 	public void calendarTest(Model model) {
 	}
 	
-	@RequestMapping("/ApplicantList")
-	public void applicantList(ApplicantList al, MailVO mvo){
-		al.mailing(mvo);
-	}
 }
