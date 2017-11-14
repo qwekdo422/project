@@ -68,7 +68,6 @@ public class SignUpController {
 		
 		ModelAndView	mv = new ModelAndView();
 		mv.addObject("id", pVO.getId()); 
-		System.out.println("id 값 받았니?"+pVO.getId());
 		mv.setViewName("Login/SubLoginForm");
 
 		return mv;

@@ -59,7 +59,26 @@ m_joindate date default sysdate
 컨트롤러 :com.jjack.web.login.controller
 함수  :	public ModelAndView LoginProc()
 파라메터 : HttpServletRequest req, HttpSession session
-o
+
+-----------------------------------------------------------------------------------------------------------
+
+ 
+#회원정보 폼 실행
+요청 http://localhost:8080/jjack/Login/modifyForm.do
+컨트롤러 :com.jjack.web.login.controller
+함수  :	public ModelAndView modifyProc()
+파라메터 :vo
+
+-----------------------------------------------------------------------------------------------------------
+
+
+
+#회원정보 수정 실행
+요청 http://localhost:8080/jjack/Login/modifyProc.do
+컨트롤러 :com.jjack.web.login.controller
+함수  :	public ModelAndView modifyProc()
+파라메터 :VO
+
 -----------------------------------------------------------------------------------------------------------
 
 

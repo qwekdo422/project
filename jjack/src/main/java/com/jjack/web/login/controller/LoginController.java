@@ -1,5 +1,7 @@
 package com.jjack.web.login.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +29,7 @@ public class LoginController {
 	 * @return : ModelandView
 	 */
 	@RequestMapping("/LoginForm")
-	public ModelAndView LoginForm(){
+	public ModelAndView LoginForm(ProfileVO pVO){
 		
 		ModelAndView mv= new ModelAndView(); 
 		mv.setViewName("Login/LoginForm");
@@ -53,7 +55,10 @@ public class LoginController {
 		int result=lService.login(id, pw);  //그 아이디가 있으면 1을 반환한다. 
 		
 		if(result==1){
-			// 회원번호 조회해서 세션에 저장
+			
+			
+			int mNo=lService.mNo(id);//로그인에 성공하여 그 아이디의 회원 번호를 받았다. 
+			
 			
 			session.setAttribute("UID", id);//세션을 부여하겠다는 의미이다.
 			mv.addObject("OBJECT",result); 
@@ -90,6 +95,33 @@ public class LoginController {
 		
 	}
 	
+	
+	
+	/**
+	 * 회원정보 수정 폼 
+	 * 
+	 * @author : 정준일
+	 * @since : 2017. 11.13.
+	 * @param :  VO
+	 * @return : ModelandView
+	 */
+	@RequestMapping("/modifyForm")
+	public ModelAndView modifyForm( HttpSession session){
+		
+		//그 해당하는 아이디의 회원 번호를 받은 후 
+		String id=(String)session.getAttribute("UID");
+		int mNo=lService.mNo(id);
+
+		
+		//로직을 처리해 주자.
+		ProfileVO pVO =lService.mModify(mNo); 
+
+		ModelAndView mv= new ModelAndView(); 
+		mv.addObject("PVO", pVO); 
+		mv.setViewName("Login/MyPage");
+		return mv; 
+		
+	}
 	
 	
 	
