@@ -28,7 +28,7 @@
 var tEvent = ${CALENDAR};
 $(document).ready(function(){
 	$("#applyBtn").click(function() {
-		
+		$("#applyFrm").attr("action", "./applyProc.do").submit();
 	});
 });
 </script>
@@ -55,8 +55,8 @@ $(document).ready(function(){
 			
 			
 			<%-- ================ 입소신청 =============== --%>
-				<form method="post" id="applyFrm" action="" enctype="multipart/form-data">
 				<div class="col-md-4 rDiv">
+				<form method="post" id="applyFrm" action="" enctype="multipart/form-data">
 					<div class="container">
 						<div class="row">
 							<div class="col-md-12">
@@ -83,13 +83,13 @@ $(document).ready(function(){
 				    	<input type="text" class="form-control" name="addr">
 				 	</div>
 					<div class="form-group">
-						<label for="sel1">관심사:</label> 
-						<select class="form-control" id="sel1">
-							<option>== 선택하세요 ==</option>
-							<option>사진</option>
-							<option>바다</option>
-							<option>절경</option>
-							<option>올레길</option>
+						<label for="interest">관심사:</label> 
+						<select class="form-control" id="interest">
+							<option value="">== 선택하세요 ==</option>
+							<option value="사진">사진</option>
+							<option value="바다">바다</option>
+							<option value="절경">절경</option>
+							<option value="올레길">올레길</option>
 						</select>
 					</div>
 				  	<div class="form-group">
@@ -97,8 +97,8 @@ $(document).ready(function(){
 				    	<input type="text" id="inDay" class="form-control" name="inDay">
 				 	</div>
 				 	<label class="btn btn-info applyBtn">입소신청</label>
-				</div>
 				</form>
+				</div>
 			<%-- ================ 입소신청 =============== --%>
 			</div>
 			<%-- row 끝 --%>
