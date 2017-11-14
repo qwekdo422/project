@@ -73,6 +73,6 @@
 	<bean id="boardService" class="com.jjack.web.test.service.TestService">
 	</bean>
 	 --> 
-	
-	
+
+
 </beans>
