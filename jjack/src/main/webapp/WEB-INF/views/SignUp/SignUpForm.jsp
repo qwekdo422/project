@@ -40,7 +40,7 @@
 			<table width="800" align="center" border="1">
 			<tr>
 					<td>아이디 :</td>
-					<td> <input type="text"  name="id"  id="id"  placeholder="아이디는 6자 이상입니다."><input type="button" id="oBtn" value="중복확인"></td>
+					<td> <input type="text"  name="id"  id="id"  placeholder="아이디는 6자 이상입니다."  oninput="checkId()"><input type="button" id="oBtn" value="중복확인"></td>
 			</tr>
 			<tr>
 					<td>비밀번호 : </td><td><input type="password" name="pw" id="pw"></td>
