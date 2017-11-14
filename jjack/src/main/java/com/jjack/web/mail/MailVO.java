@@ -5,6 +5,7 @@ public class MailVO {
 	String name;
 	String date;
 	String nick;
+	
 	public Boolean getYesno() {
 		return yesno;
 	}
@@ -21,7 +22,7 @@ public class MailVO {
 		return date;
 	}
 	public void setDate(String date) {
-		this.date = date;
+		this.date = date.substring(0, 4) + "년 " + date.substring(4, 6) + "월 " + date.substring(6) + "일";
 	}
 	public String getNick() {
 		return nick;

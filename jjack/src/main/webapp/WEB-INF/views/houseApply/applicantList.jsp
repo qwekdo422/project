@@ -131,7 +131,10 @@
 						<td>바다</td>
 						<td>10</td>
 						<td>5</td>
-						<td>연락예정&nbsp;&nbsp; <button class="btn btn-success btn-sm">메일발송</button><button class="btn btn-danger  btn-sm ml-2">승인취소</button></td>
+						<td>연락예정&nbsp;&nbsp;
+							<a class="btn btn-success btn-sm" role="button" href="../houseApply/applicantList.do?name=김대륙&yesno=true&date=20171130&nick=남자1호">메일발송</a>
+							<a class="btn btn-danger  btn-sm ml-2" role="button">승인취소</a>
+						</td>
 					</tr>
 					<tr>
 						<td>3호</td>
@@ -199,7 +202,7 @@
 			</table>
 			<hr>
 			<h3>입소 거부(4)</h3>
-			<table class="table table-striped table-hover table-bordered mb-4">
+			<table class="table table-striped table-hover table-bordered mb-5">
 				<thead>
 					<tr>
 						<th>#</th>

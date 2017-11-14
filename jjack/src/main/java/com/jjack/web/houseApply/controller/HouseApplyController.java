@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jjack.web.houseApply.service.CalendarService;
+import com.jjack.web.mail.MailVO;
 
 /**
  * 입소신청 컨트롤러
@@ -35,4 +36,8 @@ public class HouseApplyController {
 	public void calendarTest(Model model) {
 	}
 	
+	@RequestMapping("/ApplicantList")
+	public void applicantList(ApplicantList al, MailVO mvo){
+		al.mailing(mvo);
+	}
 }
