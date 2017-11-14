@@ -31,19 +31,8 @@ public class HouseApplyController {
 		return "./houseApply/applyForm";
 	}
 
-	@RequestMapping("/applicantList")
-	public void applicantList(ApplicantList al) {
-		al.applist();
-	}
-	
 	@RequestMapping("/test")
-	public String calendarTest(Model model) {
-		JSONArray  cList = null;	
-		try {
-			cList = cService.getCalendar();
-		} catch (IOException e) {e.printStackTrace();}
-		model.addAttribute("CALENDAR", cList);
-		return "houseApply/test";
+	public void calendarTest(Model model) {
 	}
 	
 }

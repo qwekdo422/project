@@ -39,7 +39,6 @@ $(document).ready(function(){
 		<div id="header">
 			<jsp:include page="../common/header.jsp" />
 		</div>
-		
 		<div class="container mt-4 lDiv">
 			<div class="row">
 			<%-- ================ 달력 =============== --%>

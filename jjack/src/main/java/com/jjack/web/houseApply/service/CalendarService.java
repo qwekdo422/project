@@ -130,7 +130,6 @@ public class CalendarService {
         if (items.size() == 0) {
             System.out.println("등록된 이벤트가 없습니다.");
         } else {
-            System.out.println("등록된 이벤트 목록");
             for (int i = 0; i < items.size(); i++) {
             	JSONObject jObj = new JSONObject();
             	jObj.put("start", items.get(i).getStart().getDateTime().toString());
