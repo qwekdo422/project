@@ -22,8 +22,15 @@
 
 <%-- 입소신청 폼 --%>
 <link rel="stylesheet" href="../css/houseApply/applyForm.css" />
+<%-- 파일업로드 --%>
+<script src="../js/houseApply/fileUpload.js"></script>
 <script type="text/javascript">
 var tEvent = ${CALENDAR};
+$(document).ready(function(){
+	$("#applyBtn").click(function() {
+		
+	});
+});
 </script>
 </head>
 
@@ -48,6 +55,7 @@ var tEvent = ${CALENDAR};
 			
 			
 			<%-- ================ 입소신청 =============== --%>
+				<form method="post" id="applyFrm" action="" enctype="multipart/form-data">
 				<div class="col-md-4 rDiv">
 					<div class="container">
 						<div class="row">
@@ -56,34 +64,12 @@ var tEvent = ${CALENDAR};
 								<label for="imageUpload" class="btn btn-info">사진등록</label>
 							</div> 
 							<div class="col-md-12">
-								<img src="../img/houseApply/basic.jpg" id="imagePreview" alt="Preview Image" width="100px" height="100px;"/>
+								<img src="../img/houseApply/basic.jpg" id="imagePreview" alt="Preview Image" width="180px" height="180px;"/>
+								<label>이미지사진을 1:1 비율로 등록해주세요.</label>
 							</div>
 						</div>
 					</div>
-					<!-- 
-					<div class="form-group">
-				    	<input type="file" name="imageUpload" id="imageUpload" style="display: none;"/> 
-						<img src="../img/houseApply/basic.jpg" id="imagePreview" alt="Preview Image" width="100px" height="100px;"/> 
-						<label for="imageUpload" class="btn btn-info">사진등록</label>
-				  	</div>
-				  	 -->
-				  	<script>
-				  	$(document).ready(function () {
-				  		
-					  	$('#imageUpload').change(function(){			
-							readImgUrlAndPreview(this);
-							function readImgUrlAndPreview(input){
-								 if (input.files && input.files[0]) {
-							            var reader = new FileReader();
-							            reader.onload = function (e) {			            	
-							                $('#imagePreview').attr('src', e.target.result);
-											}
-							          };
-							          reader.readAsDataURL(input.files[0]);
-							     }	
-						});
-				  	});
-				  	</script>
+					
 					<div class="form-group">
 				    	<label for="name">이름:</label>
 				    	<input type="text" class="form-control" name="name" value="홍길동" readonly="readonly">
@@ -108,12 +94,16 @@ var tEvent = ${CALENDAR};
 					</div>
 				  	<div class="form-group">
 				    	<label for="inDay">입소일:</label>
-				    	<input type="text" class="form-control" name="inDay">
+				    	<input type="text" id="inDay" class="form-control" name="inDay">
 				 	</div>
+				 	<label class="btn btn-info applyBtn">입소신청</label>
 				</div>
-			</div>
+				</form>
 			<%-- ================ 입소신청 =============== --%>
+			</div>
+			<%-- row 끝 --%>
 		</div>
+		<%-- 메인 끝 --%>
 
 		<div id="footer">
 			<jsp:include page="../common/footer.jsp" />

@@ -126,81 +126,22 @@ public class CalendarService {
             .setSingleEvents(true)
             .execute();
         List<Event> items = events.getItems();
-        if (items.size() == 0) {
-            System.out.println("No upcoming events found.");
-        } else {
-            System.out.println("Upcoming events");
-            for (Event event : items) {
-                DateTime start = event.getStart().getDateTime();
-                DateTime end = event.getEnd().getDateTime();
-                if (start == null) {
-                    start = event.getStart().getDate();
-                }
-                System.out.println("이벤트 제목 = "+event.getSummary());
-                System.out.println("이벤트 내용 = "+event.getDescription());
-                System.out.println("이벤트 시작일 = "+start);
-                System.out.println("이벤트 종료일 = "+end);
-            }
-        }
-        System.out.println("===================");
-        
         JSONArray jArr = new JSONArray();
-        for (int i = 0; i < items.size(); i++) {
-			JSONObject jObj = new JSONObject();
-			jObj.put("start", items.get(i).getStart().getDateTime().toString());
-			jObj.put("end", items.get(i).getEnd().getDateTime().toString());
-			jObj.put("title", items.get(i).getSummary());
-			jArr.add(jObj);
-		}
+        if (items.size() == 0) {
+            System.out.println("등록된 이벤트가 없습니다.");
+        } else {
+            System.out.println("등록된 이벤트 목록");
+            for (int i = 0; i < items.size(); i++) {
+            	JSONObject jObj = new JSONObject();
+            	jObj.put("start", items.get(i).getStart().getDateTime().toString());
+            	jObj.put("end", items.get(i).getEnd().getDateTime().toString());
+            	jObj.put("title", items.get(i).getSummary());
+            	jObj.put("content", items.get(i).getDescription());
+            	jArr.add(jObj);
+            }
+            
+        }
         System.out.println(jArr);
         return jArr;
     }
-    /*
-    @SuppressWarnings("unchecked")
-	public static void main(String[] args) throws IOException {
-        // Build a new authorized API client service.
-        // Note: Do not confuse this class with the
-        //   com.google.api.services.calendar.model.Calendar class.
-        com.google.api.services.calendar.Calendar service =
-            getCalendarService();
-
-        // List the next 10 events from the primary calendar.
-        DateTime now = new DateTime(System.currentTimeMillis());
-        Events events = service.events().list("primary")
-            .setMaxResults(10)
-            .setTimeMin(now)
-            .setOrderBy("startTime")
-            .setSingleEvents(true)
-            .execute();
-        List<Event> items = events.getItems();
-        if (items.size() == 0) {
-            System.out.println("No upcoming events found.");
-        } else {
-            System.out.println("Upcoming events");
-            for (Event event : items) {
-                DateTime start = event.getStart().getDateTime();
-                DateTime end = event.getEnd().getDateTime();
-                if (start == null) {
-                    start = event.getStart().getDate();
-                }
-                System.out.println("이벤트 제목 = "+event.getSummary());
-                System.out.println("이벤트 내용 = "+event.getDescription());
-                System.out.println("이벤트 시작일 = "+start);
-                System.out.println("이벤트 종료일 = "+end);
-            }
-        }
-        System.out.println("===================");
-        
-        JSONArray jArr = new JSONArray();
-        for (int i = 0; i < items.size(); i++) {
-			JSONObject jObj = new JSONObject();
-			jObj.put("title", items.get(i).getDescription());
-			jObj.put("start", items.get(i).getStart().getDateTime());
-			jObj.put("end", items.get(i).getEnd().getDateTime());
-			jArr.add(jObj);
-		}
-        
-        System.out.println(jArr);
-    }
-	*/
 }
