@@ -197,7 +197,6 @@
 		    <version>05Nov2002</version>
 		</dependency>
 		
-
 		<!-- spring ajax -->
 		<dependency>
   		  <groupId>org.codehaus.jackson</groupId>
