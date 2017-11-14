@@ -1,42 +1,5 @@
 $(document).ready(function(){
-	function checkId(){
-
-		
-		  var inputd=$("#id").val(); //폼 요소의 데이터를 받아서...
-
-		    if(inputd.length < 6){		
-					document.getElementById("isid").innerHTML="아이디는 6글자 이상 입력하십시오";
-					$('#pw').prop('readonly', true); //아이디가 6글자면 패스워드 폼을 누르지 못하게 막음
-
-					return; 
-		    }else{
-		    	
-				$('#pw').prop('readonly', false);//아이디를 만들 수 있는 목적이 충족되었으므로 readOnly를 풀었다.
-
-		    }
-		    
-		  $.ajax({
-			  data : { id : inputd },//id폼에 입력된 그 데이터를 서버에 전송하기 위해 준비 
-			  url : "../SignUp/Overlap.do",
-			  type : 'post',
-			  success : function(data){//요청에 성공
-			  var isId= data.result; //이 값이 1 이면 DB에 그 아이디가 있다는 의미이다.  
-						
-			  if(isId == 1){
-			  	document.getElementById("isid").innerHTML="아이디가 중복입니다."; 
-			  	$("#id").focus();
-			  	$("#id").val("");
-			  }else{
-			  	document.getElementById("isid").innerHTML="사용가능한 아이디입니다."; 
-			  	}
-			  	  },
-			  	 error : function(){ //요청에 실패
-			  		 alert("오류뜨네"); 
-			  	 }
-
-		  });//ajax 종료 
-		  
-	}//checkId() 함수 종료 
+	
 	
    $("#sBtn").click(function(){
       var id=$("#id").val();
