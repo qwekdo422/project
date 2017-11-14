@@ -51,7 +51,7 @@ function checkId(){
 		  if(isId == 1){
 		  	document.getElementById("isid").innerHTML="아이디가 중복입니다."; 
 		  	$("#id").focus();
-		  	$("#id").val("");
+		
 		  }else{
 		  	document.getElementById("isid").innerHTML="사용가능한 아이디입니다."; 
 		  	}
@@ -127,6 +127,7 @@ function checkId(){
 			</form>
 
 		</div>
+			</div>
    <div id="footer">
       <jsp:include page="../common/footer.jsp" />
    </div>
