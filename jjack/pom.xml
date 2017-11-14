@@ -198,8 +198,6 @@
 		</dependency>
 		
 
-<<<<<<< HEAD
-=======
 		<!-- spring ajax -->
 		<dependency>
   		  <groupId>org.codehaus.jackson</groupId>
@@ -207,7 +205,6 @@
    		 <version>1.9.13</version>
 		</dependency>
 
->>>>>>> branch 'branche' of https://github.com/qwekdo422/project.git
 	</dependencies>
 	<build>
 		<plugins>
