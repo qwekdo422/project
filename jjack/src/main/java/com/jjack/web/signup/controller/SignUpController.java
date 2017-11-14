@@ -47,7 +47,7 @@ public class SignUpController {
 	@ResponseBody
 	public HashMap overlapProc(@RequestParam("id") String id){
 		//폼에 있는 데이터를 보내줘야 한다. 
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
 		int isId=sService.overLap(id);
 		//결과값이 1이면 아이디가 있는 것이다. 
 		
