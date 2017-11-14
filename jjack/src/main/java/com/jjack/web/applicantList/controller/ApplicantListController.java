@@ -8,6 +8,6 @@ import com.jjack.web.mail.jMail;
 public class ApplicantListController {
 	@RequestMapping("/applicantList")
 	public void ApplicantList(MailVO mvo, String work){
-		jMail .sendMail(mvo);
+		jMail.sendMail(mvo);
 	}
 }

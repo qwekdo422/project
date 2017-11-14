@@ -13,8 +13,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
-<link rel="stylesheet" href="../css/houseApply/applicantList.css" />
-<script src="../js/houseApply/applicantList.js"></script>
+<link rel="stylesheet" href="../css/applicantList/applicantList.css" />
+<script src="../js/applicantList/applicantList.js"></script>
 </head>
 <body style="margin:0 auto;">
 	<div id="header">
