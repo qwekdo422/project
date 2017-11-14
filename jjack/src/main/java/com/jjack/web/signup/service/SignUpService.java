@@ -15,5 +15,12 @@ public class SignUpService{
 		sDAO.singUp(pVO);
 	}
 	
+//	public int overLap(ProfileVO pVO); 
+
+	public int overLap(String id){
+		
+		return sDAO.overLap(id); 
+	}
+	
 	
 }

@@ -26,6 +26,26 @@
 
 <script>
 
+function checkId(){
+	  alert("?"); 
+	  var inputd=$("#id").val(); 
+	  $.ajax({
+		  data : {
+			  id : inputd //id폼에 입력된 그 데이터를 서버에 전송하기 위해 준비
+		  },
+		  	 url : "../SignUp/Overlap.do",
+		  	type : 'get',
+		  	 success : function(data){//요청에 성공
+		  		var dd=  data.result; 
+		  		alert(dd); 
+		  	 },
+		  	 error : function(){
+		  		 alert("오류뜨네"); 
+		  	 }
+
+	  });//ajax 종료 
+	  
+}//checkId() 함수 종료 
 	</script>
 </head>	
 

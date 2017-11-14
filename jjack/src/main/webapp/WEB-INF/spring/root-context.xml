@@ -9,10 +9,10 @@
 	
 	<!-- 어노테이션을 사용하기 위한 작업 -->
 	<context:annotation-config />
-	
-	<!-- spring ajax -->
+	<!-- SPRING ajax -->
 	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
 	
+
 	<!-- 오라클 컨넥션 풀 설정 -->
 	<bean id="BaseBDDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />

@@ -1,8 +1,11 @@
 package com.jjack.web.signup.controller;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -42,9 +45,22 @@ public class SignUpController {
 	 */
 	@RequestMapping("/Overlap")
 	@ResponseBody
-	public ModelAndView OverlapProc(){
+	public HashMap overlapProc(@RequestParam("id") String id){
+		//폼에 있는 데이터를 보내줘야 한다. 
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		int isId=sService.overLap(id);
+		//결과값이 1이면 아이디가 있는 것이다. 
 		
-		return null; 
+		HashMap map = new HashMap();
+		if( isId == 1){
+			map.put("result", 1); //아이디가 중복이다.
+			return map;
+		}else{
+			
+			map.put("result", 0); //아이디가 중복이 아니다. 
+			return map; 
+			
+			}
 	}
 	
 	/**

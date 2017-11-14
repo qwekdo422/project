@@ -28,4 +28,15 @@
 			TB_MEMBER)
 		,#{id},#{pw},#{name},#{sex},TO_CHAR(TO_DATE(#{birth},'YYYY-MM-DD')),#{email},#{loc})
 </insert>
+
+<!-- 아이디 중복검사 질의문 -->
+<select id="overLap" parameterType="string" resultType="int">
+SELECT
+	COUNT(*)
+FROM
+	TB_MEMBER
+WHERE
+	m_id=#{id}
+</select>
+
 </mapper>
