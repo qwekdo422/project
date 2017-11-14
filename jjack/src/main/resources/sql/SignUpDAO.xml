@@ -26,6 +26,6 @@
 			NVL(MAX(m_no),0)+1
 		FROM
 			TB_MEMBER)
-		,#{id},#{pw},#{name},#{sex},TO_DATE(#{birth},'YYYY-MM-DD'),#{email},#{loc})
+		,#{id},#{pw},#{name},#{sex},TO_CHAR(TO_DATE(#{birth},'YYYY-MM-DD')),#{email},#{loc})
 </insert>
 </mapper>

@@ -12,7 +12,27 @@
 <link rel="stylesheet" href="../css/alert/alertify.default.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+
+	$('.btn_east_course').click(function(){
+		$('.btn_word').show();
+	});
+	$('.btn_west_course').click(function(){
+		$('.btn_west_map').show();
+	});	
+	$('.btn_south_course').click(function(){
+		$('.btn_south_map').show();
+	});
+});
+
+</script>
 <%-- ====================== 필수  ======================  --%>
+
+
+
 </head>
 <body style="margin:0 auto;">
 	<div id="header">
@@ -31,12 +51,24 @@
 				</div>
 			</div>
 			<!-- 본 화면 -->
-		 	<div id="SoloMain" class="col-lg-9">
+		 	<div id="CoupleMain" class="col-lg-9">
 				
+				<!-- 
+				<button class="btn_east_course" style="padding:0px"><img src="../img/datecourse/east_course.png"></button>
+				 -->
+				<button onclick='open_in_frame("https://m.naver.com")'style="padding:0px"><img src="../img/datecourse/east_course.png"></button>
+				<br>
+				<br>
+				<button class="btn_west_course" style="padding:0px"><img src="../img/datecourse/west_course.png"></button>
+				<br>
+				<br>
+				<button class="btn_south_course" style="padding:0px"><img src="../img/datecourse/south_course.png"></button>
+				<br>
+				<br>
+
 				
-				<h3>솔로 데이트 코스3</h3>
-				
-				
+				<iframe id ="east_frame"></iframe>
+			
 			</div>
 			<!-- 본 화면 -->
 		</div>

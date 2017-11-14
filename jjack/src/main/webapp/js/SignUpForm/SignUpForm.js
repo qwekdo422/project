@@ -104,7 +104,28 @@ $(document).ready(function(){
       });
       
       
-      
+      function checkId(){
+    	  var inputd=$("#id").val(); 
+    	  $.ajax({
+    		  data : {
+    			  id : inputd //id폼에 입력된 그 데이터를 서버에 전송하기 위해 준비
+    		  },
+    		  	 url : "../SignUp/Overlap.do",
+    		  	 success : function(data){
+    		  		 
+    		  	 }
+    		  
+    		  
+    		  
+    		  
+    		  
+    		  
+    		  
+    		  
+    		  
+    	  });//ajax 종료 
+    	  
+      }//checkId() 함수 종료 
    
    
       

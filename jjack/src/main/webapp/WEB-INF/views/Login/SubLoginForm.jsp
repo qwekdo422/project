@@ -32,6 +32,8 @@
 <input type="hidden" id="uid" value="${UID}">
 <script>
 var uid =document.getElementById("uid").value; //그 폼의 value값을 가져와서 변수에다 저장함
+//var UID=${sessionScope.UID}; 
+//alert(UID);  대오형 안되잖소?
 alert(uid +"님 환영합니다"); 
 document.location.href="../main/mainForm.do";
 </script>

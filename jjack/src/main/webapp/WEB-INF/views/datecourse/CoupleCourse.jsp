@@ -12,7 +12,26 @@
 <link rel="stylesheet" href="../css/alert/alertify.default.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$(".list-group-item").click(function(){
+		alert('menu');	
+	});
+});
+
+function open_in_frame(url){
+	alert('test');
+	$('#map_frame').attr('src',url);
+}
+
+
+</script>
 <%-- ====================== 필수  ======================  --%>
+
+
+
 </head>
 <body style="margin:0 auto;">
 	<div id="header">
@@ -25,18 +44,38 @@
 			<div class="col-lg-3">
 				<h2><데이트 코스></h2><br />
 				<div class="list-group text-right">
-					<a href="../datecourse/BasicCourse.do" class="list-group-item">기본 데이트 코스</a> 
+					<a href="../datecourse/BasicCourse.do" class="list-group-item">기본 코스</a> 
 					<a href="../datecourse/CoupleCourse.do" class="list-group-item">커풀 데이트 코스</a>
-					<a href="../datecourse/SoloCourse.do" class="list-group-item">솔로 데이트 코스</a>
+					<a href="../datecourse/SoloCourse.do" class="list-group-item">솔로 코스</a>
 				</div>
 			</div>
 			<!-- 본 화면 -->
-		 	<div id="introMain" class="col-lg-9">
+		 	<div id="CoupleMain" class="col-lg-9">
 				
+				<!-- 
+				<button class="btn_east_course" style="padding:0px"><img src="../img/datecourse/east_course.png"></button>
+				 -->
+				<button onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1z5yQJh_pAHZ8F8dbyF2qNvtJ1vGTg2r3")'><img src="../img/datecourse/east_course.png"></button>
+				<br>
+				<br>
+				<!-- 
+				<button class="btn_west_course" style="padding:0px"><img src="../img/datecourse/west_course.png"></button>
+				 -->
+				 <button onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1BNuO89rX3ZuCRCND53p6Gj9pTnzBSzCU")'><img src="../img/datecourse/west_course.png"></button>
+				<br>
+				<br>
+				<!-- 
+				<button class="btn_south_course" style="padding:0px"><img src="../img/datecourse/south_course.png"></button>
+				 -->
+				 <button onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=124b3u065zmVLoVFXD6rzHq5kMqsSum89")'><img src="../img/datecourse/south_course.png"></button>
+				<br>
+				<br>
+
+				<div class="map_class">
+				  <iframe id ="map_frame" width="530" height="450"></iframe>
+				</div>
 				
-				<h3>커풀 데이트 코스2</h3>
-				
-				
+			
 			</div>
 			<!-- 본 화면 -->
 		</div>

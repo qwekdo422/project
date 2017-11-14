@@ -25,17 +25,19 @@
 			<div class="col-lg-3">
 				<h2><데이트 코스></h2><br />
 				<div class="list-group text-right">
-					<a href="../datecourse/BasicCourse.do" class="list-group-item">기본 데이트 코스</a> 
+					<a href="../datecourse/BasicCourse.do" class="list-group-item">기본 코스</a> 
 					<a href="../datecourse/CoupleCourse.do" class="list-group-item">커풀 데이트 코스</a>
-					<a href="../datecourse/SoloCourse.do" class="list-group-item">솔로 데이트 코스</a>
+					<a href="../datecourse/SoloCourse.do" class="list-group-item">솔로 코스</a>
 				</div>
 			</div>
 			<!-- 본 화면 -->
-		 	<div id="introMain" class="col-lg-9">
+		 	<div id="BasicMain" class="col-lg-9">
 				
 				
-				<h3>기본 데이트 코스1번</h3>
-				
+				<img src="../img/datecourse/basic_course.png">
+				<br>
+				<br>
+				<iframe src="https://www.google.com/maps/d/embed?mid=1sFbzJGA5CMHBDilCXopV6-lB3ww" width="530" height="450"></iframe>
 				
 			</div>
 			<!-- 본 화면 -->

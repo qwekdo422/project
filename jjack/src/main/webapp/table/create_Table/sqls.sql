@@ -22,11 +22,11 @@ CREATE TABLE TB_Apply (
 	a_cond NUMBER(2) DEFAULT 1 NOT NULL, -- 신청상태 
 	a_interest VARCHAR2(10), -- 관심사 
 	a_pic VARCHAR2(100) NOT NULL, -- 사진파일 
-	a_tel VARCHAR2(20) NOT NULL, -- 전화번호 
+	a_tel VARCHAR2(20) NOT NULL, -- 전화번호
+	a_gisoo NUMBER(5) NOT NULL, -- 기수 
 	e_eventdate VARCHAR(8) NOT NULL, -- 입소날짜
 	CONSTRAINT acond_ck CHECK(a_cond BETWEEN 1 AND 10),
-	CONSTRAINT amno_fk FOREIGN KEY(m_no) REFERENCES TB_Member(m_no),
-	CONSTRAINT aeevent_fk FOREIGN KEY(e_eventdate) REFERENCES TB_Event(e_eventdate)
+	CONSTRAINT amno_fk FOREIGN KEY(m_no) REFERENCES TB_Member(m_no)
 );
 
 
@@ -35,24 +35,11 @@ CREATE TABLE TB_Apply (
 CREATE TABLE TB_Guest (
 	g_no NUMBER(10) CONSTRAINT gno_pk PRIMARY KEY, -- 입소자인덱스 
 	a_no NUMBER(10) NOT NULL, -- 신청인덱스
-	g_gisoo NUMBER(5) NOT NULL, -- 기수 
 	g_nick VARCHAR2(8) NOT NULL, -- 호칭 
 	g_lunch NUMBER(10) CONSTRAINT glunch_fk REFERENCES TB_Guest(g_no), -- 도시락짝 
 	g_choice NUMBER(10) CONSTRAINT gchoice_fk REFERENCES TB_Guest(g_no), -- 짝선택 
 	g_course CHAR(1) CONSTRAINT gcourse_ck CHECK(g_course IN ('A', 'B', 'C', 'D', 'S')), -- 추천코스
 	CONSTRAINT gano_fk FOREIGN KEY(a_no) REFERENCES TB_Apply(a_no)
-);
-
-
-
--- 행사정보 
-CREATE TABLE TB_Event (
-	e_eventdate VARCHAR(8) CONSTRAINT eeventdate_pk PRIMARY KEY, -- 행사날짜
-	e_days NUMBER(2) DEFAULT 2 NOT NULL, -- 행사기간
-	e_loc VARCHAR2(16), -- 대상 거주지역 
-	e_age VARCHAR2(10), -- 대상 연령대 
-	e_title VARCHAR2(50) NOT NULL, -- 행사 제목 
-	e_contents VARCHAR2(1000) -- 행사 내용 
 );
 
 

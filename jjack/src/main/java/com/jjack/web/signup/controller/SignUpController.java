@@ -3,6 +3,7 @@ package com.jjack.web.signup.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -40,6 +41,7 @@ public class SignUpController {
 	 * @return : ModelandView
 	 */
 	@RequestMapping("/Overlap")
+	@ResponseBody
 	public ModelAndView OverlapProc(){
 		
 		return null; 
@@ -68,7 +70,6 @@ public class SignUpController {
 		
 		ModelAndView	mv = new ModelAndView();
 		mv.addObject("id", pVO.getId()); 
-		System.out.println("id 값 받았니?"+pVO.getId());
 		mv.setViewName("Login/SubLoginForm");
 
 		return mv;

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="../css/common/bootstrap.min.css" />
 <div id="top">
 	<a href="../main/mainForm.do">
@@ -24,8 +25,15 @@
 					<li class="nav-item"><a class="nav-link" href="../datecourse/BasicCourse.do" id="mDatecourse">데이트코스</a>
 					<li class="nav-item"><a class="nav-link" href="#" id="mReview">후기</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" id="mNotice">공지</a></li>
-					<li class="nav-item" style="margin-left:30px"><a class="nav-link" href="../SignUp/SignUpForm.do" id="mSignUp">회원가입</a></li>
-					<li class="nav-item"><a class="nav-link" href="#" id="mLogIn">로그인</a></li>
+					<c:if test="${empty sessionScope.UID }">
+						<li class="nav-item" style="margin-left:30px"> <a class="nav-link" href="../Login/LoginForm.do" id="mLogIn">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="../SignUp/SignUpForm.do" id="mSignUp">회원가입</a></li>
+					</c:if>
+					<c:if test="${!empty sessionScope.UID }">
+						<li class="nav-item"  style="float:right">	<font color="red">${sessionScope.UID}</font><font color="white"> 님 환영합니다. </font></li>
+						<li class="nav-item"><a class="nav-link" href="../Login/Logout.do" id="mLogout">로그아웃</a></li>
+						 <li class="nav-item"><a class="nav-link" href="../Login/modifyForm.do"id="myPage">마이페이지</a></li>
+					</c:if>
 				</ul>
 			</div>
 	</nav>
