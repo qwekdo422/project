@@ -79,6 +79,10 @@ $(document).ready(function(){
 				    	<input type="text" class="form-control" name="age" value="99" readonly="readonly">
 				 	</div>
 				  	<div class="form-group">
+				    	<label for="tel">연락처:</label>
+				    	<input type="text" class="form-control" name="tel">
+				 	</div>
+				  	<div class="form-group">
 				    	<label for="addr">거주지:</label>
 				    	<input type="text" class="form-control" name="addr">
 				 	</div>
