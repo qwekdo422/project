@@ -12,7 +12,26 @@
 <link rel="stylesheet" href="../css/alert/alertify.default.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+	$('.btn_map_hide').click(function(){
+		$('#map_frame').hide();
+	});
+});
+
+function open_in_frame(url){
+	$('#map_frame').show();
+	$('#map_frame').attr('src',url);
+}
+
+
+</script>
 <%-- ====================== 필수  ======================  --%>
+
+
+
 </head>
 <body style="margin:0 auto;">
 	<div id="header">
@@ -23,7 +42,7 @@
 		<div class="row mt-4">
  			<!-- 서브메뉴 -->
 			<div class="col-lg-3">
-				<h2><데이트 코스></h2><br />
+				<h4><솔로 코스></h4><br />
 				<div class="list-group text-right">
 					<a href="../datecourse/BasicCourse.do" class="list-group-item">기본 코스</a> 
 					<a href="../datecourse/CoupleCourse.do" class="list-group-item">커풀 데이트 코스</a>
@@ -33,10 +52,55 @@
 			<!-- 본 화면 -->
 		 	<div id="SoloMain" class="col-lg-9">
 				
+				<img src="../img/datecourse/solo_course.png" width="480">
+				<br>
+				<br>
+				<button class="btn_map_hide" style="padding:3px">지도 감추기</button>
+				<br>
+				<br>
 				
-				<h3>솔로 데이트 코스3</h3>
+			
+				<button name="btn_course1" type="button" onclick="alert('투명함1');"
+				style="width:155px;height:148px;cursor:hand;filter:alpha(opacity=50);opacity:0.6;
+				position:absolute;top:80px;left:70px;z-index:10"></button>
+
+				<button name="btn_course2" type="button" onclick="alert('투명함2');"
+				style="width:200px;height:208px;cursor:hand;filter:alpha(opacity=50);opacity:0.6;
+				position:absolute;top:25px;left:322px;z-index:10"></button>
+
+				<button name="btn_course3" type="button" onclick="alert('투명함3');"
+				style="width:230px;height:90px;cursor:hand;filter:alpha(opacity=50);opacity:0.6;
+				position:absolute;top:305px;left:130px;z-index:10"></button>
+
+
+			    <div class="map_class">
+				  <iframe id ="map_frame" width="480" height="400"></iframe>
+				</div>
 				
-				
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+
+                <!-- East -->
+				<button onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1lswMDVaMXFXlxcd0ZNlPWhZIXrAeSxBt")' style="padding:0px">
+				<img src="../img/datecourse/east_course.png"></button>
+				<br>
+				<br>
+				<!-- West -->
+   			    <button onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1BNuO89rX3ZuCRCND53p6Gj9pTnzBSzCU")' style="padding:0px">
+   			    <img src="../img/datecourse/west_course.png"></button>
+				<br>
+				<br>
+				<!-- South -->
+			    <button onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=124b3u065zmVLoVFXD6rzHq5kMqsSum89")' style="padding:0px">
+			    <img src="../img/datecourse/south_course.png"></button>
+				<br>
+
+	
+								
+			
 			</div>
 			<!-- 본 화면 -->
 		</div>

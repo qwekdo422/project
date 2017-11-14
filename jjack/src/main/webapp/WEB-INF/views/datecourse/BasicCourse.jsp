@@ -23,7 +23,7 @@
 		<div class="row mt-4">
  			<!-- 서브메뉴 -->
 			<div class="col-lg-3">
-				<h2><데이트 코스></h2><br />
+				<h4><기본 코스></h4><br />
 				<div class="list-group text-right">
 					<a href="../datecourse/BasicCourse.do" class="list-group-item">기본 코스</a> 
 					<a href="../datecourse/CoupleCourse.do" class="list-group-item">커풀 데이트 코스</a>
@@ -38,7 +38,10 @@
 				<br>
 				<br>
 				<iframe src="https://www.google.com/maps/d/embed?mid=1sFbzJGA5CMHBDilCXopV6-lB3ww" width="530" height="450"></iframe>
-				
+				<br>
+				<br>
+				<br>
+				<br>
 			</div>
 			<!-- 본 화면 -->
 		</div>
