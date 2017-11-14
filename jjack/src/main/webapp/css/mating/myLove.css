@@ -1,0 +1,18 @@
+figure {
+	border: 1px solid black;
+	display:inline-block;
+	transition:all 1s;
+	perspective: 100px;
+}
+figure img {
+	width:150px;
+	height:150px;
+	border-bottom:1px solid black;
+	cursor:pointer;
+}
+figcaption {
+	cursor:pointer;
+}
+#btns {
+	display:none;
+}

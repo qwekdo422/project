@@ -21,4 +21,7 @@ public class matingController {
 	public void myLove() {
 		
 	}
+	@RequestMapping("/Loved")
+	public void Loved() {
+	}
 }
