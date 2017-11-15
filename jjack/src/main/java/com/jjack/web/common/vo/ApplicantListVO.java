@@ -20,8 +20,8 @@ public class ApplicantListVO {
 	private String gcount;		// 입소 횟수
 	private String tel;
 	private String email;
-	private int thisProcess;	// 현재 진행상태
-	private int nextProcess;	// 다음 진행명령
+	private int thisStep;	// 현재 진행상태
+	private int nextStep;	// 다음 진행명령
 	// 1:신청(승인대기) / 2:승인 / 3:입금대기 / 4:입소대기 / 5:승인거부 / 6:거부연락완료 / 7:취소 / 8:입소 / 9:퇴소 / 10:후기완료
 	private int totalCount;	// 전체 신청자 수
 	private int waitCount;		// 승인대기자 수
@@ -136,17 +136,17 @@ public class ApplicantListVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getThisProcess() {
-		return thisProcess;
+	public int getThisStep() {
+		return thisStep;
 	}
-	public void setThisProcess(int thisProcess) {
-		this.thisProcess = thisProcess;
+	public void setThisStep(int thisStep) {
+		this.thisStep = thisStep;
 	}
-	public int getNextProcess() {
-		return nextProcess;
+	public int getNextStep() {
+		return nextStep;
 	}
-	public void setNextProcess(int nextProcess) {
-		this.nextProcess = nextProcess;
+	public void setNextStep(int nextStep) {
+		this.nextStep = nextStep;
 	}
 	public int getTotalCount() {
 		return totalCount;

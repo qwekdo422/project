@@ -1,12 +1,12 @@
-package com.jjack.web.mail;
-
+package com.jjack.web.util;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
+import com.jjack.web.common.vo.ApplicantListVO;
 
-public class jMail {
-	public static void sendMail(MailVO mvo) {
+public class jMailUtil {
+	public static void sendMail(ApplicantListVO apvo) {
 		final String user = "jjakjjakchon@gmail.com"; //발신자의 이메일 아이디를 입력
 		final String password = "clapclap"; //발신자 이메일의 패스워드를 입력
 		InternetAddress from = new InternetAddress();
@@ -44,7 +44,7 @@ public class jMail {
             message.setSubject("[짝 게스트하우스] 애정촌 입소를 신청해주셔서 감사합니다", "UTF-8"); //메일 제목을 입력
 
             // Text
-            String mailHtml = MailForm.makeMail(mvo);
+            String mailHtml = MailForm.makeMail(apvo);
             
             message.setContent(mailHtml, "text/html; charset=UTF-8");    //메일 내용을 입력
 
