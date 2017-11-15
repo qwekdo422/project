@@ -59,18 +59,21 @@ function open_in_frame(url){
 				<br>
 				<br>
 				
-			
-				<button name="btn_course1" type="button" onclick="alert('투명함1');"
-				style="width:155px;height:148px;cursor:hand;filter:alpha(opacity=50);opacity:0.6;
-				position:absolute;top:80px;left:70px;z-index:10"></button>
+			    <!-- East -->
+			    <button name="btn_course2" type="button" onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1BNuO89rX3ZuCRCND53p6Gj9pTnzBSzCU")'
+				
+				style="width:143px;height:134px;cursor:hand;filter:alpha(opacity=50);opacity:0.6;
+				position:absolute;top:72px;left:63px;z-index:10"></button>
 
-				<button name="btn_course2" type="button" onclick="alert('투명함2');"
-				style="width:200px;height:208px;cursor:hand;filter:alpha(opacity=50);opacity:0.6;
-				position:absolute;top:25px;left:322px;z-index:10"></button>
-
-				<button name="btn_course3" type="button" onclick="alert('투명함3');"
-				style="width:230px;height:90px;cursor:hand;filter:alpha(opacity=50);opacity:0.6;
-				position:absolute;top:305px;left:130px;z-index:10"></button>
+				<!-- West -->
+				<button name="btn_course1" type="button" onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1gmRk5fN8ji0Id50mbmBvnJAb-gDjWycZ")'
+				style="width:180px;height:186px;cursor:hand;filter:alpha(opacity=50);opacity:0.6;
+				position:absolute;top:23px;left:295px;z-index:10"></button>
+				
+				<!-- South -->
+				<button name="btn_course3" type="button" onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1lswMDVaMXFXlxcd0ZNlPWhZIXrAeSxBt")'
+				style="width:210px;height:80px;cursor:hand;filter:alpha(opacity=50);opacity:0.6;
+				position:absolute;top:276px;left:118px;z-index:10"></button>
 
 
 			    <div class="map_class">
@@ -82,24 +85,7 @@ function open_in_frame(url){
 				<br>
 				<br>
 				<br>
-
-                <!-- East -->
-				<button onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1lswMDVaMXFXlxcd0ZNlPWhZIXrAeSxBt")' style="padding:0px">
-				<img src="../img/datecourse/east_course.png"></button>
-				<br>
-				<br>
-				<!-- West -->
-   			    <button onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1BNuO89rX3ZuCRCND53p6Gj9pTnzBSzCU")' style="padding:0px">
-   			    <img src="../img/datecourse/west_course.png"></button>
-				<br>
-				<br>
-				<!-- South -->
-			    <button onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=124b3u065zmVLoVFXD6rzHq5kMqsSum89")' style="padding:0px">
-			    <img src="../img/datecourse/south_course.png"></button>
-				<br>
-
-	
-								
+			
 			
 			</div>
 			<!-- 본 화면 -->
