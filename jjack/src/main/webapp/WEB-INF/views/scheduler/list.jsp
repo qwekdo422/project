@@ -19,11 +19,12 @@
 <link rel='stylesheet prefetch' href='../css/houseApply/fullcalendar.css'>
 <link rel="stylesheet" href="../css/scheduler/scheduler.css" />
 
-<!-- Jquery 달력 사용을 위한 라이브러리 설정 -->
+<!-- 이벤트 종료일 달력으로  표시-->
+<%--
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-
+ --%>
 
 <script src="../js/scheduler/scheduler.js"></script>
 </head>
@@ -42,7 +43,6 @@
 					<script src='../js/houseApply/fullcalendar.min.js'></script>
 				</div>
 			<%-- ================ 달력  =============== --%>
-			
 			</div>
 			<%-- row 끝 --%>
 			
@@ -52,27 +52,27 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h3 class="modal-title" id="lineModalLabel">행사 일정</h3>
-						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
 					</div>
 					<div class="modal-body">
 						
 			            <!-- content goes here -->
-						<form>
+						<form method="post" id="sFrm" action="">
 			              <div class="form-group">
 			                <label for="startEvent">이벤트 시작일:</label>
-			                <input type="text" class="form-control" id="startEvent" readonly="readonly">
+			                <input type="text" class="form-control" id="startEvent" name="startEvent" readonly="readonly">
 			              </div>
 			              <div class="form-group">
 			                <label for="endEvent">이벤트 종료일:</label>
-			                <input type="text" class="form-control" id="endEvent" placeholder="이벤트 종료일을 선택하세요.">
+			                <input type="date" class="form-control" id="endEvent" name="endEvent" placeholder="이벤트 종료일을 선택하세요.">
 			              </div>
 			              <div class="form-group">
 			                <label for="title">이벤트 제목:</label>
-			                <input type="text" class="form-control" id="title" placeholder="이벤트 제목을 입력하세요.">
+			                <input type="text" class="form-control" id="title" name="title" placeholder="이벤트 제목을 입력하세요.">
 			              </div>
 			              <div class="form-group">
 			                <label for="content">이벤트 내용:</label>
-			                <input type="text" class="form-control" id="content" placeholder="이벤트 내용을 입력하세요.">
+			                <input type="text" class="form-control" id="content" name="content" placeholder="이벤트 내용을 입력하세요.">
 			              </div>
 			            </form>
 			
