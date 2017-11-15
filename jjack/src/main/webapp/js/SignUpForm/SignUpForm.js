@@ -78,6 +78,8 @@ $(document).ready(function(){
       }
       
       $("#Sfrm").submit(); 
+      
+      
    });// $("#sBtn").click(function() 함수 종료 
 
    

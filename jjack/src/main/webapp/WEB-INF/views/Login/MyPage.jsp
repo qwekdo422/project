@@ -12,14 +12,10 @@
 	<link rel="stylesheet" href="../css/alert/alertify.default.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="../js/alert/alertify.min.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			var loc ='${PVO.loc}';
-			$("#loc").val(loc);
-		});
-	</script>
 	<%-- ====================== 필수  ======================  --%>
 </head>
+<script src="../js/MyPage/MyPage.js"></script>
+
 <body style="margin:0 auto;">
    <div id="header">
       <jsp:include page="../common/header.jsp" />
@@ -34,8 +30,13 @@
 			</tr>
 			
 			<tr>
-					<td>이름 :</td><td><input type="text" name="name" id="name" value="${PVO.name}" ></td>
+					<td>이름 변경</td><td><input type="text" name="name" id="name" value="${PVO.name}" ></td>
 			</tr>
+			<tr>
+				<td rowspan="3">비밀번호 변경 </td><td><input type="password" name="pw" id="pw" placeholder="사용중인 비밀번호"></td>
+			</tr>
+			<tr><td><input type="password" name="pw" id="pw" placeholder="새 비밀번호"></td></tr>
+			<tr><td><input type="password" name="pw" id="pw" placeholder="새 비밀번호 확인"></td></tr>
 			<tr>
 					<td>성별 :</td> 
 					<td>
@@ -55,10 +56,10 @@
 			</tr>
 			
 			<tr>
-					<td>E-MAIL : </td><td><input type="email" name="email" id="email" placeholder="abc@domain.com" value="${PVO.email}"></td>
+					<td>E-MAIL 변경 </td><td><input type="email" name="email" id="email" placeholder="abc@domain.com" value="${PVO.email}"></td>
 			</tr>
 			<tr>
-					<td>거주지 : </td>
+					<td>거주지 변경 </td>
 					<td>
 						<select name="loc" id="loc" value="${PVO.loc}">
 								<option value="">지역선택</option>

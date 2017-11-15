@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+<!-- namespace는 연결할 DAO 인터페이스경로.클래스명 -->	
+<mapper namespace="com.jjack.web.nboard.dao.NboardDAO">
+
+
+
+
+<!-- 공지사항 글쓰기 질의 명령 -->
+<!-- 아이디 요소는 그 추상함수이름과 같게 해준다.  -->
+
+	<insert id="nBoardInsert" parameterType="nboardvo"> 
+			INSERT 
+			INTO 
+				TB_Notice (N_NO, N_DATE, N_TITLE, N_CONTENTS, N_HITS, N_ISSHOW)
+			VALUES (
+					(SELECT 
+						NVL(MAX(n_no),0)+1
+					FROM
+						TB_Notice),SYSDATE,#{ntitle},#{ncontents,jdbcType=CLOB},	(SELECT NVL(MAX(n_hits),0)+1 FROM TB_Notice) , 'Y')
+	</insert>
+
+</mapper>

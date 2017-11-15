@@ -31,9 +31,8 @@
 						<li class="nav-item"><a class="nav-link" href="../SignUp/SignUpForm.do" id="mSignUp">회원가입</a></li>
 					</c:if>
 					<c:if test="${!empty sessionScope.UID }">
-						<li class="nav-item"  style="float:right">	<font color="red">${sessionScope.UID}</font><font color="white"> 님 환영합니다. </font></li>
+						<li class="nav-item"  style="float:right">	<font color="red"><a href="../Login/modifyForm.do">${sessionScope.UID}</a></font><font color="white"> 님 환영합니다. </font></li>
 						<li class="nav-item"><a class="nav-link" href="../Login/Logout.do" id="mLogout">로그아웃</a></li>
-						 <li class="nav-item"><a class="nav-link" href="../Login/modifyForm.do"id="myPage">마이페이지</a></li>
 					</c:if>
 				</ul>
 			</div>

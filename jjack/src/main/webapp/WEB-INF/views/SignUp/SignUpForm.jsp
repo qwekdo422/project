@@ -32,7 +32,7 @@ function checkId(){
 
 	    if(inputd.length < 6){		
 				document.getElementById("isid").innerHTML="아이디는 6글자 이상 입력하십시오";
-				$('#pw').prop('readonly', true); //아이디가 6글자면 패스워드 폼을 누르지 못하게 막음
+				$('#pw').prop('readonly', true); //아이디가 6글자 미만이면 패스워드 폼을 누르지 못하게 막음
 
 				return; 
 	    }else{
@@ -47,11 +47,10 @@ function checkId(){
 		  type : 'post',
 		  success : function(data){//요청에 성공
 		  var isId= data.result; //이 값이 1 이면 DB에 그 아이디가 있다는 의미이다.  
-					
 		  if(isId == 1){
 		  	document.getElementById("isid").innerHTML="아이디가 중복입니다."; 
 		  	$("#id").focus();
-		
+			$('#pw').prop('readonly', true); //아이디를 만들 수 없는 조건이므로 password폼을 닫아주었다. 
 		  }else{
 		  	document.getElementById("isid").innerHTML="사용가능한 아이디입니다."; 
 		  	}
