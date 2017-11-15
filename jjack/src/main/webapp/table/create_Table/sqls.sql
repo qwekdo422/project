@@ -23,10 +23,10 @@ CREATE TABLE TB_Apply (
 	a_interest VARCHAR2(10), -- 관심사 
 	a_pic VARCHAR2(100) NOT NULL, -- 사진파일 
 	a_tel VARCHAR2(20) NOT NULL, -- 전화번호
-	a_gisoo NUMBER(5) NOT NULL, -- 기수 
-	e_eventdate VARCHAR(8) NOT NULL, -- 입소날짜
+	e_eventdate VARCHAR2(8) NOT NULL, -- 입소날짜
 	CONSTRAINT acond_ck CHECK(a_cond BETWEEN 1 AND 10),
-	CONSTRAINT amno_fk FOREIGN KEY(m_no) REFERENCES TB_Member(m_no)
+	CONSTRAINT amno_fk FOREIGN KEY(m_no) REFERENCES TB_Member(m_no),
+	CONSTRAINT aeeventdate_fk FOREIGN KEY(e_eventdate) REFERENCES TB_Event(e_eventdate)
 );
 
 
@@ -44,12 +44,25 @@ CREATE TABLE TB_Guest (
 
 
 
+-- 행사일정
+CREATE TABLE TB_Event (
+	e_eventdate VARCHAR2(8) CONSTRAINT eeventdate_pk PRIMARY KEY, -- 행사날짜
+	e_eventend VARCHAR2(8) NOT NULL, -- 행사종료날짜
+	e_gisoo NUMBER(5) NOT NULL, -- 기수
+	e_loc VARCHAR2(16), -- 대상 거주지역
+	e_age VARCHAR2(10), -- 대상 연령대
+	e_title VARCHAR2(200) NOT NULL, -- 행사 제목
+	e_contents VARCHAR2(2000) -- 행사 내용
+);
+
+
+
 -- 공지게시판 
 CREATE TABLE TB_Notice (
 	n_no NUMBER(6) CONSTRAINT nno_pk PRIMARY KEY, -- 공지번호 
 	n_date DATE DEFAULT SYSDATE NOT NULL, -- 공지날짜 
-	n_title VARCHAR(100) NOT NULL, -- 공지제목 
-	n_contents VARCHAR(4000) NOT NULL, -- 공지내용 
+	n_title VARCHAR2(100) NOT NULL, -- 공지제목 
+	n_contents CLOB NOT NULL, -- 공지내용 
 	n_hits NUMBER(10) DEFAULT 0 NOT NULL, -- 공지조회수 
 	n_IsShow CHAR(1) DEFAULT 'Y' NOT NULL, -- 공지존재여부
 	CONSTRAINT nIsShow_ck CHECK(n_IsShow IN ('Y', 'N')) 

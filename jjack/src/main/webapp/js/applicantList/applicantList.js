@@ -4,4 +4,7 @@ $(document).ready(function(){
 	    placement: 'left',
 	});
 	 
+	$("#slctGisoo").change(function(){
+		$("#gisooFrm").submit();
+	});
 });
