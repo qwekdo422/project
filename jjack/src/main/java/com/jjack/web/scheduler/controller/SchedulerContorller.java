@@ -20,7 +20,17 @@ public class SchedulerContorller {
 	 * @return : void
 	 */
 	@RequestMapping("/writeForm")
-	public void writeForm() {}
+	public void schduleWriteForm() {}
+	
+	/**
+	 * 일정관리 목록
+	 * @author : daeo
+	 * @since : 2017. 11. 15.
+	 * @param : 
+	 * @return : void
+	 */
+	@RequestMapping("/list")
+	public void schedulList() {}
 	
 	
 }
