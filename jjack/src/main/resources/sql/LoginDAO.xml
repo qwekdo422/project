@@ -48,7 +48,33 @@
 		tb_member
 	WHERE
 		m_no=#{mNo}
-			
 </select>
+
+<!-- 아이디에 해당하는 비밀번호 가져오는 질의문 -->
+<select id="pW" resultType="string" parameterType="string">
+	SELECT 
+		m_pw
+	FROM
+		tb_member
+	WHERE
+		m_id=#{isid}
+</select>
+
+<!-- 비밀번호 일치 불일치 판별 질의문 -->
+<!-- 아이디와 비밀번호가 일치하면 1을 반환한다. -->
+<select id="isPw" resultType="int" parameterType="hashMap">
+	SELECT 
+		COUNT(*)                                                                   
+	FROM
+		tb_member
+	WHERE
+		 m_id=#{mid} and M_PW=#{mpw}
+</select>
+
+<!-- 회원정보 업데이트 질의문
+<update id="">
+
+</update>
+ -->
 
 </mapper>
