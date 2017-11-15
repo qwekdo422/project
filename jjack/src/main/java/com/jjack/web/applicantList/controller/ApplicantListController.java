@@ -8,5 +8,6 @@ import com.jjack.web.util.jMailUtil;
 public class ApplicantListController {
 	@RequestMapping("/applicantList/applicantList")
 	public void ApplicantList(ApplicantListVO apvo){
+		
 	}
 }

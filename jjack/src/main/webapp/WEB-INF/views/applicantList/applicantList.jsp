@@ -25,7 +25,7 @@
 		<form id="gisooFrm" method="GET" action="../../applicantList/applicantList.slm">
 			<select class="form-control" name="slctGisoo" id="slctGisoo">
 				<!-- 임시. 동적으로 바꿀 부분 -->
-				<option value="">2017-11-11 : 100기</option>
+				<option value="20171111">2017-11-11 : 100기</option>
 				<option value="">2017-11-4 : 99기</option>
 				<option value="">2017-10-28 : 98기</option>
 				<option value="">2017-10-21 : 97기</option>
