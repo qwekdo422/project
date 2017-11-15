@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+<!-- namespace는 연결할 DAO 인터페이스경로.클래스명 -->	
+<mapper namespace="com.jjack.web.login.dao.LoginDAO">
+
+	<!-- id는 연결할 함수명 -->
+	<!-- 아이디 비밀번호 확인 질의문 -->
+<select id="login" resultType="int"  parameterType="hashMap">
+																					<!-- 파라메터가 map계열이면 #{내용} '내용'이 키 값이 된다. -->
+																					<!-- 넣을 데이터가 여러가지라서 map이나  -->
+	SELECT 
+		COUNT(*)                                                                   
+	FROM
+		tb_member
+	WHERE
+				m_id = #{hashid}
+			AND	m_pw = #{hashpw}
+</select>
+<select id="logout" resultType="int" parameterType="string">
+	SELECT 
+		COUNT(*)                                                                   
+	FROM
+		tb_member
+	WHERE
+				m_id = #{overlap_id}
+</select>
+
+<!-- 회원번호 받는 질의문 -->
+<select id="mNo" resultType="int" parameterType="string">
+	SELECT 
+		m_no
+	FROM
+		tb_member
+	WHERE
+		m_id=#{id}
+</select>
+
+<!-- 회원정보 수정 질의문 -->
+<select id="mModify" parameterType="int" resultType="profilevo">
+<!-- 회원의 m_no를 받아서 거기에 해당하는 데이터를 받아오자 -->
+	SELECT 																							
+		m_id AS id, m_name AS name, m_sex AS sex, TO_CHAR(m_birth,'YYYY-MM-DD') AS birth, m_email AS email, m_loc AS loc
+	FROM
+		tb_member
+	WHERE
+		m_no=#{mNo}
+			
+</select>
+
+</mapper>

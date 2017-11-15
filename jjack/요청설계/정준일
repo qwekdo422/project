@@ -16,8 +16,8 @@ m_joindate date default sysdate
 
 
 #회원가입 폼
-요청 http://localhost:8080/jjack/Login/SignUpForm.do
-컨트롤러 :  com.jjack.web.main.controller
+요청 http://localhost:8080/jjack/SignUp/SignUpForm.do
+컨트롤러 :  com.jjack.web.signup.controller
 함수  : public ModelAndView SignUpForm()
 파라메터 : 없음
 -----------------------------------------------------------------------------------------------------------
@@ -26,8 +26,8 @@ m_joindate date default sysdate
 
 
 #회원가입 실행 
-요청 http://localhost:8080/jjack/Login/SignUpProc.do
-컨트롤러 :  com.jjack.web.main.controller
+요청 http://localhost:8080/jjack/SignUp/SignUpProc.do
+컨트롤러 :  com.jjack.web.signup.controller
 함수  :	public ModelAndView SignUpProc()
 파라메터 : ProfileVO 전체 
 -----------------------------------------------------------------------------------------------------------
@@ -37,7 +37,93 @@ m_joindate date default sysdate
 
 #id 중복검사 실행
 요청 http://localhost:8080/jjack/Login/Overlap.do
-컨트롤러 :  com.jjack.web.main.controller
+컨트롤러 : 
 함수  :	public ModelAndView OverlapProc()
 파라메터 : id
 -----------------------------------------------------------------------------------------------------------
+
+
+
+#로그인 폼
+요청 http://localhost:8080/jjack/Login/LoginForm.do
+컨트롤러 :com.jjack.web.login.controller
+함수  :	public ModelAndView LoginForm()
+파라메터 : 없음
+
+-----------------------------------------------------------------------------------------------------------
+
+
+
+#로그인 실행
+요청 http://localhost:8080/jjack/Login/LoginProc.do
+컨트롤러 :com.jjack.web.login.controller
+함수  :	public ModelAndView LoginProc()
+파라메터 : HttpServletRequest req, HttpSession session
+
+-----------------------------------------------------------------------------------------------------------
+
+ 
+#회원정보 폼 실행
+요청 http://localhost:8080/jjack/Login/modifyForm.do
+컨트롤러 :com.jjack.web.login.controller
+함수  :	public ModelAndView modifyProc()
+파라메터 :vo
+
+-----------------------------------------------------------------------------------------------------------
+
+
+
+#회원정보 수정 실행
+요청 http://localhost:8080/jjack/Login/modifyProc.do
+컨트롤러 :com.jjack.web.login.controller
+함수  :	public ModelAndView modifyProc()
+파라메터 :VO
+
+-----------------------------------------------------------------------------------------------------------
+
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+#공지사항 목록보기 
+요청 http://localhost:8080/jjack/Nboard/NboardList.do
+컨트롤러 :com.jjack.web.nboard.controller
+함수  :	public ModelAndView nboardList()
+파라메터 :일단 없음 
+-----------------------------------------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+#공지사항 상세보기 
+요청 http://localhost:8080/jjack/Nboard/NboarView.do
+컨트롤러 :com.jjack.web.nboard.controller
+함수  :	public ModelAndView nboardView()
+파라메터 :일단 없음 
+-----------------------------------------------------------------------------------------------------------
+
+
+
+-----------------------------------------------------------------------------------------------------------
+
+#공지사항 글쓰기 Form
+요청 http://localhost:8080/jjack/Nboard/NboardForm.do
+컨트롤러 :com.jjack.web.nboard.controller
+함수  :	public ModelAndView nboardWriteForm()
+파라메터 :일단 없음 
+-----------------------------------------------------------------------------------------------------------
+
+
+
+-----------------------------------------------------------------------------------------------------------
+
+#공지사항 글쓰기 실행함수 
+요청 http://localhost:8080/jjack/Nboard/NboardProc.do
+컨트롤러 :com.jjack.web.nboard.controller
+함수  :	public ModelAndView nboardWriteProc()
+파라메터 :VO 
+-----------------------------------------------------------------------------------------------------------
+
+

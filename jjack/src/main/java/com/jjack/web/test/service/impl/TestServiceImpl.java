@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.jjack.web.common.vo.ProfileVO;
 import com.jjack.web.common.vo.TestVO;
-import com.jjack.web.login.dao.SignUpDAO;
+import com.jjack.web.signup.dao.SignUpDAO;
 import com.jjack.web.test.dao.TestDAO;
 import com.jjack.web.test.service.TestService;
 

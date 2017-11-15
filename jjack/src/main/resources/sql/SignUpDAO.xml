@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC 
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
 <!-- namespace는 연결할 DAO 인터페이스경로.클래스명 -->	
-
-<mapper namespace="com.jjack.web.login.dao.SignUpDAO">
+<mapper namespace="com.jjack.web.signup.dao.SignUpDAO">
 
 	<!-- id는 연결할 함수명 -->
 <insert id="singUp" parameterType="profilevo">
@@ -25,6 +26,17 @@
 			NVL(MAX(m_no),0)+1
 		FROM
 			TB_MEMBER)
-		,#{id},#{pw},#{name},#{sex},TO_DATE(#{birth},'YYYY-MM-DD'),#{email},#{loc})
+		,#{id},#{pw},#{name},#{sex},TO_CHAR(TO_DATE(#{birth},'YYYY-MM-DD')),#{email},#{loc})
 </insert>
+
+<!-- 아이디 중복검사 질의문 -->
+<select id="overLap" parameterType="string" resultType="int">
+SELECT
+	COUNT(*)
+FROM
+	TB_MEMBER
+WHERE
+	m_id=#{id}
+</select>
+
 </mapper>

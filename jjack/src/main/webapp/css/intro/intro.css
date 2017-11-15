@@ -1,0 +1,33 @@
+/* 공통 */
+#introLogo {
+	width:35px;
+}
+
+.introImg {
+	max-width: 100%;
+	width /***/: auto; /* IE8 */
+    height: auto;
+    vertical-align: bottom;
+}
+
+/* 짝 게스트하우스는 */
+#jjakGH {
+	margin-bottom:40px;	
+}
+#intro1p {
+	margin:0 auto;
+	width:88%;
+}
+
+
+/* 애정촌 일정 */
+
+/* 
+#day2Btn {
+	cursor:pointer;
+}
+#day1Btn {
+	cursor:default;
+	color:#007bff;
+}
+ */
