@@ -1,5 +1,6 @@
 package com.jjack.web.houseApply.controller;
 
+
 import java.io.IOException;
 
 import org.json.simple.JSONArray;
@@ -9,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jjack.web.houseApply.service.CalendarService;
-import com.jjack.web.mail.MailVO;
 
 /**
  * 입소신청 컨트롤러

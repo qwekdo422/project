@@ -52,10 +52,11 @@ $(document).ready(function() {
 		$("#startEvent").val($(this).data("date"));
 	});
 	//	이전/다음달을 클릭하면 달력이 세로 만들어지기 때문에 다시 onclick 이벤트를 걸어준다.
+	/*
 	$("button").click(function() {
 		$(".fc-day").attr("onclick", "modalView(this)");
 	});
-	
+	*/
 	
 	//생일 폼에 달력뜨게끔 해주는 코드 
 	$("#endEvent").datepicker({
@@ -69,8 +70,7 @@ $(document).ready(function() {
         showMonthAfterYear:true, //월, 년 순의 셀렉트 박스를 년, 월 순으로 바꿔준다. 
         yearRange: 'c-100:c'
           
-       });//   $("#birth").datepicker() 함수 종료 
-	//	날짜 호버효과
+       });
 	
 });
 	

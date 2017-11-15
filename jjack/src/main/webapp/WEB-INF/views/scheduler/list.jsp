@@ -17,15 +17,15 @@
 
 <%-- 캘린더  --%>
 <link rel='stylesheet prefetch' href='../css/houseApply/fullcalendar.css'>
-<link rel='stylesheet prefetch' href='../css/houseApply/magnific-popup.css'>
 <link rel="stylesheet" href="../css/scheduler/scheduler.css" />
-
-
 
 <!-- Jquery 달력 사용을 위한 라이브러리 설정 -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
+
+<script src="../js/scheduler/scheduler.js"></script>
 </head>
 
 <body style="margin: 0 auto;">
@@ -39,10 +39,7 @@
 				<div class="col-md-12">
 					<div id='calendar'></div>
 					<script src='../js/houseApply/moment.min.js'></script>
-					<script src='../js/houseApply/fullcalendar-2.1.1.js'></script>
 					<script src='../js/houseApply/fullcalendar.min.js'></script>
-					<script src='../js/houseApply/jquery.magnific-popup.min.js'></script>
-					<script src="../js/scheduler/scheduler.js"></script>
 				</div>
 			<%-- ================ 달력  =============== --%>
 			
