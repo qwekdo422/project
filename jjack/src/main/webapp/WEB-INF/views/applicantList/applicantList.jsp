@@ -266,17 +266,8 @@
 				</tbody>
 			</table>
 			<form id="sttsFrm" method="POST" action="../../applicantList/applicantList.slm">
-				<input type="hidden" id="" name="" value="">
-				<input type="hidden" id="" name="" value="">
-				<input type="hidden" id="" name="" value="">
-				<input type="hidden" id="" name="" value="">
-				<input type="hidden" id="" name="" value="">
-				<input type="hidden" id="" name="" value="">
-				<input type="hidden" id="" name="" value="">
-				<input type="hidden" id="" name="" value="">
-				<input type="hidden" id="" name="" value="">
-				<input type="hidden" id="" name="" value="">
-				<input type="hidden" id="" name="" value="">
+				<input type="hidden" id="ano" name="ano" value="">
+				<input type="hidden" id="nextProcess" name="nextProcess" value="">
 			</form>
 		</div>
 		<!--  /.container -->
