@@ -8,6 +8,7 @@
 <mapper namespace="com.jjack.web.signup.dao.SignUpDAO">
 
 	<!-- id는 연결할 함수명 -->
+	<!--회원가입 -->
 <insert id="singUp" parameterType="profilevo">
 	INSERT
 	INTO 

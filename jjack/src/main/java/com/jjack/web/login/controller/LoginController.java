@@ -56,11 +56,12 @@ public class LoginController {
 		String pw=req.getParameter("pw"); 
 		int result=lService.login(id, pw);  //그 아이디가 있으면 1을 반환한다. 
 		
+	
 		if(result==1){
 			
 			
 			int mNo=lService.mNo(id);//로그인에 성공하여 그 아이디의 회원 번호를 받았다. 
-			
+			session.setAttribute("MNO", mNo);
 			
 			session.setAttribute("UID", id);//세션을 부여하겠다는 의미이다.
 			mv.addObject("OBJECT",result); 
@@ -113,6 +114,7 @@ public class LoginController {
 		//그 해당하는 아이디의 회원 번호를 받은 후 
 		String id=(String)session.getAttribute("UID");
 		int mNo=lService.mNo(id);
+		
 
 		
 		//로직을 처리해 주자.
@@ -120,6 +122,7 @@ public class LoginController {
 
 		ModelAndView mv= new ModelAndView(); 
 		mv.addObject("PVO", pVO); 
+		System.out.println(pVO.getBirth());
 		mv.setViewName("Login/MyPage");
 		return mv; 
 		
@@ -159,12 +162,14 @@ public class LoginController {
 	 * @return : ModelandView
 	 */
 	@RequestMapping("/modifyProc")
-	public ModelAndView modifyProc(ProfileVO pVO){
+	public ModelAndView modifyProc(ProfileVO pVO,HttpSession session ){
 		
 		
+		pVO.setNo((Integer)session.getAttribute("MNO"));
 		lService.memberModifyProc(pVO); 		
 		System.out.println(pVO.getName()+"변경된 이름");
 		System.out.println(pVO.getNewpw02()+"변경된 비번");
+		System.out.println(pVO.getNo()+"번호");
 
 		
 		

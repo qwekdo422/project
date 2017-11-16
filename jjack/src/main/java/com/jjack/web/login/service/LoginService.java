@@ -53,7 +53,6 @@ public class LoginService {
 	public void memberModifyProc(ProfileVO pVO){
 		
 		lDAO.memberModifyProc(pVO);
-		return; 
 	}
 	
 }

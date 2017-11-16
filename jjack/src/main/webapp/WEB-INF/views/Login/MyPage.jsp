@@ -97,6 +97,7 @@ function checkPw(){
       <div class="container">
 		<div id="main">
 				<form method="post" action="../Login/modifyProc.do" id="Mfrm">
+				<input type="hidden" name="no" value="${PVO.no}">
 			<table width="800" align="center" border="1">
 			<tr>
 					<td>아이디 :</td>

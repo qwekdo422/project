@@ -43,7 +43,7 @@
 <select id="mModify" parameterType="int" resultType="profilevo">
 <!-- 회원의 m_no를 받아서 거기에 해당하는 데이터를 받아오자 -->
 	SELECT 																							
-		m_id AS id, m_name AS name, m_sex AS sex, TO_CHAR(m_birth,'YYYY-MM-DD') AS birth, m_email AS email, m_loc AS loc
+		m_id AS id, m_name AS name, m_sex AS sex, m_birth AS birth, m_email AS email, m_loc AS loc
 	FROM
 		tb_member
 	WHERE
