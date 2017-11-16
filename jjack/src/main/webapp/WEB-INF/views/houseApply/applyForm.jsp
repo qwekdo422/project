@@ -26,6 +26,7 @@
 <script src="../js/houseApply/fileUpload.js"></script>
 <script type="text/javascript">
 var tEvent = ${CALENDAR};
+console.log(tEvent);
 $(document).ready(function(){
 	$("#applyBtn").click(function() {
 		$("#applyFrm").attr("action", "./applyProc.do").submit();
