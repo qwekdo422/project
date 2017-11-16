@@ -1,11 +1,6 @@
 package com.jjack.web.common.vo;
 
 public class ApplicantListVO {
-	private String edate;		// 입소일자
-	private int gisoo;		// 기수
-	private String etitle;		// 행사 제목
-	private int code;		// 명령 코드 : 1 날짜 기수 변경, 2 회원상태변경
-	
 	private int mno;		// 회원번호
 	private int ano;		// 신청인덱스
 	private String id;
@@ -23,35 +18,9 @@ public class ApplicantListVO {
 	private int thisStep;	// 현재 진행상태
 	private int nextStep;	// 다음 진행명령
 	// 1:신청(승인대기) / 2:승인 / 3:입금대기 / 4:입소대기 / 5:승인거부 / 6:거부연락완료 / 7:취소 / 8:입소 / 9:퇴소 / 10:후기완료
-	private int totalCount;	// 전체 신청자 수
-	private int waitCount;		// 승인대기자 수
-	private int manCount;	// 승인된 남자 수
+	private String pic;		// 사진파일
 	
 	
-	public String getEdate() {
-		return edate;
-	}
-	public void setEdate(String edate) {
-		this.edate = edate;
-	}
-	public int getGisoo() {
-		return gisoo;
-	}
-	public void setGisoo(int gisoo) {
-		this.gisoo = gisoo;
-	}
-	public String getEtitle() {
-		return etitle;
-	}
-	public void setEtitle(String etitle) {
-		this.etitle = etitle;
-	}
-	public int getCode() {
-		return code;
-	}
-	public void setCode(int code) {
-		this.code = code;
-	}
 	public int getMno() {
 		return mno;
 	}
@@ -148,48 +117,10 @@ public class ApplicantListVO {
 	public void setNextStep(int nextStep) {
 		this.nextStep = nextStep;
 	}
-	public int getTotalCount() {
-		return totalCount;
-	}
-	public void setTotalCount(int totalCount) {
-		this.totalCount = totalCount;
-	}
-	public int getWaitCount() {
-		return waitCount;
-	}
-	public void setWaitCount(int waitCount) {
-		this.waitCount = waitCount;
-	}
-	public int getManCount() {
-		return manCount;
-	}
-	public void setManCount(int manCount) {
-		this.manCount = manCount;
-	}
-	public int getWomanCount() {
-		return womanCount;
-	}
-	public void setWomanCount(int womanCount) {
-		this.womanCount = womanCount;
-	}
-	public int getNoCount() {
-		return noCount;
-	}
-	public void setNoCount(int noCount) {
-		this.noCount = noCount;
-	}
 	public String getPic() {
 		return pic;
 	}
 	public void setPic(String pic) {
 		this.pic = pic;
 	}
-	private int womanCount;	// 승인된 여자 수
-	private int noCount;		// 거부된 사람 수
-	private String pic;		// 사진파일
-	
-	
-	
-	
-	
 }

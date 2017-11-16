@@ -23,7 +23,7 @@ CREATE TABLE TB_Apply (
 	a_interest VARCHAR2(10), -- 관심사 
 	a_pic VARCHAR2(100) NOT NULL, -- 사진파일 
 	a_tel VARCHAR2(20) NOT NULL, -- 전화번호
-	e_eventdate VARCHAR2(8) NOT NULL, -- 입소날짜
+	e_eventdate VARCHAR2(10) NOT NULL, -- 입소날짜
 	CONSTRAINT acond_ck CHECK(a_cond BETWEEN 1 AND 10),
 	CONSTRAINT amno_fk FOREIGN KEY(m_no) REFERENCES TB_Member(m_no),
 	CONSTRAINT aeeventdate_fk FOREIGN KEY(e_eventdate) REFERENCES TB_Event(e_eventdate)
@@ -46,8 +46,8 @@ CREATE TABLE TB_Guest (
 
 -- 행사일정
 CREATE TABLE TB_Event (
-	e_eventdate VARCHAR2(8) CONSTRAINT eeventdate_pk PRIMARY KEY, -- 행사날짜
-	e_eventend VARCHAR2(8) NOT NULL, -- 행사종료날짜
+	e_eventdate VARCHAR2(10) CONSTRAINT eeventdate_pk PRIMARY KEY, -- 행사날짜
+	e_eventend VARCHAR2(10) NOT NULL, -- 행사종료날짜
 	e_gisoo NUMBER(5) NOT NULL, -- 기수
 	e_loc VARCHAR2(16), -- 대상 거주지역
 	e_age VARCHAR2(10), -- 대상 연령대

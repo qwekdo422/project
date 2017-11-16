@@ -1,6 +1,6 @@
 package com.jjack.web.applicantList.controller;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import com.jjack.web.common.vo.ApplicantListVO;
 import com.jjack.web.util.jMailUtil;
 
@@ -8,10 +8,15 @@ import com.jjack.web.util.jMailUtil;
 @RequestMapping("/applicantList")
 public class ApplicantListController {
 	
-	@RequestMapping("/ListManage")
-	public void ListManage(ApplicantListVO apvo, Boolean mail){
-		//mail : 메일발송완료
+	@RequestMapping("/ManageList")
+	public String ListManage(ApplicantListVO apvo, @RequestParam(value="mail", required=false) Boolean mail){
+		//mail : 메일발송여부
 		
+		
+		
+		
+		
+		return "applicantList/applicantList";
 	}
 	
 	@RequestMapping("/okMailing")

@@ -15,18 +15,15 @@
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
 
-<%-- 캘린더  --%>
+<%-- 일정관리  --%>
 <link rel='stylesheet prefetch' href='../css/houseApply/fullcalendar.css'>
 <link rel="stylesheet" href="../css/scheduler/scheduler.css" />
-
-<!-- 이벤트 종료일 달력으로  표시-->
-<%--
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
- --%>
-
 <script src="../js/scheduler/scheduler.js"></script>
+
+<script type="text/javascript">
+//	행사일정들(json형태)
+var schedule = ${SCHEDULE};
+</script>
 </head>
 
 <body style="margin: 0 auto;">
@@ -54,42 +51,44 @@
 						<h3 class="modal-title" id="lineModalLabel">행사 일정</h3>
 							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
 					</div>
+					<form method="post" id="sFrm" action="">
 					<div class="modal-body">
-						
 			            <!-- content goes here -->
-						<form method="post" id="sFrm" action="">
 			              <div class="form-group">
-			                <label for="startEvent">이벤트 시작일:</label>
-			                <input type="text" class="form-control" id="startEvent" name="startEvent" readonly="readonly">
+			                <label for="gisoo">기수:</label>
+			                <input type="text" class="form-control" id="gisoo" name="gisoo">
 			              </div>
 			              <div class="form-group">
-			                <label for="endEvent">이벤트 종료일:</label>
-			                <input type="date" class="form-control" id="endEvent" name="endEvent" placeholder="이벤트 종료일을 선택하세요.">
+			                <label for="eventdate">이벤트 시작일:</label>
+			                <input type="text" class="form-control" id="eventdate" name="eventdate" readonly="readonly">
+			              </div>
+			              <div class="form-group">
+			                <label for="eventend">이벤트 종료일:</label>
+			                <input type="date" class="form-control" id="eventend" name="eventend" placeholder="이벤트 종료일을 선택하세요.">
+			              </div>
+			              <div class="form-group">
+			                <label for="loc">대상 거주지역:</label>
+			                <input type="text" class="form-control" id="loc" name="loc" placeholder="이벤트 대상 거주지역을 입력하세요.">
+			              </div>
+			              <div class="form-group">
+			                <label for="age">대상 연령대:</label>
+			                <input type="text" class="form-control" id="age" name="age" placeholder="이벤트 대상 연령대를 입력하세요.">
 			              </div>
 			              <div class="form-group">
 			                <label for="title">이벤트 제목:</label>
 			                <input type="text" class="form-control" id="title" name="title" placeholder="이벤트 제목을 입력하세요.">
 			              </div>
 			              <div class="form-group">
-			                <label for="content">이벤트 내용:</label>
-			                <input type="text" class="form-control" id="content" name="content" placeholder="이벤트 내용을 입력하세요.">
+			                <label for="contents">이벤트 내용:</label>
+			                <input type="text" class="form-control" id="contents" name="contents" placeholder="이벤트 내용을 입력하세요.">
 			              </div>
-			            </form>
-			
 					</div>
 					<div class="modal-footer">
-						<div class="btn-group btn-group-justified" role="group" aria-label="group button">
-							<div class="btn-group" role="group">
-								<button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Close</button>
-							</div>
-							<div class="btn-group btn-delete hidden" role="group">
-								<button type="button" id="delImage" class="btn btn-default btn-hover-red" data-dismiss="modal"  role="button">Delete</button>
-							</div>
-							<div class="btn-group" role="group">
-								<button type="button" id="saveImage" class="btn btn-default btn-hover-green" data-action="save" role="button">Save</button>
-							</div>
-						</div>
+						<input type="button" id="wBtn" class="btn btn-info" data-dismiss="modal" value="등록">
+						<input type="button" id="mBtn" class="btn btn-info" data-dismiss="modal" value="수정">
+						<input type="button" id="xBtn" class="btn btn-info" data-dismiss="modal" value="닫기">
 					</div>
+			        </form>
 				</div>
 			  </div>
 			</div>
