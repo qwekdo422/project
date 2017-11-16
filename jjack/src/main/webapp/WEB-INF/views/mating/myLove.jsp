@@ -25,13 +25,13 @@
 		<div class="container row mt-4 mb-5 ml-1">
 			<div class="col-xs-2 mx-auto">
 				<figure class="figure">
-					<img src="../img/guests/03.jpg" class="figure-img img-fluid">
+					<img src="../img/guests/3.jpg" class="figure-img img-fluid">
 					<figcaption class="text-center">여자 1호</figcaption>
 				</figure>
 			</div>
 			<div class="col-xs-2 mx-auto">
 				<figure class="figure">
-					<img src="../img/guests/04.jpg" class="figure-img img-fluid polaroid">
+					<img src="../img/guests/4.jpg" class="figure-img img-fluid polaroid">
 					<figcaption class="text-center">여자 2호</figcaption>
 				</figure>
 			</div>

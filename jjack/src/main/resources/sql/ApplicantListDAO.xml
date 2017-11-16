@@ -2,18 +2,19 @@
 <!DOCTYPE mapper PUBLIC 	"-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace는 연결할 DAO 인터페이스경로.클래스명 -->	
 <mapper namespace="com.jjack.web.applicantList.dao.ApplicantListDAO">
+	<!-- 신청자 리스트 구하기 -->
 	<sql id = "apList">
 		SELECT
 			a.m_no AS mno,
 			a.a_no AS ano,
 			m.m_no AS id,
-			m.name AS name,
 			g.g_nick AS nick,
-			m.m_sexAS sex,
-			m.m_age AS age,
+			m.m_name AS name,
+			m.m_sex AS sex,
+			TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - TO_NUMBER(TO_CHAR(m.m_birth, 'YYYY'))+1 AS age,
 			m.m_loc AS loc,
 			a.a_interest AS interest,
-			a.apdate_AS adate,
+			a.a_apdate AS adate,
 			a.a_tel AS tel,
 			m.m_email AS email,
 			a.a_cond AS thisStep,
@@ -24,11 +25,13 @@
 			TB_Member m,
 			TB_Apply a,
 			TB_Guest g,
-			(SELECT COUNT(a_no) AS acount, a_no FROM TB_APPLY) ac,
-			(SELECT COUNT(g_no) AS gcount, g_no FROM TB_GUEST) gc
+			(SELECT COUNT(a_no) AS acount, m_no FROM TB_Apply GROUP BY m_no) ac,
+			-- 수정해야해 (SELECT COUNT(m_no) AS gcount , m_no FROM TB_Guest gcg, TB_Apply gca GROUP BY m_no HAVING gcg.a_no = gca.a_no) gc
 		WHERE
-			ac.a_no = a.a_no 
-			AND gc.g_no = g.g_no 
+			m.m_no = a.m_no
+			AND a.a_no(+) = g.a_no
+			AND ac.m_no = a.m_no 
+			-- 수정해야해 AND gc.m_no(+) = a.m_no
 			AND a.e_eventdate = #{edate} 
 			AND
 	</sql>
