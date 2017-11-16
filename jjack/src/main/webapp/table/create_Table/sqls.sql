@@ -52,7 +52,8 @@ CREATE TABLE TB_Event (
 	e_loc VARCHAR2(16), -- 대상 거주지역
 	e_age VARCHAR2(10), -- 대상 연령대
 	e_title VARCHAR2(200) NOT NULL, -- 행사 제목
-	e_contents VARCHAR2(2000) -- 행사 내용
+	e_contents VARCHAR2(2000), -- 행사 내용
+	CONSTRAINT egisoo_uk UNIQUE(e_gisoo)
 );
 
 
