@@ -22,7 +22,7 @@
 	</div>
 	<div class="container">
 		<h2 class="mt-4">입소신청자 관리</h2>
-		<form id="gisooFrm" method="GET" action="../../applicantList/applicantList.slm">
+		<form id="gisooFrm" method="GET" action="../../applicantList/changeGisoo.slm">
 			<select class="form-control" name="slctGisoo" id="slctGisoo">
 				<!-- 임시. 동적으로 바꿀 부분 -->
 				<option value="20171111">2017-11-11 : 100기</option>
@@ -265,7 +265,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<form id="sttsFrm" method="POST" action="../../applicantList/applicantList.slm">
+			<form id="sttsFrm" method="POST" action="../../applicantList/.do">
 				<input type="hidden" id="ano" name="ano" value="">
 				<input type="hidden" id="nextProcess" name="nextProcess" value="">
 			</form>

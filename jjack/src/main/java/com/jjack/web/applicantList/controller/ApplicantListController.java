@@ -5,9 +5,18 @@ import com.jjack.web.common.vo.ApplicantListVO;
 import com.jjack.web.util.jMailUtil;
 
 @Controller
+@RequestMapping("/applicantList")
 public class ApplicantListController {
-	@RequestMapping("/applicantList/applicantList")
-	public void ApplicantList(ApplicantListVO apvo){
+	
+	@RequestMapping("/ListManage")
+	public void ListManage(ApplicantListVO apvo, Boolean mail){
+		//mail : 메일발송완료
 		
 	}
+	
+	@RequestMapping("/okMailing")
+	public void okMailing(ApplicantListVO apvo) {
+		
+	}
+	
 }
