@@ -27,7 +27,7 @@ function checkPw(){
 		 var isid=$("#id").val(); 
 		$.ajax({
 			  data :{ pw : inputd, id : isid },//id폼에 입력된 그 데이터를 서버에 전송하기 위해 준비 
-			  url : "../Login/modifyProc.do",
+			  url : "../Login/pwOverlap.do",
 			  dataType : 'json',
 			  type : 'post',
 			  success : function(data){//요청에 성공
@@ -60,6 +60,7 @@ function checkPw(){
 		}
 		if(newPw01 == nowPw){
 			document.getElementById("newpw001").innerHTML="기존의 비밀번호와 동일합니다."; 
+			$("#newpw01").val(""); 
 			return; 
 		}
 
@@ -74,6 +75,18 @@ function checkPw(){
 			document.getElementById("newpw002").innerHTML="새 비밀번호가 다릅니다.";
 		}
 	}
+	
+	$(document).ready(function(){
+		
+		
+		$("#mBtn").click(function(){
+			
+			alert("정보수정이 완료되었습니다."); 
+			
+			$("#Mfrm").submit(); 
+			
+		}); 
+	}); 
 
 </script>
 
@@ -102,12 +115,12 @@ function checkPw(){
 					<td>성별 :</td> 
 					<td>
 					<c:if test="${PVO.sex eq  'M'}">
-					<input type="radio" id="sex" name="sex" value="M"  checked="checked">남자
-					<input type="radio" id="sex"name="sex" value="F" >여자
+					<input type="radio" id="sex" name="sex" value="M"  checked="checked" >남자
+					<input type="radio" id="sex"name="sex" value="F"onclick="return false" >여자
 					</c:if>
 					<c:if test="${PVO.sex eq  'F'}">
-					<input type="radio" id="sex" name="sex" value="M" >남자
-					<input type="radio" id="sex"name="sex" value="F"  checked="checked">여자
+					<input type="radio" id="sex" name="sex" value="M" onclick="return false">남자
+					<input type="radio" id="sex"name="sex" value="F"  checked="checked" >여자
 					</c:if>
 					
 					</td>

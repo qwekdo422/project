@@ -17,6 +17,16 @@ public class ProfileVO {
 	
 	private int no; //myBatis에 의해 추가된 변수임 
 	
+	private String newpw02; //새로운 비밀번호를 update 하기 위해 추가된 변수 
+	
+	
+	public String getNewpw02() {
+		return newpw02;
+	}
+	public void setNewpw02(String newpw02) {
+		this.newpw02 = newpw02;
+	}
+
 	
 	
 	public int getNo() {

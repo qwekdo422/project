@@ -62,7 +62,7 @@
 
 <!-- 비밀번호 일치 불일치 판별 질의문 -->
 <!-- 아이디와 비밀번호가 일치하면 1을 반환한다. -->
-<select id="isPw" resultType="int" parameterType="hashMap">
+<select id="isPw" resultType="int" parameterType="profilevo">
 	SELECT 
 		COUNT(*)                                                                   
 	FROM
@@ -71,10 +71,19 @@
 		 m_id=#{mid} and M_PW=#{mpw}
 </select>
 
-<!-- 회원정보 업데이트 질의문
-<update id="">
-
+<!-- 회원정보 업데이트 질의문 -->
+<update id="memberModifyProc" parameterType="profilevo">
+	UPDATE
+		tb_member
+	SET
+		m_name=#{name}, m_pw=#{newpw02},m_email=#{email}, m_loc=#{loc}
+	WHERE
+		m_no=#{no}
 </update>
- -->
+
+
+
+
+
 
 </mapper>

@@ -126,16 +126,16 @@ public class LoginController {
 	}
 	
 	/**
-	 * 회원정보 수정 실행 함수 
+	 * 회원정보  ajax비밀번호 중복확인 여부 함수 
 	 * 
 	 * @author : 정준일
 	 * @since : 2017. 11.15.
 	 * @param :  VO
 	 * @return : ModelandView
 	 */
-	@RequestMapping("/modifyProc")
+	@RequestMapping("/pwOverlap")
 	@ResponseBody
-	public HashMap modifyProc(@RequestParam("id") String id, @RequestParam("pw") String pw){
+	public HashMap pwOverlap(@RequestParam("id") String id, @RequestParam("pw") String pw){
 			
 		int isPw = lService.isPw(pw, id); //결과값이 1이면 아이디와 비밀번호가 일치하는 것이다. 
 
@@ -148,7 +148,52 @@ public class LoginController {
 			map.put("result", 0); //아이디랑 비밀번호가 일치하지 않는다. 
 			return map;
 		}
-		
 	}
+	
+	/**
+	 * 회원정보  수정함수 
+	 * 
+	 * @author : 정준일
+	 * @since : 2017. 11.16.
+	 * @param :  VO
+	 * @return : ModelandView
+	 */
+	@RequestMapping("/modifyProc")
+	public ModelAndView modifyProc(ProfileVO pVO){
+		
+		
+		lService.memberModifyProc(pVO); 		
+		System.out.println(pVO.getName()+"변경된 이름");
+		System.out.println(pVO.getNewpw02()+"변경된 비번");
+
+		
+		
+		ModelAndView mv= new ModelAndView(); 
+		mv.addObject("PVO", pVO); 
+
+		mv.setViewName("Login/MyPage");
+		return mv ;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

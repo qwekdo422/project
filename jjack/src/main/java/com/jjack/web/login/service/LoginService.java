@@ -49,4 +49,11 @@ public class LoginService {
 		return lDAO.pW(isid); 
 	}
 	
+	//회원정보 수정 처리 함수 
+	public void memberModifyProc(ProfileVO pVO){
+		
+		lDAO.memberModifyProc(pVO);
+		return; 
+	}
+	
 }

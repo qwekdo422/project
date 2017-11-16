@@ -73,11 +73,19 @@ m_joindate date default sysdate
 
 
 
-#회원정보 수정 실행
-요청 http://localhost:8080/jjack/Login/modifyProc.do
+#비밀번호 중복검사
+요청 http://localhost:8080/jjack/Login/pwOverlap.do
 컨트롤러 :com.jjack.web.login.controller
 함수  :	public ModelAndView modifyProc()
 파라메터 :VO
+
+-----------------------------------------------------------------------------------------------------------
+
+#회원정보 수정 실행함수 
+요청 http://localhost:8080/jjack/Login/modifyProc.do
+컨트롤러 :com.jjack.web.login.controller
+함수  :	public ModelAndView modifyProc()
+파라메터 :vo
 
 -----------------------------------------------------------------------------------------------------------
 
