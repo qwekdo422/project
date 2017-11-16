@@ -24,4 +24,15 @@ public class SessionUtil {
 		//	이 함수는 로그인을 했으면 true, 로그인을 안했으면 false로 반환한다.
 		return !isNull;
 	}
+	
+	/**
+	 * 회원번호 반환해주는 함수
+	 * @author : daeo
+	 * @since : 2017. 11. 16.
+	 * @param : session
+	 * @return : int
+	 */
+	public static int getMno(HttpSession session) {
+		return (Integer)session.getAttribute("MNO");
+	}
 }

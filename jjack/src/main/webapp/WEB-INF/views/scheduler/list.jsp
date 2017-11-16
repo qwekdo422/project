@@ -51,12 +51,12 @@ var schedule = ${SCHEDULE};
 						<h3 class="modal-title" id="lineModalLabel">행사 일정</h3>
 							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
 					</div>
-					<form method="post" id="sFrm" action="">
+					<form method="post" id="scheduleFrm" action="">
 					<div class="modal-body">
 			            <!-- content goes here -->
 			              <div class="form-group">
 			                <label for="gisoo">기수:</label>
-			                <input type="text" class="form-control" id="gisoo" name="gisoo">
+			                <input type="text" class="form-control" id="gisoo" name="gisoo" placeholder="기수를 등록하세요.">
 			              </div>
 			              <div class="form-group">
 			                <label for="eventdate">이벤트 시작일:</label>
@@ -84,8 +84,13 @@ var schedule = ${SCHEDULE};
 			              </div>
 					</div>
 					<div class="modal-footer">
+						<%-- 
 						<input type="button" id="wBtn" class="btn btn-info" data-dismiss="modal" value="등록">
 						<input type="button" id="mBtn" class="btn btn-info" data-dismiss="modal" value="수정">
+						<input type="button" id="xBtn" class="btn btn-info" data-dismiss="modal" value="닫기">
+						--%>
+						<input type="button" id="wBtn" class="btn btn-info"  value="등록">
+						<input type="button" id="mBtn" class="btn btn-info" value="수정">
 						<input type="button" id="xBtn" class="btn btn-info" data-dismiss="modal" value="닫기">
 					</div>
 			        </form>

@@ -45,4 +45,15 @@ public class SchedulerService {
 		}
 		return jArr;
 	}
+	
+	/**
+	 * 
+	 * @author : daeo
+	 * @since : 2017. 11. 16.
+	 * @param : SchedulerVO
+	 * @return : void
+	 */
+	public void writeSchedule(SchedulerVO vo) {
+		scDAO.insertSchedule(vo);
+	}
 }

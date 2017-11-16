@@ -30,5 +30,21 @@
 			TB_EVENT	
 	</select>
 	
+	<!-- 행사일정 등록 -->
+	<insert id="insertSchedule" parameterType="SchedulerVO">
+		insert into TB_EVENT(
+			E_EVENTDATE,
+			E_EVENTEND,
+			E_GISOO,
+			E_LOC,
+			E_AGE,
+			E_TITLE,
+			E_CONTENTS	
+		)
+		values (
+			#{EVENTDATE}, #{EVENTEND}, #{GISOO}, #{LOC}, #{AGE}, #{TITLE}, #{CONTENTS}  		
+		)
+	</insert>
+	
 </mapper>
 

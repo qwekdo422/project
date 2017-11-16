@@ -1,9 +1,6 @@
 package com.jjack.web.scheduler.controller;
 
-import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,17 +21,7 @@ public class SchedulerContorller {
 	@Autowired private SchedulerService scService;
 	
 	/**
-	 * 일정 등록
-	 * @author : daeo
-	 * @since : 2017. 11. 15.
-	 * @param : 
-	 * @return : void
-	 */
-	@RequestMapping("/writeForm")
-	public void schduleWriteForm() {}
-	
-	/**
-	 * 일정목록
+	 * 행사일정 목록
 	 * @author : daeo
 	 * @since : 2017. 11. 15.
 	 * @param : 
@@ -44,6 +31,19 @@ public class SchedulerContorller {
 	public String scheduleList(Model model) {
 		model.addAttribute("SCHEDULE", scService.getSchedule());
 		return "scheduler/list";
+	}
+	
+	/**
+	 * 행사일정 등록
+	 * @author : daeo
+	 * @since : 2017. 11. 16.
+	 * @param : SchedulerVO
+	 * @param : gisoo, eventdate, eventend, loc, age, title, contents
+	 * @return : String
+	 */
+	@RequestMapping("/writeProc")
+	public String schduleWriteProc(SchedulerVO vo) {
+		return "redirect:./list.do";
 	}
 	
 	
