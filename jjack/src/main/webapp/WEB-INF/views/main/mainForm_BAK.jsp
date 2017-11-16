@@ -22,18 +22,13 @@
 		<!-- Page Content -->
 			<div class="row">
 
-<!--  
+ 
 				<div class="col-lg-3">
-					<br> <br>
-					<h2 class="my-4">데이트 코스</h2>
-					<div class="list-group">
-						<a href="./datecourse/BasicCourse.do" class="list-group-item">데이트 코스1</a> 
-						<a href="#" class="list-group-item">데이트 코스2</a> 
-						<a href="#"	class="list-group-item">데이트 코스3</a>
-					</div>
-
+					<br>
+					<h5> <실시간 워드 클라우드> </h5> <br>
+                    <img class="card-img-top" src="../img/main/real_word.PNG" alt="">
 				</div>
--->
+
 				<!-- /.col-lg-3 -->
 
 				<div class="col-lg-9">
@@ -48,14 +43,14 @@
 						</ol>
 						<div class="carousel-inner" role="listbox">
 							<div class="carousel-item active">
-								<img class="d-block img-fluid" src="../img/guest1.jpg" alt="First slide">
+								<img class="d-block img-fluid" src="../img/main/guest1.jpg" alt="First slide">
 							</div>
 							<div class="carousel-item">
-								<img class="d-block img-fluid" src="../img/guest2.jpg"
+								<img class="d-block img-fluid" src="../img/main/guest2.jpg"
 									alt="Second slide">
 							</div>
 							<div class="carousel-item">
-								<img class="d-block img-fluid" src="../img/guest3.jpg"
+								<img class="d-block img-fluid" src="../img/main/guest3.jpg"
 									alt="Third slide">
 							</div>
 						</div>
@@ -75,7 +70,7 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top"
-									src="../img/love_word1.PNG" alt=""></a>
+									src="../img/main/love_word1.PNG" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="#">남자1호 ♥ 여자2호</a>
@@ -92,7 +87,7 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top"
-									src="../img/love_word2.PNG" alt=""></a>
+									src="../img/main/love_word2.PNG" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="#">남자3호 ♥ 여자1호</a>
@@ -106,7 +101,7 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top"
-									src="../img/love_word3.PNG" alt=""></a>
+									src="../img/main/love_word3.PNG" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="#">남자5호 ♥ 여자3호</a>
@@ -120,7 +115,7 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top"
-									src="../img/love_word4.PNG" alt=""></a>
+									src="../img/main/love_word4.PNG" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="#">남자5호 ♥ 여자3호</a>
@@ -134,7 +129,7 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top"
-									src="../img/love_word5.PNG" alt=""></a>
+									src="../img/main/love_word5.PNG" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="#">남자4호 ♥ 여자5호</a>
@@ -148,7 +143,7 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top"
-									src="../img/love_word5.PNG" alt=""></a>
+									src="../img/main/love_word5.PNG" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="#">남자1호 ♥ 여자2호</a>
@@ -167,8 +162,11 @@
 
 			</div>
 			<!-- /.row -->
+			<script src="../js/main/jquery.min.js"></script>
+            <script src="../js/main/bootstrap.bundle.min.js"></script>
 		</div>
 		<!--  /.container -->
+		
 	<!---------------------------------------------->
 	<div id="footer">
 		<jsp:include page="../common/footer.jsp" />
