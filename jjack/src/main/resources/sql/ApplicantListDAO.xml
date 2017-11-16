@@ -34,7 +34,7 @@
 	</sql>
 
 	<!-- 승인대기중인 입소신청자들 -->
-	<select id="getWaitList" parameterType="int" resultType="applicantlistvo">
+	<select id="getWaitList" parameterType="string" resultType="applicantlistvo">
 		<include refid="apList"></include>
 			a_cond = 1
 		ORDER BY
@@ -42,7 +42,7 @@
 	</select>
 	
 	<!-- 승인된 남자신청자들 -->
-	<select id="getOkManList" parameterType="int" resultType="applicantlistvo">
+	<select id="getOkManList" parameterType="string" resultType="applicantlistvo">
 		<include refid="apList"></include>
 			a_cond IN (2, 3, 4, 8, 9, 10)
 		AND m_sex = 'M'
@@ -51,7 +51,7 @@
 	</select>
 	
 	<!-- 승인된 여자신청자들 -->
-	<select id="getOkWomanList" parameterType="int" resultType="applicantlistvo">
+	<select id="getOkWomanList" parameterType="string" resultType="applicantlistvo">
 		<include refid="apList"></include>
 			a_cond IN (2, 3, 4, 8, 9, 10)
 		AND m_sex = 'W'
@@ -60,7 +60,7 @@
 	</select>
 	
 	<!-- 승인거부된 신청자들 -->
-	<select id="getDeniedList" parameterType="int" resultType="applicantlistvo">
+	<select id="getDeniedList" parameterType="string" resultType="applicantlistvo">
 		<include refid="apList"></include>
 			a_cond IN (5,6,7)
 		ORDER BY
@@ -68,7 +68,7 @@
 	</select>
 	
 	<!-- 선택한 입소날짜, 기수와 대기자, 승인자, 거부자 수 -->
-	<select id="getApCountVO" parameterType="String" resultType="applicantcountvo">
+	<select id="getApCount" parameterType="string" resultType="applicantcountvo">
 		SELECT
 			e_eventdate AS edate,
 			e_gisoo AS gisoo,
