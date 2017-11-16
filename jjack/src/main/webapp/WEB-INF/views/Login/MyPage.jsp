@@ -14,15 +14,15 @@
 	<script src="../js/alert/alertify.min.js"></script>
 	<%-- ====================== 필수  ======================  --%>
 </head>
+
 <script >
 	$(function(){//select 박스의 데이터 값을 받아와서 다시 넣어주는 함수 
 		var loc ='${PVO.loc}';
 		$("#loc").val(loc);
 });
 
-	function checkPw(){
+function checkPw(){
 
-		
 		var inputd=$("#nowpw").val(); //폼 요소의 데이터를 받아서...
 		 var isid=$("#id").val(); 
 		$.ajax({
@@ -34,7 +34,7 @@
 			  var isPw= data.result;	//이 값이 1 이면 아이디와 비번이 일치한다.   
 			  if(isPw == 1){
 			  	document.getElementById("ispw").innerHTML="비밀번호가 일치합니다. "; 
-				 	$("#pw01").focus();
+				 	$("#newpw01").focus();
 			  	}else{
 				document.getElementById("ispw").innerHTML="비밀번호가 틀립니다."; 
 			  	}
@@ -44,33 +44,37 @@
 			  	 }
 
 		  });//ajax 종료 
-		
+	
 	}//checkPw() 함수 종료 
 	
-	
 	function newPwCheck(){
-	  	  
-	  	  var newPw01=$("#newpw01").val(); 
-	  	  if(newPw01.length <8){
-				document.getElementById("newpw001").innerHTML="비밀번호는 8글자 이상 입력하십시오";
-
-	  	  }else{
-				document.getElementById("newpw001").innerHTML="사용가능한 비밀번호입니다. ";
-
-	  	  }
-	  	  var newPw02=$("#newpw02").val(); 
-	  	  
-	  	  if(newPw01 == newPw02){
-	  		  
-				document.getElementById("newpw002").innerHTML="비밀번호가 일치합니다";
-			
-				
-	  	  }else{
-				document.getElementById("newpw002").innerHTML="비밀번호가 다릅니다. ";
-
-	  	  }
+		var nowPw=$("#nowpw").val(); 
+		var newPw01=$("#newpw01").val(); 
+		var newPw02=$("#newpw02").val(); 
+		
+		if(newPw01.length <8){
+			document.getElementById("newpw001").innerHTML="비밀번호는 8자 이상 등록하십시오."; 
+		}
+		else if(newPw01.length >=8){
+			document.getElementById("newpw001").innerHTML="사용가능한 비밀번호입니다."; 
+		}
+		if(newPw01 == nowPw){
+			document.getElementById("newpw001").innerHTML="기존의 비밀번호와 동일합니다."; 
+			return; 
+		}
 
 	}
+	
+	function newPwCheckCheck(){
+		var newPw01=$("#newpw01").val(); 
+		var newPw02=$("#newpw02").val(); 
+		if(newPw01 == newPw02){
+			document.getElementById("newpw002").innerHTML="새 비밀번호 확인";
+		}else{
+			document.getElementById("newpw002").innerHTML="새 비밀번호가 다릅니다.";
+		}
+	}
+
 </script>
 
 <body style="margin:0 auto;">
@@ -93,7 +97,7 @@
 				<td rowspan="3">비밀번호 변경 </td><td><input type="password" name="nowpw" id="nowpw" oninput="checkPw()" placeholder="사용중인 비밀번호"><span id="ispw" style="color:red"></sapn></td>
 			</tr>
 			<tr><td><input type="password" name="newpw01" id="newpw01" placeholder="새 비밀번호" oninput="newPwCheck()"><span id="newpw001" style="color:red"></sapn></td></tr>
-			<tr><td><input type="password" name="newpw02" id="newpw02" placeholder="새 비밀번호 확인"oninput="newPwCheck()"><span id="newpw002" style="color:red"></td></tr>
+			<tr><td><input type="password" name="newpw02" id="newpw02" placeholder="새 비밀번호 확인"oninput="newPwCheckCheck()"><span id="newpw002" style="color:red"></td></tr>
 			<tr>
 					<td>성별 :</td> 
 					<td>

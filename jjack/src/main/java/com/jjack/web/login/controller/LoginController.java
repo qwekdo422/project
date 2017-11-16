@@ -136,13 +136,8 @@ public class LoginController {
 	@RequestMapping("/modifyProc")
 	@ResponseBody
 	public HashMap modifyProc(@RequestParam("id") String id, @RequestParam("pw") String pw){
-		
-	
+			
 		int isPw = lService.isPw(pw, id); //결과값이 1이면 아이디와 비밀번호가 일치하는 것이다. 
-
-		//System.out.println(pw);
-		//데이터 베이스에서 비밀번호를 받아오자. 
-		
 
 		System.out.println(isPw);
 		HashMap map = new HashMap();
