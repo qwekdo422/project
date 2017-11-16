@@ -11,17 +11,27 @@
 	/* margin-top: 20px; */
 }
 
+/*	이벤트 색깔 */
 .fc-event {
-	background: red;
-	border-color: red;
+	background: #005aff36;
+	border-color: #005aff36;
 }
-
+/*	행사 글씨 */
+.fc-title {
+	color: red;
+}
+/*	날짜 호버효과 */
 .fc-day:hover {
 	background: #CEF6F5;
+}
+/*	행사 호버효과 */
+.fc-event-container:hover {
 	cursor: pointer;
 }
-
-
+/* 모달창 수정버튼 */
+#mBtn{
+	display: none;
+}
 .center {
     margin-top:50px;   
 }
