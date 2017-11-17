@@ -32,7 +32,7 @@
 	
 	<!-- 행사일정 등록 -->
 	<insert id="insertSchedule" parameterType="SchedulerVO">
-		insert into TB_EVENT(
+		INSERT INTO TB_EVENT(
 			E_EVENTDATE,
 			E_EVENTEND,
 			E_GISOO,
@@ -42,9 +42,24 @@
 			E_CONTENTS	
 		)
 		values (
-			#{EVENTDATE}, #{EVENTEND}, #{GISOO}, #{LOC}, #{AGE}, #{TITLE}, #{CONTENTS}  		
+			#{eventdate}, #{eventend}, #{gisoo}, #{loc}, #{age}, #{title}, #{contents}  		
 		)
 	</insert>
+	
+	<!-- 행사일정 수정 -->
+	<update id="updateSchedule" parameterType="SchedulerVO">
+		UPDATE 
+			TB_EVENT
+		SET
+			E_EVENTEND = #{eventend},
+			E_GISOO = #{gisoo}, 
+			E_LOC = #{loc}, 
+			E_AGE = #{age}, 
+			E_TITLE = #{title}, 
+			E_CONTENTS = #{contents}
+		WHERE 
+			E_EVENTDATE = #{eventdate}
+	</update>
 	
 </mapper>
 

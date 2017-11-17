@@ -21,7 +21,7 @@ public class SchedulerService {
 	@Autowired private SchedulerDAO scDAO;
 	
 	/**
-	 * 
+	 * 행사일정 조회
 	 * @author : daeo
 	 * @since : 2017. 11. 16.
 	 * @param : 
@@ -47,7 +47,7 @@ public class SchedulerService {
 	}
 	
 	/**
-	 * 
+	 * 일정등록
 	 * @author : daeo
 	 * @since : 2017. 11. 16.
 	 * @param : SchedulerVO
@@ -55,5 +55,27 @@ public class SchedulerService {
 	 */
 	public void writeSchedule(SchedulerVO vo) {
 		scDAO.insertSchedule(vo);
+	}
+
+	/**
+	 * 일정수정
+	 * @author : daeo
+	 * @since : 2017. 11. 17.
+	 * @param : SchedulerVO
+	 * @return : void
+	 */
+	public void modifySchedule(SchedulerVO vo) {
+		scDAO.updateSchedule(vo);
+	}
+	
+	/**
+	 * 기수 체크
+	 * @author : daeo
+	 * @since : 2017. 11. 17.
+	 * @param : 
+	 * @return : int
+	 */
+	public int gisooCheck(int gisoo) {
+		return scDAO.selectGisoo(gisoo);
 	}
 }
