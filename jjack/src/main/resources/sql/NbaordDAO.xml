@@ -10,7 +10,7 @@
 
 
 
-<!-- 공지사항 글쓰기 질의 명령 -->
+<!-- 공지사항 글쓰기 질의 명령  조회수 증가는 아직 해결 못함 -->
 <!-- 아이디 요소는 그 추상함수이름과 같게 해준다.  -->
 
 	<insert id="nBoardInsert" parameterType="nboardvo"> 
@@ -21,7 +21,66 @@
 					(SELECT 
 						NVL(MAX(n_no),0)+1
 					FROM
-						TB_Notice),SYSDATE,#{ntitle},#{ncontents,jdbcType=CLOB},	(SELECT NVL(MAX(n_hits),0)+1 FROM TB_Notice) , 'Y')
+						TB_Notice),SYSDATE,#{ntitle},#{ncontents,jdbcType=CLOB},'0' , 'Y')
 	</insert>
+	
+	<!-- 게시물 목록보여주기 질의명령 -->
+	<select id="nboardList" resultType="nboardvo" parameterType="string">
+		SELECT 
+			n_no AS nno, n_date AS nday, n_title AS ntitle, n_contents AS ncontents, n_hits AS nhits
+		FROM
+			TB_Notice
+		WHERE
+			n_isshow=#{isShow}
+	</select>
+	
+	<!-- 이미 본 글 번호를 조회할 질의 명령 -->
+	<!-- 즉, 아이디를 넣으면 그 아이디와 그 아이디가 본 게시물의 번호가 결과로 튀어 나온다. -->
+<resultMap id="clobMap" type="hashMap">
+	<result property="nno" column="bh_No" jdbcType="CLOB" javaType="java.lang.String"></result>
+</resultMap>
+<select id="getHitNo" parameterType="string" resultMap="clobMap">
+	SELECT
+		bh_User,
+		bh_No
+	From
+		nboardhit
+	WHERE
+		bh_User=#{user} 
+</select>
+
+
+
+<!-- 기존 방문한 사람을 위한 이미 본 글번호 수정 질의 명령 -->
+	<update id="updateHitNO"	parameterType="hashMap">
+		UPDATE
+			nboardhit
+		SET
+			bh_No = #{no}
+		WHERE
+			bh_User = #{user}
+	</update>
+
+
+<!-- 처음 방문한 사람을 위한 이미 본 글번호 등록 질의 명령 -->
+<insert id="insertHitNo" parameterType="hashMap" >
+		INSERT
+		INTO
+			nboardhit
+		VALUES(#{user}, #{nno})
+</insert>
+
+<!-- 실제 조회수 증가 질의 등록 -->
+<update id="updateHit" parameterType="int">
+	UPDATE
+		TB_Notice
+	SET
+		N_HITS=N_HITS+1
+	WHERE
+		N_NO=#{nno}
+</update> 
+
+
+
 
 </mapper>

@@ -14,6 +14,15 @@
 	<script src="../js/alert/alertify.min.js"></script>
 	<%-- ====================== 필수  ======================  --%>
 </head>
+<script>
+$(document).ready(function(){
+	$("#sBtn").click(function(){
+
+		$(location).attr("href", "../Nboard/NboardForm.do"); 
+	});
+}); 
+
+</script>
 <body style="margin:0 auto;">
    <div id="header">
       <jsp:include page="../common/header.jsp" />
@@ -29,14 +38,20 @@
 						<th>제목</th>
 						<th>조회수</th>
 					</tr>
+					<c:forEach var="data" items="${NLIST}">
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>${data.nno}</td>
+						<td>${data.nday}</td>
+						<td><a href="../Nboard/HitUpProc.do?nno=${data.nno} ">${data.ntitle}</a></td>
+						<td>${data.nhits}</td>
 					</tr>
+					</c:forEach>
 				</table>
-			</form>
-			
+			</form>	
+				<c:if test="${sessionScope.UID eq 'admin'}">
+				<input type="button" value="글쓰기" id="sBtn">
+				</c:if>
+		
 			
 			
 			

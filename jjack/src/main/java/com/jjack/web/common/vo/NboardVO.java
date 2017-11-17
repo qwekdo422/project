@@ -4,14 +4,23 @@ import java.sql.Date;
 
 public class NboardVO {
 
+	
 	private Date nday; 
 	private String ntitle; 
 	private String ncontents; 
-	private int nhis;
+	private int nhits;
 	
 	private String isshow; //myBatis에 의해 추가된 변수 
 	
+	private int nno;  //myBatis에 의해 추가된 변수 
 	
+
+	public int getNno() {
+		return nno;
+	}
+	public void setNno(int nno) {
+		this.nno = nno;
+	}
 	//getter, setter 함수 
 	public String getIsshow() {
 		return isshow;
@@ -38,11 +47,11 @@ public class NboardVO {
 	public void setNcontents(String ncontents) {
 		this.ncontents = ncontents;
 	}
-	public int getNhis() {
-		return nhis;
+	public int getNhits() {
+		return nhits;
 	}
-	public void setNhis(int nhis) {
-		this.nhis = nhis;
+	public void setNhits(int nhis) {
+		this.nhits = nhis;
 	} 
 	
 	

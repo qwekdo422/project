@@ -20,6 +20,7 @@ public class ProfileVO {
 	private String newpw02; //새로운 비밀번호를 update 하기 위해 추가된 변수 
 	
 	
+
 	public String getNewpw02() {
 		return newpw02;
 	}

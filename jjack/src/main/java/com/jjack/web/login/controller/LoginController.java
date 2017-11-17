@@ -49,7 +49,7 @@ public class LoginController {
 	 * @return : ModelandView
 	 */
 	@RequestMapping("/LoginProc")
-	public ModelAndView LoginProc(HttpServletRequest req, HttpSession session){
+	public ModelAndView LoginProc(HttpServletRequest req, HttpSession session, ProfileVO pVO){
 		System.out.println("실행되니?");
 		ModelAndView mv= new ModelAndView(); 
 		String id=req.getParameter("id"); 
@@ -61,7 +61,11 @@ public class LoginController {
 			
 			
 			int mNo=lService.mNo(id);//로그인에 성공하여 그 아이디의 회원 번호를 받았다. 
-			session.setAttribute("MNO", mNo);
+			session.setAttribute("MNO", mNo);//세션을 저장하였다. 
+																							//즉 로그인 했을 때, 즉 세션이 필요한 곳에서
+																							//getAttribute("키값"); 하면 
+																							//그 세션이 있는 곳에서는 저 키값에 저장된 변수를 
+																							//사용할 수 있다. 
 			
 			session.setAttribute("UID", id);//세션을 부여하겠다는 의미이다.
 			mv.addObject("OBJECT",result); 
@@ -165,7 +169,9 @@ public class LoginController {
 	public ModelAndView modifyProc(ProfileVO pVO,HttpSession session ){
 		
 		
-		pVO.setNo((Integer)session.getAttribute("MNO"));
+		pVO.setNo((Integer)session.getAttribute("MNO"));//그 회원의 회원번호를 저장해주었다. 
+		
+		
 		lService.memberModifyProc(pVO); 		
 		System.out.println(pVO.getName()+"변경된 이름");
 		System.out.println(pVO.getNewpw02()+"변경된 비번");
