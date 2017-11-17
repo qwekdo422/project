@@ -4,7 +4,7 @@ $(document).ready(function(){
 	    placement: 'left',
 	});
 	 
-	$("#slctGisoo").change(function(){
-		$("#gisooFrm").submit();
+	$("#edate").change(function(){
+		$("#edateFrm").submit();
 	});
 });

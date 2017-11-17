@@ -3,6 +3,10 @@ import com.jjack.web.common.vo.*;
 import java.util.*;
 
 public interface ApplicantListDAO {
+	// 처음에 보여줄 날짜
+	public String getEdate();
+	// 모든 이벤트날짜, 기수 목록
+	public List<ApplicantCountVO> getEventList();
 	// 입소날짜, 기수, 신청자 수
 	public ApplicantCountVO getApCount(String edate);
 	// 승인대기자 목록

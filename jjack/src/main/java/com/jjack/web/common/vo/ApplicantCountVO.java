@@ -1,7 +1,7 @@
 package com.jjack.web.common.vo;
 
 public class ApplicantCountVO {
-	private String edate;		// 입소일자
+	private String evdate;		// 입소일자
 	private int gisoo;		// 기수
 	private String etitle;		// 행사 제목
 	private int waitCount;		// 승인대기자 수
@@ -10,11 +10,11 @@ public class ApplicantCountVO {
 	private int deniedCount;		// 거부된 사람 수	
 	
 	
-	public String getEdate() {
-		return edate;
+	public String getEvdate() {
+		return evdate;
 	}
-	public void setEdate(String edate) {
-		this.edate = edate;
+	public void setEvdate(String evdate) {
+		this.evdate = evdate;
 	}
 	public int getGisoo() {
 		return gisoo;

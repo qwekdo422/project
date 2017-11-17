@@ -10,6 +10,11 @@ public class ApplicantListService {
 	@Autowired
 	ApplicantListDAO aDAO;
 	
+	// 처음에 보여줄 날짜 구하기
+	public String getEdate() {
+		return aDAO.getEdate();
+	}
+	
 	// 입소날짜, 기수, 신청자 수 구하기
 	public ApplicantCountVO getApCount(String edate) {
 		return aDAO.getApCount(edate);
@@ -33,6 +38,11 @@ public class ApplicantListService {
 	// 거부된 신청자 목록 구하기
 	public List<ApplicantListVO> getDeniedList(String edate) {
 		return aDAO.getDeniedList(edate);
+	}
+	
+	// 모든 이벤트날짜, 기수 목록 구하기
+	public List<ApplicantCountVO> getEventList(){
+		return aDAO.getEventList();
 	}
 	
 }

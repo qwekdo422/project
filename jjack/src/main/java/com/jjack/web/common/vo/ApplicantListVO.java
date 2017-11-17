@@ -1,7 +1,7 @@
 package com.jjack.web.common.vo;
 
 public class ApplicantListVO {
-	private String edate;		// 입소일자
+	private String evdate;		// 입소일자
 	private int gisoo;		// 기수
 
 	private int mno;		// 회원번호
@@ -25,11 +25,11 @@ public class ApplicantListVO {
 	
 	
 	
-	public String getEdate() {
-		return edate;
+	public String getEvdate() {
+		return evdate;
 	}
-	public void setEdate(String edate) {
-		this.edate = edate;
+	public void setEvdate(String evdate) {
+		this.evdate = evdate;
 	}
 	public int getGisoo() {
 		return gisoo;
