@@ -127,25 +127,15 @@
 			e_eventdate = #{edate}
 	</select>
 	
-	<!-- 승인대기 -> 승인 -->
-	<update id="comeProc" parameterType="int">
+	<!-- 상태변경 -->
+	<update id="changeCond" parameterType="hmap">
 		UPDATE
 			TB_Apply
 		SET
-			a_cond=2
+			a_cond=#{nextStep}
 		WHERE
 			a_no=#{ano}
 	</update>
-	
-	<update id="denyProc" parameterType="int">
-		UPDATE
-			TB_Apply
-		SET
-			a_cond=5
-		WHERE
-			a_no=#{ano}
-	</update>
-	
 	
 
 

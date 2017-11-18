@@ -22,7 +22,7 @@
 		<jsp:include page="../common/header.jsp" />
 	</div>
 	<div class="container">
-		<h2 class="mt-4">입소신청자 관리</h2><button id="comeBtn">이건되나</button>
+		<h2 class="mt-4">입소신청자 관리</h2><button id="comeBtn" class="btn">이건되나</button>
 		<form id="edateFrm" method="GET" action="../applicantList/ManageList.do">
 			<select class="form-control" name="edate" id="edate">
 				<c:forEach var="op" items="${elist}">

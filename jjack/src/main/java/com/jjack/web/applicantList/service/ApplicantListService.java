@@ -46,14 +46,10 @@ public class ApplicantListService {
 	}
 	
 	// 신청자 입소승인하기
-	public void comeProc(int ano) {
-		aDAO.comeProc(ano);
+	public void changeCond(int ano, int nextStep) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("ano", ano);
+		map.put("nextStep", nextStep);
+		aDAO.changeCond(map);
 	}
-	
-	// 신청자 입소거부하기
-	public void denyProc(int ano) {
-		aDAO.denyProc(ano);
-	}
-		
-		
 }

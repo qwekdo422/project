@@ -47,11 +47,10 @@ public class ApplicantListController {
 		return mv;
 	}
 	
-	// 입소 승인
-	@RequestMapping("/comeProc")
-	public ModelAndView comeProc(String edate, int ano){
-		System.out.println(ano +" 입소승인");
-		as.comeProc(ano);
+	// 상태 변경
+	@RequestMapping("/changeCond")
+	public ModelAndView comeProc(String edate, int ano, int nextStep){
+		as.changeCond(ano, nextStep);
 		ModelAndView mv = new ModelAndView();
 		RedirectView rv = new RedirectView("ManageList.do");
 		rv.addStaticAttribute("edate", edate);
@@ -59,21 +58,19 @@ public class ApplicantListController {
 		return mv;
 	}
 	
-	// 입소 거부
-	@RequestMapping("/denyProc")
-	public ModelAndView denyProc(String edate, int ano){
-		System.out.println(ano +" 입소거부");
-		as.denyProc(ano);
-		ModelAndView mv = new ModelAndView();
-		RedirectView rv = new RedirectView("ManageList.do");
-		rv.addStaticAttribute("edate", edate);
-		mv.setView(rv);
-		return mv;
-	}
-	
+	// 메일 보내기
 	@RequestMapping("/mailing")
-	public void okMailing(ApplicantListVO apvo) {
-		
+	public ModelAndView mailing(ApplicantListVO apvo, String edate) {
+		System.out.println(apvo.getId() + "에게 메일 발송");
+		jMailUtil.sendMail(apvo);
+		Boolean mail = true;
+		as.changeCond(apvo.getAno(), 3);
+		ModelAndView mv = new ModelAndView();
+		RedirectView rv = new RedirectView("ManageList.do");
+		rv.addStaticAttribute("edate", edate);
+		rv.addStaticAttribute("mail", mail);
+		mv.setView(rv);
+		return mv;
 	}
 	
 }

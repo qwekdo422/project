@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	alert("ready");
+	alert(1);
 	
 	$("[data-toggle='tooltip']").tooltip({
 	    placement: 'left',
