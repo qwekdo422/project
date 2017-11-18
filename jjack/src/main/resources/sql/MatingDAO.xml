@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	"-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace는 연결할 DAO 인터페이스경로.클래스명 -->	
+<mapper namespace="com.jjack.web.applicantList.dao.MatingDAO">
+
+	<sql id="gno">
+		WHERE
+			g_no=(
+				SELECT
+					MAX(g_no)
+				FROM
+					TB_Guest g, TB_Apply a
+				WHERE
+					g.a_no=a.a_no
+					AND a.m_no=#{mno}
+			)
+	
+	</sql>
+
+	<!-- 점심 짝 정보 -->
+	<update id="lunching" parameterType="">
+		UPDATE
+			TB_Guest
+		SET
+			g_lunch=#{one}
+		<include refid="gno" />
+	</update>
+
+	<!-- 선택한 짝 정보 -->
+	<update id="chooseOne" parameterType="hmap">
+		UPDATE
+			TB_Guest
+		SET
+			g_choice=#{one} 
+		<include refid="gno" />
+	</update>
+	
+	<!-- 코스 정보 -->
+
+</mapper>
