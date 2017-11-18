@@ -64,7 +64,7 @@ public class ApplicantListController {
 		System.out.println(apvo.getId() + "에게 메일 발송");
 		jMailUtil.sendMail(apvo);
 		Boolean mail = true;
-		as.changeCond(apvo.getAno(), 3);
+		as.changeCond(apvo.getAno(), apvo.getThisStep()+1);
 		ModelAndView mv = new ModelAndView();
 		RedirectView rv = new RedirectView("ManageList.do");
 		rv.addStaticAttribute("edate", edate);
