@@ -5,3 +5,4 @@ update tb_apply set e_eventdate=(
     FROM (select e_eventdate AS ed, a_no AS ano FROM tb_apply)
     where ano = a_no
 );
+
