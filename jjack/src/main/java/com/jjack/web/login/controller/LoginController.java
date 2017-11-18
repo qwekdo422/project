@@ -94,6 +94,7 @@ public class LoginController {
 	@RequestMapping("/Logout")
 	public ModelAndView LoOutProc(HttpSession session){
 		session.removeAttribute("UID");
+		session.removeAttribute("MNO");
 		RedirectView rv= new RedirectView();
 		ModelAndView mv= new ModelAndView(); 
 		rv.setUrl("../main/mainForm.do"); 
