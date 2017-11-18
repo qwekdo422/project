@@ -61,7 +61,7 @@ public class ApplicantListController {
 	// 메일 보내기
 	@RequestMapping("/mailing")
 	public ModelAndView mailing(ApplicantListVO apvo, String edate) {
-		System.out.println(apvo.getId() + "에게 메일 발송");
+		System.out.println(apvo.getName() + "에게 메일 발송");
 		jMailUtil.sendMail(apvo);
 		Boolean mail = true;
 		as.changeCond(apvo.getAno(), apvo.getThisStep()+1);
@@ -69,6 +69,20 @@ public class ApplicantListController {
 		RedirectView rv = new RedirectView("ManageList.do");
 		rv.addStaticAttribute("edate", edate);
 		rv.addStaticAttribute("mail", mail);
+		mv.setView(rv);
+		return mv;
+	}
+	
+	// 입소
+	@RequestMapping("/newGuest")
+	public ModelAndView newGuest(ApplicantListVO apvo, String edate) {
+		//apvo로 넘길 것 : ano, sex, evdate
+		System.out.println(apvo.getName() + "입소");
+		as.setNewGuest(apvo);
+		as.changeCond(apvo.getAno(), 8);
+		ModelAndView mv = new ModelAndView();
+		RedirectView rv = new RedirectView("ManageList.do");
+		rv.addStaticAttribute("edate", edate);
 		mv.setView(rv);
 		return mv;
 	}

@@ -33,7 +33,7 @@
 		<hr>
 		<div class="container">
 			<c:if test="${numbers.waitCount ne 0}">
-				<h3>승인대기자(${numbers.waitCount})</h3>
+				<h3>승인대기자(${numbers.waitCount})</h3>	<%-- 이거 구할필요 없이 그냥 fn:length 쓰자 --%>
 				<table class="table table-striped table-hover table-bordered mb-4">
 					<thead>
 						<tr>
@@ -66,21 +66,18 @@
 								<td>${wait.acount}</td>
 								<td>${wait.gcount}</td>
 								<td>
-									<button class="btn btn-success btn-sm comeBtn">승인</button>
-									<button class="denyBtn btn btn-danger btn-sm ml-2">거부</button>
+									<form method="POST" action="../applicantList/changeCond.do">
+										<input type="hidden" name="edate" value="${edate}">
+										<input type="hidden" name="ano" value="${wait.ano}">
+										<input type="hidden" name="nextStep" value="">	<%-- 승인버튼이면 2, 거부면 5 --%>
+									</form>
+									<button class="btn btn-success btn-sm comeBtn" class="comeBtn${wait.sex}">승인</button>
+									<button class="denyBtn btn btn-danger btn-sm ml-2" class="denyBtn">거부</button>
 								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-				<form id="comeFrm" method="POST" action="../applicantList/comeProc.do">
-					<input type="hidden" name ="ano" value="">
-					<input type="hidden" name ="edate" value="${edate}">
-				</form>
-				<form id="denyFrm" method="POST" action="../applicantList/denyProc.do">
-					<input type="hidden" name ="ano" value="">
-					<input type="hidden" name ="edate" value="${edate}">
-				</form>
 				<hr>
 			</c:if>
 			<h3>입소 승인 (남자 : ${numbers.manCount})</h3>
@@ -120,7 +117,7 @@
 								<c:if test="${m.thisStep eq 3}">
 									입금대기&nbsp;&nbsp; <button class="btn btn-info btn-sm">입금확인</button>
 								</c:if>
-								<%-- 입금확인. 입소시 nextStep=8 --%>
+								<%-- 입금확인. 입소시 입소 쿼리 돌리고 nextStep=8 --%>
 								<c:if test="${m.thisStep eq 4}">
 									입금확인&nbsp;&nbsp; <button class="btn btn-warning btn-sm">입소확인</button>
 								</c:if>
@@ -128,6 +125,7 @@
 								<c:if test="${m.thisStep eq 8}">
 									입소&nbsp;&nbsp; <button class="btn btn-warning btn-sm">퇴소</button>
 								</c:if>
+<%-- 처리 다 되면 여자에도 복사 --%>
 							</td>
 						</tr>
 					</c:forEach>
@@ -198,7 +196,8 @@
 									연락예정&nbsp;&nbsp; <button class="btn btn-success btn-sm">메일발송</button><button class="btn btn-danger  btn-sm ml-2">거부취소</button>
 								</c:if>
 								<%-- 입소거부 안내메일 발송완료--%>
-								<c:if test="${m.thisStep eq 6}">거부안내 완료</c:if>
+								<%-- 추가합격시 입소대기상태로 --%>
+								<c:if test="${m.thisStep eq 6}">거부안내 완료 <button class="btn btn-danger  btn-sm ml-2">추가합격</button></c:if>
 								<%-- 취소 --%>
 								<c:if test="${m.thisStep eq 7}">취소</c:if>
 							</td>
@@ -206,10 +205,6 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<form id="sttsFrm" method="POST" action="../../applicantList/.do">
-				<input type="hidden" id="ano" name="ano" value="">
-				<input type="hidden" id="nextProcess" name="nextProcess" value="">
-			</form>
 		</div>
 		<!--  /.container -->
 	</div>
