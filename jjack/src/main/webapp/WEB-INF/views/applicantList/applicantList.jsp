@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@
 		<jsp:include page="../common/header.jsp" />
 	</div>
 	<div class="container">
-		<h2 class="mt-4">입소신청자 관리</h2>
+		<h2 class="mt-4">입소신청자 관리</h2><button id="comeBtn">이건되나</button>
 		<form id="edateFrm" method="GET" action="../applicantList/ManageList.do">
 			<select class="form-control" name="edate" id="edate">
 				<c:forEach var="op" items="${elist}">
@@ -50,23 +51,36 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="w" items="${wait}" varStatus="vs">
+						<c:forEach var="wait" items="${wait}" varStatus="vs">
 							<tr>
 								<td>${vs.count}</td>
-								<td>${w.id}</td>
-								<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${w.pic}' />">${w.name}</a></td>
-								<td><c:if test="${w.sex eq 'M'}">남자</c:if><c:if test="${w.sex eq 'F'}">여자</c:if></td>
-								<td>${w.age}</td>
-								<td>${w.loc}</td>
-								<td>${w.interest}</td>
-								<td>${w.adate}</td>
-								<td>${w.acount}</td>
-								<td>${w.gcount}</td>
-								<td><button class="btn btn-success btn-sm">승인</button><button class="btn btn-danger  btn-sm ml-2">거부</button></td>
+								<td>${wait.id}</td>
+								<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${wait.pic}' />">${wait.name}</a></td>
+								<td><c:if test="${wait.sex eq 'M'}">남자</c:if><c:if test="${wait.sex eq 'F'}">여자</c:if></td>
+								<td>${wait.age}</td>
+								<td>${wait.loc}</td>
+								<td>${wait.interest}</td>
+								<td>
+								<c:set var = "adate1" value="${wait.adate}" />
+								<c:set var = "adate2" value="${fn:substring(adate1, 5, 16)}" />${adate2}</td>
+								<td>${wait.acount}</td>
+								<td>${wait.gcount}</td>
+								<td>
+									<button class="btn btn-success btn-sm comeBtn">승인</button>
+									<button class="denyBtn btn btn-danger btn-sm ml-2">거부</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				<form id="comeFrm" method="POST" action="../applicantList/comeProc.do">
+					<input type="hidden" name ="ano" value="">
+					<input type="hidden" name ="edate" value="${edate}">
+				</form>
+				<form id="denyFrm" method="POST" action="../applicantList/denyProc.do">
+					<input type="hidden" name ="ano" value="">
+					<input type="hidden" name ="edate" value="${edate}">
+				</form>
 				<hr>
 			</c:if>
 			<h3>입소 승인 (남자 : ${numbers.manCount})</h3>
@@ -85,16 +99,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="om" items="${okMan}" varStatus="vs">
+					<c:forEach var="m" items="${okMan}" varStatus="vs">
 						<tr>
 							<td>${vs.count}</td>
-							<td>${om.id}</td>
-							<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${om.pic}' />">${om.name}</a></td>
-							<td>${om.age}</td>
-							<td>${om.tel}</td>
-							<td>${om.interest}</td>
-							<td>${om.acount}</td>
-							<td>${om.gcount}</td>
+							<td>${m.id}</td>
+							<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${m.pic}' />">${m.name}</a></td>
+							<td>${m.age}</td>
+							<td>${m.tel}</td>
+							<td>${m.interest}</td>
+							<td>${m.acount}</td>
+							<td>${m.gcount}</td>
 							<td>연락예정&nbsp;&nbsp; <button class="btn btn-success btn-sm">메일발송</button><button class="btn btn-danger  btn-sm ml-2">승인취소</button></td>
 						</tr>
 					</c:forEach>
@@ -115,16 +129,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="ow" items="${okWoman}" varStatus="vs">
+					<c:forEach var="w" items="${okWoman}" varStatus="vs">
 						<tr>
 							<td>${vs.count}</td>
-							<td>${ow.id}</td>
-							<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${ow.pic}' />">${ow.name}</a></td>
-							<td>${ow.age}</td>
-							<td>${ow.tel}</td>
-							<td>${ow.interest}</td>
-							<td>${ow.acount}</td>
-							<td>${ow.gcount}</td>
+							<td>${w.id}</td>
+							<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${w.pic}' />">${w.name}</a></td>
+							<td>${w.age}</td>
+							<td>${w.tel}</td>
+							<td>${w.interest}</td>
+							<td>${w.acount}</td>
+							<td>${w.gcount}</td>
 							<td>연락예정&nbsp;&nbsp; <button class="btn btn-success btn-sm">메일발송</button><button class="btn btn-danger  btn-sm ml-2">승인취소</button></td>
 						</tr>
 					</c:forEach>

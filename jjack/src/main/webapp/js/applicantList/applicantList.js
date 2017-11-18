@@ -1,5 +1,6 @@
 $(document).ready(function(){
-			
+	alert("ready");
+	
 	$("[data-toggle='tooltip']").tooltip({
 	    placement: 'left',
 	});
@@ -7,4 +8,17 @@ $(document).ready(function(){
 	$("#edate").change(function(){
 		$("#edateFrm").submit();
 	});
+
+
+	
+	$("#comeBtn").click(function(){
+		alert(1);
+		//$(this).parent().attr('action', '../applicantList/denyProc.do').submit();
+	});	
+	
+	$(".denyBtn").click(function(){
+		alert(2);
+		//$(this).parent().attr('action', '../applicantList/denyProc.do').submit();
+	});
+	
 });

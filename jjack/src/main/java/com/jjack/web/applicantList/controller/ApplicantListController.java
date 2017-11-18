@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.servlet.view.RedirectView;
 import com.jjack.web.applicantList.service.ApplicantListService;
 import com.jjack.web.common.vo.*;
-import com.jjack.web.util.jMailUtil;
+import com.jjack.web.util.*;
 
 @Controller
 @RequestMapping("/applicantList")
@@ -44,6 +44,30 @@ public class ApplicantListController {
 		mv.addObject("denied", denied);
 		mv.addObject("mail", mail);
 		mv.setViewName("applicantList/applicantList");
+		return mv;
+	}
+	
+	// 입소 승인
+	@RequestMapping("/comeProc")
+	public ModelAndView comeProc(String edate, int ano){
+		System.out.println(ano +" 입소승인");
+		as.comeProc(ano);
+		ModelAndView mv = new ModelAndView();
+		RedirectView rv = new RedirectView("ManageList.do");
+		rv.addStaticAttribute("edate", edate);
+		mv.setView(rv);
+		return mv;
+	}
+	
+	// 입소 거부
+	@RequestMapping("/denyProc")
+	public ModelAndView denyProc(String edate, int ano){
+		System.out.println(ano +" 입소거부");
+		as.denyProc(ano);
+		ModelAndView mv = new ModelAndView();
+		RedirectView rv = new RedirectView("ManageList.do");
+		rv.addStaticAttribute("edate", edate);
+		mv.setView(rv);
 		return mv;
 	}
 	

@@ -17,4 +17,8 @@ public interface ApplicantListDAO {
 	public List<ApplicantListVO> getOkWomanList(String edate);
 	// 거부된 신청자 목록
 	public List<ApplicantListVO> getDeniedList(String edate);
+	// 신청 승인
+	public void comeProc(int ano);
+	// 신청 거부
+	public void denyProc(int ano);
 }

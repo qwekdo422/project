@@ -92,7 +92,7 @@
 	<select id="getOkWomanList" parameterType="string" resultType="applicantlistvo">
 		<include refid="apList"></include>
 			a_cond IN (2, 3, 4, 8, 9, 10)
-		AND m_sex = 'W'
+		AND m_sex = 'F'
 			ORDER BY
 		a_apdate ASC
 	</select>
@@ -117,13 +117,34 @@
 			deniedCount
 		FROM
 			TB_Event,
-			(SELECT COUNT(*) AS waitCount FROM TB_Apply WHERE e_eventdate = #{edate} AND a_cond=1) wc,
-			(SELECT COUNT(*) AS manCount FROM TB_Apply WHERE e_eventdate = #{edate} AND a_cond IN (2, 3, 4, 8, 9, 10)) mc,
-			(SELECT COUNT(*) AS womanCount FROM TB_Apply WHERE e_eventdate = #{edate} AND a_cond IN (2, 3, 4, 8, 9, 10)) fc,
-			(SELECT COUNT(*) AS deniedCount	FROM TB_Apply WHERE e_eventdate = #{edate} AND a_cond IN (5, 6 ,7))  dc
+			(SELECT COUNT(a_no) AS waitCount FROM TB_Apply WHERE e_eventdate = #{edate} AND a_cond=1) wc,
+			(SELECT COUNT(a.a_no) AS manCount FROM TB_Apply a, TB_Member m
+			 WHERE a.e_eventdate = #{edate} AND a_cond IN (2, 3, 4, 8, 9, 10) AND a.m_no=m.m_no AND m.m_sex='M') mc,
+			(SELECT COUNT(a.a_no) AS womanCount FROM TB_Apply a, TB_Member m
+			 WHERE a.e_eventdate = #{edate} AND a_cond IN (2, 3, 4, 8, 9, 10) AND a.m_no=m.m_no AND m.m_sex='F') fc,
+			(SELECT COUNT(a_no) AS deniedCount	FROM TB_Apply WHERE e_eventdate = #{edate} AND a_cond IN (5, 6 ,7))  dc
 		WHERE
 			e_eventdate = #{edate}
 	</select>
+	
+	<!-- 승인대기 -> 승인 -->
+	<update id="comeProc" parameterType="int">
+		UPDATE
+			TB_Apply
+		SET
+			a_cond=2
+		WHERE
+			a_no=#{ano}
+	</update>
+	
+	<update id="denyProc" parameterType="int">
+		UPDATE
+			TB_Apply
+		SET
+			a_cond=5
+		WHERE
+			a_no=#{ano}
+	</update>
 	
 	
 

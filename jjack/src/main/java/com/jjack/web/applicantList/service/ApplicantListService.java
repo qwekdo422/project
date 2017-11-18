@@ -45,4 +45,15 @@ public class ApplicantListService {
 		return aDAO.getEventList();
 	}
 	
+	// 신청자 입소승인하기
+	public void comeProc(int ano) {
+		aDAO.comeProc(ano);
+	}
+	
+	// 신청자 입소거부하기
+	public void denyProc(int ano) {
+		aDAO.denyProc(ano);
+	}
+		
+		
 }
