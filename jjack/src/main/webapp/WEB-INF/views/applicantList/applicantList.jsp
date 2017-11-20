@@ -67,7 +67,7 @@
 							<tr>
 								<td>${vs.count}</td>
 								<td>${wait.id}</td>
-								<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${wait.pic}' />">${wait.name}</a></td>
+								<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../file/${wait.pic}' />">${wait.name}</a></td>
 								<td><c:if test="${wait.sex eq 'M'}">남자</c:if><c:if test="${wait.sex eq 'F'}">여자</c:if></td>
 								<td>${wait.age}</td>
 								<td>${wait.loc}</td>
@@ -113,7 +113,7 @@
 						<tr>
 							<td>${vs.count}</td>
 							<td>${m.id}</td>
-							<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${m.pic}' />">
+							<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../file/${m.pic}' />">
 								<c:if test="${!empty m.nick}">${m.nick}(${m.name})</c:if><c:if test="${empty m.nick}">${m.name}</c:if></a>
 							</td>
 							<td>${m.age}</td>
@@ -200,7 +200,7 @@
 						<tr>
 							<td>${vs.count}</td>
 							<td>${w.id}</td>
-							<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${w.pic}' />">
+							<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../file/${w.pic}' />">
 								<c:if test="${!empty w.nick}">${w.nick}(${w.name})</c:if><c:if test="${empty w.nick}">${w.name}</c:if></a>
 							</td>
 							<td>${w.age}</td>
@@ -290,7 +290,7 @@
 							<tr>
 								<td>-</td>
 								<td>${d.id}</td>
-								<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${d.pic}' />">${d.name}</a></td>
+								<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../file/${d.pic}' />">${d.name}</a></td>
 								<td><c:if test="${d.sex eq 'M'}">남자</c:if><c:if test="${d.sex eq 'F'}">여자</c:if></td>
 								<td>${d.age}</td>
 								<td>${d.tel}</td>
@@ -330,7 +330,7 @@
 							<tr>
 								<td>-</td>
 								<td>${d.id}</td>
-								<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${d.pic}' />">${d.name}</a></td>
+								<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../file/${d.pic}' />">${d.name}</a></td>
 								<td><c:if test="${d.sex eq 'M'}">남자</c:if><c:if test="${d.sex eq 'F'}">여자</c:if></td>
 								<td>${d.age}</td>
 								<td>${d.tel}</td>

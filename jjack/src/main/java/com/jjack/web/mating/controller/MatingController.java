@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/mating")
-public class matingController {
+public class MatingController {
 	@RequestMapping("/forLunch")
 	public void forLunch() {
 		
