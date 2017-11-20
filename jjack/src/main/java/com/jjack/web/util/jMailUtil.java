@@ -49,7 +49,7 @@ public class jMailUtil {
             message.setContent(mailHtml, "text/html; charset=UTF-8");    //메일 내용을 입력
 
             // send the message
-            Transport.send(message); ////전송
+            Transport.send(message); //전송
             System.out.println("message sent successfully...");
         } catch (AddressException e) {
             e.printStackTrace();

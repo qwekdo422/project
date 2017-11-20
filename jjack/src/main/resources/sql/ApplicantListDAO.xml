@@ -92,7 +92,7 @@
 	<select id="getOkWomanList" parameterType="string" resultType="applicantlistvo">
 		<include refid="apList"></include>
 			a_cond IN (2, 3, 4, 8, 9, 10)
-		AND m_sex = 'W'
+		AND m_sex = 'F'
 			ORDER BY
 		a_apdate ASC
 	</select>
@@ -117,17 +117,47 @@
 			deniedCount
 		FROM
 			TB_Event,
-			(SELECT COUNT(*) AS waitCount FROM TB_Apply WHERE e_eventdate = #{edate} AND a_cond=1) wc,
-			(SELECT COUNT(*) AS manCount FROM TB_Apply WHERE e_eventdate = #{edate} AND a_cond IN (2, 3, 4, 8, 9, 10)) mc,
-			(SELECT COUNT(*) AS womanCount FROM TB_Apply WHERE e_eventdate = #{edate} AND a_cond IN (2, 3, 4, 8, 9, 10)) fc,
-			(SELECT COUNT(*) AS deniedCount	FROM TB_Apply WHERE e_eventdate = #{edate} AND a_cond IN (5, 6 ,7))  dc
+			(SELECT COUNT(a_no) AS waitCount FROM TB_Apply WHERE e_eventdate = #{edate} AND a_cond=1) wc,
+			(SELECT COUNT(a.a_no) AS manCount FROM TB_Apply a, TB_Member m
+			 WHERE a.e_eventdate = #{edate} AND a_cond IN (2, 3, 4, 8, 9, 10) AND a.m_no=m.m_no AND m.m_sex='M') mc,
+			(SELECT COUNT(a.a_no) AS womanCount FROM TB_Apply a, TB_Member m
+			 WHERE a.e_eventdate = #{edate} AND a_cond IN (2, 3, 4, 8, 9, 10) AND a.m_no=m.m_no AND m.m_sex='F') fc,
+			(SELECT COUNT(a_no) AS deniedCount	FROM TB_Apply WHERE e_eventdate = #{edate} AND a_cond IN (5, 6 ,7))  dc
 		WHERE
 			e_eventdate = #{edate}
 	</select>
 	
+	<!-- 상태변경 -->
+	<update id="changeCond" parameterType="hashMap">
+		UPDATE
+			TB_Apply
+		SET
+			a_cond=#{nextStep}
+		WHERE
+			a_no=#{ano}
+	</update>
 	
-
-
-	
+	<insert id="newGuest" parameterType="applicantlistvo">
+	<selectKey keyProperty="applicantlistvo" resultType="string" order="BEFORE">
+		SELECT
+			<if test="#{sex}='M'">'남자 '||</if><if test="#{sex}='W'">'여자 '||</if>cnt||'호' AS nick
+		FROM
+			(
+				SELECT
+					COUNT(g_no)+1 AS cnt
+				FROM
+					TB_Guest g, TB_Apply a, TB_Member
+				WHERE
+		    		g.a_no=a.a_no
+		    		AND a.m_no=m.m_no
+					AND e_eventdate=#{evdate}
+					AND m_sex=#{sex}
+			)
+	</selectKey>
+		INSERT INTO
+			TB_Guest(g_no, a_no, g_nick)
+		VALUES
+		((SELECT MAX(g_no)+1 FROM TB_Guest), #{ano}, #{nick})
+	</insert>
 	
 </mapper>

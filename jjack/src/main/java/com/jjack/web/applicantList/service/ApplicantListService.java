@@ -45,4 +45,16 @@ public class ApplicantListService {
 		return aDAO.getEventList();
 	}
 	
+	// 신청자 입소승인하기
+	public void changeCond(int ano, int nextStep) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("ano", ano);
+		map.put("nextStep", nextStep);
+		aDAO.changeCond(map);
+	}
+	
+	// 입소자 정보 추가하기
+	public void setNewGuest(ApplicantListVO apvo) {
+		aDAO.setNewGuest(apvo);
+	}
 }

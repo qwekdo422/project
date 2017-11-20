@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@
 		<jsp:include page="../common/header.jsp" />
 	</div>
 	<div class="container">
-		<h2 class="mt-4">입소신청자 관리</h2>
+		<h2 class="mt-4">입소신청자 관리</h2><button id="comeBtn" class="btn">이건되나</button>
 		<form id="edateFrm" method="GET" action="../applicantList/ManageList.do">
 			<select class="form-control" name="edate" id="edate">
 				<c:forEach var="op" items="${elist}">
@@ -32,7 +33,7 @@
 		<hr>
 		<div class="container">
 			<c:if test="${numbers.waitCount ne 0}">
-				<h3>승인대기자(${numbers.waitCount})</h3>
+				<h3>승인대기자(${numbers.waitCount})</h3>	<%-- 이거 구할필요 없이 그냥 fn:length 쓰자 --%>
 				<table class="table table-striped table-hover table-bordered mb-4">
 					<thead>
 						<tr>
@@ -50,19 +51,29 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="w" items="${wait}" varStatus="vs">
+						<c:forEach var="wait" items="${wait}" varStatus="vs">
 							<tr>
 								<td>${vs.count}</td>
-								<td>${w.id}</td>
-								<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${w.pic}' />">${w.name}</a></td>
-								<td><c:if test="${w.sex eq 'M'}">남자</c:if><c:if test="${w.sex eq 'F'}">여자</c:if></td>
-								<td>${w.age}</td>
-								<td>${w.loc}</td>
-								<td>${w.interest}</td>
-								<td>${w.adate}</td>
-								<td>${w.acount}</td>
-								<td>${w.gcount}</td>
-								<td><button class="btn btn-success btn-sm">승인</button><button class="btn btn-danger  btn-sm ml-2">거부</button></td>
+								<td>${wait.id}</td>
+								<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${wait.pic}' />">${wait.name}</a></td>
+								<td><c:if test="${wait.sex eq 'M'}">남자</c:if><c:if test="${wait.sex eq 'F'}">여자</c:if></td>
+								<td>${wait.age}</td>
+								<td>${wait.loc}</td>
+								<td>${wait.interest}</td>
+								<td>
+								<c:set var = "adate1" value="${wait.adate}" />
+								<c:set var = "adate2" value="${fn:substring(adate1, 5, 16)}" />${adate2}</td>
+								<td>${wait.acount}</td>
+								<td>${wait.gcount}</td>
+								<td>
+									<form method="POST" action="../applicantList/changeCond.do">
+										<input type="hidden" name="edate" value="${edate}">
+										<input type="hidden" name="ano" value="${wait.ano}">
+										<input type="hidden" name="nextStep" value="">	<%-- 승인버튼이면 2, 거부면 5 --%>
+									</form>
+									<button class="btn btn-success btn-sm comeBtn" class="comeBtn${wait.sex}">승인</button>
+									<button class="denyBtn btn btn-danger btn-sm ml-2" class="denyBtn">거부</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -85,17 +96,37 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="om" items="${okMan}" varStatus="vs">
+					<c:forEach var="m" items="${okMan}" varStatus="vs">
 						<tr>
 							<td>${vs.count}</td>
-							<td>${om.id}</td>
-							<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${om.pic}' />">${om.name}</a></td>
-							<td>${om.age}</td>
-							<td>${om.tel}</td>
-							<td>${om.interest}</td>
-							<td>${om.acount}</td>
-							<td>${om.gcount}</td>
-							<td>연락예정&nbsp;&nbsp; <button class="btn btn-success btn-sm">메일발송</button><button class="btn btn-danger  btn-sm ml-2">승인취소</button></td>
+							<td>${m.id}</td>
+							<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${m.pic}' />">
+								<c:if test="${!empty m.nick}">${m.nick}(${m.name})</c:if><c:if test="${empty m.nick}">${m.name}</c:if></a>
+							</td>
+							<td>${m.age}</td>
+							<td>${m.tel}</td>
+							<td>${m.interest}</td>
+							<td>${m.acount}</td>
+							<td>${m.gcount}</td>
+							<td>
+								<%-- 입소승인. 승인취소시 nextStep=1 --%>
+								<c:if test="${m.thisStep eq 2}">
+									연락예정&nbsp;&nbsp; <button class="btn btn-success btn-sm">메일발송</button><button class="btn btn-danger  btn-sm ml-2">승인취소</button>
+								</c:if>
+								<%-- 입금대기. 입금확인시 nextStep=4--%>
+								<c:if test="${m.thisStep eq 3}">
+									입금대기&nbsp;&nbsp; <button class="btn btn-info btn-sm">입금확인</button>
+								</c:if>
+								<%-- 입금확인. 입소시 입소 쿼리 돌리고 nextStep=8 --%>
+								<c:if test="${m.thisStep eq 4}">
+									입금확인&nbsp;&nbsp; <button class="btn btn-warning btn-sm">입소확인</button>
+								</c:if>
+								<%-- 입소 상태. 퇴소시 nextStep=9 --%>
+								<c:if test="${m.thisStep eq 8}">
+									입소&nbsp;&nbsp; <button class="btn btn-warning btn-sm">퇴소</button>
+								</c:if>
+<%-- 처리 다 되면 여자에도 복사 --%>
+							</td>
 						</tr>
 					</c:forEach>
 			</table>
@@ -115,16 +146,18 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="ow" items="${okWoman}" varStatus="vs">
+					<c:forEach var="w" items="${okWoman}" varStatus="vs">
 						<tr>
 							<td>${vs.count}</td>
-							<td>${ow.id}</td>
-							<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${ow.pic}' />">${ow.name}</a></td>
-							<td>${ow.age}</td>
-							<td>${ow.tel}</td>
-							<td>${ow.interest}</td>
-							<td>${ow.acount}</td>
-							<td>${ow.gcount}</td>
+							<td>${w.id}</td>
+							<td><a data-toggle="tooltip" rel="tooltip" data-html="true" title="<img src='../img/guests/${w.pic}' />">
+								<c:if test="${!empty w.nick}">${w.nick}(${m.name})</c:if><c:if test="${empty w.nick}">${w.name}</c:if></a>
+							</td>
+							<td>${w.age}</td>
+							<td>${w.tel}</td>
+							<td>${w.interest}</td>
+							<td>${w.acount}</td>
+							<td>${w.gcount}</td>
 							<td>연락예정&nbsp;&nbsp; <button class="btn btn-success btn-sm">메일발송</button><button class="btn btn-danger  btn-sm ml-2">승인취소</button></td>
 						</tr>
 					</c:forEach>
@@ -157,15 +190,21 @@
 							<td>${d.tel}</td>
 							<td>${d.acount}</td>
 							<td>${d.gcount}</td>
-							<td>연락예정&nbsp;&nbsp; <button class="btn btn-success btn-sm">메일발송</button><button class="btn btn-danger  btn-sm ml-2">거부취소</button></td>
+							<td>
+								<%-- 입소거부. 메일발송시 nextStep=6--%>
+								<c:if test="${m.thisStep eq 5}">
+									연락예정&nbsp;&nbsp; <button class="btn btn-success btn-sm">메일발송</button><button class="btn btn-danger  btn-sm ml-2">거부취소</button>
+								</c:if>
+								<%-- 입소거부 안내메일 발송완료--%>
+								<%-- 추가합격시 입소대기상태로 --%>
+								<c:if test="${m.thisStep eq 6}">거부안내 완료 <button class="btn btn-danger  btn-sm ml-2">추가합격</button></c:if>
+								<%-- 취소 --%>
+								<c:if test="${m.thisStep eq 7}">취소</c:if>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			<form id="sttsFrm" method="POST" action="../../applicantList/.do">
-				<input type="hidden" id="ano" name="ano" value="">
-				<input type="hidden" id="nextProcess" name="nextProcess" value="">
-			</form>
 		</div>
 		<!--  /.container -->
 	</div>

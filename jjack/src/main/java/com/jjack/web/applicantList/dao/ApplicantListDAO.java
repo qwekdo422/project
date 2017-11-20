@@ -17,4 +17,8 @@ public interface ApplicantListDAO {
 	public List<ApplicantListVO> getOkWomanList(String edate);
 	// 거부된 신청자 목록
 	public List<ApplicantListVO> getDeniedList(String edate);
+	// 상태 변경
+	public void changeCond(HashMap<String, Integer> map);
+	// 입소자 정보 추가
+	public void setNewGuest(ApplicantListVO apvo);
 }
