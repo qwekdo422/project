@@ -25,14 +25,30 @@
 	</insert>
 	
 	<!-- 게시물 목록보여주기 질의명령 -->
-	<select id="nboardList" resultType="nboardvo" parameterType="string">
-		SELECT 
-			n_no AS nno, n_date AS nday, n_title AS ntitle, n_contents AS ncontents, n_hits AS nhits
-		FROM
-			TB_Notice
-		WHERE
-			n_isshow=#{isShow}
+	<select id="nboardList" resultType="nboardvo" parameterType="hashMap">
+SELECT
+	realTotal.nno AS nno, realTotal.nday AS nday, realTotal.ntitle AS ntitle, realTotal.ncontents AS ncontents, realTotal.nhits AS nhits
+FROM
+			(SELECT rownum AS rno,
+						total.nno AS nno, total.nday AS nday, total.ntitle AS ntitle, total.ncontents AS ncontents, total.nhits AS nhits
+			FROM
+						(SELECT 
+								n_no AS nno, n_date AS nday, n_title AS ntitle, n_contents AS ncontents, N_HITS AS nhits
+						FROM
+							TB_Notice
+						WHERE
+							n_isshow='Y'
+						ORDER BY
+							n_no DESC) total) realTotal
+WHERE
+	rno BETWEEN #{start} AND #{end}
 	</select>
+	
+	
+	
+	
+	
+	
 	
 	<!-- 이미 본 글 번호를 조회할 질의 명령 -->
 	<!-- 즉, 아이디를 넣으면 그 아이디와 그 아이디가 본 게시물의 번호가 결과로 튀어 나온다. -->
@@ -80,6 +96,31 @@
 		N_NO=#{nno}
 </update> 
 
+
+<!-- 공지사항 게시판 상세보기 질의명령 -->
+<!-- 그 게시물 번호를 이용해서 그 내용을 뽑아내자.-->
+<select id="nBoardView"  resultType="nboardvo" parameterType="int">
+	SELECT 
+		n_no AS nno,
+		n_date AS nday,
+		n_title AS ntitle,
+		n_contents AS ncontents,
+		n_hits AS nhits
+	FROM
+		TB_Notice
+	WHERE
+		n_no =#{nno}
+</select>
+
+<!-- 페이징 처리를 위한 총 레코드 갯수 구하기 질의명령 -->
+<select id="getTotal" resultType="int">
+	SELECT 
+		COUNT(*)
+	FROM
+		TB_Notice
+	WHERE
+		n_IsShow='Y'
+</select>
 
 
 

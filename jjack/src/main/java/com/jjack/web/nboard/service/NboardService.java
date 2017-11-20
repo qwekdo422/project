@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jjack.web.common.vo.NboardVO;
 import com.jjack.web.nboard.dao.NboardDAO;
+import com.jjack.web.util.PageUtil;
 
 @Service
 public class NboardService {
@@ -22,11 +23,23 @@ public class NboardService {
 	}
 	
 	//공지사항 리스트 가져오기 처리 함수 
-	public ArrayList nboardList(String isShow){
+	public ArrayList nboardList(int nowPage, PageUtil pInfo){
+
 		
-		return (ArrayList)nDAO.nboardList(isShow); 
+		int start=(nowPage-1)*(pInfo.getListCount())+1; //시작페이지
+		int end=start+(pInfo.getListCount()-1); //종료위치 
 		
+		
+		HashMap map = new HashMap();
+		map.put("start",start); 
+		map.put("end",end); 
+		ArrayList list= nDAO.nboardList(map); 
+		
+		return list; 
 	}
+
+	
+	
 	
 	//조회수 증가 여부를 판단할 함수 
 	public boolean isHitNow(String id, int nno){
@@ -77,6 +90,21 @@ public class NboardService {
 	public void updateHit(int nno){
 		nDAO.updateHit(nno);
 	}
+	
+	
+	//게시물 상세보기 처리 로직 
+	public NboardVO nBoardView(int nno){
+		return (NboardVO)nDAO.nBoardView(nno);
+	}
+	
+	//페이징 처리를 위한 총 데이터의 갯수 가져오기
+	public int getTotalService(){
+		
+		int total=nDAO.getTotal(); 
+		return total;  
+	}
+	
+	
 	
 	
 	

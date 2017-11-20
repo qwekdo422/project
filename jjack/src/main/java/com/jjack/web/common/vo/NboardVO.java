@@ -14,7 +14,26 @@ public class NboardVO {
 	
 	private int nno;  //myBatis에 의해 추가된 변수 
 	
+	private int rno; //myBatis에 의해 추가된 변수 
+										//DB에 입력한 순서대로 뽑아주게 해주는 변수 rownum
 
+	private int nowPage; //추가된 변수 
+	
+	
+	
+	
+	public int getNowPage() {
+		return nowPage;
+	}
+	public void setNowPage(int nowPage) {
+		this.nowPage = nowPage;
+	}
+	public int getRno() {
+		return rno;
+	}
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
 	public int getNno() {
 		return nno;
 	}

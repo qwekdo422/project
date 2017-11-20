@@ -31,25 +31,20 @@ $(function(){
           sSkinURI: "../se2/SmartEditor2Skin.html",
 		//	스킨에 표시할 내용을 지정한다.
           htParams : {
-				bUseToolbar :true,
+				bUseToolbar :false,
               	bUseVerticalResizer : true,
-        		bUseModeChanger : true
-          }
+      			bUseModeChanger : true
+         }
 	});
 });
 
 $(document).ready(function(){
-	$("#nbtn").click(function(){
-		//스킨을 입혀서 스마트 에디터를 구현한 것이다. 
-		//사용자가 입력한 내용은 스킨에 입력한 것일 뿐 textarea에는 입력되지 않는다. 
-		//처리 방법 : ★★★ 스킨에 있는 내용을 <textarea>에 반영한 후 서브밋 처리를 해야 한다. 
-		oEditors.getById["nbody"].exec("UPDATE_CONTENTS_FIELD", []);
-		var	body = $("#nbody").val();
-		var	ntitle = $("#ntitle").val();
-
-		$("#nfrm").submit(); 
-	
+	$("#lBtn").click(function(){
+		
+		$(location).attr("href", "../Nboard/NboardList.do"); 
 	}); 
+	
+	
 }); 
 </script>
 <body style="margin:0 auto;">
@@ -58,25 +53,29 @@ $(document).ready(function(){
    </div>
       <div class="container">
 		
-		<!-- 글쓰기 폼  -->
-		<form method="post" id="nfrm"action="../Nboard/NboardProc.do">
+
+		<form method="post" id="vfrm"action="">
 	<table width="800"  border="1" align="center">
-		<tr>
-			<td><input type="text" name="ntitle" id="ntitle"  style="width:100%" placeholder="제목을 입력해주세요"></td>
-		</tr>
-		 <tr>
-		 	<td colspan="2"><textarea id="nbody" name="ncontents" row="10" cols="110"  ></textarea></td>
-		 </tr>
-		  <tr>
-				<td colspan="2" align="center">
-					<input type="button" id="nbtn" value="작성완료" >
+			<tr>
+				<td>
+			작성일 :${VO.nday}		 | 		공지 번호 :${VO.nno}		| 	  ${VO.ntitle}
 				</td>
+			  </tr>
+			<tr>
+					<td colspan="2"><textarea id="nbody" name="ncontents" row="10" cols="110"  readonly >${VO.ncontents}</textarea></td>
 			</tr>
 	</table>
+	<div align="center">
+	<input type="button" id="lBtn" value="목록보기" align="right">	
+	<c:if test="${sessionScope.UID eq 'admin'}">
+	<input type="button" id="mtn" value="수정하기" align="right">
+	<input type="button" id="dBtn" value="삭제하기" align="right">
+	</c:if>
+	</div>
 		</form>
-		<!-- 글쓰기 폼 종료   -->
-		
-		
+
+
+			
 		</div>
    <div id="footer">
       <jsp:include page="../common/footer.jsp" />
