@@ -39,12 +39,24 @@ $(function(){
 });
 
 $(document).ready(function(){
-	$("#lBtn").click(function(){
+	$("#lBtn").click(function(){ //목록보기 
 		
 		$(location).attr("href", "../Nboard/NboardList.do"); 
 	}); 
 	
+	$("#dBtn").click(function(){ //삭제하기
+
+		if(confirm("정말로 삭제하시겠습니까?")){
+			$(location).attr("href","../Nboard/NboardDelete.do?nno=${VO.nno}"); 
+			alert("게시물이 삭제되었습니다."); 
+			return; 
+		}else{
+			return; 
+		}
 	
+	
+	
+	}); 
 }); 
 </script>
 <body style="margin:0 auto;">
@@ -68,8 +80,8 @@ $(document).ready(function(){
 	<div align="center">
 	<input type="button" id="lBtn" value="목록보기" align="right">	
 	<c:if test="${sessionScope.UID eq 'admin'}">
+		<input type="button" id="dBtn" value="삭제하기" align="right">
 	<input type="button" id="mtn" value="수정하기" align="right">
-	<input type="button" id="dBtn" value="삭제하기" align="right">
 	</c:if>
 	</div>
 		</form>

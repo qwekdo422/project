@@ -17,11 +17,24 @@ public class NboardVO {
 	private int rno; //myBatis에 의해 추가된 변수 
 										//DB에 입력한 순서대로 뽑아주게 해주는 변수 rownum
 
-	private int nowPage; //추가된 변수 
+	private int nowPage; //페이징 처리를 위해 추가된 변수 
+	private int startPage;
+	private int endPage; 
 	
 	
 	
-	
+	public int getStartPage() {
+		return startPage;
+	}
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+	public int getEndPage() {
+		return endPage;
+	}
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
 	public int getNowPage() {
 		return nowPage;
 	}

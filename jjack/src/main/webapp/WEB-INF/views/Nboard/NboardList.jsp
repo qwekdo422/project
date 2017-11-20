@@ -40,7 +40,7 @@ $(document).ready(function(){
 					<tr>
 						<td>${data.nno}</td>
 						<td>${data.nday}</td>
-						<td><a href="../Nboard/HitUpProc.do?nno=${data.nno}&nowPage=${NPINFO.nowPage}">${data.ntitle}</a></td>
+						<td><a href="../Nboard/HitUpProc.do?nno=${data.nno}&nowPage=${nowPage}">${data.ntitle}</a></td>
 						<td>${data.nhits}</td>
 					</tr>
 					</c:forEach>
@@ -63,25 +63,39 @@ $(document).ready(function(){
 		<tr>
 			<td align="center">
 				<%--	[이전] --%>
+				<c:if test="${nowPage ne 1}"><!--'nowPage=1 이 맨 앞으로' 니까nowPage가 1이 아닐 때만 보이게 하자.  -->
+				<a href="../Nboard/NboardList.do?nowPage=1">[맨 앞으로]</a>
+				</c:if>	
 				
-				<c:if test="${NPINFO.startPage eq 1}">
-					[이전]
+				<c:if test="${startPage eq 1}">
+						<a href="../Nboard/NboardList.do?nowPage=${nowPage -1}">[이전]</a>
 				</c:if>
-				<c:if test="${NPINFO.startPage ne 1}">
-					<a href="">[이전]</a>
+				<c:if test="${startPage ne 1}">
+						<a href="../Nboard/NboardList.do?nowPage=${nowPage -1}">[이전]</a>
 				</c:if>
+
+				<c:if test="${nowPage eq 0}">
+					<c:redirect url="../Nboard/NboardList.do?nowPage=1" />
+				</c:if>
+
+
 				<%--	[1][2][3] --%>
-				<c:forEach var="page" begin="${NPINFO.startPage}" end="${NPINFO.endPage}">
+				<c:forEach var="page" begin="${startPage}" end="${endPage}">
 					<a href="../Nboard/NboardList.do?nowPage=${page}">[${page}]</a>
 				</c:forEach>
-				
+			
 				<%--	[다음] --%>
-				<c:if test="${NPINFO.endPage eq NPINFO.totalPage}">
-					<a href="../Nboard/NboardList.do?nowPage=${NPINFO.nowPage + 1}">[다음]</a>
+				<c:if test="${endPage ne totalPage || nowPage ne totalPage}">
+<%--<c:if test="${endPage ne totalPage || endPage eq totalPage}"> --%>
+					<a href="../Nboard/NboardList.do?nowPage=${nowPage + 1}">[다음]</a>	
 				</c:if>
-				<c:if test="${NPINFO.endPage ne NPINFO.totalPage}">
-					<a href="">[다음]</a>
+
+				<c:if test="${nowPage ne endPage}"><!-- 맨 뒤로 가면 맨뒤로 이 버튼을 없애고 싶다. -->
+					<a href="../Nboard/NboardList.do?nowPage=${totalPage}">[맨 뒤로]</a>	
 				</c:if>
+	
+
+
 			</td>
 		</tr>
 	</table>

@@ -38,14 +38,17 @@ public class NboardController {
 
 		//그 게시물의 모든 데이터를 가지고 와서 
 		int total= nService.getTotalService(); 
-		
+		System.out.println("총 데이터의 갯수"+ total);
+
 		//페이징 처리 해주고 
 		PageUtil pInfo= new PageUtil(nowPage, total); 
-		
 		//페이지에 해당하는 목록만 뽑는다. 
 		ArrayList list=nService.nboardList(nowPage, pInfo); 
 		
-		mv.addObject("NPINFO",pInfo); 
+		mv.addObject("startPage",pInfo.getStartPage());
+		mv.addObject("endPage",pInfo.getEndPage());
+		mv.addObject("nowPage",pInfo.getNowPage()); 
+		mv.addObject("totalPage",pInfo.getTotalPage());
 		mv.addObject("NLIST",list); 
 		mv.setViewName("Nboard/NboardList");
 		return mv; 
@@ -137,6 +140,16 @@ public ModelAndView nboardView(NboardVO nVO , @RequestParam(value="nno") int nno
 
 
 //공지사항 삭제하기
+@RequestMapping("/NboardDelete")
+public ModelAndView nboardDelete(@RequestParam(value="nno") int nno){
+	ModelAndView mv= new ModelAndView(); 
+
+	
+	nService.nBoardDelete(nno);
+	RedirectView rv= new RedirectView("../Nboard/NboardList.do");
+	mv.setView(rv);
+	return mv; 
+}
 
 
 //공지사항 수정하기 

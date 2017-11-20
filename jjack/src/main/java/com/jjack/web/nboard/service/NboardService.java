@@ -105,7 +105,12 @@ public class NboardService {
 	}
 	
 	
-	
+	//공지사항 게시물 삭제 처리 로직 
+	public void nBoardDelete(int nno){
+			
+		nDAO.nBoardDelete(nno);
+		return ; 
+	}
 	
 	
 	

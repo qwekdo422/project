@@ -123,5 +123,26 @@ WHERE
 </select>
 
 
+<!-- 공지사항 게시판 삭제하기 질의문 -->
+<update id="nBoardDelete" parameterType="int" >
+UPDATE 
+	TB_Notice
+SET
+    N_ISSHOW='N'
+WHERE
+    N_NO=#{nno}
+</update>
+
+	
+
+
 
 </mapper>
+
+
+
+
+
+
+
+
