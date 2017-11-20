@@ -27,7 +27,7 @@ public class jMailUtil {
 		});
 		try {
             MimeMessage message = new MimeMessage(session);
-            String fromName = "짝 게스트하우스";
+            String fromName = "LoveChon";
             // 발신자 이름 한글화
             try{
                 from = new InternetAddress(new String(fromName.getBytes("UTF-8"), "8859_1") + "<jjakjjakchon@gmail.com>");
@@ -38,7 +38,7 @@ public class jMailUtil {
             message.setFrom(from);
 
             //수신자메일주소
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("sonullimi@gmail.com")); 
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(apvo.getEmail())); 
 
             // Subject
             message.setSubject("[짝 게스트하우스] 애정촌 입소를 신청해주셔서 감사합니다", "UTF-8"); //메일 제목을 입력

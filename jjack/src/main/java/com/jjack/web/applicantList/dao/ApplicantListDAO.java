@@ -20,5 +20,5 @@ public interface ApplicantListDAO {
 	// 상태 변경
 	public void changeCond(HashMap<String, Integer> map);
 	// 입소자 정보 추가
-	public void setNewGuest(ApplicantListVO apvo);
+	public void newGuest(ApplicantListVO apvo);
 }

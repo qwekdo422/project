@@ -1,5 +1,9 @@
 package com.jjack.web.applicantList.controller;
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.util.*;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +27,10 @@ public class ApplicantListController {
 		if(edate.equals("first")) {
 			edate = as.getEdate();
 		}
+
+		JSONObject jMail = new JSONObject();
+		jMail.put("mail", mail);
+		
 		// 이벤트 날짜, 기수 목록을 구한다
 		List<ApplicantCountVO> elist = as.getEventList();
 		// 날짜, 기수, 신청자 목록 등을 구한다
@@ -32,7 +40,6 @@ public class ApplicantListController {
 		List<ApplicantListVO> okWoman = as.getOkWomanList(edate);
 		List<ApplicantListVO> denied =  as.getDeniedList(edate);
 
-	
 		// 파라미터에 넣고 뷰 호출
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("edate", edate);
@@ -42,7 +49,7 @@ public class ApplicantListController {
 		mv.addObject("okMan", okMan);
 		mv.addObject("okWoman", okWoman);
 		mv.addObject("denied", denied);
-		mv.addObject("mail", mail);
+		mv.addObject("mail", jMail);
 		mv.setViewName("applicantList/applicantList");
 		return mv;
 	}
@@ -76,8 +83,6 @@ public class ApplicantListController {
 	// 입소
 	@RequestMapping("/newGuest")
 	public ModelAndView newGuest(ApplicantListVO apvo, String edate) {
-		//apvo로 넘길 것 : ano, sex, evdate
-		System.out.println(apvo.getName() + "입소");
 		as.setNewGuest(apvo);
 		as.changeCond(apvo.getAno(), 8);
 		ModelAndView mv = new ModelAndView();

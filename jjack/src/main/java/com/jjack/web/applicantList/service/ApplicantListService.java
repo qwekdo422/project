@@ -55,6 +55,6 @@ public class ApplicantListService {
 	
 	// 입소자 정보 추가하기
 	public void setNewGuest(ApplicantListVO apvo) {
-		aDAO.setNewGuest(apvo);
+		aDAO.newGuest(apvo);
 	}
 }
