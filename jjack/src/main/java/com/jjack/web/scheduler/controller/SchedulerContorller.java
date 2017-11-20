@@ -32,7 +32,7 @@ public class SchedulerContorller {
 	public String scheduleList(String status, Model model) {
 		model.addAttribute("SCHEDULE", scService.getSchedule());
 		//	관리자 일정관리
-		if(status == "admin") {
+		if(status == "A") {
 			return "scheduler/list";
 		} else {
 			//	사용자 입소신청
