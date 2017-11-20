@@ -88,6 +88,7 @@ var status = "${status}";
 					<div class="modal-footer">
 						<input type="button" id="wBtn" class="btn btn-info"  value="등록">
 						<input type="button" id="mBtn" class="btn btn-info" value="수정">
+						<input type="button" id="dBtn" class="btn btn-info" value="삭제">
 						<input type="button" id="xBtn" class="btn btn-info" data-dismiss="modal" value="닫기">
 					</div>
 			        </form>

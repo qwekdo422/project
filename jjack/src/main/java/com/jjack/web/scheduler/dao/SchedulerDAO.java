@@ -10,12 +10,16 @@ import com.jjack.web.common.vo.SchedulerVO;
  * @since : 2017. 11. 17.
  */
 public interface SchedulerDAO {
-	//	행사 일정 조회
+	//	행사 일정 조회 (관리자, 사용자)
 	public List<SchedulerVO> selectSchedule();
-	//	행사 등록
+	//	행사 등록 (관리자)
 	public void insertSchedule(SchedulerVO vo);
-	//	행사 수정
+	//	행사 수정 (관리자)
 	public void updateSchedule(SchedulerVO vo);
-	//	기수 조회
+	//	행사 삭제 (관리자)
+	public void deleteSchdule(String eventdate);
+	//	기수 조회 (관리자)
 	public int selectGisoo(int gisoo);
+	//	입소신청(사용자)
+	public void insertApply(SchedulerVO vo);
 }

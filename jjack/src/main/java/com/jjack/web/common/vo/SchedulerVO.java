@@ -1,5 +1,6 @@
 package com.jjack.web.common.vo;
 
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 행사 일정관리VO
@@ -14,8 +15,53 @@ public class SchedulerVO {
 	private String age;			//	대상 연령대
 	private String title;		//	행사제목
 	private String contents;	//	행사내용
-
+	private String name;		//	이름
+	private String tel;			//	연락처
+	private String interest;	//	관심사
+	private MultipartFile file;	//	사진파일
+	private String pic;				//	사진 저장이름
+	
 	public SchedulerVO() {}
+	
+	public String getPic() {
+		return pic;
+	}
+	
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+	
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getInterest() {
+		return interest;
+	}
+
+	public void setInterest(String interest) {
+		this.interest = interest;
+	}
 
 	public String getEventdate() {
 		return eventdate;

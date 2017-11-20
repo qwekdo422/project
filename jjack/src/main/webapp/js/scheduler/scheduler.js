@@ -27,11 +27,11 @@ $(document).ready(function() {
 					top : tableTop,
 					opacity: 1,
 					backgroundColor: "rgba(0, 114, 212, 0.22)",
-				}, 2000, function() {
+				}, 1000, function() {
 					eventView.css("position", "");
 				});
 				
-				
+				$("#eventdate").val(event.start._i);
 				$(".gisoo").text(event.gisoo);	
 				$(".eventDay").text(event.start._i+"~"+event.end._i);	
 				$(".loc").text(event.loc);	
@@ -88,6 +88,17 @@ $(document).ready(function() {
 		completAlert("수정");
 	});
 	
+	//	행사 일정 삭제버튼 이벤트
+	$("#dBtn").click(function(){
+		//	수정완료 alert창을 띄우고 서브밋을 한다.
+		completAlert("삭제");
+	});
+	
+	//	사용자 입소신청 클릭 이벤트
+	$(".applyBtn").click(function(){
+		$("#applyFrm").attr("action", "./applyProc.do").submit();
+	});
+	
 	//	기수 중복체크 (키보드 누를때 마다)
 	$("#gisoo").keyup(function() {
 		var gisoo = $("#gisoo").val();
@@ -116,18 +127,20 @@ $(document).ready(function() {
 
 //	완료알림창을 띄우고 서브밋처리하는 함수
 function completAlert(msg) {
-	alertify.alert(msg+"이 완료되었습니다.", function(){
+	alertify.alert(msg+"이(가) 완료되었습니다.", function(){
 		if(msg == '등록') {
 			$("#scheduleFrm").attr("action", "./writeProc.do").submit();
 		} else if (msg == '수정') {
 			$("#scheduleFrm").attr("action", "./modifyProc.do").submit();
+		} else if (msg == '삭제') {
+			$(location).attr("href", "./delete.do?eventdate="+$(eventdate).val());
 		}
 	});
 }
 
 var eGisoo;	//	행사일정을 클릭했을 때 그 행사일정의 기수를 저장할 변수
 var eStatus = false;	//	일반날짜, 이벤트 일정을 클랙했을 때의 상태값
-// 달력을 클릭 했을때 모달창 처리 함수
+// 달력을 클릭 했을때 모달창 처리 함수 (관리자일 경우만)
 function modalView(target, event) {
 	//	모달창을 띄운다.
 	$(target).attr("data-toggle", "modal");
@@ -148,6 +161,7 @@ function modalView(target, event) {
 		//	행사일정을 클릭 했을 때 등록버튼이 아닌 수정버튼을 보이게 한다.
 		$("#wBtn").css("display", "none");
 		$("#mBtn").css("display", "block");
+		$("#dBtn").css("display", "block");
 		//	이벤트 일정을 클릭했을 때의 상태값
 		eStatus = true;
 	} 
@@ -165,6 +179,7 @@ function modalView(target, event) {
 		$("#eventdate").val($(target).data("date"));
 		// 행사일정이 없을때 등록버튼을 보이게 하고 수정버튼을 숨긴다.
 		$("#mBtn").css("display", "none");
+		$("#dBtn").css("display", "none");
 		$("#wBtn").css("display", "block");
 		//	일반 날자를 클릭했을 때의 상태값
 		eStatus = false;

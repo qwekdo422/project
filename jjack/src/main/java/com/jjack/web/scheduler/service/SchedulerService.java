@@ -2,6 +2,8 @@ package com.jjack.web.scheduler.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.jjack.web.common.vo.SchedulerVO;
 import com.jjack.web.scheduler.dao.SchedulerDAO;
+import com.jjack.web.util.FileUtil;
 
 /**
  * 행사일정관리 서비스
@@ -69,6 +72,17 @@ public class SchedulerService {
 	}
 	
 	/**
+	 * 일정삭제
+	 * @author : daeo
+	 * @since : 2017. 11. 20.
+	 * @param :	eventdate	/	이벤트 시작일 
+	 * @return : void
+	 */
+	public void deleteSchedule(String eventdate) {
+		scDAO.deleteSchdule(eventdate);
+	}
+	
+	/**
 	 * 기수 체크
 	 * @author : daeo
 	 * @since : 2017. 11. 17.
@@ -78,4 +92,15 @@ public class SchedulerService {
 	public int gisooCheck(int gisoo) {
 		return scDAO.selectGisoo(gisoo);
 	}
+
+	public void ghApply(SchedulerVO vo, HttpSession session) {
+		//	파일저장 경로
+		String path = session.getServletContext().getRealPath("file");
+		//	사진원래 이름 추출
+		String fileName = vo.getFile().getOriginalFilename();
+		String saveName = FileUtil.upload(vo.getFile(), fileName, path);
+		vo.setPic(saveName);
+		scDAO.insertApply(vo);
+	}
+	
 }

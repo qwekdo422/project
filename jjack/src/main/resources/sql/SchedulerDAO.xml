@@ -61,6 +61,15 @@
 			E_EVENTDATE = #{eventdate}
 	</update>
 	
+	<!-- 행사일정 삭제 -->
+	<delete id="deleteSchdule" parameterType="string">
+		DELETE
+		FROM
+			TB_EVENT
+		WHERE
+			E_EVENTDATE = #{eventdate}
+	</delete>
+	
 	<!-- 기수 조회 -->
 	<select id="selectGisoo" parameterType="int" resultType="int">
 		SELECT

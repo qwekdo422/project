@@ -91,19 +91,15 @@ var status = "${status}";
 					
 					<div class="form-group">
 				    	<label for="name">이름:</label>
-				    	<input type="text" class="form-control" name="name" value="홍길동" readonly="readonly">
+				    	<input type="text" class="form-control" name="name" value="${member.name}" readonly="readonly">
 				  	</div>
-				  	<div class="form-group">
-				    	<label for="age">나이:</label>
-				    	<input type="text" class="form-control" name="age" value="99" readonly="readonly">
-				 	</div>
 				  	<div class="form-group">
 				    	<label for="tel">연락처:</label>
 				    	<input type="text" class="form-control" name="tel">
 				 	</div>
 				  	<div class="form-group">
-				    	<label for="addr">거주지:</label>
-				    	<input type="text" class="form-control" name="addr">
+				    	<label for="loc">거주지:</label>
+				    	<input type="text" class="form-control" name="loc" value="${member.loc}" readonly>
 				 	</div>
 					<div class="form-group">
 						<label for="interest">관심사:</label> 
@@ -116,8 +112,8 @@ var status = "${status}";
 						</select>
 					</div>
 				  	<div class="form-group">
-				    	<label for="inDay">입소일:</label>
-				    	<input type="text" id="inDay" class="form-control" name="inDay">
+				    	<label for="eventdate">입소일:</label>
+				    	<input type="text" id="eventdate" class="form-control" name="eventdate" placeholder="행사를 클릭하세요." readonly>
 				 	</div>
 				 	<label class="btn btn-info applyBtn">입소신청</label>
 				</form>
