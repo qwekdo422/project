@@ -18,7 +18,7 @@
 	</sql>
 
 	<!-- 점심 짝 정보 -->
-	<update id="lunching" parameterType="">
+	<update id="lunching" parameterType="string">
 		UPDATE
 			TB_Guest
 		SET
@@ -27,7 +27,7 @@
 	</update>
 
 	<!-- 선택한 짝 정보 -->
-	<update id="chooseOne" parameterType="hmap">
+	<update id="chooseOne" parameterType="hashMap">
 		UPDATE
 			TB_Guest
 		SET
