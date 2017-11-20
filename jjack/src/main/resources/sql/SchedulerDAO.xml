@@ -16,7 +16,7 @@
 		<result property="contents" column="e_contents"/>
 	</resultMap>
 	
-	<!-- 행사일정 조회 -->
+	<!-- 행사일정 조회 (관리자, 사용자)-->
 	<select id="selectSchedule" resultMap="scheduleList">
 		SELECT
 			E_EVENTDATE,
@@ -30,7 +30,7 @@
 			TB_EVENT	
 	</select>
 	
-	<!-- 행사일정 등록 -->
+	<!-- 행사일정 등록 (관리자) -->
 	<insert id="insertSchedule" parameterType="SchedulerVO">
 		INSERT INTO TB_EVENT(
 			E_EVENTDATE,
@@ -46,7 +46,7 @@
 		)
 	</insert>
 	
-	<!-- 행사일정 수정 -->
+	<!-- 행사일정 수정 (관리자) -->
 	<update id="updateSchedule" parameterType="SchedulerVO">
 		UPDATE 
 			TB_EVENT
@@ -61,7 +61,7 @@
 			E_EVENTDATE = #{eventdate}
 	</update>
 	
-	<!-- 행사일정 삭제 -->
+	<!-- 행사일정 삭제 (관리자)-->
 	<delete id="deleteSchdule" parameterType="string">
 		DELETE
 		FROM
@@ -70,7 +70,7 @@
 			E_EVENTDATE = #{eventdate}
 	</delete>
 	
-	<!-- 기수 조회 -->
+	<!-- 기수 조회 (관리자)-->
 	<select id="selectGisoo" parameterType="int" resultType="int">
 		SELECT
 			COUNT(*)
@@ -79,5 +79,21 @@
 		WHERE
 			E_GISOO = #{gisoo}
 	</select>
+	
+	<!-- 입소신청 등록 (사용자) -->
+	<insert id="insertApply" parameterType="SchedulerVO">
+		INSERT INTO TB_APPLY (
+			A_NO, 
+			M_NO, 
+			A_INTEREST, 
+			A_PIC, 
+			A_TEL,
+			E_EVENTDATE
+		)
+		VALUES (
+			(SELECT NVL(MAX(A_NO), 0) + 1 FROM TB_APPLY ),
+			 #{mNo}, #{interest}, #{pic}, #{tel}, #{eventdate}  
+		)
+	</insert>
 </mapper>
 

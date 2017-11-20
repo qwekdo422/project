@@ -18,11 +18,22 @@ public class SchedulerVO {
 	private String name;		//	이름
 	private String tel;			//	연락처
 	private String interest;	//	관심사
-	private MultipartFile file;	//	사진파일
-	private String pic;				//	사진 저장이름
+	private MultipartFile imageUpload;	//	사진파일
+	private String pic;			//	사진 저장이름
+	private int mNo;			//	회원번호
 	
 	public SchedulerVO() {}
 	
+	public int getmNo() {
+		return mNo;
+	}
+
+	public void setmNo(int mNo) {
+		this.mNo = mNo;
+	}
+
+
+
 	public String getPic() {
 		return pic;
 	}
@@ -31,14 +42,15 @@ public class SchedulerVO {
 		this.pic = pic;
 	}
 	
-	public MultipartFile getFile() {
-		return file;
-	}
 	
-	public void setFile(MultipartFile file) {
-		this.file = file;
+	public MultipartFile getImageUpload() {
+		return imageUpload;
 	}
-	
+
+	public void setImageUpload(MultipartFile imageUpload) {
+		this.imageUpload = imageUpload;
+	}
+
 	public String getName() {
 		return name;
 	}

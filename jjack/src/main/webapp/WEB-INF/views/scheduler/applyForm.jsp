@@ -103,7 +103,7 @@ var status = "${status}";
 				 	</div>
 					<div class="form-group">
 						<label for="interest">관심사:</label> 
-						<select class="form-control" id="interest">
+						<select class="form-control" id="interest" name="interest">
 							<option value="">== 선택하세요 ==</option>
 							<option value="사진">사진</option>
 							<option value="바다">바다</option>

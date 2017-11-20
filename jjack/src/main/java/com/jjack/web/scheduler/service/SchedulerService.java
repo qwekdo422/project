@@ -92,14 +92,31 @@ public class SchedulerService {
 	public int gisooCheck(int gisoo) {
 		return scDAO.selectGisoo(gisoo);
 	}
-
+	
+	/**
+	 * 입소신청
+	 * @author : daeo
+	 * @since : 2017. 11. 20.
+	 * @param : 
+	 * @return : void
+	 */
 	public void ghApply(SchedulerVO vo, HttpSession session) {
 		//	파일저장 경로
 		String path = session.getServletContext().getRealPath("file");
+		System.out.println(path);
 		//	사진원래 이름 추출
-		String fileName = vo.getFile().getOriginalFilename();
-		String saveName = FileUtil.upload(vo.getFile(), fileName, path);
+		String fileName = vo.getImageUpload().getOriginalFilename();
+		//	사진을 서버에 저장하고 사진의 저장한 이름을 얻어온다.
+		String saveName = FileUtil.upload(vo.getImageUpload(), fileName, path);
+		//	사진 저장이름 저장
 		vo.setPic(saveName);
+		//	회원번호저장
+		vo.setmNo((Integer)session.getAttribute("MNO"));
+		System.out.println("mNo = "+vo.getmNo());
+		System.out.println("interest = "+vo.getInterest());
+		System.out.println("pic = "+vo.getPic());
+		System.out.println("tel = "+vo.getTel());
+		System.out.println("eventdate = "+vo.getEventdate());
 		scDAO.insertApply(vo);
 	}
 	

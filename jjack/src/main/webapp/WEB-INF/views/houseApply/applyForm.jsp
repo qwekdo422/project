@@ -19,7 +19,6 @@
 <link rel='stylesheet prefetch' href='../css/houseApply/fullcalendar.css'>
 <link rel="stylesheet" href="../css/scheduler/scheduler.css" />
 <script src="../js/scheduler/scheduler.js"></script>
-
 <script type="text/javascript">
 //	행사일정들(json형태)
 var schedule = ${SCHEDULE};
@@ -75,8 +74,8 @@ var schedule = ${SCHEDULE};
 				 	</div>
 					<div class="form-group">
 						<label for="interest">관심사:</label> 
-						<select class="form-control" id="interest">
-							<option value="">== 선택하세요 ==</option>
+						<select class="form-control" id="interest" name="interest">
+							<option value="0">== 선택하세요 ==</option>
 							<option value="사진">사진</option>
 							<option value="바다">바다</option>
 							<option value="절경">절경</option>

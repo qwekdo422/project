@@ -99,6 +99,21 @@ $(document).ready(function() {
 		$("#applyFrm").attr("action", "./applyProc.do").submit();
 	});
 	
+	//	사용자 입소신청시 사진업로드
+  	$('#imageUpload').change(function(){
+  		console.log($(this));
+  		readImgUrlAndPreview(this);
+  		function readImgUrlAndPreview(input){
+  			 if (input.files && input.files[0]) {
+  		            var reader = new FileReader();
+  		            reader.onload = function (e) {			            	
+  		                $('#imagePreview').attr('src', e.target.result);
+  							}
+  			          };
+  			          reader.readAsDataURL(input.files[0]);
+  			     }	
+  		});
+	
 	//	기수 중복체크 (키보드 누를때 마다)
 	$("#gisoo").keyup(function() {
 		var gisoo = $("#gisoo").val();
