@@ -29,9 +29,13 @@ public class SchedulerContorller {
 	 * @return : JSONARRY	/	행사일정들을 json형태로 저장
 	 */
 	@RequestMapping("/list")
-	public String scheduleList(Model model) {
+	public String scheduleList(String status, Model model) {
 		model.addAttribute("SCHEDULE", scService.getSchedule());
-		return "scheduler/list";
+		if(status == "admin") {
+			return "scheduler/list";
+		} else {
+			return "scheduler/writeForm";
+		}
 	}
 	
 	/**

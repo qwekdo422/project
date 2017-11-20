@@ -15,22 +15,14 @@
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
 
-<%-- 캘린더  --%>
+<%-- 일정관리  --%>
 <link rel='stylesheet prefetch' href='../css/houseApply/fullcalendar.css'>
-<link rel='stylesheet prefetch' href='../css/houseApply/magnific-popup.css'>
-<link rel="stylesheet" href="../css/houseApply/calendar.css" />
+<link rel="stylesheet" href="../css/scheduler/scheduler.css" />
+<script src="../js/scheduler/scheduler.js"></script>
 
-<%-- 입소신청 폼 --%>
-<link rel="stylesheet" href="../css/houseApply/applyForm.css" />
-<%-- 파일업로드 --%>
-<script src="../js/houseApply/fileUpload.js"></script>
 <script type="text/javascript">
-var tEvent = ${CALENDAR};
-$(document).ready(function(){
-	$("#applyBtn").click(function() {
-		$("#applyFrm").attr("action", "./applyProc.do").submit();
-	});
-});
+//	행사일정들(json형태)
+var schedule = ${SCHEDULE};
 </script>
 </head>
 
@@ -42,20 +34,29 @@ $(document).ready(function(){
 		<div class="container mt-4 lDiv">
 			<div class="row">
 			<%-- ================ 달력 =============== --%>
-				<div class="col-md-8">
+				<div class="col-md-12">
 					<div id='calendar'></div>
 					<script src='../js/houseApply/moment.min.js'></script>
-					<script src='../js/houseApply/fullcalendar-2.1.1.js'></script>
 					<script src='../js/houseApply/fullcalendar.min.js'></script>
-					<script src='../js/houseApply/jquery.magnific-popup.min.js'></script>
-					<script src="../js/scheduler/scheduler.js"></script>
 				</div>
 			<%-- ================ 달력  =============== --%>
-			
 			
 			<%-- ================ 입소신청 =============== --%>
 				<div class="col-md-4 rDiv">
 				<form method="post" id="applyFrm" action="" enctype="multipart/form-data">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+						    	<input type="file" name="imageUpload" id="imageUpload" style="display: none;"/> 
+								<label for="imageUpload" class="btn btn-info">사진등록</label>
+							</div> 
+							<div class="col-md-12">
+								<img src="../img/houseApply/basic.jpg" id="imagePreview" alt="Preview Image" width="180px" height="180px;"/>
+								<label>이미지사진을 1:1 비율로 등록해주세요.</label>
+							</div>
+						</div>
+					</div>
+					
 					<div class="form-group">
 				    	<label for="name">이름:</label>
 				    	<input type="text" class="form-control" name="name" value="홍길동" readonly="readonly">
@@ -92,6 +93,8 @@ $(document).ready(function(){
 			<%-- ================ 입소신청 =============== --%>
 			</div>
 			<%-- row 끝 --%>
+			
+			
 		</div>
 		<%-- 메인 끝 --%>
 

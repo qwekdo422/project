@@ -15,14 +15,23 @@
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
 
-<%-- 일정관리  --%>
+<%-- 캘린더  --%>
 <link rel='stylesheet prefetch' href='../css/houseApply/fullcalendar.css'>
-<link rel="stylesheet" href="../css/scheduler/scheduler.css" />
-<script src="../js/scheduler/scheduler.js"></script>
+<link rel='stylesheet prefetch' href='../css/houseApply/magnific-popup.css'>
+<link rel="stylesheet" href="../css/houseApply/calendar.css" />
 
+<%-- 입소신청 폼 --%>
+<link rel="stylesheet" href="../css/houseApply/applyForm.css" />
+<%-- 파일업로드 --%>
+<script src="../js/houseApply/fileUpload.js"></script>
 <script type="text/javascript">
-//	행사일정들(json형태)
-var schedule = ${SCHEDULE};
+var tEvent = ${CALENDAR};
+console.log(tEvent);
+$(document).ready(function(){
+	$("#applyBtn").click(function() {
+		$("#applyFrm").attr("action", "./applyProc.do").submit();
+	});
+});
 </script>
 </head>
 
@@ -34,12 +43,16 @@ var schedule = ${SCHEDULE};
 		<div class="container mt-4 lDiv">
 			<div class="row">
 			<%-- ================ 달력 =============== --%>
-				<div class="col-md-12">
+				<div class="col-md-8">
 					<div id='calendar'></div>
 					<script src='../js/houseApply/moment.min.js'></script>
+					<script src='../js/houseApply/fullcalendar-2.1.1.js'></script>
 					<script src='../js/houseApply/fullcalendar.min.js'></script>
+					<script src='../js/houseApply/jquery.magnific-popup.min.js'></script>
+					<script src="../js/houseApply/calendar.js"></script>
 				</div>
 			<%-- ================ 달력  =============== --%>
+			
 			
 			<%-- ================ 입소신청 =============== --%>
 				<div class="col-md-4 rDiv">
@@ -93,8 +106,6 @@ var schedule = ${SCHEDULE};
 			<%-- ================ 입소신청 =============== --%>
 			</div>
 			<%-- row 끝 --%>
-			
-			
 		</div>
 		<%-- 메인 끝 --%>
 

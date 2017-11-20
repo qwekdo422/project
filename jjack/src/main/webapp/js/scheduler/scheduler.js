@@ -60,23 +60,33 @@ $(document).ready(function() {
 		validation();
 		//	무결성 검사에 걸렸을 겅우 다음을 수행하지 않고 리턴
 		if(isFlag()) return;
-		//	등록완료 alert창을 띄우고 서브밋을 한다.
+		//	수정완료 alert창을 띄우고 서브밋을 한다.
 		completAlert("수정");
 	});
 	
-	//	기수 중복체크
+	//	기수 중복체크 (키보드 누를때 마다)
 	$("#gisoo").keyup(function() {
-		$.ajax({
-			url: './gisooCheck.do',
-			data: {'gisoo': $("#gisoo").val()},	
-			success: function(data) {
-				console.log(data);
-			},
-			error: function(e) {
-				alert(e+"에러");
-			}
-		})
-	});
+		var gisoo = $("#gisoo").val();
+		if(gisoo != "" && gisoo.length < 9) {
+			$.ajax({
+				url: './gisooCheck.do',
+				data: {'gisoo': gisoo},	
+				success: function(data) {
+					//	data가 1이면  데이터베이스에 기수가 존재한다.
+					if(data == 1 && gisoo != eGisoo) {
+						$("#gisoo").css("color", "red");
+						$("#gisoo").siblings().text("기수: 중복된 기수는 사용할 수 없습니다.").css("color", "red");
+					} else {
+						$("#gisoo").css("color", "black");
+						$("#gisoo").siblings().text("기수:").css("color", "black");
+					}
+				},
+				error: function(e) {
+					alert(e+"에러");
+				}
+			})
+		}
+	}); // 기수종복체크 종료
 	
 });	// document 종료
 
@@ -91,15 +101,19 @@ function completAlert(msg) {
 	});
 }
 
-
+var eGisoo;	//	행사일정을 클릭했을 때 그 행사일정의 기수를 저장할 변수
+var eStatus = false;	//	일반날짜, 이벤트 일정을 클랙했을 때의 상태값
 // 달력을 클릭 했을때 모달창 처리 함수
 function modalView(target, event) {
 	//	모달창을 띄운다.
 	$(target).attr("data-toggle", "modal");
 	$(target).attr("data-target", "#squarespaceModal");
+	$("#gisoo").css("color", "black");
+	$("#gisoo").siblings().text("기수:").css("color", "black");
 	//	행사일정이 존재 할때
 	if(event != null) {
 		//	상세 모달창에 행사관련 정보를 넣어준다.
+		eGisoo = event.gisoo;
 		$("#gisoo").val(event.gisoo);
 		$("#loc").val(event.loc);
 		$("#age").val(event.age);
@@ -110,6 +124,8 @@ function modalView(target, event) {
 		//	행사일정을 클릭 했을 때 등록버튼이 아닌 수정버튼을 보이게 한다.
 		$("#wBtn").css("display", "none");
 		$("#mBtn").css("display", "block");
+		//	이벤트 일정을 클릭했을 때의 상태값
+		eStatus = true;
 	} 
 	
 	//	행사일정이 없을 때
@@ -126,6 +142,8 @@ function modalView(target, event) {
 		// 행사일정이 없을때 등록버튼을 보이게 하고 수정버튼을 숨긴다.
 		$("#mBtn").css("display", "none");
 		$("#wBtn").css("display", "block");
+		//	일반 날자를 클릭했을 때의 상태값
+		eStatus = false;
 	}
 }
 

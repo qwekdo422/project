@@ -61,5 +61,14 @@
 			E_EVENTDATE = #{eventdate}
 	</update>
 	
+	<!-- 기수 조회 -->
+	<select id="selectGisoo" parameterType="int" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			TB_EVENT
+		WHERE
+			E_GISOO = #{gisoo}
+	</select>
 </mapper>
 
