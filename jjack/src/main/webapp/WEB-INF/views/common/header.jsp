@@ -31,13 +31,13 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="../intro/thisGHis.do" id="mIntro">소개</a></li>
 					<c:if test="${sessionScope.MNO ne 0}">
-					<li class="nav-item"><a class="nav-link" href="../houseApply/applyForm.do" id="mHouseApply">애정촌입소신청</a></li>
+					<li class="nav-item"><a class="nav-link" href="../scheduler/list.do?status=U" id="mHouseApply">애정촌입소신청</a></li>
 					</c:if>
 <%-- admin 계정이면 볼 수 있는  메뉴. 작업하기 귀찮으니까 주석처리해둠
 					<c:if test="${sessionScope.MNO eq 0}">
  --%>
 					<li class="nav-item"><a class="nav-link" href="../applicantList/ManageList.do">[신청자]</a></li>
-					<li class="nav-item"><a class="nav-link" href="../scheduler/list.do">[일정관리]</a></li>
+					<li class="nav-item"><a class="nav-link" href="../scheduler/list.do?status=A">[일정관리]</a></li>
 <%-- 
 					</c:if>
  --%>
