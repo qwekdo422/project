@@ -16,6 +16,11 @@
 <%-- ====================== 필수  ======================  --%>
 <link rel="stylesheet" href="../css/applicantList/applicantList.css" />
 <script src="../js/applicantList/applicantList.js"></script>
+<script>
+var a = ${mail};
+var len = ${fn:length(okMan)};
+console.log(len);
+</script>
 </head>
 <body style="margin:0 auto;">
 	<div id="header">
