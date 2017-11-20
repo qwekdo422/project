@@ -9,6 +9,14 @@
 	/* max-width: 900px; */
 	margin: 0 auto;
 	/* margin-top: 20px; */
+	background: #f0fff1;
+}
+
+table#eventView{
+	/* background: #f0fff1; */
+}
+.col-md-4.rDiv {
+	background: beige;
 }
 
 /*	이벤트 색깔 */

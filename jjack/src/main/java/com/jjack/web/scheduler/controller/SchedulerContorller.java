@@ -25,17 +25,19 @@ public class SchedulerContorller {
 	 * 행사일정 목록
 	 * @author : daeo
 	 * @since : 2017. 11. 15.
-	 * @param : 
+	 * @param : status / 관리자:ADMIN, 사용자:USER
 	 * @return : JSONARRY	/	행사일정들을 json형태로 저장
 	 */
 	@RequestMapping("/list")
 	public String scheduleList(String status, Model model) {
 		model.addAttribute("SCHEDULE", scService.getSchedule());
 		//	관리자 일정관리
-		if(status == "A") {
+		if(status.equals("A")) {
+			model.addAttribute("status", "ADMIN");
 			return "scheduler/list";
 		} else {
 			//	사용자 입소신청
+			model.addAttribute("status", "USER");
 			return "scheduler/writeForm";
 		}
 	}

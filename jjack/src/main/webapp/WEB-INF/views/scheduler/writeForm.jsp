@@ -19,10 +19,12 @@
 <link rel='stylesheet prefetch' href='../css/houseApply/fullcalendar.css'>
 <link rel="stylesheet" href="../css/scheduler/scheduler.css" />
 <script src="../js/scheduler/scheduler.js"></script>
-
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 //	행사일정들(json형태)
 var schedule = ${SCHEDULE};
+var status = "${status}";
 </script>
 </head>
 
@@ -32,13 +34,43 @@ var schedule = ${SCHEDULE};
 			<jsp:include page="../common/header.jsp" />
 		</div>
 		<div class="container mt-4 lDiv">
+			<%-- 관리자, 사용자 여부(관리자: ADMIN, 사용자: USER)  --%>
 			<div class="row">
 			<%-- ================ 달력 =============== --%>
-				<div class="col-md-12">
+				<div class="col-md-8">
 					<div id='calendar'></div>
 					<script src='../js/houseApply/moment.min.js'></script>
 					<script src='../js/houseApply/fullcalendar.min.js'></script>
+					<br>
+					<%-- 행사일정 상세정보 입소신청자만 보인다. --%>
+					<c:if test="${status eq 'USER'}">
+					<div class="container" style="padding: 0 0;">
+						<table class="table table-bordered" id="eventView">
+							<tr>
+								<th>기수</th>
+								<td class="gisoo"></td>
+								<th>행사 기간</th>
+								<td class="eventDay"></td>
+							</tr>
+							<tr>
+								<th>대상지역</th>
+								<td class="loc"></td>
+								<th>대상 연령대</th>
+								<td class="age"></td>
+							</tr>
+							<tr>
+								<th>행사 제목</th>
+								<td class="title" colspan="4"></td>
+							</tr>
+							<tr>
+								<th>행사 내용</th>
+								<td class="contents" colspan="4"></td>
+							</tr>
+						</table>
+					</div>
+					</c:if>
 				</div>
+				
 			<%-- ================ 달력  =============== --%>
 			
 			<%-- ================ 입소신청 =============== --%>

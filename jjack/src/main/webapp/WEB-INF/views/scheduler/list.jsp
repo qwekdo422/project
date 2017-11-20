@@ -23,6 +23,7 @@
 <script type="text/javascript">
 //	행사일정들(json형태)
 var schedule = ${SCHEDULE};
+var status = "${status}";
 </script>
 </head>
 
@@ -32,6 +33,7 @@ var schedule = ${SCHEDULE};
 			<jsp:include page="../common/header.jsp" />
 		</div>
 		<div class="container mt-4 lDiv">
+			<%-- 관리자, 사용자 여부(관리자: ADMIN, 사용자: USER)  --%>
 			<div class="row">
 			<%-- ================ 달력 =============== --%>
 				<div class="col-md-12">

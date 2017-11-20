@@ -8,13 +8,37 @@ $(document).ready(function() {
 			center : 'title',
 			right : 'month,agendaWeek,agendaDay'
 		},
-		defaultDate : /*'2017-11-08'*/date.getTime(),
+		defaultDate : date.getTime(),
 		editable : true,
 		eventLimit : true, // allow "more" link when too many events
 		events : schedule,
 		eventClick : function(event) {
-			//	행사일정을 클릭했을 때 모달창 출력(일정 상세정보)
-			modalView(this, event);
+			//	관리자 일경우
+			if(status == 'ADMIN'){
+				//	행사일정을 클릭했을 때 모달창 출력(일정 상세정보)
+				modalView(this, event);
+			} else {
+				//	사용자일 경우
+				var eventView = $("#eventView"); 
+				eventView.css("position", "absolute");
+				eventView.css("opacity", "0");
+				var tableTop = $(eventView).parent().position().top;
+				eventView.css("top", "-200px").animate({
+					top : tableTop,
+					opacity: 1,
+					backgroundColor: "rgba(0, 114, 212, 0.22)",
+				}, 2000, function() {
+					eventView.css("position", "");
+				});
+				
+				
+				$(".gisoo").text(event.gisoo);	
+				$(".eventDay").text(event.start._i+"~"+event.end._i);	
+				$(".loc").text(event.loc);	
+				$(".age").text(event.age);	
+				$(".title").text(event.title);	
+				$(".contents").text(event.contents);	
+			}
 			
 		} // 이벤트 클릭했을 때 작업 종료
 	
