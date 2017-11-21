@@ -1,19 +1,22 @@
 package com.jjack.web.mating.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.jjack.web.mating.service.MatingService;
 /**
  * 
  * @author 최정규
  * @since : 2017. 11. 10.	
  */
 @Controller
-@RequestMapping("/mating")
 public class MatingController {
-	@RequestMapping("/forLunch")
+	public MatingService ms;
+	
+	@RequestMapping("/mating/forLunch")
 	public void forLunch() {
-		
+
 	}
-	@RequestMapping("/Arrows")
+	@RequestMapping("/mating/Arrows")
 	public void Arrows() {
 		
 	}

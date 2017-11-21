@@ -4,17 +4,16 @@
 <mapper namespace="com.jjack.web.applicantList.dao.MatingDAO">
 
 	<sql id="gno">
-		WHERE
-			g_no=(
-				SELECT
-					MAX(g_no)
-				FROM
-					TB_Guest g, TB_Apply a
-				WHERE
-					g.a_no=a.a_no
-					AND a.m_no=#{mno}
-			)
-	
+		g_no=(
+			SELECT
+				g_no
+			FROM
+				TB_Guest g, TB_Apply a
+			WHERE
+				g.a_no=a.a_no
+				AND a.m_no=#{mno}
+				AND a.eventdate=#{edate}
+		)
 	</sql>
 
 	<!-- 점심 짝 정보 -->
@@ -23,8 +22,22 @@
 			TB_Guest
 		SET
 			g_lunch=#{one}
-		<include refid="gno" />
+		WHERE
+			<include refid="gno" />
 	</update>
+
+	<!-- 짝선택시의 이성 목록 -->
+	<select id="getLoves" parameterType="matingvo" resultType="matingvo">
+		SELECT
+			a.a_pic AS pic
+			g.g_nick AS nick,
+		FROM
+			TB_Guest g, TB_Apply a
+		WHERE
+			a.a_no = g.a_no
+			AND sex=<if test="sex eq 'Male'">'F'</if><if test="sex eq 'Female'">'M'</if>
+			AND 
+	</select>
 
 	<!-- 선택한 짝 정보 -->
 	<update id="chooseOne" parameterType="hashMap">
@@ -32,7 +45,8 @@
 			TB_Guest
 		SET
 			g_choice=#{one} 
-		<include refid="gno" />
+		WHERE
+			<include refid="gno" />
 	</update>
 	
 	<!-- 코스 정보 -->
