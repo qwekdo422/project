@@ -3,20 +3,122 @@
 <!-- namespace는 연결할 DAO 인터페이스경로.클래스명 -->	
 <mapper namespace="com.jjack.web.mating.dao.MatingDAO">
 
-	<sql id="gno">
-		g_no=(
-			SELECT
-				g_no
-			FROM
-				TB_Guest g, TB_Apply a
-			WHERE
-				g.a_no=a.a_no
-				AND a.m_no=#{mno}
-				AND a.eventdate=#{edate}
-		)
-	</sql>
 
-	<!-- 입소자 정보 가져오기 -->
+<!-- 사랑의 작대기 -->
+
+	<!-- 전부 선택을 완료했는지 알아보기 -->
+	<select id="cClear" parameterType="string" resultType="matingvo">
+		SELECT
+			tCount,	-- 입소자 수
+			cCount	-- 선택을 완료한 사람 수
+		FROM
+			(SELECT COUNT(g_no) AS tCount FROM TB_Guest g, TB_Apply a 
+				WHERE g.a_no=a.a_no AND e_eventdate = #{edate}) wc,
+			 (SELECT COUNT(g_no) AS cCount FROM TB_Guest g, TB_Apply a 
+			 	WHERE g.a_no=a.a_no AND g_choice IS NOT NULL AND e_eventdate = #{edate}) cc
+	</select>
+	
+	<!-- 커플정보(코스) 업데이트 -->
+	<!-- 관심사 -->
+	<update id="coupling" parameterType="string">
+		UPDATE
+			TB_Guest
+		SET
+			g_course=(
+				
+			
+			)
+		
+	
+	</update>
+
+
+	<!-- 처음에 보여줄 날짜 정하기. 입소자가 있는 기수로 -->
+	<select id="getEdate" resultType="string">
+		SELECT
+			MAX(e_eventdate) KEEP(DENSE_RANK FIRST ORDER BY e_eventdate DESC) AS edate
+		FROM
+			TB_Apply
+		WHERE
+    		a_cond=8
+	</select>
+
+	<!-- 모든 날짜, 기수 정보 가져오기 -->
+	<select id="getEventList" resultType="matingvo">
+		SELECT
+			e_eventdate AS evdate,
+			e_gisoo AS gisoo
+		FROM
+			TB_Event
+		ORDER BY
+			e_eventdate DESC
+	</select>
+
+	<!-- 입소자 수 구하기. 전체수, 선택완료한 사람수, 남자수, 여자수, 커플수 구하기 -->
+	<!-- 여기서 위에 구한건 다시 구하지말고 따로 세팅하자 -->
+	<select id="getNumbers" resultType="matingvo" parameterType="string">
+		SELECT
+			tCount,	-- 입소자 수
+			cCount,	-- 선택을 완료한 사람 수
+			mCount,	-- 입소한 남자 수
+			fCount,	-- 입소한 여자 수
+			cpCount	-- 커플된 사람 수. /2할까?
+		FROM
+			(SELECT COUNT(g_no) AS tCount FROM TB_Guest g, TB_Apply a 
+				WHERE g.a_no=a.a_no AND e_eventdate = #{edate}) wc,
+			(SELECT COUNT(g.g_no) AS mCount FROM TB_Guest g, TB_Apply a, TB_Member m
+				WHERE a.e_eventdate = #{edate} AND a.m_no=m.m_no AND g.a_no=a.a_no AND m.m_sex='M') mc,
+			(SELECT COUNT(g.g_no) AS fCount FROM TB_Guest g, TB_Apply a, TB_Member m
+				WHERE a.e_eventdate = #{edate} AND a.m_no=m.m_no AND g.a_no=a.a_no AND m.m_sex='F') fc,
+			 (SELECT COUNT(g_no) AS cCount FROM TB_Guest g, TB_Apply a 
+			 	WHERE g.a_no=a.a_no AND g_choice IS NOT NULL AND e_eventdate = #{edate}) cc,
+			 (SELECT COUNT(g_course) AS cpCount FROM TB_Guest g, TB_Apply a 
+			 	WHERE g.a_no=a.a_no AND  g_course IN ('A', 'B', 'C') AND e_eventdate = #{edate}) cpc
+	</select>
+
+	<!-- 사랑의 작대기용 입소자(남자) 리스트 가져오기 -->
+	<select id="MenForArrows" parameterType="string" resultType="matingvo">
+		SELECT
+			g.g_no AS gno,
+			g.g_choice AS myLove,
+			a.a_pic AS pic,
+			g.g_nick AS nick,
+			g.g_course AS coupling
+		FROM
+			TB_Guest g, TB_Apply a, TB_Member m
+		WHERE
+			g.a_no=a.a_no
+			AND a.m_no=m.m_no
+			AND m.m_sex = 'M'
+			AND a.e_eventdate=#{edate}
+		ORDER BY
+			g.g_nick
+	</select>
+
+	<!-- 사랑의 작대기용 입소자(여자) 리스트 가져오기 -->
+	<select id="WomenForArrows" parameterType="string" resultType="matingvo">
+		SELECT
+			g.g_no AS gno,
+			g.g_choice AS myLove,
+			a.a_pic AS pic,
+			g.g_nick AS nick,
+			g.g_course AS coupling
+		FROM
+			TB_Guest g, TB_Apply a, TB_Member m
+		WHERE
+			g.a_no=a.a_no
+			AND a.m_no=m.m_no
+			AND m.m_sex = 'F'
+			AND a.e_eventdate=#{edate}
+		ORDER BY
+			g.g_nick
+	</select>
+
+
+
+<!-- 짝선택 -->
+
+	<!-- 짝선택용 입소자 정보 가져오기 -->
 	<select id="getInfo" parameterType="int" resultType="matingvo">
 		SELECT
 			m.m_no AS mno,
@@ -34,7 +136,7 @@
 			AND a.a_cond = 8
 			AND m.m_no=#{mno}
 	</select>
-
+		
 	<!-- 점심 짝 정보 -->
 	<update id="lunching" parameterType="string">
 		UPDATE
@@ -42,7 +144,16 @@
 		SET
 			g_lunch=#{one}
 		WHERE
-			<include refid="gno" />
+			g_no=(
+				SELECT
+					g_no
+				FROM
+					TB_Guest g, TB_Apply a
+				WHERE
+					g.a_no=a.a_no
+					AND a.m_no=#{mno}
+					AND a.eventdate=#{edate}
+			)
 	</update>
 
 	<!-- 짝 선택시의 이성 목록 -->

@@ -3,11 +3,11 @@ figure {
 	display:inline-block;
 }
 figure img {
-	width:180px;
-	height:180px;
+	width:105px;
+	height:105px;
 	border-bottom:1px solid black;
-	cursor:default;
+	cursor:pointer;
 }
 figcaption {
-	cursor:default;
+	cursor:pointer;
 }

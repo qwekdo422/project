@@ -14,8 +14,70 @@ public class MatingVO {
 	private String sex;
 	private String osex;
 	private String pic;
+	private String course;
+	private String interest;
+	private String coupling;	// 커플이 됐는지 여부. Y N
+	
+	private int mCount;	// 입소한 남자 수
+	private int fCound;		// 입소한 여자 수
+	private int cCount;		// 선택을 완료한 사람 수
+	private int tCount;		// 전체 사람 수
+	private int cpCount;	// 커플 수
 	
 	
+	public String getInterest() {
+		return interest;
+	}
+	public void setInterest(String interest) {
+		// 관심사에 따라서 setInterest
+		this.interest = interest;
+	}
+	public String getCoupling() {
+		return coupling;
+	}
+	public void setCoupling(String coupling) {
+		if (coupling.equals("S")) {
+			this.coupling = "N"; 
+		} else {
+			this.coupling = "Y";
+		}
+	}
+	public int getCpCount() {
+		return cpCount;
+	}
+	public void setCpCount(int cpCount) {
+		this.cpCount = cpCount;
+	}
+	public String getCourse() {
+		return course;
+	}
+	public void setCourse(String course) {
+		this.course = course;
+	}
+	public int getmCount() {
+		return mCount;
+	}
+	public void setmCount(int mCount) {
+		this.mCount = mCount;
+	}
+	public int getfCound() {
+		return fCound;
+	}
+	public void setfCound(int fCound) {
+		this.fCound = fCound;
+	}
+	public int getcCount() {
+		return cCount;
+	}
+	public void setcCount(int cCount) {
+		this.cCount = cCount;
+	}
+	public int gettCount() {
+		return tCount;
+	}
+	public void settCount(int tCount) {
+		this.tCount = tCount;
+	}
 	public String getPic() {
 		return pic;
 	}

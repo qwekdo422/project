@@ -25,6 +25,21 @@ public class MatingController {
 	}
 	@RequestMapping("/Arrows")
 	public void Arrows() {
+		// choice가 다 채워졌는가
+		
+		
+		
+		
+		// 뷰에 필요한 것 : 내 gno, choice, 전체 사람수
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 	@RequestMapping("/myLove")
