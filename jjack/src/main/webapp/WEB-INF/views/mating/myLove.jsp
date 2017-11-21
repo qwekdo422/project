@@ -23,46 +23,28 @@
 	<div class="container">
 		<h2 class="text-center mt-4">♥ 한명을 선택하세요</h2>
 		<div class="container row mt-4 mb-5 ml-1">
-			<div class="col-xs-2 mx-auto">
-				<figure class="figure">
-					<img src="../file/3.jpg" class="figure-img img-fluid">
-					<figcaption class="text-center">여자 1호</figcaption>
-				</figure>
-			</div>
-			<div class="col-xs-2 mx-auto">
-				<figure class="figure">
-					<img src="../file/4.jpg" class="figure-img img-fluid polaroid">
-					<figcaption class="text-center">여자 2호</figcaption>
-				</figure>
-			</div>
-			<div class="col-xs-2 mx-auto">
-				<figure class="figure">
-					<img src="../file/12.jpg" class="figure-img img-fluid polaroid">
-					<figcaption class="text-center">여자 3호</figcaption>
-				</figure>
-			</div>
-			<div class="col-xs-2 mx-auto">
-				<figure class="figure">
-					<img src="../file/14.jpg" class="figure-img img-fluid polaroid">
-					<figcaption class="text-center">여자 4호</figcaption>
-				</figure>
-			</div>
-			<div class="col-xs-2 mx-auto">
-				<figure class="figure">
-					<img src="../file/16.jpg" class="figure-img img-fluid polaroid">
-					<figcaption class="text-center">여자 5호</figcaption>
-				</figure>
-			</div>
+			<c:forEach var="p" items="${myLoves}">
+				<div class="col-xs-2 mx-auto">
+					<figure class="figure">
+						<img src="../file/${p.pic}" class="figure-img img-fluid">
+						<figcaption class="text-center">${p.nick}</figcaption>
+						<input type="hidden" class="gno" value="${p.gno}">
+					</figure>
+				</div>
+			</c:forEach>
 		</div>
 		<!-- 사진들 div 종료 -->
 		
 		<div class="row container mb-5" id="btns">
 			<div class="col-md-6 mx-auto">
-				<button class="btn btn-danger btn-lg col-lg-7 mr-5 mb-3" id="chooseBtn">선택</button>
-				<button class="btn btn-info btn-lg col-lg-3 mb-3" id="noBtn">변경</button>
+				<form method="POST" action="../mating/Loved.do">
+					<input type="hidden" name="myGno" value="${myGno}">
+					<input type="hidden" name="myLove" id="myLove" value="">
+					<input type="button" class="btn btn-danger btn-lg col-lg-7 mr-5 mb-3" id="chooseBtn" value="선택">
+					<input type="button" class="btn btn-info btn-lg col-lg-3 mb-3" id="noBtn" value="변경">
+				</form>
 			</div>
 		</div>
-		<form method="POST" action="../mating/Loved.do"><input type="hidden" name="choose" id="choose" value=""></form>
 	</div>
 	<!--  /.container -->
 	<!---------------------------------------------->

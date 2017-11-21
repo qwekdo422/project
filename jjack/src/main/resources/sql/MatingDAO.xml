@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC 	"-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace는 연결할 DAO 인터페이스경로.클래스명 -->	
-<mapper namespace="com.jjack.web.applicantList.dao.MatingDAO">
+<mapper namespace="com.jjack.web.mating.dao.MatingDAO">
 
 	<sql id="gno">
 		g_no=(
@@ -16,6 +16,25 @@
 		)
 	</sql>
 
+	<!-- 입소자 정보 가져오기 -->
+	<select id="getInfo" parameterType="int" resultType="matingvo">
+		SELECT
+			m.m_no AS mno,
+			a.a_no AS ano,
+			g.g_no AS gno,
+			m.m_sex AS sex,
+			g.g_nick AS nick,
+			a.e_eventdate AS evdate,
+			NVL(g.g_choice, -1) AS myLove
+		FROM
+			TB_Member m, TB_Apply a, TB_Guest g
+		WHERE
+			a.m_no=m.m_no
+			AND g.a_no=a.a_no
+			AND a.a_cond = 8
+			AND m.m_no=#{mno}
+	</select>
+
 	<!-- 점심 짝 정보 -->
 	<update id="lunching" parameterType="string">
 		UPDATE
@@ -26,27 +45,44 @@
 			<include refid="gno" />
 	</update>
 
-	<!-- 짝선택시의 이성 목록 -->
-	<select id="getLoves" parameterType="matingvo" resultType="matingvo">
+	<!-- 짝 선택시의 이성 목록 -->
+	<select id="getLoves" parameterType="MatingVO" resultType="MatingVO">
 		SELECT
-			a.a_pic AS pic
-			g.g_nick AS nick,
+			g.g_no AS gno,
+			a.a_pic AS pic,
+			g.g_nick AS nick
 		FROM
-			TB_Guest g, TB_Apply a
+			TB_Guest g, TB_Apply a, TB_Member m
 		WHERE
 			a.a_no = g.a_no
-			AND sex=<if test="sex eq 'Male'">'F'</if><if test="sex eq 'Female'">'M'</if>
-			AND 
+			AND m.m_no = a.m_no
+			AND m.m_sex=#{osex}
+			AND a.e_eventdate = #{evdate}
+		ORDER BY
+			g_nick
 	</select>
 
-	<!-- 선택한 짝 정보 -->
+	<!-- 선택한 짝 알아내기 -->
+	<select id="whoIsMyChoice" parameterType="int" resultType="MatingVO">
+		SELECT
+			lvg.g_nick AS nick,
+			lva.a_pic AS pic
+		FROM
+			TB_Guest myg, TB_Guest lvg, TB_Apply lva
+		WHERE
+			myg.g_no=#{myGno}
+			AND lva.a_no = lvg.a_no
+			AND myg.g_choice=lvg.g_no
+	</select>
+
+	<!-- 선택한 짝 등록 -->
 	<update id="chooseOne" parameterType="hashMap">
 		UPDATE
 			TB_Guest
 		SET
-			g_choice=#{one} 
+			g_choice=#{myLove} 
 		WHERE
-			<include refid="gno" />
+			g_no=#{myGno}
 	</update>
 	
 	<!-- 코스 정보 -->

@@ -4,13 +4,15 @@ public class MatingVO {
 	private int gno;
 	private int ano;
 	private int mno;
+	private String id;
 	private int lunchP;
 	private int myLove;
 	private String nick;
-	private String edate;
+	private String edate;		// 관리자 등이 보기 위해 선택하는 날짜
 	private int gisoo;
-	private int evdate;
+	private String evdate;	// 입소자가 입소한 날짜
 	private String sex;
+	private String osex;
 	private String pic;
 	
 	
@@ -24,7 +26,14 @@ public class MatingVO {
 		return sex;
 	}
 	public void setSex(String sex) {
+		osex = (sex.equals("M")) ? "F":"M";
 		this.sex = sex;
+	}
+	public String getOsex() {
+		return osex;
+	}
+	public void setOsex(String osex) {
+		this.osex = osex;
 	}
 	public int getGno() {
 		return gno;
@@ -74,11 +83,16 @@ public class MatingVO {
 	public void setGisoo(int gisoo) {
 		this.gisoo = gisoo;
 	}
-	public int getEvdate() {
+	public String getEvdate() {
 		return evdate;
 	}
-	public void setEvdate(int evdate) {
+	public void setEvdate(String evdate) {
 		this.evdate = evdate;
 	}
-	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 }
