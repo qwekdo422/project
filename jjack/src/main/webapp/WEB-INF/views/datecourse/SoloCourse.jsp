@@ -19,11 +19,19 @@ $(function(){
 	$('.btn_map_hide').click(function(){
 		$('#map_frame').hide();
 	});
+	$('.btn_food_hide').click(function(){
+		$('#food_frame').hide();
+	});
 });
 
 function open_in_frame(url){
 	$('#map_frame').show();
 	$('#map_frame').attr('src',url);
+}
+
+function open_food_frame(url){
+	$('#food_frame').show();
+	$('#food_frame').attr('src',url);
 }
 
 
@@ -45,7 +53,7 @@ function open_in_frame(url){
 				<h4><솔로 코스></h4><br />
 				<div class="list-group text-right">
 					<a href="../datecourse/BasicCourse.do" class="list-group-item">기본 코스</a> 
-					<a href="../datecourse/CoupleCourse.do" class="list-group-item">커풀 데이트 코스</a>
+					<a href="../datecourse/CoupleCourse.do" class="list-group-item">커플 데이트 코스</a>
 					<a href="../datecourse/SoloCourse.do" class="list-group-item">솔로 코스</a>
 				</div>
 			</div>
@@ -56,35 +64,39 @@ function open_in_frame(url){
 				<br>
 				<br>
 				<button class="btn_map_hide" style="padding:3px">지도 감추기</button>
-				<br>
-				<br>
-				
-			    <!-- East -->
-			    <button name="btn_course2" type="button" onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1BNuO89rX3ZuCRCND53p6Gj9pTnzBSzCU")'
-				
+				<button class="btn_food_hide" style="padding:3px">맛집 숨김</button>
+					
+			    <!-- East(course3)-->
+			    <button name="btn_course3" type="button" onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1GnxvmgmYl8gshefdlNAZpwCTpZ1ML4-w");
+			    	open_food_frame("https://m.store.naver.com/restaurants/listMap?back=false&category=%EB%B6%84%EC%8B%9D&menu=6&query=%EC%A0%9C%EC%A3%BC%EB%8F%84%20%EB%A7%9B%EC%A7%91&searchQuery=%EC%A0%9C%EC%A3%BC%EB%8F%84%20%EB%A7%9B%EC%A7%91&level=bottom&age=30")'
 				style="width:143px;height:134px;cursor:hand;filter:alpha(opacity=50);opacity:0.6;
 				position:absolute;top:72px;left:63px;z-index:10"></button>
 
-				<!-- West -->
-				<button name="btn_course1" type="button" onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1gmRk5fN8ji0Id50mbmBvnJAb-gDjWycZ")'
+				<!-- West(course1) -->
+				<button name="btn_course1" type="button" onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1gmRk5fN8ji0Id50mbmBvnJAb-gDjWycZ");
+					open_food_frame("https://m.store.naver.com/restaurants/listMap?back=false&category=%EB%B6%84%EC%8B%9D&menu=6&query=%EC%A0%9C%EC%A3%BC%EB%8F%84%20%EB%A7%9B%EC%A7%91&searchQuery=%EC%A0%9C%EC%A3%BC%EB%8F%84%20%EB%A7%9B%EC%A7%91&level=bottom&age=30")'
 				style="width:180px;height:186px;cursor:hand;filter:alpha(opacity=50);opacity:0.6;
 				position:absolute;top:23px;left:295px;z-index:10"></button>
 				
-				<!-- South -->
-				<button name="btn_course3" type="button" onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1lswMDVaMXFXlxcd0ZNlPWhZIXrAeSxBt")'
+				<!-- South(course2) -->
+				<button name="btn_course2" type="button" onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1lswMDVaMXFXlxcd0ZNlPWhZIXrAeSxBt");
+					open_food_frame("https://m.store.naver.com/restaurants/listMap?back=false&category=%EB%B6%84%EC%8B%9D&menu=6&query=%EC%A0%9C%EC%A3%BC%EB%8F%84%20%EB%A7%9B%EC%A7%91&searchQuery=%EC%A0%9C%EC%A3%BC%EB%8F%84%20%EB%A7%9B%EC%A7%91&level=bottom&age=30")'
 				style="width:210px;height:80px;cursor:hand;filter:alpha(opacity=50);opacity:0.6;
 				position:absolute;top:276px;left:118px;z-index:10"></button>
 
-
+                <br>
+                <br>
 			    <div class="map_class">
 				  <iframe id ="map_frame" width="480" height="400"></iframe>
+				</div>
+				<br>
+				<div class="food_class">
+				  <iframe id ="food_frame" width="480" height="400"></iframe>
 				</div>
 				
 				<br>
 				<br>
-				<br>
-				<br>
-				<br>
+
 			
 			
 			</div>

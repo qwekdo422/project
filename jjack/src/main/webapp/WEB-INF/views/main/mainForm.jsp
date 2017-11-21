@@ -165,7 +165,7 @@ $(function(){
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top"
-									src="../img/main/love_word5.jpg" alt=""></a>
+									src="../img/main/love_word6.jpg" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="#">남자1호 ♥ 여자2호</a>
