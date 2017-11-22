@@ -31,6 +31,7 @@ public interface NboardDAO {
 	
 	public NboardVO preNext(int nno); //이전글 다음글 꺼내오기 위한 로직 
 	
+	public NboardVO nboardSearch(HashMap map);//공지사항 검색 처리를 위한 로직 |연습하자.|
 	//-------------------------------------------------------------------------------------------------------------------
 }
 

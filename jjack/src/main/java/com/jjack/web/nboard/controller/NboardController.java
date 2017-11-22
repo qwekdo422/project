@@ -193,7 +193,7 @@ mv.setViewName("main/mainForm");
 
 
 
-//공지사항 검색하기 
+//공지사항 검색하기 연습해보자. 
 	
 	
 	

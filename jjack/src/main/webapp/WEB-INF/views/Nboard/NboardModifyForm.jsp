@@ -13,16 +13,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="../js/alert/alertify.min.js"></script>
 	<%-- ====================== 필수  ======================  --%>
-	<script>
-		$(function() {
-			$("#nbtn").on("click", function(e) { 
-				var txt = $("#se2_iframe .se2_inputarea").html();
-				$("#nbody").val(txt);
-				console.log(txt);
-				e.preventDefault();
-			})
-		});
-	</script>
 </head>
 <script src="../se2/js/HuskyEZCreator.js" charset="UTF-8"></script><!-- 스마트에디트 스킨 불러오기 -->
 <script>
@@ -85,24 +75,28 @@ $(document).ready(function(){
    </div>
       <div class="container">
 
-	<!-- 수정하기 폼  -->
-		<form method="post" id="nfrm"action="../Nboard/NboardModifyProc.do">
-		<input type="hidden" id="nno" name="nno" value="${VO.nno}">
-	<table width="800"  border="1" align="center">
-		<tr>
-			<td><input type="text" name="ntitle" id="ntitle"  style="width:100%" placeholder="제목을 입력해주세요" value="${VO.ntitle}"></td>
-		</tr>																																																								
-		 <tr>
-		 	<td colspan="2"><textarea  id="nbody" name="ncontents"  row="100" cols="110" >${VO.ncontents}</textarea></td>
-		 </tr>
-		  <tr>
+<!-- 수정하기 폼  -->
+<form method="post" id="nfrm"action="../Nboard/NboardModifyProc.do">
+<input type="hidden" id="nno" name="nno" value="${VO.nno}">
+		<table width="800"  border="1" align="center">
+			<tr>
+				<td>
+					<input type="text" name="ntitle" id="ntitle"  style="width:100%" placeholder="제목을 입력해주세요" value="${VO.ntitle}">
+				</td>
+			</tr>																																																								
+		 	<tr>
+		 		<td colspan="2">
+		 			<textarea  id="nbody" name="ncontents"  row="100" cols="110" >${VO.ncontents}</textarea>
+		 		</td>
+		 	</tr>
+		  	<tr>
 				<td colspan="2" align="center">
 					<input type="button" id="nbtn" value="수정완료" >
 				</td>
 			</tr>
 	</table>
-		</form>
-		<!-- 수정하기 폼 종료    -->
+</form>
+
 
 
 			

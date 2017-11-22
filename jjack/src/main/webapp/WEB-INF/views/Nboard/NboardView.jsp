@@ -69,10 +69,8 @@ $(document).ready(function(){
       <jsp:include page="../common/header.jsp" />
    </div>
       <div class="container">
-		
-
 		<form method="post" id="vfrm"action="">
-	<table width="800" border="1" align="center">
+	<table width="1100" border="1" align="center">
 			<tr>
 				<td>
 			작성일 :${VO.nday}		 | 		공지 번호 :${VO.nno}		| 	  	${VO.ntitle}
@@ -83,6 +81,7 @@ $(document).ready(function(){
 						<td colspan="2"><div>${VO.ncontents}</div></td>
 			</tr> 
 	</table>
+	
 	<br>
 	<table border="1" align="center" width="800">
 		<tr>

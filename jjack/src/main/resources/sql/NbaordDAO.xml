@@ -176,9 +176,21 @@ FROM
  				 N_NO desc) total
 WHERE
     n_no=#{nno}
-
 </select>
 
+
+
+<!-- 공지사항 게시판 검색기능 질의 명령 |하다가 말았음|-->
+<select id="nboardSearch"  resultType="nboardvo" parameterType="hashMap" >
+SELECT
+	n_no AS nno, n_date AS nday, n_title AS ntitle, n_contents AS ncontents
+FROM 
+	TB_Notice
+WHERE
+	n_IsShow='Y' AND
+	
+	
+</select>
 </mapper>
 
 

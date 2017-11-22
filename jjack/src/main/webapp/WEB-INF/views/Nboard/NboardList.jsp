@@ -28,52 +28,38 @@ $(document).ready(function(){
       <jsp:include page="../common/header.jsp" />
    </div>
       <div class="container">
-			<!--목록보여주기-->
-				<table width="1000" border="1" align="center">
-					<tr>
-						<th>번호</th>
-						<th>작성일</th>
-						<th>제목</th>
-						<th>조회수</th>
-					</tr>
-					<c:forEach var="data" items="${NLIST}">
-					<tr>
-						<td>${data.nno}</td>
-						<td>${data.nday}</td>
-						<td><a href="../Nboard/HitUpProc.do?nno=${data.nno}&nowPage=${nowPage}">${data.ntitle}</a></td>
-						<td>${data.nhits}</td>
-					</tr>
-					</c:forEach>
-				</table>
+      
+<!--목록보여주기-->
+<table width="1000" border="1" align="center">
+			<tr>
+				<th>번호</th>
+				<th>작성일</th>
+				<th>제목</th>
+				<th>조회수</th>
+			</tr>
+				<c:forEach var="data" items="${NLIST}">
+			<tr>
+				<td>${data.nno}</td>
+				<td>${data.nday}</td>
+				<td><a href="../Nboard/HitUpProc.do?nno=${data.nno}&nowPage=${nowPage}">${data.ntitle}</a></td>
+				<td>${data.nhits}</td>
+			</tr>
+				</c:forEach>
+</table>
 				
-				<!-- 글쓰기 버튼 -->
-				<div align="center">
-				<c:if test="${sessionScope.UID eq 'admin'}">
-				<input type="button" value="글쓰기" id="sBtn">
-				</c:if>
-				</div>
 			
-			
-			
-			<!-- 페이징 처리 -->
-				<table width="1000" border="1" align="center">
+<!-- 페이징 처리 -->
+<table width="1000"  align="center">
 		<tr>
 			<td align="center">
 				<%--	[이전] --%>
 				<c:if test="${nowPage ne 1}"><!--'nowPage=1 이 맨 앞으로' 니까nowPage가 1이 아닐 때만 보이게 하자.  -->
-				<a href="../Nboard/NboardList.do?nowPage=1">[맨 앞으로]</a>
-				</c:if>	
-				
-				<c:if test="${(startPage eq 1 || startPage ne 1) && nowPage ne 1}"><%-- ★★--%>
+						<a href="../Nboard/NboardList.do?nowPage=1">[맨 앞으로]</a>
+				</c:if>		
+				<c:if test="${(startPage eq 1 || startPage ne 1) && nowPage ne 1}"><%-- ★★ nowPage가 1페이지면 [이전] 버튼이 사라지는 로직--%>
 						<a href="../Nboard/NboardList.do?nowPage=${nowPage -1}">[이전]</a>
 				</c:if>
-			
-
-				<c:if test="${nowPage eq 0}">
-					<c:redirect url="../Nboard/NboardList.do?nowPage=1" />
-				</c:if>
-
-
+				
 				<%--	[1][2][3] --%>
 				<c:forEach var="page" begin="${startPage}" end="${endPage}">
 					<a href="../Nboard/NboardList.do?nowPage=${page}">[${page}]</a>
@@ -81,7 +67,7 @@ $(document).ready(function(){
 			
 				<%--	[다음] --%>
 				<c:if test="${endPage ne totalPage || nowPage ne totalPage}">
-				<%--<c:if test="${endPage ne totalPage || endPage eq totalPage}"> --%>
+					<%--<c:if test="${endPage ne totalPage || endPage eq totalPage}"> --%>
 					<a href="../Nboard/NboardList.do?nowPage=${nowPage + 1}">[다음]</a>	
 				</c:if>
 
@@ -93,35 +79,35 @@ $(document).ready(function(){
 </table>
 			
 			
-			<!--검색상자 -->
+<!-- 글쓰기 버튼 -->
+<div align="center">
+		<c:if test="${sessionScope.UID eq 'admin'}">
+				<input type="button" value="글쓰기" id="sBtn">
+		</c:if>
+</div>
+			
+			
+			
+			
+			<%--검색상자 : 나중에 연습해라			
 			<form method="post" action="">
-			<table width="800" border ="1" align="center">
+			<table width="800" align="center">
 					<tr>
 						<td align="center">
-							<select id=""></select>
+							<select id="kind" name="kind"><!-- kind에 따라서 value값이 정해지겠지 -->
+								<option value="ntitle">제목</option>
+								<option value="ncontents">본문</oprtion>
+								<option value="nday">날짜</option>
+								<option value="all">전체검색</option>
+						 </select>
+						 		<input type="text" id="search" name="search" >
+						 		<input type="submit" id="sBtn" value="검색">
 						</td>
 					</tr>
 			</table>			
 			</form>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			--%>
+
 			
 		</div>
    <div id="footer">
