@@ -6,37 +6,6 @@
 
 <!-- 사랑의 작대기 -->
 
-	<!-- 전부 선택을 완료했는지 알아보기 -->
-	<select id="cClear" parameterType="string" resultType="matingvo">
-		SELECT
-			tCount,	-- 입소자 수
-			cCount	-- 선택을 완료한 사람 수
-		FROM
-			(SELECT COUNT(g_no) AS tCount FROM TB_Guest g, TB_Apply a 
-				WHERE g.a_no=a.a_no AND e_eventdate = #{edate}) wc,
-			 (SELECT COUNT(g_no) AS cCount FROM TB_Guest g, TB_Apply a 
-			 	WHERE g.a_no=a.a_no AND g_choice IS NOT NULL AND e_eventdate = #{edate}) cc
-	</select>
-	
-	
-	<!-- 커플(여) 정보 가져오기 -->
-	<select id="getCouple" parameterType="string" resultType="matingvo">
-		SELECT 
-			ma.a_interest AS interest,
-			mg.g_no AS gno,
-			mg.a_no AS ano
-			ma.e_eventdate AS evdate	--?? edate야 evdate야?
-		FROM
-			TB_Guest mg, TB_Apply ma, TB_Member mm, TB_Guest pg
-		WHERE
-			mg.g_choice = pg.g_no
-			AND mg.g_no = pg.g_choice
-			AND mg.a_no = ma.a_no
-			AND ma.m_no = mm.m_no
-			AND ma.e_eventdate = #{edate}
-			AND m_sex = 'F'
-	</select>
-	
 	<!-- 커플링 및 코스 업데이트 -->
 	<update id="coupling" parameterType="string">
 		UPDATE
@@ -70,7 +39,6 @@
 		    a_no IN (SELECT a_no FROM TB_Apply WHERE e_eventdate = #{edate})
 	</update>
 
-
 	<!-- 처음에 보여줄 날짜 정하기. 입소자가 있는 기수로 -->
 	<select id="getEdate" resultType="string">
 		SELECT
@@ -82,6 +50,7 @@
 	</select>
 
 	<!-- 모든 날짜, 기수 정보 가져오기 -->
+	<!-- 이건 완성하고나서 이전기수구경하기 기능 만들거면 넣자 -->
 	<select id="getEventList" resultType="matingvo">
 		SELECT
 			e_eventdate AS evdate,
@@ -93,14 +62,13 @@
 	</select>
 
 	<!-- 입소자 수 구하기. 전체수, 선택완료한 사람수, 남자수, 여자수, 커플수 구하기 -->
-	<!-- 여기서 위에 구한건 다시 구하지말고 따로 세팅하자 -->
 	<select id="getNumbers" resultType="matingvo" parameterType="string">
 		SELECT
 			tCount,	-- 입소자 수
 			cCount,	-- 선택을 완료한 사람 수
 			mCount,	-- 입소한 남자 수
 			fCount,	-- 입소한 여자 수
-			cpCount	-- 커플된 사람 수. /2할까?
+			cpCount	-- 커플된 사람 수. 필요한가?
 		FROM
 			(SELECT COUNT(g_no) AS tCount FROM TB_Guest g, TB_Apply a 
 				WHERE g.a_no=a.a_no AND e_eventdate = #{edate}) wc,
@@ -121,13 +89,15 @@
 			g.g_choice AS myLove,
 			a.a_pic AS pic,
 			g.g_nick AS nick,
+			SUBSTR(lg.g_nick,4,1)-1 AS loveNo,
 			g.g_course AS coupling
 		FROM
-			TB_Guest g, TB_Apply a, TB_Member m
+			TB_Guest g, TB_Apply a, TB_Member m, TB_Guest lg
 		WHERE
 			g.a_no=a.a_no
 			AND a.m_no=m.m_no
 			AND m.m_sex = 'M'
+			AND g.g_choice = lg.g_no
 			AND a.e_eventdate=#{edate}
 		ORDER BY
 			g.g_nick
@@ -140,13 +110,15 @@
 			g.g_choice AS myLove,
 			a.a_pic AS pic,
 			g.g_nick AS nick,
+			SUBSTR(lg.g_nick,4,1)-1 AS loveNo,
 			g.g_course AS coupling
 		FROM
-			TB_Guest g, TB_Apply a, TB_Member m
+			TB_Guest g, TB_Apply a, TB_Member m, TB_Guest lg
 		WHERE
 			g.a_no=a.a_no
 			AND a.m_no=m.m_no
 			AND m.m_sex = 'F'
+			AND g.g_choice = lg.g_no
 			AND a.e_eventdate=#{edate}
 		ORDER BY
 			g.g_nick

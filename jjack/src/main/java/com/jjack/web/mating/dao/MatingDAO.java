@@ -6,11 +6,17 @@ public interface MatingDAO {
 	/*
 	 *  사랑의 작대기
 	 */
-	
-	
-	
-	
-	
+
+	// 입소한 사람들이 있는 현재 날짜 구하기
+	public String getEdate();
+	// 이번기수의 사람수 구하기
+	public MatingVO getNumbers(String edate);
+	// 남자 정보 가져오기
+	public List<MatingVO> MenForArrows(String edate);
+	// 여자 정보 가져오기
+	public List<MatingVO> WomenForArrows(String edate);
+	// 커플맺고 코스 입력
+	public void coupling(String edate);
 	
 	
 	

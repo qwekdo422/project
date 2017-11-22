@@ -16,7 +16,8 @@ public class MatingVO {
 	private String pic;
 	private String course;
 	private String interest;
-	private String coupling;	// 커플이 됐는지 여부. Y N
+	private String coupling;	// 커플이 됐는지 여부. Y / N
+	private int loveNo;	// 선택한 상대가 몇 호인지
 	
 	private int mCount;	// 입소한 남자 수
 	private int fCound;		// 입소한 여자 수
@@ -25,6 +26,12 @@ public class MatingVO {
 	private int cpCount;	// 커플 수
 	
 	
+	public int getLoveNo() {
+		return loveNo;
+	}
+	public void setLoveNo(int loveNo) {
+		this.loveNo = loveNo;
+	}
 	public String getInterest() {
 		return interest;
 	}

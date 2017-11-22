@@ -23,25 +23,28 @@ public class MatingController {
 	public void forLunch() {
 		
 	}
+	
 	@RequestMapping("/Arrows")
-	public void Arrows() {
-		// choice가 다 채워졌는가
+	public ModelAndView Arrows(ModelAndView mv) {
+		// 현재 날짜 확인
+		String edate = ms.getEdate();
+		// 모든 사람이 짝을 선택했는지 확인
+		MatingVO noVO = ms.getNumbers(edate);	// 근데 이러면 커플수가 0 나와. 커플수 필요하면 따로 빼자
+		if(noVO.gettCount() - noVO.getcCount() == 0) {
+			ms.coupling(edate);
+		}
 		
+		// 입소자들 정보 가져오기
+		List<MatingVO> men = ms.MenForArrows(edate);
+		List<MatingVO> women = ms.WomenForArrows(edate);
 		
-		
-		
-		// 뷰에 필요한 것 : 내 gno, choice, 전체 사람수
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		// 뷰 호출
+		mv.addObject("numbers", noVO);
+		mv.addObject("mList", men);
+		mv.addObject("fList", women);
+		return mv;
 	}
+	
 	@RequestMapping("/myLove")
 	public ModelAndView myLove(HttpSession session) {
 		int mno = (Integer)session.getAttribute("MNO");
