@@ -33,49 +33,53 @@ var status = "${status}";
 		<div id="header">
 			<jsp:include page="../common/header.jsp" />
 		</div>
-		<div class="container mt-4 lDiv">
+		<div class="container mt-4">
 			<%-- 관리자, 사용자 여부(관리자: ADMIN, 사용자: USER)  --%>
 			<div class="row">
 			<%-- ================ 달력 =============== --%>
-				<div class="col-md-8">
+				<div class="col-md-8 lDiv">
 					<div id='calendar'></div>
 					<script src='../js/houseApply/moment.min.js'></script>
 					<script src='../js/houseApply/fullcalendar.min.js'></script>
 					<br>
 					<%-- 행사일정 상세정보 입소신청자만 보인다. --%>
 					<c:if test="${status eq 'USER'}">
-					<div class="container" style="padding: 0 0;">
-						<table class="table table-bordered" id="eventView">
-							<tr>
-								<th>기수</th>
-								<td class="gisoo"></td>
-								<th>행사 기간</th>
-								<td class="eventDay"></td>
-							</tr>
-							<tr>
-								<th>대상지역</th>
-								<td class="loc"></td>
-								<th>대상 연령대</th>
-								<td class="age"></td>
-							</tr>
-							<tr>
-								<th>행사 제목</th>
-								<td class="title" colspan="4"></td>
-							</tr>
-							<tr>
-								<th>행사 내용</th>
-								<td class="contents" colspan="4"></td>
-							</tr>
-						</table>
-					</div>
+						<div class="container" style="padding: 0 0;">
+							<table class="table table-bordered" id="eventView">
+								<tr>
+									<th>기수</th>
+									<td class="gisoo"></td>
+									<th>행사 기간</th>
+									<td class="eventDay"></td>
+								</tr>
+								<tr>
+									<th>대상지역</th>
+									<td class="loc"></td>
+									<th>대상 연령대</th>
+									<td class="age"></td>
+								</tr>
+								<tr>
+									<th>행사 제목</th>
+									<td class="title" colspan="4"></td>
+								</tr>
+								<tr>
+									<th>행사 내용</th>
+									<td class="contents" colspan="4"></td>
+								</tr>
+							</table>
+						</div>
 					</c:if>
 				</div>
 				
 			<%-- ================ 달력  =============== --%>
 			
 			<%-- ================ 입소신청 =============== --%>
+				
 				<div class="col-md-4 rDiv">
+				<h1 class="applyCencle">입소를 취소하셨습니다.</h1>
 				<form method="post" id="applyFrm" action="" enctype="multipart/form-data">
+					<input type="hidden" id="aNo" name="aNo">
+					<input type="hidden" id="pic" name="pic">
 					<div class="container">
 						<div class="row">
 							<div class="col-md-12">
@@ -95,7 +99,7 @@ var status = "${status}";
 				  	</div>
 				  	<div class="form-group">
 				    	<label for="tel">연락처:</label>
-				    	<input type="text" class="form-control" name="tel">
+				    	<input type="text" class="form-control" name="tel" id="tel">
 				 	</div>
 				  	<div class="form-group">
 				    	<label for="loc">거주지:</label>
@@ -108,14 +112,20 @@ var status = "${status}";
 							<option value="사진">사진</option>
 							<option value="바다">바다</option>
 							<option value="절경">절경</option>
-							<option value="올레길">올레길</option>
 						</select>
 					</div>
 				  	<div class="form-group">
 				    	<label for="eventdate">입소일:</label>
 				    	<input type="text" id="eventdate" class="form-control" name="eventdate" placeholder="행사를 클릭하세요." readonly>
 				 	</div>
-				 	<label class="btn btn-info applyBtn">입소신청</label>
+				 	<!-- <label class="btn btn-info" id="applyBtn">입소신청</label>
+				 	<label class="btn btn-info" id="mBtn">수정</label>
+				 	<label class="btn btn-info" id="resetBtn">입소취소</label> -->
+				 	<div class="form-group">
+					 	<input type="button" class="btn btn-info" id="applyBtn" value="입소신청">
+					 	<input type="button" class="btn btn-info" id="uBtn" value="수정">
+					 	<input type="button" class="btn btn-info" id="resetBtn" value="입소취소">
+				 	</div>
 				</form>
 				</div>
 			<%-- ================ 입소신청 =============== --%>

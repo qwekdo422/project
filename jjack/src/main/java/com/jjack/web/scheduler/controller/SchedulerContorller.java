@@ -2,6 +2,7 @@ package com.jjack.web.scheduler.controller;
 
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jjack.web.common.vo.GuestApplyVO;
 import com.jjack.web.common.vo.ProfileVO;
 import com.jjack.web.common.vo.SchedulerVO;
 import com.jjack.web.login.service.LoginService;
@@ -46,8 +48,15 @@ public class SchedulerContorller {
 			return "scheduler/list";
 		} else {
 			//	사용자일 경우
-			int mNo = (Integer)session.getAttribute("MNO");
-			//	회원의 정보를 뷰에 포워딩.
+			//	회원번호를 가져온다.
+			Object oMNO = session.getAttribute("MNO");
+			//	잘못된 접근처리 (로그인 안하고 url로 접근시)
+			if(oMNO == null) {
+				return "common/error";
+			}
+			int mNo = (Integer) oMNO;
+			
+			//	회원의 정보를 뷰에 전달
 			ProfileVO member = lService.mModify(mNo);
 			//	현재년도
 			int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -55,7 +64,6 @@ public class SchedulerContorller {
 			int birth = (Integer.parseInt(member.getBirth().toString().split("-")[0]));
 			//	나이
 			member.setAge(year - birth);
-			System.out.println();
 			model.addAttribute("member", member);
 			model.addAttribute("status", "USER");
 			return "scheduler/applyForm";
@@ -117,7 +125,7 @@ public class SchedulerContorller {
 	}
 	
 	/**
-	 * 입소신청관리 함수
+	 * 입소신청처리 함수
 	 * @author : daeo
 	 * @since : 2017. 11. 20.
 	 * @param : SchedulerVO vo
@@ -125,8 +133,49 @@ public class SchedulerContorller {
 	 * @return : String	/ redirect: list.do?status=U / 사용자
 	 */
 	@RequestMapping("/applyProc")
-	public String ghApplyProc(SchedulerVO vo, HttpSession session) {
+	public String ghApplyProc(GuestApplyVO vo, HttpSession session) {
 		scService.ghApply(vo, session);
 		return "redirect:./list.do?status=U";
 	}
+	
+	/**
+	 * 입소 신청서 정보 조회 함수
+	 * @author : daeo
+	 * @since : 2017. 11. 21.
+	 * @param : eventdate(이벤트 시작일), sesseion (회원번호를 사용하기위한 session)
+	 * @return : GuestApplyVO /	입소신청서 정보
+	 */
+	@RequestMapping("/applyInfo")
+	@ResponseBody
+	public GuestApplyVO GeustApplyInfo(String eventdate, HttpSession session) {
+		//	게스트하우스 신청데이터
+		return scService.getApplyInfo(eventdate, session);
+	}
+	
+	/**
+	 * 입소 신천서 수정
+	 * @author : daeo
+	 * @since : 2017. 11. 22.
+	 * @param : GuestApplyVO(입소신청 수정정보), session
+	 * @return : String	/ redirect: list.do?status=U / 사용자
+	 */
+	@RequestMapping("/applyModify")
+	public String appModifyProc(GuestApplyVO vo, HttpSession session) {
+		scService.applyModify(vo, session);
+		return "redirect:./list.do?status=U";
+	}
+	/**
+	 * 입소취소
+	 * @author : daeo
+	 * @since : 2017. 11. 22.
+	 * @param : aNo	/ 입소 신청 인덱스
+	 * @return : String	/ redirect: list.do?status=U / 사용자
+	 */
+	@RequestMapping("/applyCondStatus")
+	public String condModify(int aNo) {
+		scService.condModify(aNo);
+		return "redirect:./list.do?status=U";
+	}
+	
+	
 }

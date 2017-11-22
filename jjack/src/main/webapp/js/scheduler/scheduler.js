@@ -1,5 +1,6 @@
 var flag = false;	//	무결성 검사에 걸렸는지 안걸렸는지를  판단할 변수
 $(document).ready(function() {
+	$(".lDiv").attr("class", "col-md-12 lDiv");
 	//	==============  달력표시  ===================
 	var date = new Date();
 	$('#calendar').fullCalendar({
@@ -19,6 +20,7 @@ $(document).ready(function() {
 				modalView(this, event);
 			} else {
 				//	사용자일 경우
+				//	이벤트일정을 클릭하면 행사 상세정보를 상단에서 하단으로 이동해서 보여주는 애니메이션작업
 				var eventView = $("#eventView"); 
 				eventView.css("position", "absolute");
 				eventView.css("opacity", "0");
@@ -30,14 +32,79 @@ $(document).ready(function() {
 				}, 1000, function() {
 					eventView.css("position", "");
 				});
-				
+				//	행사일정 상세정보 보여주는 영역에 상세정보 넣기
 				$("#eventdate").val(event.start._i);
 				$(".gisoo").text(event.gisoo);	
 				$(".eventDay").text(event.start._i+"~"+event.end._i);	
 				$(".loc").text(event.loc);	
 				$(".age").text(event.age);	
 				$(".title").text(event.title);	
-				$(".contents").text(event.contents);	
+				$(".contents").text(event.contents);
+				
+				//	이벤트일정을 클릭했을 때 사용자의 입소상태를 알기위한 ajax처리
+				$.ajax({
+					url: "./applyInfo.do",
+					data: {"eventdate": event.start._i},
+					success: function(data) {
+						//	이벤트 일정을 클릭할 때 입소신청창을 보여준다.
+						//	투명도를 0으로 숨긴다.
+						$(".rDiv").css("opacity", 0);
+						//	영역을 잡아준다.
+						$(".lDiv").attr("class", "col-md-8 lDiv");
+						//	숨긴 div를 보여준다.
+						$(".rDiv").css("display", "block");
+						//	1초동안 투명도를 밝게 보여준다.
+						$(".rDiv").animate({
+							opacity: 1	
+						}, 1000);
+						var gApply = data;
+						var cond = gApply.cond;
+						
+						//	데이터 초기화 작업
+						$(".applyCencle").hide();
+						$("#applyFrm").show();
+						$("#interest").val("").prop("selected", true);
+						$("#tel").val("");
+						$("#uBtn").css("display", "none");
+						$("#imagePreview").prop("src", "../img/houseApply/basic.jpg");
+						
+						//	해당날짜에 이벤트 신청을 안한사람
+						if(cond == 0) {
+							$("#applyBtn").prop("disabled", false);
+							$("#applyBtn").val("입소신청");
+							$("#resetBtn").css("display", "none");
+						//	해당날짜에 이벤트를 신청한사람 (승인대기 상태)
+						} else if(cond == 1 || cond == 2 || cond == 5) {
+							//	입소신청정보를 보여준다.
+							//	입소신청번튼을 승인대기로 체인지
+							$("#applyBtn").val("승인대기");
+							//	승인대기버튼 클릭막기
+							$("#applyBtn").prop("disabled", true);
+							//	수정버튼 보이기
+							$("#uBtn").css("display", "block");
+							//	전화번호
+							$("#tel").val(gApply.tel);
+							//	관심사 자동체크
+							$("#interest").val(gApply.interest).prop("selected", true);
+							//	사진등록버튼 사진수정버튼으로 수정
+							$("#imageUpload").next().text("사진수정");
+							$("#imagePreview").prop("src", "../file/"+gApply.pic);
+							//	히든에 숨겨놓을 입소신청 번호
+							$("#aNo").val(gApply.aNo);
+							//	히든에 숨겨놓을 사진이름
+							$("#pic").val(gApply.pic);
+						//	해당행사에 입소취소를 취소한사람
+						} else if (cond == 7) {
+							$("#applyFrm").hide();
+							$(".applyCencle").show();
+						}
+						
+						
+					},
+					error: function(e) {
+						alert("에러"+e);
+					}
+				});
 			}
 			
 		} // 이벤트 클릭했을 때 작업 종료
@@ -68,7 +135,7 @@ $(document).ready(function() {
 		}
 	});	//	버튼 클릭이벤트 종료
 	
-	//	행사 일정 등록버튼 이벤트
+	//	행사 일정 등록버튼 이벤트 (관리자)
 	$("#wBtn").click(function(){
 		//	무결성 검사
 		validation();
@@ -78,7 +145,7 @@ $(document).ready(function() {
 		completAlert("등록");
 	});
 	
-	//	행사 일정 수정버튼 이벤트
+	//	행사 일정 수정버튼 이벤트 (관리자)
 	$("#mBtn").click(function(){
 		//	무결성 검사
 		validation();
@@ -88,26 +155,37 @@ $(document).ready(function() {
 		completAlert("수정");
 	});
 	
-	//	행사 일정 삭제버튼 이벤트
+	//	행사 일정 삭제버튼 이벤트 (관리자)
 	$("#dBtn").click(function(){
 		//	수정완료 alert창을 띄우고 서브밋을 한다.
 		completAlert("삭제");
 	});
 	
-	//	사용자 입소신청 클릭 이벤트
-	$(".applyBtn").click(function(){
+	//	입소신청버튼 이벤트 (사용자)
+	$("#applyBtn").click(function(){
 		$("#applyFrm").attr("action", "./applyProc.do").submit();
 	});
 	
-	//	사용자 입소신청시 사진업로드
+	//	입소신청서 수정버튼(사용자)
+	$("#uBtn").click(function(){
+		$("#applyFrm").attr("action", "./applyModify.do").submit();
+	});
+	
+	//	입소신청취소 버튼 (사용자)
+	$("#resetBtn").click(function(){
+		$("#applyFrm").attr("action", "./applyCondStatus.do?aNo="+$("#aNo").val()).submit();
+	});
+	
+	
+	
+	//	입소신청시 사진등록을 누르면 등록한 사진을 화면에서 바로 볼수 있도록 처리(사용자)
   	$('#imageUpload').change(function(){
-  		console.log($(this));
   		readImgUrlAndPreview(this);
   		function readImgUrlAndPreview(input){
   			 if (input.files && input.files[0]) {
   		            var reader = new FileReader();
   		            reader.onload = function (e) {			            	
-  		                $('#imagePreview').attr('src', e.target.result);
+  		                		$('#imagePreview').attr('src', e.target.result);
   							}
   			          };
   			          reader.readAsDataURL(input.files[0]);
@@ -134,7 +212,7 @@ $(document).ready(function() {
 				error: function(e) {
 					alert(e+"에러");
 				}
-			})
+			});
 		}
 	}); // 기수종복체크 종료
 	
@@ -214,7 +292,7 @@ function isFlag() {
 	return false;
 }
 
-//	무결성 검사 함수
+//	무결성 검사 함수 (관리자)
 function validation () {
 	var gisoo = $("#gisoo");			// 기수
 	var eventdate = $("#eventdate");	// 이벤트 시작일

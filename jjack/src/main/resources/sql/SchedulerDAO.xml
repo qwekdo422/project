@@ -81,7 +81,7 @@
 	</select>
 	
 	<!-- 입소신청 등록 (사용자) -->
-	<insert id="insertApply" parameterType="SchedulerVO">
+	<insert id="insertApply" parameterType="GuestApplyVO">
 		INSERT INTO TB_APPLY (
 			A_NO, 
 			M_NO, 
@@ -95,5 +95,50 @@
 			 #{mNo}, #{interest}, #{pic}, #{tel}, #{eventdate}  
 		)
 	</insert>
+	
+	<!-- 입소신청서 정보 조회 -->
+	<select id="selectApplyInfo" parameterType="hashMap" resultType="GuestApplyVO">
+		SELECT 
+			(
+			SELECT 
+				NVL(MAX(A_COND), 0)
+			FROM
+				TB_APPLY
+			WHERE
+				M_NO = #{mNo}
+			AND
+				E_EVENTDATE = #{eventdate}
+			)			AS cond, 
+			A_TEL		AS tel,
+			A_INTEREST	AS interest,
+			A_PIC 		AS pic,
+			A_NO  		AS aNo
+		FROM 
+			TB_APPLY
+		WHERE
+			M_NO = #{mNo}
+	</select>
+	
+	<!-- 입소신청서 수정 -->
+	<update id="updateApply" parameterType="GuestApplyVO">
+		UPDATE
+			TB_APPLY
+		SET
+			A_INTEREST	= #{interest}, 
+			A_PIC		= #{pic},
+			A_TEL		= #{tel}
+		WHERE
+		 	A_NO = #{aNo}
+	</update>
+	
+	<!-- 입소취소 -->
+	<update id="updateCond" parameterType="int">
+		UPDATE
+			TB_APPLY
+		SET
+			A_COND = 7
+		WHERE 
+			A_NO = #{aNo}
+	</update>
 </mapper>
 

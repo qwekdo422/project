@@ -5,6 +5,11 @@
 	font-size: 14px;
 }
  */
+.rDiv {
+	opacity:0;
+	display: none;
+}
+ 
 #calendar {
 	/* max-width: 900px; */
 	margin: 0 auto;

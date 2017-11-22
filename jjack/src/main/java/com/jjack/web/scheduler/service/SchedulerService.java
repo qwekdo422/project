@@ -1,5 +1,6 @@
 package com.jjack.web.scheduler.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jjack.web.common.vo.GuestApplyVO;
 import com.jjack.web.common.vo.SchedulerVO;
 import com.jjack.web.scheduler.dao.SchedulerDAO;
 import com.jjack.web.util.FileUtil;
@@ -86,7 +88,7 @@ public class SchedulerService {
 	 * 기수 체크
 	 * @author : daeo
 	 * @since : 2017. 11. 17.
-	 * @param : 
+	 * @param : gisoo
 	 * @return : int
 	 */
 	public int gisooCheck(int gisoo) {
@@ -97,13 +99,26 @@ public class SchedulerService {
 	 * 입소신청
 	 * @author : daeo
 	 * @since : 2017. 11. 20.
-	 * @param : 
+	 * @param : SchedulerVO, session (이미지 저장경로을 위한 세션)
+	 * @param : imageUpload(파일)
 	 * @return : void
 	 */
-	public void ghApply(SchedulerVO vo, HttpSession session) {
+	public void ghApply(GuestApplyVO vo, HttpSession session) {
+		//	사진업로드
+		GuestApplyVO avo = imgUpload(vo, session);
+		scDAO.insertApply(avo);
+	}
+	
+	/**
+	 * 사진업로드 처리 및 회원번호 얻기 처리 함수
+	 * @author : daeo
+	 * @since : 2017. 11. 22.
+	 * @param : GuestApplyVO(입소신청서 정보), session
+	 * @return : void
+	 */
+	public GuestApplyVO imgUpload(GuestApplyVO vo, HttpSession session) {
 		//	파일저장 경로
 		String path = session.getServletContext().getRealPath("file");
-		System.out.println(path);
 		//	사진원래 이름 추출
 		String fileName = vo.getImageUpload().getOriginalFilename();
 		//	사진을 서버에 저장하고 사진의 저장한 이름을 얻어온다.
@@ -112,12 +127,49 @@ public class SchedulerService {
 		vo.setPic(saveName);
 		//	회원번호저장
 		vo.setmNo((Integer)session.getAttribute("MNO"));
-		System.out.println("mNo = "+vo.getmNo());
-		System.out.println("interest = "+vo.getInterest());
-		System.out.println("pic = "+vo.getPic());
-		System.out.println("tel = "+vo.getTel());
-		System.out.println("eventdate = "+vo.getEventdate());
-		scDAO.insertApply(vo);
+		return vo;
 	}
+	
+	/**
+	 * 입소신청서 정보 조회
+	 * @author : daeo
+	 * @since : 2017. 11. 21.
+	 * @param : eventdate(이벤트 시작일), session(회원번호를 얻을 세션)
+	 * @return : GuestApplyVO
+	 */
+	public GuestApplyVO getApplyInfo(String eventdate, HttpSession session) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("eventdate", eventdate);
+		map.put("mNo", (Integer) session.getAttribute("MNO"));
+		return scDAO.selectApplyInfo(map);
+	}
+	
+	/**
+	 * 입소신청서 정보 수정
+	 * @author : daeo
+	 * @since : 2017. 11. 22.
+	 * @param : GuestApplyVO(수정할 정보), session
+	 * @return : void
+	 */
+	public void applyModify(GuestApplyVO vo, HttpSession session) {
+		//	입소신청서 수정시 사진을 변경했을 때
+		if(!vo.getImageUpload().isEmpty()) {
+			//	사진업로드
+			vo = imgUpload(vo, session);
+		}
+		scDAO.updateApply(vo);
+	}
+	
+	/**
+	 * 입소취소
+	 * @author : daeo
+	 * @since : 2017. 11. 22.
+	 * @param : aNo	/ 입소신청 번호
+	 * @return : void
+	 */
+	public void condModify(int aNo) {
+		scDAO.updateCond(aNo);
+	}
+
 	
 }
