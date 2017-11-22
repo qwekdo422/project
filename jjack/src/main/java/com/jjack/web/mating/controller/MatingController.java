@@ -54,7 +54,6 @@ public class MatingController {
 			rv.addStaticAttribute("redir", "re");
 			rv.addStaticAttribute("myGno", myGno);
 			rv.addStaticAttribute("myLove", mvo.getMyLove());
-//			rv.setExposeModelAttributes(false);
 			mv.setView(rv);
 			return mv;
 		}

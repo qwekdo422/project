@@ -18,18 +18,56 @@
 			 	WHERE g.a_no=a.a_no AND g_choice IS NOT NULL AND e_eventdate = #{edate}) cc
 	</select>
 	
-	<!-- 커플정보(코스) 업데이트 -->
-	<!-- 관심사 -->
+	
+	<!-- 커플(여) 정보 가져오기 -->
+	<select id="getCouple" parameterType="string" resultType="matingvo">
+		SELECT 
+			ma.a_interest AS interest,
+			mg.g_no AS gno,
+			mg.a_no AS ano
+			ma.e_eventdate AS evdate	--?? edate야 evdate야?
+		FROM
+			TB_Guest mg, TB_Apply ma, TB_Member mm, TB_Guest pg
+		WHERE
+			mg.g_choice = pg.g_no
+			AND mg.g_no = pg.g_choice
+			AND mg.a_no = ma.a_no
+			AND ma.m_no = mm.m_no
+			AND ma.e_eventdate = #{edate}
+			AND m_sex = 'F'
+	</select>
+	
+	<!-- 커플링 및 코스 업데이트 -->
 	<update id="coupling" parameterType="string">
 		UPDATE
-			TB_Guest
+		    TB_Guest g
 		SET
-			g_course=(
-				
-			
-			)
-		
-	
+		    g_course=NVL(
+		       (SELECT 
+		            DECODE (
+		                DECODE (
+		                    mm.m_sex, 
+		                    'M', pa.a_interest, 
+		                    'F', ma.a_interest
+		                ),
+		                '사진', 'A',
+		                '바다', 'B',
+		                '절경', 'C'
+		            )
+		        FROM
+		            TB_Guest mg, TB_Apply ma, TB_Member mm, TB_Guest pg, TB_Apply pa, TB_Member pm
+		        WHERE
+		            mg.g_choice = pg.g_no
+		            AND mg.g_no = pg.g_choice
+		            AND mg.a_no = ma.a_no
+		            AND ma.m_no = mm.m_no
+		            AND pg.a_no = pa.a_no
+		            AND pa.m_no = pm.m_no
+		            AND ma.e_eventdate = #{edate}
+		            AND g.g_no = mg.g_no
+		        ), 'S')
+		WHERE
+		    a_no IN (SELECT a_no FROM TB_Apply WHERE e_eventdate = #{edate})
 	</update>
 
 

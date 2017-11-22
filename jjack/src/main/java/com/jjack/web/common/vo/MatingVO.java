@@ -29,7 +29,6 @@ public class MatingVO {
 		return interest;
 	}
 	public void setInterest(String interest) {
-		// 관심사에 따라서 setInterest
 		this.interest = interest;
 	}
 	public String getCoupling() {
@@ -52,7 +51,15 @@ public class MatingVO {
 		return course;
 	}
 	public void setCourse(String course) {
-		this.course = course;
+		if(course.equals("사진")) {
+			this.course = "A";
+		} else if(course.equals("바다")) {
+			this.course = "B";
+		} else if(course.equals("절경")) {
+			this.course = "C";
+		} else {
+			this.course = course;
+		}
 	}
 	public int getmCount() {
 		return mCount;
