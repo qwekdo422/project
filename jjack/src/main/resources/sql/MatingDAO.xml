@@ -97,7 +97,7 @@
 			g.a_no=a.a_no
 			AND a.m_no=m.m_no
 			AND m.m_sex = 'M'
-			AND g.g_choice = lg.g_no
+			AND g.g_choice = lg.g_no(+)
 			AND a.e_eventdate=#{edate}
 		ORDER BY
 			g.g_nick
@@ -118,7 +118,7 @@
 			g.a_no=a.a_no
 			AND a.m_no=m.m_no
 			AND m.m_sex = 'F'
-			AND g.g_choice = lg.g_no
+			AND g.g_choice = lg.g_no(+)
 			AND a.e_eventdate=#{edate}
 		ORDER BY
 			g.g_nick

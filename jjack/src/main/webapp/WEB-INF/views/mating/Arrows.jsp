@@ -14,6 +14,12 @@
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
 <link rel="stylesheet" href="../css/mating/Arrows.css" />
+<script src="../js/mating/Arrows.js"></script>
+<script>
+	var allClear = ${numbers.tCount} -${numbers.cCount};
+
+
+</script>
 </head>
 <body style="margin:0 auto;">
 	<div id="header">
@@ -49,8 +55,9 @@
 					<!-- 남자리스트 영역 종료 -->
 					
 					<div id="arrowsDiv" class="col-lg-8">
-					작대기 영역
-					
+						<svg xmlns="http://www.w3.org/2000/svg" width="520px" height="760px" version="1.1">
+							<line x1="40" x2="120" y1="100" y2="100" stroke="black" stroke-width="20" stroke-linecap="round"/>
+						</svg>
 					
 					
 					

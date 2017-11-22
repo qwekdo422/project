@@ -11,3 +11,7 @@ figure img {
 figcaption {
 	cursor:pointer;
 }
+#choiceClear {
+	text-align:center;
+	margin-top:30px;
+}
