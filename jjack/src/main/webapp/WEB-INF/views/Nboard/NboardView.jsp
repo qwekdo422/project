@@ -32,19 +32,19 @@ $(function(){
 		//	스킨에 표시할 내용을 지정한다.
           htParams : {
 				bUseToolbar :false,
-              	bUseVerticalResizer : true,
-      			bUseModeChanger : true
+              	bUseVerticalResizer : false,
+      			bUseModeChanger : false
          }
 	});
 });
 
 $(document).ready(function(){
-	$("#lBtn").click(function(){ //목록보기 
+	$("#lBtn").click(function(){ //목록보기 기능 버튼
 		
 		$(location).attr("href", "../Nboard/NboardList.do"); 
 	}); 
 	
-	$("#dBtn").click(function(){ //삭제하기
+	$("#dBtn").click(function(){ //삭제하기 기능 버튼
 
 		if(confirm("정말로 삭제하시겠습니까?")){
 			$(location).attr("href","../Nboard/NboardDelete.do?nno=${VO.nno}"); 
@@ -53,10 +53,15 @@ $(document).ready(function(){
 		}else{
 			return; 
 		}
-	
-	
-	
 	}); 
+	
+	$("#mtn").click(function(){//수정하기 폼으로 이동 버튼
+		$(location).attr("href","../Nboard/NboardModify.do?nno=${VO.nno}"); 
+	}); 
+	
+	
+	
+	
 }); 
 </script>
 <body style="margin:0 auto;">
@@ -67,20 +72,37 @@ $(document).ready(function(){
 		
 
 		<form method="post" id="vfrm"action="">
-	<table width="800"  border="1" align="center">
+	<table width="800" border="1" align="center">
 			<tr>
 				<td>
-			작성일 :${VO.nday}		 | 		공지 번호 :${VO.nno}		| 	  ${VO.ntitle}
+			작성일 :${VO.nday}		 | 		공지 번호 :${VO.nno}		| 	  	${VO.ntitle}
 				</td>
 			  </tr>
 			<tr>
-					<td colspan="2"><textarea id="nbody" name="ncontents" row="10" cols="110"  readonly >${VO.ncontents}</textarea></td>
-			</tr>
+			<!--  <td colspan="2" ><textarea  id="nbody" name="ncontents" row="10" cols="110"   disabled >${VO.ncontents}</textarea></td>-->	
+						<td colspan="2"><div>${VO.ncontents}</div></td>
+			</tr> 
 	</table>
+	<br>
+	<table border="1" align="center" width="800">
+		<tr>
+			<c:if test="${PRENEXT.pre ne '이전글 없음'}">		
+			<td>▲이전글</td><td><a href="../Nboard/NboardView.do?nno=${PRENEXT.preNo}">${PRENEXT.pre}</a></td><td>작성일 : ${PRENEXT.preday}</td>
+			</c:if>
+		</tr>
+		
+	<tr>
+	<c:if test="${PRENEXT.next ne '다음글 없음'}">		
+			<td>▼다음글</td><td><a href="../Nboard/NboardView.do?nno=${PRENEXT.nextNo}">${PRENEXT.next}</a></td><td>작성일 : ${PRENEXT.nextday}</td>
+	</c:if>
+	</tr>
+
+	</table>
+	
 	<div align="center">
 	<input type="button" id="lBtn" value="목록보기" align="right">	
 	<c:if test="${sessionScope.UID eq 'admin'}">
-		<input type="button" id="dBtn" value="삭제하기" align="right">
+	<input type="button" id="dBtn" value="삭제하기" align="right">
 	<input type="button" id="mtn" value="수정하기" align="right">
 	</c:if>
 	</div>

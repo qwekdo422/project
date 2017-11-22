@@ -1,6 +1,7 @@
 package com.jjack.web.nboard.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -69,9 +70,7 @@ public class NboardController {
 	//공지사항 글쓰기 실행 함수 
 	@RequestMapping("/NboardProc")
 	public ModelAndView nboardWriteProc(NboardVO nVO){
-		
 		nService.nBoardInsert(nVO);
-		
 		//글을 쓰고나서 목록보기로 돌아간다.
 		ModelAndView mv= new ModelAndView();
 		RedirectView rv= new RedirectView("../Nboard/NboardList.do"); 
@@ -130,8 +129,11 @@ public ModelAndView nboardView(NboardVO nVO , @RequestParam(value="nno") int nno
 
 	//세션을 이용하지 않고 게시물 번호를 받아오기 위해서는 어떻게 해야 할까? 
 	//requestparameter로 받자. 
+	NboardVO preNext=nService.preNext(nno); 
 	NboardVO VO=nService.nBoardView(nno); 
 	ModelAndView mv= new ModelAndView(); 
+	
+	mv.addObject("PRENEXT",preNext); 
 	mv.addObject("VO",VO); 
 	mv.setViewName("Nboard/NboardView");
 	return mv; 
@@ -152,7 +154,43 @@ public ModelAndView nboardDelete(@RequestParam(value="nno") int nno){
 }
 
 
-//공지사항 수정하기 
+//공지사항 수정하기 폼 
+@RequestMapping("/NboardModify")
+public ModelAndView nboardModify(@RequestParam(value="nno") int nno){
+	
+	NboardVO nVO=nService.nBoardModify(nno); 
+	ModelAndView mv= new ModelAndView(); 
+	mv.addObject("VO",nVO); 
+	System.out.println("공지사항 수정하기 폼"+nVO.getNcontents());
+	mv.setViewName("Nboard/NboardModifyForm");
+	
+	
+	return mv; 
+}
+
+//공지사항 수정하기 실행함수 
+//수정하기 폼에서 그 폼에 있는 데이터를 바다야 한다. 
+@RequestMapping("/NboardModifyProc")
+public ModelAndView nboardModifyProc(NboardVO nVO){
+	
+HashMap map=new HashMap();
+map.put("title", nVO.getNtitle()); 
+map.put("contents", nVO.getNcontents()); 
+map.put("nno",nVO.getNno()); 
+
+
+
+nService.nBoardModifyProc(map);
+
+ModelAndView mv= new ModelAndView(); 
+//RedirectView rv= new RedirectView("../Nboard/NboardView.do"); 
+//rv.addStaticAttribute("VO",nVO);
+//mv.setView(rv);
+mv.setViewName("main/mainForm");
+	
+	return mv; 
+}
+
 
 
 //공지사항 검색하기 

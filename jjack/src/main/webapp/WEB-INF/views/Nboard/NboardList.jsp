@@ -45,11 +45,8 @@ $(document).ready(function(){
 					</tr>
 					</c:forEach>
 				</table>
-
-			
-		
-			
-			
+				
+				<!-- 글쓰기 버튼 -->
 				<div align="center">
 				<c:if test="${sessionScope.UID eq 'admin'}">
 				<input type="button" value="글쓰기" id="sBtn">
@@ -58,7 +55,7 @@ $(document).ready(function(){
 			
 			
 			
-			<!-- 페이지이동기능 만들고 -->
+			<!-- 페이징 처리 -->
 				<table width="1000" border="1" align="center">
 		<tr>
 			<td align="center">
@@ -67,12 +64,10 @@ $(document).ready(function(){
 				<a href="../Nboard/NboardList.do?nowPage=1">[맨 앞으로]</a>
 				</c:if>	
 				
-				<c:if test="${startPage eq 1}">
+				<c:if test="${(startPage eq 1 || startPage ne 1) && nowPage ne 1}"><%-- ★★--%>
 						<a href="../Nboard/NboardList.do?nowPage=${nowPage -1}">[이전]</a>
 				</c:if>
-				<c:if test="${startPage ne 1}">
-						<a href="../Nboard/NboardList.do?nowPage=${nowPage -1}">[이전]</a>
-				</c:if>
+			
 
 				<c:if test="${nowPage eq 0}">
 					<c:redirect url="../Nboard/NboardList.do?nowPage=1" />
@@ -86,22 +81,48 @@ $(document).ready(function(){
 			
 				<%--	[다음] --%>
 				<c:if test="${endPage ne totalPage || nowPage ne totalPage}">
-<%--<c:if test="${endPage ne totalPage || endPage eq totalPage}"> --%>
+				<%--<c:if test="${endPage ne totalPage || endPage eq totalPage}"> --%>
 					<a href="../Nboard/NboardList.do?nowPage=${nowPage + 1}">[다음]</a>	
 				</c:if>
 
-				<c:if test="${nowPage ne endPage}"><!-- 맨 뒤로 가면 맨뒤로 이 버튼을 없애고 싶다. -->
+				<c:if test="${nowPage ne totalPage}"><!-- 맨 뒤로 가면 맨뒤로 이 버튼을 없애고 싶다. -->
 					<a href="../Nboard/NboardList.do?nowPage=${totalPage}">[맨 뒤로]</a>	
 				</c:if>
-	
-
-
 			</td>
 		</tr>
-	</table>
+</table>
 			
 			
-			<!--검색상자 만들기 -->
+			<!--검색상자 -->
+			<form method="post" action="">
+			<table width="800" border ="1" align="center">
+					<tr>
+						<td align="center">
+							<select id=""></select>
+						</td>
+					</tr>
+			</table>			
+			</form>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		</div>
    <div id="footer">
       <jsp:include page="../common/footer.jsp" />

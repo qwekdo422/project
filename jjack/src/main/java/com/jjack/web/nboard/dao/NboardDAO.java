@@ -23,7 +23,13 @@ public interface NboardDAO {
 	
 	public int getTotal(); //페이징 처리를 위해 총 데이터의 갯수를 가지고 오자.
 	
-	public void nBoardDelete(int nno);
+	public void nBoardDelete(int nno); //게시물 삭제 처리 시킬 로직 
+		
+	public NboardVO nBoardModify(int nno); //수정하기 폼 가져오기 위한 로직 
+	
+	public void nBoardModifyProc(HashMap map); //게시글 수정 실행함수 
+	
+	public NboardVO preNext(int nno); //이전글 다음글 꺼내오기 위한 로직 
 	
 	//-------------------------------------------------------------------------------------------------------------------
 }

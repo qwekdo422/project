@@ -112,6 +112,22 @@ public class NboardService {
 		return ; 
 	}
 	
+	//공지사항 게시판 수정하기 폼 가져오기 위한 로직
+	public NboardVO nBoardModify(int nno){
+		return  (NboardVO)nDAO.nBoardModify(nno); 
+	}
+	
+	//공지사항 게시판 수정하기 실행을 위한 로직 
+	public void nBoardModifyProc(HashMap map){		
+		nDAO.nBoardModifyProc(map);
+		return;  
+	}
+	
+	//이전글 다음글 꺼내오기 위한 실행 로직 
+	public NboardVO preNext(int nno){
+		
+		return(NboardVO)nDAO.preNext(nno); 
+	}
 	
 	
 	
