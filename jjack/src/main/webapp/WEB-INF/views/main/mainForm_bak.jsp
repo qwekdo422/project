@@ -43,7 +43,7 @@ $(function(){
 					<br>
 					<h5 align="center"> [실시간 워드 클라우드] </h5> <br>
                     <img class="card-img-top" src="../img/main/real_word.jpg">
-                    <button class="btn_word">실시간 워드 버튼</button>
+                    <button class="btn_word">실시간 워드 버튼1</button>
 				</div>
 
 				<!-- /.col-lg-3 -->
