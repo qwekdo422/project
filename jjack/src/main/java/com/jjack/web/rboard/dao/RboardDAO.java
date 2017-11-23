@@ -27,4 +27,7 @@ public interface RboardDAO {
 	//리뷰 상세보기 질의명령 
 	public RboardVO rboardView(int rno); 
 	
+	
+	//총 데이터 갯수 가져오기 질의명령 
+	public int getTotalList(); 
 }

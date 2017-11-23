@@ -65,6 +65,13 @@ public class RboardService {
 		return (RboardVO)rDAO.rboardView(rno); 
 	}
 	
+	//총 데이터 갯수 가져오기 위한 로직 
+	public int getTotalList(){
+		
+		int total=rDAO.getTotalList(); 
+		return total; 
+	}
+
 	
 	
 	

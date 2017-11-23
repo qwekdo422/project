@@ -29,10 +29,10 @@ public class RboardController {
 	public ModelAndView rboardList(HttpSession session){
 		
 		ModelAndView mv= new ModelAndView(); 
-		Str
+		
 		
 		mv.setViewName("Rboard/RboardList");
-		return mv; 
+		return null; 
 	}
 	
 	
