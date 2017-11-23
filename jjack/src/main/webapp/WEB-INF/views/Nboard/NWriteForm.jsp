@@ -52,14 +52,13 @@ $(document).ready(function(){
 			return ; 
 		}
 		
-		if(body==""){
+		if(body=="<p>&nbsp;</p>"){
 			alert("본문을 입력하십시오"); 
 			return; 
 		}
 		
 
 		$("#nfrm").submit(); 
-	
 	}); 
 }); 
 </script>
@@ -69,14 +68,18 @@ $(document).ready(function(){
    </div>
       <div class="container">
 		
-		<!-- 글쓰기 폼  -->
-		<form method="post" id="nfrm"action="../Nboard/NboardProc.do">
+<!-- 글쓰기 폼  -->
+<form method="post" id="nfrm"action="../Nboard/NboardProc.do">
 	<table width="800"  border="1" align="center">
 		<tr>
-			<td><input type="text" name="ntitle" id="ntitle"  style="width:100%" placeholder="제목을 입력해주세요"></td>
+			<td>
+				<input type="text" name="ntitle" id="ntitle"  style="width:100%" placeholder="제목을 입력해주세요">
+			</td>
 		</tr>
 		 <tr>
-		 	<td colspan="2"><textarea  id="nbody" name="ncontents" row="100" cols="110"  ></textarea></td>
+		 	<td colspan="2">
+		 		<textarea  id="nbody" name="ncontents" row="100" cols="110"  ></textarea>
+		  </td>
 		 </tr>
 		  <tr>
 				<td colspan="2" align="center">
@@ -84,8 +87,8 @@ $(document).ready(function(){
 				</td>
 			</tr>
 	</table>
-		</form>
-		<!-- 글쓰기 폼 종료   -->
+</form>
+<!-- 글쓰기 폼 종료   -->
 		
 		
 		</div>

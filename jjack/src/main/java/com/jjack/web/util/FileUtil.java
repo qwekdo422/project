@@ -26,7 +26,8 @@ public class FileUtil {
 		name = renameFile(name, path);
 		
 		//	1.	복사할 파일을 File클래스로 만든다.
-		File copyFile = new File(path+"\\"+name);
+		File copyFile = new File(path+"\\"+name); //이 경로에 있는 파일을 가져와서 쓸 계획이다. 
+	
 		//	2.	복사를 시도한다.
 		try {
 			oriFile.transferTo(copyFile);

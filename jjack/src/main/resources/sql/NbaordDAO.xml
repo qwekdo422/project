@@ -13,17 +13,17 @@
 <!-- 공지사항 글쓰기 질의 명령  조회수 증가는 아직 해결 못함 -->
 <!-- 아이디 요소는 그 추상함수이름과 같게 해준다.  -->
 
-	<insert id="nBoardInsert" parameterType="nboardvo"> 
+<insert id="nBoardInsert" parameterType="nboardvo"> 
 			INSERT 
 			INTO 
 				TB_Notice (N_NO, N_DATE, N_TITLE, N_CONTENTS, N_HITS, N_ISSHOW)
 			VALUES (
 					(SELECT 
-						NVL(MAX(n_no),0)+1
+						    NVL(MAX(n_no),0)+1
 					FROM
 						TB_Notice),SYSDATE,#{ntitle},#{ncontents,jdbcType=CLOB},'0' , 'Y')
 	</insert>
-	
+
 	<!-- 게시물 목록보여주기 질의명령 -->
 	<select id="nboardList" resultType="nboardvo" parameterType="hashMap">
 SELECT
