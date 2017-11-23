@@ -15,6 +15,12 @@
 <%-- ====================== 필수  ======================  --%>
 <link rel="stylesheet" href="../css/mating/forLunch.css" />
 <script src="../js/mating/forLunch.js"></script>
+<script>
+	var ladderSize = ${ladderSize};
+
+
+
+</script>
 </head>
 <body style="margin:0 auto;">
 	<div id="header">
@@ -33,30 +39,9 @@
 				</div>
 			</div>
 			<!-- 본 화면 -->
-		 	<div id="introMain" class="col-lg-9">
+		 	<div id="main" class="col-lg-9">
 				<div class="row">
 				
-					<div id="men" class="col-lg-2">
- 						<c:forEach var="ml" items="${mList}" varStatus="vs">
-							<div class="col-xs-2 mx-auto">
-								<figure class="figure">
-									<img src="../file/${ml.pic}" class="figure-img img-fluid">
-									<figcaption class="text-center">${ml.nick}</figcaption>
-								</figure>
-							</div>
-						</c:forEach>
-					</div>
-					<!-- 남자리스트 영역 종료 -->
-					
-					<div id="arrowsDiv" class="col-lg-8">
-					
-						<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-						
-						
-						</svg>
-					</div>
-					<!-- 사랑의 작대기 영역 종료 -->
-					
 					<div id="women" class="col-lg-2">
  						<c:forEach var="fl" items="${fList}">
 							<div class="col-xs-2 mx-auto">
@@ -68,6 +53,27 @@
 						</c:forEach>
 					</div>
 					<!-- 여자리스트 종료 -->
+					
+					<div id="arrowsDiv" class="col-lg-8">
+					
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+						
+						
+						</svg>
+					</div>
+					<!-- 사다리 영역 종료 -->
+					
+					<div id="men" class="col-lg-2">
+ 						<c:forEach var="ml" items="${mList}" varStatus="vs">
+							<div class="col-xs-2 mx-auto">
+								<figure class="figure">
+									<img src="../file/${ml.pic}" class="figure-img img-fluid">
+									<figcaption class="text-center">${ml.nick}</figcaption>
+								</figure>
+							</div>
+						</c:forEach>
+					</div>
+					<!-- 남자리스트 영역 종료 -->
 				</div>
 				<!-- row -->
 			</div>

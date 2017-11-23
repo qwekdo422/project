@@ -11,6 +11,29 @@ public class MatingService {
 	public MatingDAO md;
 	
 	/*
+	 *  점심 사다리 타기
+	 */
+	
+	// 사다리용 여자 정보 가져오기
+	public List<MatingVO> WomenForLunch(String edate){
+		return md.WomenForLunch(edate);
+	}
+	// 사다리용 남자 정보 가져오기
+	public List<MatingVO> MenForLunch(String edate){
+		return md.MenForLunch(edate);
+	}
+	// 남자수, 여자수에 맞춰 사다리 가져오기
+	public int makeLadder(String edate){
+		return md.makeLadder(edate);
+	}
+	// 점심 파트너 입력
+	public void lunching(HashMap<String, Integer> map){
+		md.lunching(map);
+	}
+	
+	
+	
+	/*
 	 *  사랑의 작대기
 	 */
 	
@@ -38,11 +61,6 @@ public class MatingService {
 	public void coupling(String edate) {
 		md.coupling(edate);
 	}
-	
-	
-	
-	
-	
 	
 	
 	

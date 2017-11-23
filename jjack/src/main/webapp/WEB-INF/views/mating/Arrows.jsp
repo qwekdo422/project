@@ -44,7 +44,7 @@
 				</div>
 			</div>
 			<!-- 본 화면 -->
-		 	<div id="introMain" class="col-lg-9">
+		 	<div id="main" class="col-lg-9">
 				<div class="row">
 				
 					<div id="men" class="col-lg-2">

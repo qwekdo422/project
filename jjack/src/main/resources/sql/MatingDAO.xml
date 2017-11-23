@@ -2,7 +2,75 @@
 <!DOCTYPE mapper PUBLIC 	"-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace는 연결할 DAO 인터페이스경로.클래스명 -->	
 <mapper namespace="com.jjack.web.mating.dao.MatingDAO">
+<!-- 공통 -->
+	<!-- 처음에 보여줄 날짜 정하기. 입소자가 있는 기수로 -->
+	<select id="getEdate" resultType="string">
+		SELECT
+			MAX(e_eventdate) AS edate
+		FROM
+			TB_Apply
+		WHERE
+    		a_cond=8
+	</select>
+
+
 <!-- 점심 사다리타기 -->
+	<!-- 여자 정보 가져오기 -->
+	<select id="WomenForLunch" parameterType="string" resultType="matingvo">
+		SELECT
+			g.g_no AS gno,
+			a.a_pic AS pic,
+			g.g_nick AS nick
+		FROM
+			TB_Guest g, TB_Apply a, TB_Member m
+		WHERE
+			g.a_no=a.a_no
+			AND a.m_no=m.m_no
+			AND m.m_sex = 'F'
+			AND a.e_eventdate=#{edate}
+		ORDER BY
+			g.g_nick
+	</select>
+	
+	<!-- 남자 정보 가져오기 -->
+	<select id="MenForLunch" parameterType="string" resultType="matingvo">
+		SELECT
+			g.g_no AS gno,
+			a.a_pic AS pic,
+			g.g_nick AS nick
+		FROM
+			TB_Guest g, TB_Apply a, TB_Member m
+		WHERE
+			g.a_no=a.a_no
+			AND a.m_no=m.m_no
+			AND m.m_sex = 'M'
+			AND a.e_eventdate=#{edate}
+		ORDER BY
+			g.g_nick
+	</select>
+
+	<!-- 남자수, 여자수에 맞춰 사다리 가져오기 -->
+	<select id="makeLadder" parameterType="string" resultType="int">
+		SELECT
+			MAX(g.g_no)
+		FROM
+			TB_Guest g, TB_Apply a
+		WHERE
+			g.a_no = a.a_no
+			AND a.e_eventdate = #{edate}
+	</select> 
+
+	<!-- 점심 파트너 입력 -->
+	<insert id="lunching" parameterType="hashMap">
+		UPDATE
+			TB_Guest
+		SET
+			g_lunch = #{pno}
+		WHERE
+			g_no = #{gno}
+	</insert>
+
+
 
 <!-- 사랑의 작대기 -->
 
@@ -38,16 +106,6 @@
 		WHERE
 		    a_no IN (SELECT a_no FROM TB_Apply WHERE e_eventdate = #{edate})
 	</update>
-
-	<!-- 처음에 보여줄 날짜 정하기. 입소자가 있는 기수로 -->
-	<select id="getEdate" resultType="string">
-		SELECT
-			MAX(e_eventdate) KEEP(DENSE_RANK FIRST ORDER BY e_eventdate DESC) AS edate
-		FROM
-			TB_Apply
-		WHERE
-    		a_cond=8
-	</select>
 
 	<!-- 입소자 수 구하기. 전체수, 선택완료한 사람수, 남자수, 여자수, 커플수 구하기 -->
 	<select id="getNumbers" resultType="matingvo" parameterType="string">
@@ -120,25 +178,6 @@
 			AND m.m_no=#{mno}
 	</select>
 		
-	<!-- 점심 짝 정보 -->
-	<update id="lunching" parameterType="string">
-		UPDATE
-			TB_Guest
-		SET
-			g_lunch=#{one}
-		WHERE
-			g_no=(
-				SELECT
-					g_no
-				FROM
-					TB_Guest g, TB_Apply a
-				WHERE
-					g.a_no=a.a_no
-					AND a.m_no=#{mno}
-					AND a.eventdate=#{edate}
-			)
-	</update>
-
 	<!-- 짝 선택시의 이성 목록 -->
 	<select id="getLoves" parameterType="MatingVO" resultType="MatingVO">
 		SELECT
@@ -179,6 +218,4 @@
 			g_no=#{myGno}
 	</update>
 	
-	<!-- 코스 정보 -->
-
 </mapper>

@@ -11,3 +11,15 @@ figure img {
 figcaption {
 	cursor:default;
 }
+svg {
+	width:520px;
+	height:760px;'
+}
+line {
+	stroke-linecap:round;
+	stroke-width:12px;
+	mix-blend-mode: screen;
+}
+g {
+	isolation: isolate;
+}

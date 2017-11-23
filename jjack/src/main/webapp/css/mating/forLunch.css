@@ -1,4 +1,16 @@
-
+figure {
+	border: 1px solid black;
+	display:inline-block;
+}
+figure img {
+	width:105px;
+	height:105px;
+	border-bottom:1px solid black;
+	cursor:pointer;
+}
+figcaption {
+	cursor:pointer;
+}
 
 
 
