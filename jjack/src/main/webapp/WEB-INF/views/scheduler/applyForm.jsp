@@ -78,7 +78,7 @@ var status = "${status}";
 				<div class="col-md-4 rDiv">
 				<h1 class="applyText"></h1>
 				<form method="post" id="applyFrm" action="" enctype="multipart/form-data">
-					<input type="hidden" id="aNo" name="aNo">
+					<input type="hidden" id="aNo" name="aNo" value=-1>
 					<input type="hidden" id="pic" name="pic">
 					<div class="container">
 						<div class="row">

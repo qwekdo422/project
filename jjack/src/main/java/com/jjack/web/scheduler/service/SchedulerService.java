@@ -105,8 +105,12 @@ public class SchedulerService {
 	 */
 	public void ghApply(GuestApplyVO vo, HttpSession session) {
 		//	사진업로드
-		GuestApplyVO avo = imgUpload(vo, session);
-		scDAO.insertApply(avo);
+		imgUpload(vo, session);
+		System.out.println(vo.getTel());
+		System.out.println(vo.getInterest());
+		System.out.println(vo.getmNo());
+		System.out.println(vo.getPic());
+		scDAO.insertApply(vo);
 	}
 	
 	/**
@@ -155,7 +159,7 @@ public class SchedulerService {
 		//	입소신청서 수정시 사진을 변경했을 때
 		if(!vo.getImageUpload().isEmpty()) {
 			//	사진업로드
-			vo = imgUpload(vo, session);
+			imgUpload(vo, session);
 		}
 		scDAO.updateApply(vo);
 	}

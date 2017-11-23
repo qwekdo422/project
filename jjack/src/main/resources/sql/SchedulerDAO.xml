@@ -99,24 +99,17 @@
 	<!-- 입소신청서 정보 조회 -->
 	<select id="selectApplyInfo" parameterType="hashMap" resultType="GuestApplyVO">
 		SELECT 
-			(
-			SELECT 
-				NVL(MAX(A_COND), 0)
-			FROM
-				TB_APPLY
-			WHERE
-				M_NO = #{mNo}
-			AND
-				E_EVENTDATE = #{eventdate}
-			)			AS cond, 
-			A_TEL		AS tel,
-			A_INTEREST	AS interest,
-			A_PIC 		AS pic,
-			A_NO  		AS aNo
-		FROM 
-			TB_APPLY
-		WHERE
+			NVL(A_COND, 0)	AS cond,
+			A_TEL			AS tel,
+			A_INTEREST		AS interest,
+			A_PIC 			AS pic,
+			A_NO			AS aNo
+		FROM
+			TB_APPLY RIGHT OUTER JOIN DUAL 
+		ON
 			M_NO = #{mNo}
+		AND
+			E_EVENTDATE	= #{eventdate}
 	</select>
 	
 	<!-- 입소신청서 수정 -->

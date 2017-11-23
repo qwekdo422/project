@@ -115,4 +115,43 @@ select a_cond from  TB_APPLY where m_no = 31;
 		AND
 			A.M_NO = M.M_NO
 		
+SELECT NVL(MAX(A_NO), 0) + 1 FROM TB_APPLY;
+
+
+		SELECT 
+			(
+			SELECT 
+				NVL(MAX(A_COND), 0)
+			FROM
+				TB_APPLY
+			WHERE
+				M_NO = 31
+			AND
+				E_EVENTDATE = '2017-11-11'
+			)			AS cond, 
+			A_TEL		AS tel,
+			A_INTEREST	AS interest,
+			A_PIC 		AS pic,
+			A_NO		AS aNo
+		FROM 
+			TB_APPLY
+		WHERE
+			M_NO = 31
+		AND
+			E_EVENTDATE = '2017-11-11'
+			
 		
+		SELECT 
+			NVL(A_COND, 0)	AS cond,
+			A_TEL			AS tel,
+			A_INTEREST		AS interest,
+			A_PIC 			AS pic,
+			A_NO			AS aNo
+		FROM
+			TB_APPLY RIGHT OUTER JOIN DUAL 
+		ON
+			M_NO = 31
+		AND
+			E_EVENTDATE	= '2017-11-04'
+			
+			

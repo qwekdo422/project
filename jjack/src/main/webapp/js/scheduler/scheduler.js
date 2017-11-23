@@ -41,15 +41,15 @@ $(document).ready(function() {
 				$(".title").text(event.title);	
 				$(".contents").text(event.contents);
 				
-				//	이벤트일정을 클릭했을 때 사용자의 입소상태를 알기위한 ajax처리
+				//	이벤트일정을 클릭했을 때 사용자의 입소상태에 따라 작업처리
 				$.ajax({
 					url: "./applyInfo.do",
-					data: {"eventdate": event.start._i},
+					data: {"eventdate": event.start._i},	//	행사시작일
 					success: function(data) {
 						//	이벤트 일정을 클릭할 때 입소신청창을 보여준다.
 						//	투명도를 0으로 숨긴다.
 						$(".rDiv").css("opacity", 0);
-						//	영역을 잡아준다.
+						//	표시될 영역을 잡아준다.
 						$(".lDiv").attr("class", "col-md-8 lDiv");
 						//	숨긴 div를 보여준다.
 						$(".rDiv").css("display", "block");
@@ -57,21 +57,30 @@ $(document).ready(function() {
 						$(".rDiv").animate({
 							opacity: 1	
 						}, 1000);
+						//	success 데이터
 						var gApply = data;
 						var cond = gApply.cond;
-						
 						//	데이터 초기화 작업
+						//	입소상태에 따라 보여질 텍스트 문구를 숨긴다.
 						$(".applyText").hide();
+						//	입소신청폼을 보여준다.
 						$("#applyFrm").show();
+						//	관심사 선택창을 디폴트로 잡아준다.
 						$("#interest").val("").prop("selected", true);
+						//	전화번호 정보를 초기화
 						$("#tel").val("");
+						//	수정버튼 숨김
 						$("#uBtn").css("display", "none");
+						//	사진등록에 쓸 기본이미지 출력
 						$("#imagePreview").prop("src", "../img/houseApply/basic.jpg");
 						
 						//	해당날짜에 이벤트 신청을 안한사람
 						if(cond == 0) {
+							//	신청버튼을 사용할 수 있게한다.
 							$("#applyBtn").prop("disabled", false);
+							//	버튼이름을 입소신청으로 만든다.
 							$("#applyBtn").val("입소신청");
+							//	입소취소 버튼을 숨긴다.
 							$("#resetBtn").css("display", "none");
 						//	해당날짜에 이벤트를 신청한사람 (승인대기 상태)
 						} else if(cond == 1 || cond == 2 || cond == 5) {
@@ -86,10 +95,13 @@ $(document).ready(function() {
 							$("#tel").val(gApply.tel);
 							//	관심사 자동체크
 							$("#interest").val(gApply.interest).prop("selected", true);
-							//	사진등록버튼 사진수정버튼으로 수정
+							//	사진등록버튼 이름을 사진수정버튼으로 수정
 							$("#imageUpload").next().text("사진수정");
+							//	입소신청때 등록한 사진을 보여준다.
 							$("#imagePreview").prop("src", "../file/"+gApply.pic);
+							alert(aNo);
 							//	히든에 숨겨놓을 입소신청 번호
+//							$("#pic").prev().html('<input type="hidden" id="aNo" name="aNo" value="'+gApply.aNo+'">');
 							$("#aNo").val(gApply.aNo);
 							//	히든에 숨겨놓을 사진이름
 							$("#pic").val(gApply.pic);
@@ -106,7 +118,10 @@ $(document).ready(function() {
 						} else if (cond == 7) {
 							//	입소취소
 							condStatus("입소를 취소하셨습니다.");
-						} else if (cond <= 8 && cond >= 10 ) {
+						} else if (cond == 8){
+							//	입소
+							condStatus("일정에 맞게 입소바랍니다.");
+						} else if (cond == 9 || cond == 10 ) {
 							//	신청할 수 없는 이벤트(행사 종료되었을 때)
 							condStatus("이벤트가 종료되었습니다.");
 						}
@@ -148,7 +163,7 @@ $(document).ready(function() {
 	//	행사 일정 등록버튼 이벤트 (관리자)
 	$("#wBtn").click(function(){
 		//	무결성 검사
-		validation();
+		validationAdmin();
 		//	무결성 검사에 걸렸을 겅우 다음을 수행하지 않고 리턴
 		if(isFlag()) return;
 		//	등록완료 alert창을 띄우고 서브밋을 한다.
@@ -158,7 +173,7 @@ $(document).ready(function() {
 	//	행사 일정 수정버튼 이벤트 (관리자)
 	$("#mBtn").click(function(){
 		//	무결성 검사
-		validation();
+		validationAdmin();
 		//	무결성 검사에 걸렸을 겅우 다음을 수행하지 않고 리턴
 		if(isFlag()) return;
 		//	수정완료 alert창을 띄우고 서브밋을 한다.
@@ -311,7 +326,7 @@ function isFlag() {
 }
 
 //	무결성 검사 함수 (관리자)
-function validation () {
+function validationAdmin () {
 	var gisoo = $("#gisoo");			// 기수
 	var eventdate = $("#eventdate");	// 이벤트 시작일
 	var eventend = $("#eventend");		//	이벤트 종료일
@@ -345,3 +360,9 @@ function validation () {
 	} // 무결성 검사 반복문 종료
 } // 무결성 검사 함수 종료
 
+
+//	무결성검사 (사용자)
+function validationUser () {
+	var tel = $("#tel");	//	전화번호
+	
+}
