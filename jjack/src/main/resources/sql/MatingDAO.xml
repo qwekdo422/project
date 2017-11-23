@@ -49,48 +49,24 @@
     		a_cond=8
 	</select>
 
-	<!-- 모든 날짜, 기수 정보 가져오기 -->
-	<!-- 이건 완성하고나서 이전기수구경하기 기능 만들거면 넣자 -->
-	<select id="getEventList" resultType="matingvo">
-		SELECT
-			e_eventdate AS evdate,
-			e_gisoo AS gisoo
-		FROM
-			TB_Event
-		ORDER BY
-			e_eventdate DESC
-	</select>
-
 	<!-- 입소자 수 구하기. 전체수, 선택완료한 사람수, 남자수, 여자수, 커플수 구하기 -->
 	<select id="getNumbers" resultType="matingvo" parameterType="string">
 		SELECT
 			tCount,	-- 입소자 수
-			cCount,	-- 선택을 완료한 사람 수
-			mCount,	-- 입소한 남자 수
-			fCount,	-- 입소한 여자 수
-			cpCount	-- 커플된 사람 수. 필요한가?
+			cCount	-- 선택을 완료한 사람 수
 		FROM
 			(SELECT COUNT(g_no) AS tCount FROM TB_Guest g, TB_Apply a 
 				WHERE g.a_no=a.a_no AND e_eventdate = #{edate}) wc,
-			(SELECT COUNT(g.g_no) AS mCount FROM TB_Guest g, TB_Apply a, TB_Member m
-				WHERE a.e_eventdate = #{edate} AND a.m_no=m.m_no AND g.a_no=a.a_no AND m.m_sex='M') mc,
-			(SELECT COUNT(g.g_no) AS fCount FROM TB_Guest g, TB_Apply a, TB_Member m
-				WHERE a.e_eventdate = #{edate} AND a.m_no=m.m_no AND g.a_no=a.a_no AND m.m_sex='F') fc,
 			 (SELECT COUNT(g_no) AS cCount FROM TB_Guest g, TB_Apply a 
-			 	WHERE g.a_no=a.a_no AND g_choice IS NOT NULL AND e_eventdate = #{edate}) cc,
-			 (SELECT COUNT(g_course) AS cpCount FROM TB_Guest g, TB_Apply a 
-			 	WHERE g.a_no=a.a_no AND  g_course IN ('A', 'B', 'C') AND e_eventdate = #{edate}) cpc
+			 	WHERE g.a_no=a.a_no AND g_choice IS NOT NULL AND e_eventdate = #{edate}) cc
 	</select>
 
 	<!-- 사랑의 작대기용 입소자(남자) 리스트 가져오기 -->
 	<select id="MenForArrows" parameterType="string" resultType="matingvo">
 		SELECT
-			g.g_no AS gno,
-			g.g_choice AS myLove,
 			a.a_pic AS pic,
 			g.g_nick AS nick,
-			SUBSTR(lg.g_nick,4,1)-1 AS loveNo,
-			g.g_course AS coupling
+			SUBSTR(lg.g_nick,4,1)-1 AS loveNo
 		FROM
 			TB_Guest g, TB_Apply a, TB_Member m, TB_Guest lg
 		WHERE
@@ -106,12 +82,9 @@
 	<!-- 사랑의 작대기용 입소자(여자) 리스트 가져오기 -->
 	<select id="WomenForArrows" parameterType="string" resultType="matingvo">
 		SELECT
-			g.g_no AS gno,
-			g.g_choice AS myLove,
 			a.a_pic AS pic,
 			g.g_nick AS nick,
-			SUBSTR(lg.g_nick,4,1)-1 AS loveNo,
-			g.g_course AS coupling
+			SUBSTR(lg.g_nick,4,1)-1 AS loveNo
 		FROM
 			TB_Guest g, TB_Apply a, TB_Member m, TB_Guest lg
 		WHERE

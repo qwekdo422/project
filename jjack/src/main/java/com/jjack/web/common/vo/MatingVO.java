@@ -16,14 +16,10 @@ public class MatingVO {
 	private String pic;
 	private String course;
 	private String interest;
-	private String coupling;	// 커플이 됐는지 여부. Y / N
 	private int loveNo;	// 선택한 상대가 몇 호인지
 	
-	private int mCount;	// 입소한 남자 수
-	private int fCount;		// 입소한 여자 수
 	private int cCount;		// 선택을 완료한 사람 수
 	private int tCount;		// 전체 사람 수
-	private int cpCount;	// 커플 수
 	
 	
 	public int getLoveNo() {
@@ -38,47 +34,11 @@ public class MatingVO {
 	public void setInterest(String interest) {
 		this.interest = interest;
 	}
-	public String getCoupling() {
-		return coupling;
-	}
-	public void setCoupling(String coupling) {
-		if (coupling.equals("S")) {
-			this.coupling = "N"; 
-		} else {
-			this.coupling = "Y";
-		}
-	}
-	public int getCpCount() {
-		return cpCount;
-	}
-	public void setCpCount(int cpCount) {
-		this.cpCount = cpCount;
-	}
 	public String getCourse() {
 		return course;
 	}
 	public void setCourse(String course) {
-		if(course.equals("사진")) {
-			this.course = "A";
-		} else if(course.equals("바다")) {
-			this.course = "B";
-		} else if(course.equals("절경")) {
-			this.course = "C";
-		} else {
-			this.course = course;
-		}
-	}
-	public int getmCount() {
-		return mCount;
-	}
-	public void setmCount(int mCount) {
-		this.mCount = mCount;
-	}
-	public int getfCount() {
-		return fCount;
-	}
-	public void setfCount(int fCount) {
-		this.fCount = fCount;
+		this.course = course;
 	}
 	public int getcCount() {
 		return cCount;
