@@ -111,7 +111,7 @@ if(id !=null){//즉, 로그인 한 상태인 경우는 조회수 올리기 로�
 	}
 }// end of if 
 
-	//로그인 하지 않은 상태에서는 조회수를 올리지 않고 그냥 목록보기 
+	//로그인 하지 않은 상태에서는 조회수를 올리지 않고 그냥 상세보기 
 	ModelAndView mv= new ModelAndView(); 
 	RedirectView rv= new RedirectView("../Nboard/NboardView.do");
 	rv.addStaticAttribute("nno",nVO.getNno());
