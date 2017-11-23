@@ -1,4 +1,5 @@
-var flag = false;	//	무결성 검사에 걸렸는지 안걸렸는지를  판단할 변수
+var flag = false;	//	무결성 검사에 걸렸는지 안걸렸는지를  판단할 변수(걸렸을 때 true)
+var uBtnStatus = false;	// 수정버튼 클릭했을 때 상태값 (수정버튼 클릭했을 때 true)
 $(document).ready(function() {
 	$(".lDiv").attr("class", "col-md-12 lDiv");
 	//	==============  달력표시  ===================
@@ -54,12 +55,12 @@ $(document).ready(function() {
 						//	숨긴 div를 보여준다.
 						$(".rDiv").css("display", "block");
 						//	1초동안 투명도를 밝게 보여준다.
-						$(".rDiv").animate({
-							opacity: 1	
-						}, 1000);
+						$(".rDiv").animate({opacity: 1}, 1000);
 						//	success 데이터
 						var gApply = data;
+						//	입소 상태값
 						var cond = gApply.cond;
+						
 						//	데이터 초기화 작업
 						//	입소상태에 따라 보여질 텍스트 문구를 숨긴다.
 						$(".applyText").hide();
@@ -91,6 +92,8 @@ $(document).ready(function() {
 							$("#applyBtn").prop("disabled", true);
 							//	수정버튼 보이기
 							$("#uBtn").css("display", "block");
+							//	입소취소버튼 보이기
+							$("#resetBtn").css("display", "block");
 							//	전화번호
 							$("#tel").val(gApply.tel);
 							//	관심사 자동체크
@@ -99,9 +102,7 @@ $(document).ready(function() {
 							$("#imageUpload").next().text("사진수정");
 							//	입소신청때 등록한 사진을 보여준다.
 							$("#imagePreview").prop("src", "../file/"+gApply.pic);
-							alert(aNo);
 							//	히든에 숨겨놓을 입소신청 번호
-//							$("#pic").prev().html('<input type="hidden" id="aNo" name="aNo" value="'+gApply.aNo+'">');
 							$("#aNo").val(gApply.aNo);
 							//	히든에 숨겨놓을 사진이름
 							$("#pic").val(gApply.pic);
@@ -130,7 +131,7 @@ $(document).ready(function() {
 						alert("에러"+e);
 					}
 				});
-			}
+			} // 사용자 조건 종료
 			
 		} // 이벤트 클릭했을 때 작업 종료
 	
@@ -197,10 +198,12 @@ $(document).ready(function() {
 	
 	//	입소신청서 수정버튼(사용자)
 	$("#uBtn").click(function(){
+		uBtnStatus = true;
 		//	무결성 검사
 		validation();
 		//	무결성 검사에 걸렸을 겅우 다음을 수행하지 않고 리턴 (true 일경우 무결성 검사 걸린 경우)
 		if(isFlag()) return;
+		uBtnStatus = false;
 		$("#applyFrm").attr("action", "./applyModify.do").submit();
 	});
 	
@@ -271,7 +274,6 @@ function completAlert(msg) {
 }
 
 var eGisoo;	//	행사일정을 클릭했을 때 그 행사일정의 기수를 저장할 변수
-var eStatus = false;	//	일반날짜, 이벤트 일정을 클랙했을 때의 상태값
 // 달력을 클릭 했을때 모달창 처리 함수 (관리자일 경우만)
 function modalView(target, event) {
 	//	모달창을 띄운다.
@@ -294,8 +296,6 @@ function modalView(target, event) {
 		$("#wBtn").css("display", "none");
 		$("#mBtn").css("display", "block");
 		$("#dBtn").css("display", "block");
-		//	이벤트 일정을 클릭했을 때의 상태값
-		eStatus = true;
 	} 
 	
 	//	행사일정이 없을 때
@@ -313,8 +313,6 @@ function modalView(target, event) {
 		$("#mBtn").css("display", "none");
 		$("#dBtn").css("display", "none");
 		$("#wBtn").css("display", "block");
-		//	일반 날자를 클릭했을 때의 상태값
-		eStatus = false;
 	}
 }
 
@@ -353,6 +351,11 @@ function validation () {
 	for (var i = 0; i < frmArr.length; i++) {
 		//	태그 (gisoo ~ contents)
 		var vTag = frmArr[i];
+		//	수정버튼클릭 했을 떄 사진 무결성 검사 제외
+		//	수정은 디폴트로 입소 신청한 사진을 사용하므로
+		if(vTag.attr("id") == 'imageUpload' && uBtnStatus == true) {
+			continue;
+		}
 		if(vTag.val() == "") {
 			flag = true;	//	무결성 검사에 걸렸을 때 true로 변경(버튼클릭 이벤트때 사용)
 			switch (vTag) {
