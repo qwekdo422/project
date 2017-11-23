@@ -19,9 +19,6 @@ import com.jjack.web.test.service.impl.TestServiceImpl;
 @Controller
 public class MainController {
 
-	
-
-	@Autowired private TestService tService; 
 
 	/**
 	 * 메인페이지 관련 함수

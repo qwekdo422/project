@@ -60,16 +60,10 @@ function open_food_frame(url){
 			<!-- 본 화면 -->
 		 	<div id="CoupleMain" class="col-lg-9">
 				
-				
-				<br>
 			    <!-- Map url -->
 				<button onclick='open_map_frame("https://www.google.com/maps/d/embed?mid=1z5yQJh_pAHZ8F8dbyF2qNvtJ1vGTg2r3");
 					open_food_frame("https://m.store.naver.com/restaurants/listMap?back=false&category=%EB%B6%84%EC%8B%9D&menu=6&query=%EC%A0%9C%EC%A3%BC%EB%8F%84%20%EB%A7%9B%EC%A7%91&searchQuery=%EC%A0%9C%EC%A3%BC%EB%8F%84%20%EB%A7%9B%EC%A7%91&level=bottom&age=30")' 
-					style="padding:0px">
-					<img src="../img/datecourse/east_course.png">
-				</button>
-				<img src="../img/datecourse/love_icon.gif" width="130">
-				<img src="../img/datecourse/recommend_icon.png">
+					style="padding:0px"><img src="../img/datecourse/east_course.png"></button>
 				<br>
 				<br>
    			    <button onclick='open_map_frame("https://www.google.com/maps/d/embed?mid=1BNuO89rX3ZuCRCND53p6Gj9pTnzBSzCU");
