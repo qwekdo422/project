@@ -16,9 +16,15 @@
 <link rel="stylesheet" href="../css/mating/Arrows.css" />
 <script src="../js/mating/Arrows.js"></script>
 <script>
+	// 선택을 아직 하지 않은 사람 수
 	var allClear = ${numbers.tCount} -${numbers.cCount};
-
-
+	
+	// 선 그리기
+	function drawLine(e){
+		e[0].beginElement();
+		e[1].beginElement();
+	}
+	
 </script>
 </head>
 <body style="margin:0 auto;">
@@ -42,7 +48,7 @@
 				<div class="row">
 				
 					<div id="men" class="col-lg-2">
- 						<c:forEach var="ml" items="${mList}">
+ 						<c:forEach var="ml" items="${mList}" varStatus="vs">
 							<div class="col-xs-2 mx-auto">
 								<figure class="figure">
 									<img src="../file/${ml.pic}" class="figure-img img-fluid">
@@ -55,11 +61,65 @@
 					<!-- 남자리스트 영역 종료 -->
 					
 					<div id="arrowsDiv" class="col-lg-8">
-						<svg xmlns="http://www.w3.org/2000/svg" width="520px" height="760px" version="1.1">
-							<line x1="40" x2="120" y1="100" y2="100" stroke="black" stroke-width="20" stroke-linecap="round"/>
+					
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+							<g>
+								<!-- 남자 선 -->
+								<line x1="10" x2="10" y1="70" y2="70" class="mLine">
+									<animate attributeName='x2' attributeType='XML' to='510' begin='indefinite' dur='1s' fill='freeze' />
+									<animate class="y2anm" attributeName='y2' attributeType='XML' to='' begin='indefinite' dur='1s' fill='freeze' />
+								</line>
+								<line x1="10" x2="10" y1="225" y2="225" class="mLine" >
+									<animate attributeName='x2' attributeType='XML' to='510' begin='indefinite' dur='1s'  fill='freeze' />
+									<animate class="y2anm" attributeName='y2' attributeType='XML' to='' begin='indefinite' dur='1s' fill='freeze' />
+								</line>
+								<line x1="10" x2="10" y1="385" y2="385" class="mLine" >
+									<animate attributeName='x2' attributeType='XML' to='510' begin='indefinite' dur='1s'  fill='freeze' />
+									<animate class="y2anm" attributeName='y2' attributeType='XML' to='' begin='indefinite' dur='1s' fill='freeze' />
+								</line>
+								<line x1="10" x2="10" y1="540" y2="540" class="mLine" >
+									<animate attributeName='x2' attributeType='XML' to='510' begin='indefinite' dur='1s'  fill='freeze' />
+									<animate class="y2anm" attributeName='y2' attributeType='XML' to='' begin='indefinite' dur='1s' fill='freeze' />
+								</line>
+								<line x1="10" x2="10" y1="695" y2="695" class="mLine" >
+									<animate attributeName='x2' attributeType='XML' to='510' begin='indefinite' dur='1s'  fill='freeze' />
+									<animate class="y2anm" attributeName='y2' attributeType='XML' to='' begin='indefinite' dur='1s' fill='freeze' />
+								</line>
+								<!-- 여자 선 -->
+								<line x1="510" x2="510" y1="70" y2="70" class="fLine" >
+									<animate attributeName='x2' attributeType='XML' to='10' begin='indefinite' dur='1s'  fill='freeze' />
+									<animate class="y2anm" attributeName='y2' attributeType='XML' to='' begin='indefinite' dur='1s' fill='freeze' />
+								</line>
+								<line x1="510" x2="510" y1="225" y2="225" class="fLine" >
+									<animate attributeName='x2' attributeType='XML' to='10' begin='indefinite' dur='1s'  fill='freeze' />
+									<animate class="y2anm" attributeName='y2' attributeType='XML' to='' begin='indefinite' dur='1s' fill='freeze' />
+								</line>
+								<line x1="510" x2="510" y1="385" y2="385" class="fLine" >
+									<animate attributeName='x2' attributeType='XML' to='10' begin='indefinite' dur='1s'  fill='freeze' />
+									<animate class="y2anm" attributeName='y2' attributeType='XML' to='' begin='indefinite' dur='1s' fill='freeze' />
+								</line>
+								<line x1="510" x2="510" y1="540" y2="540" class="fLine" >
+									<animate attributeName='x2' attributeType='XML' to='10' begin='indefinite' dur='1s'  fill='freeze' />
+									<animate class="y2anm" attributeName='y2' attributeType='XML' to='' begin='indefinite' dur='1s' fill='freeze' />
+								</line>
+								<line x1="510" x2="510" y1="695" y2="695" class="fLine" >
+									<animate attributeName='x2' attributeType='XML' to='10' begin='indefinite' dur='1s'  fill='freeze' />
+									<animate class="y2anm" attributeName='y2' attributeType='XML' to='' begin='indefinite' dur='1s' fill='freeze' />
+								</line>
+							</g>
+							<!-- 남자 원 -->
+							<circle cx="10" cy="70" r="6" class="mCircle" />
+							<circle cx="10" cy="225" r="6" class="mCircle" />
+							<circle cx="10" cy="385" r="6" class="mCircle" />
+							<circle cx="10" cy="540" r="6" class="mCircle" />
+							<circle cx="10" cy="695" r="6" class="mCircle" />
+							<!-- 여자 원 -->
+							<circle cx="510" cy="70" r="6" class="fCircle" />
+							<circle cx="510" cy="225" r="6" class="fCircle" />
+							<circle cx="510" cy="385" r="6" class="fCircle" />
+							<circle cx="510" cy="540" r="6" class="fCircle" />
+							<circle cx="510" cy="695" r="6" class="fCircle" />
 						</svg>
-					
-					
 					
 					</div>
 					<!-- 사랑의 작대기 영역 종료 -->

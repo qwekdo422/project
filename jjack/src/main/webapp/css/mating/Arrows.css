@@ -15,3 +15,28 @@ figcaption {
 	text-align:center;
 	margin-top:30px;
 }
+
+svg {
+	width:520px;
+	height:760px;'
+}
+line {
+	stroke-linecap:round;
+	stroke-width:12px;
+	mix-blend-mode: screen;
+}
+g {
+	isolation: isolate;
+}
+.mLine {
+	stroke:DeepSkyBlue;
+}
+.fLine {
+	stroke:tomato;
+}
+.mCircle {
+	fill:DeepSkyBlue;
+}
+.fCircle {
+	fill:tomato;
+}

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC 	"-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace는 연결할 DAO 인터페이스경로.클래스명 -->	
 <mapper namespace="com.jjack.web.mating.dao.MatingDAO">
-
+<!-- 점심 사다리타기 -->
 
 <!-- 사랑의 작대기 -->
 

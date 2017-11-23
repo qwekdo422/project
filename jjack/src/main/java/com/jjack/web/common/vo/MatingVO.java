@@ -20,7 +20,7 @@ public class MatingVO {
 	private int loveNo;	// 선택한 상대가 몇 호인지
 	
 	private int mCount;	// 입소한 남자 수
-	private int fCound;		// 입소한 여자 수
+	private int fCount;		// 입소한 여자 수
 	private int cCount;		// 선택을 완료한 사람 수
 	private int tCount;		// 전체 사람 수
 	private int cpCount;	// 커플 수
@@ -74,11 +74,11 @@ public class MatingVO {
 	public void setmCount(int mCount) {
 		this.mCount = mCount;
 	}
-	public int getfCound() {
-		return fCound;
+	public int getfCount() {
+		return fCount;
 	}
-	public void setfCound(int fCound) {
-		this.fCound = fCound;
+	public void setfCount(int fCount) {
+		this.fCount = fCount;
 	}
 	public int getcCount() {
 		return cCount;
