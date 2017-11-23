@@ -54,7 +54,7 @@ var status = "${status}";
 									<td class="eventDay"></td>
 								</tr>
 								<tr>
-									<th>대상지역</th>
+									<th>대상 지역</th>
 									<td class="loc"></td>
 									<th>대상 연령대</th>
 									<td class="age"></td>
@@ -100,7 +100,7 @@ var status = "${status}";
 				  	</div>
 				  	<div class="form-group">
 				    	<label for="tel">연락처:</label>
-				    	<input type="text" class="form-control" name="tel" id="tel">
+				    	<input type="text" class="form-control" name="tel" id="tel" placeholder="ex) 010-1111-1111">
 				 	</div>
 				  	<div class="form-group">
 				    	<label for="loc">거주지:</label>
