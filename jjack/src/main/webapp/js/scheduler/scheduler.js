@@ -61,7 +61,7 @@ $(document).ready(function() {
 						var cond = gApply.cond;
 						
 						//	데이터 초기화 작업
-						$(".applyCencle").hide();
+						$(".applyText").hide();
 						$("#applyFrm").show();
 						$("#interest").val("").prop("selected", true);
 						$("#tel").val("");
@@ -93,13 +93,23 @@ $(document).ready(function() {
 							$("#aNo").val(gApply.aNo);
 							//	히든에 숨겨놓을 사진이름
 							$("#pic").val(gApply.pic);
+						//	입금하세요.
+						} else if (cond == 3) {
+							condStatus("입금하세요. 계좌번호: 기업은행 010-7131-2014");
+						//	입소예정
+						} else if (cond == 4) {
+							condStatus("입소 예정입니다.");
 						//	해당행사에 입소취소를 취소한사람
+						} else if (cond == 6) {
+							//	마감
+							condStatus("마감되었습니다.");
 						} else if (cond == 7) {
-							$("#applyFrm").hide();
-							$(".applyCencle").show();
+							//	입소취소
+							condStatus("입소를 취소하셨습니다.");
+						} else if (cond <= 8 && cond >= 10 ) {
+							//	신청할 수 없는 이벤트(행사 종료되었을 때)
+							condStatus("이벤트가 종료되었습니다.");
 						}
-						
-						
 					},
 					error: function(e) {
 						alert("에러"+e);
@@ -218,6 +228,14 @@ $(document).ready(function() {
 	
 });	// document 종료
 
+
+//	입소상태에 따라 처리해주는 함수
+function condStatus(msg) {
+	$("#applyFrm").hide();
+	$(".applyText").text(msg);
+	$(".applyText").show();
+}
+
 //	완료알림창을 띄우고 서브밋처리하는 함수
 function completAlert(msg) {
 	alertify.alert(msg+"이(가) 완료되었습니다.", function(){
@@ -279,7 +297,7 @@ function modalView(target, event) {
 	}
 }
 
-//	무결성 검사 산태체크 함수
+//	무결성 검사 상태체크 함수
 function isFlag() {
 	//	무결성 검사에 걸렸을 겅우
 	if(flag == true) {

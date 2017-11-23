@@ -76,7 +76,7 @@ var status = "${status}";
 			<%-- ================ 입소신청 =============== --%>
 				
 				<div class="col-md-4 rDiv">
-				<h1 class="applyCencle">입소를 취소하셨습니다.</h1>
+				<h1 class="applyText"></h1>
 				<form method="post" id="applyFrm" action="" enctype="multipart/form-data">
 					<input type="hidden" id="aNo" name="aNo">
 					<input type="hidden" id="pic" name="pic">
