@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DateCourseController {
 	@RequestMapping("/BasicCourse")
 	public String basicCourse(){
-		System.out.println("BasicCourse");
+		//System.out.println("BasicCourse");
 		return "datecourse/BasicCourse";
 	}
 	@RequestMapping("/CoupleCourse")
 	public String coupleCourse(){
-		System.out.println("CoupleCourse");
+		//System.out.println("CoupleCourse");
 		return "datecourse/CoupleCourse";
 	}
 	@RequestMapping("/SoloCourse")
 	public String soloCourse(){
-		System.out.println("SoloCourse");
+		//System.out.println("SoloCourse");
 		return "datecourse/SoloCourse";
 	}
 	

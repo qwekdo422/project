@@ -44,18 +44,22 @@ $(document).ready(function(){
 		//사용자가 입력한 내용은 스킨에 입력한 것일 뿐 textarea에는 입력되지 않는다. 
 		//처리 방법 : ★★★ 스킨에 있는 내용을 <textarea>에 반영한 후 서브밋 처리를 해야 한다. 
 		oEditors.getById["nbody"].exec("UPDATE_CONTENTS_FIELD", []);
-		var	body = $("#nbody").val();
 		var	ntitle = $("#ntitle").val();
+		var	body = $("#nbody").val();
+	
+		if(ntitle==""){
+			alert("제목을 입력하십시오");
+			return ; 
+		}
+		
+		if(body=="<p>&nbsp;</p>"){
+			alert("본문을 입력하십시오"); 
+			return; 
+		}
+		
 
-		alert(ntitle);
-		
-		alert(body);
-		
 		$("#nfrm").submit(); 
-	
 	}); 
-	
-	
 }); 
 </script>
 <body style="margin:0 auto;">
@@ -64,14 +68,18 @@ $(document).ready(function(){
    </div>
       <div class="container">
 		
-		<!-- 글쓰기 폼  -->
-		<form method="post" id="nfrm"action="../Nboard/NboardProc.do">
+<!-- 글쓰기 폼  -->
+<form method="post" id="nfrm"action="../Nboard/NboardProc.do">
 	<table width="800"  border="1" align="center">
 		<tr>
-			<td><input type="text" name="ntitle" id="ntitle"  style="width:100%" placeholder="제목을 입력해주세요"></td>
+			<td>
+				<input type="text" name="ntitle" id="ntitle"  style="width:100%" placeholder="제목을 입력해주세요">
+			</td>
 		</tr>
 		 <tr>
-		 	<td colspan="2"><textarea id="nbody" name="ncontents" row="10" cols="110"  ></textarea></td>
+		 	<td colspan="2">
+		 		<textarea  id="nbody" name="ncontents" row="100" cols="110"  ></textarea>
+		  </td>
 		 </tr>
 		  <tr>
 				<td colspan="2" align="center">
@@ -79,8 +87,8 @@ $(document).ready(function(){
 				</td>
 			</tr>
 	</table>
-		</form>
-		<!-- 글쓰기 폼 종료   -->
+</form>
+<!-- 글쓰기 폼 종료   -->
 		
 		
 		</div>

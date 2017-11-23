@@ -15,22 +15,13 @@
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
 
-<%-- 캘린더  --%>
+<%-- 일정관리  --%>
 <link rel='stylesheet prefetch' href='../css/houseApply/fullcalendar.css'>
-<link rel='stylesheet prefetch' href='../css/houseApply/magnific-popup.css'>
-<link rel="stylesheet" href="../css/houseApply/calendar.css" />
-
-<%-- 입소신청 폼 --%>
-<link rel="stylesheet" href="../css/houseApply/applyForm.css" />
-<%-- 파일업로드 --%>
-<script src="../js/houseApply/fileUpload.js"></script>
+<link rel="stylesheet" href="../css/scheduler/scheduler.css" />
+<script src="../js/scheduler/scheduler.js"></script>
 <script type="text/javascript">
-var tEvent = ${CALENDAR};
-$(document).ready(function(){
-	$("#applyBtn").click(function() {
-		$("#applyFrm").attr("action", "./applyProc.do").submit();
-	});
-});
+//	행사일정들(json형태)
+var schedule = ${SCHEDULE};
 </script>
 </head>
 
@@ -42,16 +33,12 @@ $(document).ready(function(){
 		<div class="container mt-4 lDiv">
 			<div class="row">
 			<%-- ================ 달력 =============== --%>
-				<div class="col-md-8">
+				<div class="col-md-12">
 					<div id='calendar'></div>
 					<script src='../js/houseApply/moment.min.js'></script>
-					<script src='../js/houseApply/fullcalendar-2.1.1.js'></script>
 					<script src='../js/houseApply/fullcalendar.min.js'></script>
-					<script src='../js/houseApply/jquery.magnific-popup.min.js'></script>
-					<script src="../js/houseApply/calendar.js"></script>
 				</div>
 			<%-- ================ 달력  =============== --%>
-			
 			
 			<%-- ================ 입소신청 =============== --%>
 				<div class="col-md-4 rDiv">
@@ -87,8 +74,8 @@ $(document).ready(function(){
 				 	</div>
 					<div class="form-group">
 						<label for="interest">관심사:</label> 
-						<select class="form-control" id="interest">
-							<option value="">== 선택하세요 ==</option>
+						<select class="form-control" id="interest" name="interest">
+							<option value="0">== 선택하세요 ==</option>
 							<option value="사진">사진</option>
 							<option value="바다">바다</option>
 							<option value="절경">절경</option>
@@ -105,6 +92,8 @@ $(document).ready(function(){
 			<%-- ================ 입소신청 =============== --%>
 			</div>
 			<%-- row 끝 --%>
+			
+			
 		</div>
 		<%-- 메인 끝 --%>
 

@@ -82,7 +82,7 @@ public class SignUpController {
 		
 		
 		sService.SignUpProc(pVO); //회원가입 폼 데이터 DB에 넣는 로직 수행 
-		
+		System.out.println(pVO.getBirth()+"날짜날짜");
 		
 		ModelAndView	mv = new ModelAndView();
 		mv.addObject("id", pVO.getId()); 

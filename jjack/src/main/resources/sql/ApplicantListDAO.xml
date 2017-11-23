@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	"-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace는 연결할 DAO 인터페이스경로.클래스명 -->	
+<mapper namespace="com.jjack.web.applicantList.dao.ApplicantListDAO">
+
+	<!-- 처음에 보여줄 날짜 정하기 -->
+	<select id="getEdate" resultType="string">
+		SELECT
+			MAX(e_eventdate) AS edate
+		FROM
+			TB_Event
+	</select>
+
+	<!-- 모든 날짜, 기수 정보 가져오기 -->
+	<select id="getEventList" resultType="applicantcountvo">
+		SELECT
+			e_eventdate AS evdate,
+			e_gisoo AS gisoo
+		FROM
+			TB_Event
+		ORDER BY
+			e_eventdate DESC
+	</select>
+
+	<!-- 신청자 리스트 구하기 공통부분-->
+	<sql id = "apList">
+		SELECT
+			a.m_no AS mno,
+			a.a_no AS ano,
+			m.m_id AS id,
+			g.g_nick AS nick,
+			m.m_name AS name,
+			m.m_sex AS sex,
+			TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - TO_NUMBER(TO_CHAR(m.m_birth, 'YYYY'))+1 AS age,
+			m.m_loc AS loc,
+			a.a_interest AS interest,
+			a.a_apdate AS adate,
+			a.e_eventdate AS evdate,
+			a.a_tel AS tel,
+			m.m_email AS email,
+			a.a_cond AS thisStep,
+			a.a_pic AS pic,
+		    ac.acount AS acount,
+			NVL(gc.gcount, 0) AS gcount  
+		FROM
+			TB_Member m,
+			TB_Apply a,
+		    TB_Guest g,
+		    (SELECT
+		        COUNT(a_no) AS acount, m_no
+		    FROM
+		        TB_Apply 
+		    GROUP BY
+		        m_no) ac,
+		    (SELECT
+		        COUNT(gg.g_no) AS gcount, gg.m_no
+		    FROM 
+		        (SELECT 
+		            a.m_no, g.g_no 
+		        FROM 
+		            TB_Apply a, TB_Guest g 
+		        WHERE 
+		            a.a_no=g.a_no) gg 
+		    GROUP BY
+		        gg.m_no) gc
+		WHERE
+			m.m_no = a.m_no
+		    AND a.a_no = g.a_no(+)
+		    AND ac.m_no = a.m_no
+		    AND gc.m_no(+) = a.m_no
+		    AND a.e_eventdate = #{edate}
+		    AND 
+	</sql>
+
+	<!-- 승인대기중인 입소신청자들 -->
+	<select id="getWaitList" parameterType="string" resultType="applicantlistvo">
+		<include refid="apList"></include>
+			a_cond = 1
+		ORDER BY
+			a_apdate ASC
+	</select>
+	
+	<!-- 승인된 남자신청자들 -->
+	<select id="getOkManList" parameterType="string" resultType="applicantlistvo">
+		<include refid="apList"></include>
+			a_cond IN (2, 3, 4, 8, 9, 10)
+		AND m_sex = 'M'
+			ORDER BY
+		a_apdate ASC
+	</select>
+	
+	<!-- 승인된 여자신청자들 -->
+	<select id="getOkWomanList" parameterType="string" resultType="applicantlistvo">
+		<include refid="apList"></include>
+			a_cond IN (2, 3, 4, 8, 9, 10)
+		AND m_sex = 'F'
+			ORDER BY
+		a_apdate ASC
+	</select>
+	
+	<!-- 승인거부된 신청자들 -->
+	<select id="getDeniedList" parameterType="string" resultType="applicantlistvo">
+		<include refid="apList"></include>
+			a_cond IN (5,6,7)
+		ORDER BY
+			a_apdate ASC
+	</select>
+	
+	<!-- 선택한 입소날짜, 기수와 대기자, 승인자, 거부자 수 -->
+	<select id="getApCount" parameterType="string" resultType="ApplicantCountVO">
+		SELECT
+			e_eventdate AS evdate,
+			e_gisoo AS gisoo,
+			e_title AS etitle,
+			waitCount,
+			manCount,
+			womanCount,
+			deniedCount
+		FROM
+			TB_Event,
+			(SELECT COUNT(a_no) AS waitCount FROM TB_Apply WHERE e_eventdate = #{edate} AND a_cond=1) wc,
+			(SELECT COUNT(a.a_no) AS manCount FROM TB_Apply a, TB_Member m
+			 WHERE a.e_eventdate = #{edate} AND a_cond IN (2, 3, 4, 8, 9, 10) AND a.m_no=m.m_no AND m.m_sex='M') mc,
+			(SELECT COUNT(a.a_no) AS womanCount FROM TB_Apply a, TB_Member m
+			 WHERE a.e_eventdate = #{edate} AND a_cond IN (2, 3, 4, 8, 9, 10) AND a.m_no=m.m_no AND m.m_sex='F') fc,
+			(SELECT COUNT(a_no) AS deniedCount	FROM TB_Apply WHERE e_eventdate = #{edate} AND a_cond IN (5, 6 ,7))  dc
+		WHERE
+			e_eventdate = #{edate}
+	</select>
+	
+	<!-- 상태변경 -->
+	<update id="changeCond" parameterType="hashMap">
+		UPDATE
+			TB_Apply
+		SET
+			a_cond=#{nextStep}
+		WHERE
+			a_no=#{ano}
+	</update>
+	
+	<insert id="newGuest" parameterType="applicantlistvo">
+		<selectKey keyProperty="nick" resultType="string" order="BEFORE">
+			SELECT
+				<if test="sex eq 'M'.toString()">'남자 '</if><if test="sex eq 'F'.toString()">'여자 '</if>||cnt||'호' AS nick
+			FROM
+				(
+					SELECT
+						COUNT(g_no)+1 AS cnt
+					FROM
+						TB_Guest g, TB_Apply a, TB_Member m
+					WHERE
+			    		g.a_no=a.a_no
+			    		AND a.m_no=m.m_no
+						AND a.e_eventdate=#{evdate}
+						AND m.m_sex=#{sex}
+				)
+		</selectKey>
+		INSERT INTO
+			TB_Guest(g_no, a_no, g_nick)
+		VALUES
+			((SELECT MAX(g_no)+1 FROM TB_Guest), #{ano}, #{nick})
+	</insert>
+	
+</mapper>

@@ -5,23 +5,46 @@
 	font-size: 14px;
 }
  */
+.rDiv {
+	opacity:0;
+	display: none;
+}
+ 
 #calendar {
 	/* max-width: 900px; */
 	margin: 0 auto;
 	/* margin-top: 20px; */
+	background: #f0fff1;
 }
 
+table#eventView{
+	/* background: #f0fff1; */
+}
+.col-md-4.rDiv {
+	background: beige;
+}
+
+/*	이벤트 색깔 */
 .fc-event {
-	background: red;
-	border-color: red;
+	background: #005aff36;
+	border-color: #005aff36;
 }
-
+/*	행사 글씨 */
+.fc-title {
+	color: red;
+}
+/*	날짜 호버효과 */
 .fc-day:hover {
 	background: #CEF6F5;
+}
+/*	행사 호버효과 */
+.fc-event-container:hover {
 	cursor: pointer;
 }
-
-
+/* 모달창 수정버튼 */
+#mBtn{
+	display: none;
+}
 .center {
     margin-top:50px;   
 }

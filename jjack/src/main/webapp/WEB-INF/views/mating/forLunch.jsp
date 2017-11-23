@@ -13,6 +13,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
+<link rel="stylesheet" href="../css/mating/forLunch.css" />
+<script src="../js/mating/forLunch.js"></script>
 </head>
 <body style="margin:0 auto;">
 	<div id="header">
@@ -32,11 +34,42 @@
 			</div>
 			<!-- 본 화면 -->
 		 	<div id="introMain" class="col-lg-9">
+				<div class="row">
 				
-				
-				<!-- 여기에 사다리 -->
-				
-				
+					<div id="men" class="col-lg-2">
+ 						<c:forEach var="ml" items="${mList}" varStatus="vs">
+							<div class="col-xs-2 mx-auto">
+								<figure class="figure">
+									<img src="../file/${ml.pic}" class="figure-img img-fluid">
+									<figcaption class="text-center">${ml.nick}</figcaption>
+								</figure>
+							</div>
+						</c:forEach>
+					</div>
+					<!-- 남자리스트 영역 종료 -->
+					
+					<div id="arrowsDiv" class="col-lg-8">
+					
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+						
+						
+						</svg>
+					</div>
+					<!-- 사랑의 작대기 영역 종료 -->
+					
+					<div id="women" class="col-lg-2">
+ 						<c:forEach var="fl" items="${fList}">
+							<div class="col-xs-2 mx-auto">
+								<figure class="figure">
+									<img src="../file/${fl.pic}" class="figure-img img-fluid">
+									<figcaption class="text-center">${fl.nick}</figcaption>
+								</figure>
+							</div>
+						</c:forEach>
+					</div>
+					<!-- 여자리스트 종료 -->
+				</div>
+				<!-- row -->
 			</div>
 			<!-- 본 화면 -->
 		</div>

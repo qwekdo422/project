@@ -13,8 +13,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
+
+<script>
+
+$(function(){
+	$('.btn_word').click(function(){
+		<!--jQuery 이미지 리로드가 되지 않을때 처리 방법-->
+		<!--크롬의 경우에는 removeAttr를 썼더라도 src 속성이 이전 속성과 같아버리면 이미지를 새로 받아오지 않고 기존의 이미지를 셋팅해버립니다..-->
+        <!--그래서 크롬을 속여서 다른 주소이게끔 착각하게 뒤에 타임스탬프의 허위 매개변수를 셋팅해 줘야 합니다 -->
+
+		$('.col-lg-3 img').attr('src','../img/main/real_word.jpg?timestamp='+new Date().getTime());
+	});
+});
+</script>
+
 </head>
 <body style="margin:0 auto;">
+
+
 	<div id="header">
 		<jsp:include page="../common/header.jsp" />
 	</div>
@@ -22,18 +38,14 @@
 		<!-- Page Content -->
 			<div class="row">
 
-<!--  
-				<div class="col-lg-3">
-					<br> <br>
-					<h2 class="my-4">데이트 코스</h2>
-					<div class="list-group">
-						<a href="./datecourse/BasicCourse.do" class="list-group-item">데이트 코스1</a> 
-						<a href="#" class="list-group-item">데이트 코스2</a> 
-						<a href="#"	class="list-group-item">데이트 코스3</a>
-					</div>
-
+ 
+				<div class="col-lg-3" align="center">
+					<br>
+					<h5 align="center"> [실시간 워드 클라우드] </h5> <br>
+                    <img class="card-img-top" src="../img/main/real_word.jpg">
+                    <button class="btn_word">실시간 워드 버튼</button>
 				</div>
--->
+
 				<!-- /.col-lg-3 -->
 
 				<div class="col-lg-9">
@@ -48,14 +60,14 @@
 						</ol>
 						<div class="carousel-inner" role="listbox">
 							<div class="carousel-item active">
-								<img class="d-block img-fluid" src="../img/guest1.jpg" alt="First slide">
+								<img class="d-block img-fluid" src="../img/main/guest1.jpg" alt="First slide">
 							</div>
 							<div class="carousel-item">
-								<img class="d-block img-fluid" src="../img/guest2.jpg"
+								<img class="d-block img-fluid" src="../img/main/guest2.jpg"
 									alt="Second slide">
 							</div>
 							<div class="carousel-item">
-								<img class="d-block img-fluid" src="../img/guest3.jpg"
+								<img class="d-block img-fluid" src="../img/main/guest3.jpg"
 									alt="Third slide">
 							</div>
 						</div>
@@ -75,13 +87,14 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top"
-									src="../img/love_word1.PNG" alt=""></a>
+									src="../img/main/love_word1.jpg" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="#">남자1호 ♥ 여자2호</a>
 									</h4>
-									<h5>2017년 11월 25일</h5>
-									<p class="card-text">제주도와서 나의 반쪽을 만나서 너무 좋아요! ^^</p>
+									<h5 class="card-subtitle" align="center" style="color:red">
+										2017년 11월 25일
+									</h5>	
 								</div>
 							
 							</div>
@@ -92,13 +105,14 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top"
-									src="../img/love_word2.PNG" alt=""></a>
+									src="../img/main/love_word2.jpg" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="#">남자3호 ♥ 여자1호</a>
 									</h4>
-									<h5>2017년 11월 18일</h5>
-									<p class="card-text">올해 드디어 제주도에서 솔로 탈출했어요! ^^</p>
+									<h5 class="card-subtitle" align="center" style="color:red">
+										2017년 11월 18일
+									</h5>									
 								</div>
 							</div>
 						</div>
@@ -106,13 +120,14 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top"
-									src="../img/love_word3.PNG" alt=""></a>
+									src="../img/main/love_word3.jpg" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="#">남자5호 ♥ 여자3호</a>
 									</h4>
-									<h5>2017년 11월 15일</h5>
-									<p class="card-text">사랑은 제주도 짝 게스트하우스에서... ^^</p>
+									<h5 class="card-subtitle" align="center" style="color:red">
+										2017년 11월 15일
+									</h5>									
 								</div>
 							</div>
 						</div>
@@ -120,13 +135,14 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top"
-									src="../img/love_word4.PNG" alt=""></a>
+									src="../img/main/love_word4.jpg" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="#">남자5호 ♥ 여자3호</a>
 									</h4>
-									<h5>2017년 11월 9일</h5>
-									<p class="card-text">저희 오늘부터 1일이에요! ㅎㅎ</p>
+									<h5 class="card-subtitle" align="center" style="color:red">
+										2017년 11월 9일
+									</h5>									
 								</div>
 							</div>
 						</div>
@@ -134,13 +150,14 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top"
-									src="../img/love_word5.PNG" alt=""></a>
+									src="../img/main/love_word5.jpg" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="#">남자4호 ♥ 여자5호</a>
 									</h4>
-									<h5>2017년 10월 30일</h5>
-									<p class="card-text">처음처럼 사랑은 짝게스트하우스에서...</p>
+									<h5 class="card-subtitle" align="center" style="color:red">
+										2017년 10월 30일
+									</h5>
 								</div>
 							</div>
 						</div>
@@ -148,13 +165,16 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top"
-									src="../img/love_word5.PNG" alt=""></a>
+									src="../img/main/love_word5.jpg" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="#">남자1호 ♥ 여자2호</a>
 									</h4>
-									<h5>2017년 11월 2일</h5>
-									<p class="card-text">사랑은 사다리게임으로 시작해요..^^</p>
+									<h5 class="card-subtitle" align="center" style="color:red">
+										2017년 11월 3일
+									</h5>
+							
+									
 								</div>
 							</div>
 						</div>
@@ -167,8 +187,11 @@
 
 			</div>
 			<!-- /.row -->
+			<script src="../js/main/jquery.min.js"></script>
+            <script src="../js/main/bootstrap.bundle.min.js"></script>
 		</div>
 		<!--  /.container -->
+		
 	<!---------------------------------------------->
 	<div id="footer">
 		<jsp:include page="../common/footer.jsp" />

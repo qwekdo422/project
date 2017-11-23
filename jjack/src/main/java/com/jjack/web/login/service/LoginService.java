@@ -35,6 +35,24 @@ public class LoginService {
 		return lDAO.mModify(mNo); 
 	}
 	
+	//아이디/비번 일치 판변 처리 함수 
+	public int isPw(String pw, String id){
+		
+		HashMap map=new HashMap();
+		map.put("mpw",pw);
+		map.put("mid",id);
+		return lDAO.isPw(map); 
+	}
 	
+	//비밀번호 가져오기 처리 함수 
+	public String pW(String isid){
+		return lDAO.pW(isid); 
+	}
+	
+	//회원정보 수정 처리 함수 
+	public void memberModifyProc(ProfileVO pVO){
+		
+		lDAO.memberModifyProc(pVO);
+	}
 	
 }

@@ -1,20 +1,6 @@
-회원가입 테이블 
-create table TB_MEMBER(
-m_no NUMBER(10) not null,
-m_id varchar2(32) not null,
-m_pw varchar2(32) not null,
-m_name varchar2(20) not null,
-m_sex char(1) not null,
-m_birth date not null,
-m_email varchar2(100), 
-m_loc varchar2(16) not null, 
-m_joindate date default sysdate
-); 
 
 
-
-
-
+######################################로그인/ 회원가입/정보수정########################################
 #회원가입 폼
 요청 http://localhost:8080/jjack/SignUp/SignUpForm.do
 컨트롤러 :  com.jjack.web.signup.controller
@@ -73,15 +59,35 @@ m_joindate date default sysdate
 
 
 
-#회원정보 수정 실행
-요청 http://localhost:8080/jjack/Login/modifyProc.do
+#비밀번호 중복검사
+요청 http://localhost:8080/jjack/Login/pwOverlap.do
 컨트롤러 :com.jjack.web.login.controller
 함수  :	public ModelAndView modifyProc()
 파라메터 :VO
 
 -----------------------------------------------------------------------------------------------------------
 
+#회원정보 수정 실행함수 
+요청 http://localhost:8080/jjack/Login/modifyProc.do
+컨트롤러 :com.jjack.web.login.controller
+함수  :	public ModelAndView modifyProc()
+파라메터 :vo
 
+-----------------------------------------------------------------------------------------------------------
+######################################로그인/ 회원가입/정보수정 끝########################################
+
+
+
+
+
+
+
+
+
+
+
+
+###################################공지사항 게시판 요청설계#############################################
 
 -----------------------------------------------------------------------------------------------------------
 
@@ -123,7 +129,21 @@ m_joindate date default sysdate
 요청 http://localhost:8080/jjack/Nboard/NboardProc.do
 컨트롤러 :com.jjack.web.nboard.controller
 함수  :	public ModelAndView nboardWriteProc()
-파라메터 :VO 
+파라메터 :없음
 -----------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------
+
+#공지사항 조회수 올리기 실행요청   
+요청 http://localhost:8080/jjack/Nboard/HitUpProc.do
+컨트롤러 :com.jjack.web.nboard.controller
+함수  :	public ModelAndView hitUpProc()
+파라메터 :없음
+-----------------------------------------------------------------------------------------------------------
+
+
+
+
+###################################공지사항 게시판 요청설계 끝#############################################
 
 

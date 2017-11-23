@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.jjack.web.scheduler.dao.SchedulerDAO">
+	
+	<!-- 반환값을 schedulervo와 매칭시키기 위한 resultMap설정 -->
+	<resultMap type="SchedulerVO" id="scheduleList">
+		<result property="eventdate" column="e_eventdate"/>
+		<result property="eventend" column="e_eventend"/>
+		<result property="gisoo" column="e_gisoo"/>
+		<result property="loc" column="e_loc"/>
+		<result property="age" column="e_age"/>
+		<result property="title" column="e_title"/>
+		<result property="contents" column="e_contents"/>
+	</resultMap>
+	
+	<!-- 행사일정 조회 (관리자, 사용자)-->
+	<select id="selectSchedule" resultMap="scheduleList">
+		SELECT
+			E_EVENTDATE,
+			E_EVENTEND,
+			E_GISOO,
+			E_LOC,
+			E_AGE,
+			E_TITLE,
+			E_CONTENTS
+		FROM
+			TB_EVENT	
+	</select>
+	
+	<!-- 행사일정 등록 (관리자) -->
+	<insert id="insertSchedule" parameterType="SchedulerVO">
+		INSERT INTO TB_EVENT(
+			E_EVENTDATE,
+			E_EVENTEND,
+			E_GISOO,
+			E_LOC,
+			E_AGE,
+			E_TITLE,
+			E_CONTENTS	
+		)
+		values (
+			#{eventdate}, #{eventend}, #{gisoo}, #{loc}, #{age}, #{title}, #{contents}  		
+		)
+	</insert>
+	
+	<!-- 행사일정 수정 (관리자) -->
+	<update id="updateSchedule" parameterType="SchedulerVO">
+		UPDATE 
+			TB_EVENT
+		SET
+			E_EVENTEND = #{eventend},
+			E_GISOO = #{gisoo}, 
+			E_LOC = #{loc}, 
+			E_AGE = #{age}, 
+			E_TITLE = #{title}, 
+			E_CONTENTS = #{contents}
+		WHERE 
+			E_EVENTDATE = #{eventdate}
+	</update>
+	
+	<!-- 행사일정 삭제 (관리자)-->
+	<delete id="deleteSchdule" parameterType="string">
+		DELETE
+		FROM
+			TB_EVENT
+		WHERE
+			E_EVENTDATE = #{eventdate}
+	</delete>
+	
+	<!-- 기수 조회 (관리자)-->
+	<select id="selectGisoo" parameterType="int" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			TB_EVENT
+		WHERE
+			E_GISOO = #{gisoo}
+	</select>
+	
+	<!-- 입소신청 등록 (사용자) -->
+	<insert id="insertApply" parameterType="GuestApplyVO">
+		INSERT INTO TB_APPLY (
+			A_NO, 
+			M_NO, 
+			A_INTEREST, 
+			A_PIC, 
+			A_TEL,
+			E_EVENTDATE
+		)
+		VALUES (
+			(SELECT NVL(MAX(A_NO), 0) + 1 FROM TB_APPLY ),
+			 #{mNo}, #{interest}, #{pic}, #{tel}, #{eventdate}  
+		)
+	</insert>
+	
+	<!-- 입소신청서 정보 조회 -->
+	<select id="selectApplyInfo" parameterType="hashMap" resultType="GuestApplyVO">
+		SELECT 
+			NVL(A_COND, 0)	AS cond,
+			A_TEL			AS tel,
+			A_INTEREST		AS interest,
+			A_PIC 			AS pic,
+			A_NO			AS aNo
+		FROM
+			TB_APPLY RIGHT OUTER JOIN DUAL 
+		ON
+			M_NO = #{mNo}
+		AND
+			E_EVENTDATE	= #{eventdate}
+	</select>
+	
+	<!-- 입소신청서 수정 -->
+	<update id="updateApply" parameterType="GuestApplyVO">
+		UPDATE
+			TB_APPLY
+		SET
+			A_INTEREST	= #{interest}, 
+			A_PIC		= #{pic},
+			A_TEL		= #{tel}
+		WHERE
+		 	A_NO = #{aNo}
+	</update>
+	
+	<!-- 입소취소 -->
+	<update id="updateCond" parameterType="int">
+		UPDATE
+			TB_APPLY
+		SET
+			A_COND = 7
+		WHERE 
+			A_NO = #{aNo}
+	</update>
+</mapper>
+

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+<!-- namespace는 연결할 DAO 인터페이스경로.클래스명 -->	
+<mapper namespace="com.jjack.web.rboard.dao.RboardDAO">
+
+<!-- 리뷰 게시판 작성 질의문 -->
+<insert id="rboardWrite" parameterType="hashMap" >
+INSERT
+INTO 
+	TB_Review (r_no,g_no, r_wdate, r_title, r_contents, r_hits, r_IsShow)
+VALUES
+(
+	(SELECT 
+		NVL(MAX(r_no),0)+1
+
+	FROM
+		TB_Review), 14, sysdate,#{rtitle},#{rcontents}, 0 , 'Y')
+</insert>
+
+<!-- 리뷰게시판 목록 가져오기  -->
+<select id="rboardList"  resultType="rboardvo">
+
+SELECT 
+	r_no, AS  r_title, r_wdate AS rdate ,r_hits AS
+FROM
+
+WHERE
+
+ORDER BY
+</select>
+
+
+<!--                              조회수 증가                   관련                         로직  -->
+	<!-- 이미 본 글 번호를 조회할 질의 명령 -->
+<resultMap id="clobMap" type="hashMap">
+	<result property="rno" column="result_no" jdbcType="CLOB" javaType="java.lang.String"></result>
+</resultMap>
+<select id="getHitNo" parameterType="string" resultMap="clobMap">
+	SELECT
+		r_user,
+		result_no
+	From
+		rboardhit
+	WHERE
+		r_user=#{user} 
+</select>
+
+<!-- 처음 방문한 사람을 위한 이미 본 글번호 등록 질의 명령 -->
+<insert id="insertHitNo" parameterType="hashMap" >
+		INSERT
+		INTO
+			rboardhit
+		VALUES(#{user}, #{rno})
+</insert>
+
+<!-- 기존 방문한 사람을 위한 이미 본 글번호 수정 질의 명령 -->
+<update id="updateHitNO"	parameterType="hashMap">
+		UPDATE
+			rboardhit
+		SET
+			result_no = #{no}
+		WHERE
+			r_user = #{user}
+</update>
+
+<!-- 실제 조회수 증가 질의명령 -->
+<update id="updateHit" parameterType="int">
+UPDATE
+	TB_Review
+SET
+	r_hits = r_hits+ 1
+WHERE
+	r_no=#{rno}
+</update>
+<!--                              조회수 증가                   관련                         로직  -->
+
+
+
+
+
+<!-- 리뷰 상세보기  -->
+<select id="rboardView" resultType="rboardvo" parameterType="int">
+SELECT
+	r_no AS rno,  r_wdate AS rdate, r_title AS rtitle, r_contents AS rcontents
+FROM 
+	TB_Review
+WHERE
+	r_no=#{rno}
+</select>
+
+<!-- 리뷰 리스트를 가지오 오기 위한 총 데이터의 갯수 -->
+<select  id="getTotalList" resultType="int">
+SELECT 
+	COUNT(*)
+FROM 
+	TB_Review
+WHERE
+	r_isshow='Y'; 
+	
+</select>
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

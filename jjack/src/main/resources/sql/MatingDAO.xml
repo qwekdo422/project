@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	"-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace는 연결할 DAO 인터페이스경로.클래스명 -->	
+<mapper namespace="com.jjack.web.mating.dao.MatingDAO">
+<!-- 점심 사다리타기 -->
+
+<!-- 사랑의 작대기 -->
+
+	<!-- 커플링 및 코스 업데이트 -->
+	<update id="coupling" parameterType="string">
+		UPDATE
+		    TB_Guest g
+		SET
+		    g_course=NVL(
+		       (SELECT 
+		            DECODE (
+		                DECODE (
+		                    mm.m_sex, 
+		                    'M', pa.a_interest, 
+		                    'F', ma.a_interest
+		                ),
+		                '사진', 'A',
+		                '바다', 'B',
+		                '절경', 'C'
+		            )
+		        FROM
+		            TB_Guest mg, TB_Apply ma, TB_Member mm, TB_Guest pg, TB_Apply pa, TB_Member pm
+		        WHERE
+		            mg.g_choice = pg.g_no
+		            AND mg.g_no = pg.g_choice
+		            AND mg.a_no = ma.a_no
+		            AND ma.m_no = mm.m_no
+		            AND pg.a_no = pa.a_no
+		            AND pa.m_no = pm.m_no
+		            AND ma.e_eventdate = #{edate}
+		            AND g.g_no = mg.g_no
+		        ), 'S')
+		WHERE
+		    a_no IN (SELECT a_no FROM TB_Apply WHERE e_eventdate = #{edate})
+	</update>
+
+	<!-- 처음에 보여줄 날짜 정하기. 입소자가 있는 기수로 -->
+	<select id="getEdate" resultType="string">
+		SELECT
+			MAX(e_eventdate) KEEP(DENSE_RANK FIRST ORDER BY e_eventdate DESC) AS edate
+		FROM
+			TB_Apply
+		WHERE
+    		a_cond=8
+	</select>
+
+	<!-- 입소자 수 구하기. 전체수, 선택완료한 사람수, 남자수, 여자수, 커플수 구하기 -->
+	<select id="getNumbers" resultType="matingvo" parameterType="string">
+		SELECT
+			tCount,	-- 입소자 수
+			cCount	-- 선택을 완료한 사람 수
+		FROM
+			(SELECT COUNT(g_no) AS tCount FROM TB_Guest g, TB_Apply a 
+				WHERE g.a_no=a.a_no AND e_eventdate = #{edate}) wc,
+			 (SELECT COUNT(g_no) AS cCount FROM TB_Guest g, TB_Apply a 
+			 	WHERE g.a_no=a.a_no AND g_choice IS NOT NULL AND e_eventdate = #{edate}) cc
+	</select>
+
+	<!-- 사랑의 작대기용 입소자(남자) 리스트 가져오기 -->
+	<select id="MenForArrows" parameterType="string" resultType="matingvo">
+		SELECT
+			a.a_pic AS pic,
+			g.g_nick AS nick,
+			SUBSTR(lg.g_nick,4,1)-1 AS loveNo
+		FROM
+			TB_Guest g, TB_Apply a, TB_Member m, TB_Guest lg
+		WHERE
+			g.a_no=a.a_no
+			AND a.m_no=m.m_no
+			AND m.m_sex = 'M'
+			AND g.g_choice = lg.g_no(+)
+			AND a.e_eventdate=#{edate}
+		ORDER BY
+			g.g_nick
+	</select>
+
+	<!-- 사랑의 작대기용 입소자(여자) 리스트 가져오기 -->
+	<select id="WomenForArrows" parameterType="string" resultType="matingvo">
+		SELECT
+			a.a_pic AS pic,
+			g.g_nick AS nick,
+			SUBSTR(lg.g_nick,4,1)-1 AS loveNo
+		FROM
+			TB_Guest g, TB_Apply a, TB_Member m, TB_Guest lg
+		WHERE
+			g.a_no=a.a_no
+			AND a.m_no=m.m_no
+			AND m.m_sex = 'F'
+			AND g.g_choice = lg.g_no(+)
+			AND a.e_eventdate=#{edate}
+		ORDER BY
+			g.g_nick
+	</select>
+
+
+
+<!-- 짝선택 -->
+
+	<!-- 짝선택용 입소자 정보 가져오기 -->
+	<select id="getInfo" parameterType="int" resultType="matingvo">
+		SELECT
+			m.m_no AS mno,
+			a.a_no AS ano,
+			g.g_no AS gno,
+			m.m_sex AS sex,
+			g.g_nick AS nick,
+			a.e_eventdate AS evdate,
+			NVL(g.g_choice, -1) AS myLove
+		FROM
+			TB_Member m, TB_Apply a, TB_Guest g
+		WHERE
+			a.m_no=m.m_no
+			AND g.a_no=a.a_no
+			AND a.a_cond = 8
+			AND m.m_no=#{mno}
+	</select>
+		
+	<!-- 점심 짝 정보 -->
+	<update id="lunching" parameterType="string">
+		UPDATE
+			TB_Guest
+		SET
+			g_lunch=#{one}
+		WHERE
+			g_no=(
+				SELECT
+					g_no
+				FROM
+					TB_Guest g, TB_Apply a
+				WHERE
+					g.a_no=a.a_no
+					AND a.m_no=#{mno}
+					AND a.eventdate=#{edate}
+			)
+	</update>
+
+	<!-- 짝 선택시의 이성 목록 -->
+	<select id="getLoves" parameterType="MatingVO" resultType="MatingVO">
+		SELECT
+			g.g_no AS gno,
+			a.a_pic AS pic,
+			g.g_nick AS nick
+		FROM
+			TB_Guest g, TB_Apply a, TB_Member m
+		WHERE
+			a.a_no = g.a_no
+			AND m.m_no = a.m_no
+			AND m.m_sex=#{osex}
+			AND a.e_eventdate = #{evdate}
+		ORDER BY
+			g_nick
+	</select>
+
+	<!-- 선택한 짝 알아내기 -->
+	<select id="whoIsMyChoice" parameterType="int" resultType="MatingVO">
+		SELECT
+			lvg.g_nick AS nick,
+			lva.a_pic AS pic
+		FROM
+			TB_Guest myg, TB_Guest lvg, TB_Apply lva
+		WHERE
+			myg.g_no=#{myGno}
+			AND lva.a_no = lvg.a_no
+			AND myg.g_choice=lvg.g_no
+	</select>
+
+	<!-- 선택한 짝 등록 -->
+	<update id="chooseOne" parameterType="hashMap">
+		UPDATE
+			TB_Guest
+		SET
+			g_choice=#{myLove} 
+		WHERE
+			g_no=#{myGno}
+	</update>
+	
+	<!-- 코스 정보 -->
+
+</mapper>

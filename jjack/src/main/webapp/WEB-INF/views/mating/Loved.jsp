@@ -21,11 +21,11 @@
 	</div>
 	<div class="container">
 		<h2 class="text-center mt-4">♥ 당신의 선택</h2>
-		<div class="container row mt-4 mb-5 ml-1">
+		<div class="container row mt-4 mb-3 ml-1">
 			<div class="col-xs-2 mx-auto">
 				<figure class="figure">
-					<img src="../img/guests/03.jpg" class="figure-img img-fluid">
-					<figcaption class="text-center">여자 1호</figcaption>
+					<img src="../file/${myLove.pic}" class="figure-img img-fluid">
+					<figcaption class="text-center">${myLove.nick}</figcaption>
 				</figure>
 			</div>
 		</div>

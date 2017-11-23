@@ -1,3 +1,11 @@
 ###	입소신청
 요청 : ../houseApply/applyForm.do
 
+
+########### 관리자 일정관리 ###########
+##	일정 목록
+요청: ../scheduler/list.do
+##	일정 등록
+요청: ../scheduler/write.do
+##	일정 수정
+요청: ../scheduler/modify.do

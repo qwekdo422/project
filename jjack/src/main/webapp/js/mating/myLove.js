@@ -1,16 +1,17 @@
 $(document).ready(function(){
-	var who = 0;
+	
 	$('figure img, figcaption').click(function(){
-		if(who==0) {
+		if($("#myLove").val()=="") {
 			who = $("figure").index($(this).parent())+1;
-			$('#choose').val(who);
+			lgno = $(".gno").eq(who-1).val();
+			$('#myLove').val(lgno);
 			$('figure').not($(this).parent()).css('filter', 'grayscale(100%)');
 			$('#btns').delay(700).slideDown(400);
 		}
 	});
 	
 	$('#noBtn').click(function(){
-		$('#choose').val("");
+		$('#myLove').val("");
 		who=0;
 		$('figure').css('filter', 'grayscale(0%)');
 		$('#btns').slideUp(400);

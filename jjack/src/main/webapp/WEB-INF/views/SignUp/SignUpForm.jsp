@@ -22,12 +22,13 @@
 <!-- Jquery 달력 사용을 위한 라이브러리 설정 -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> 
+
+
 
 <script>
 function checkId(){
 
-	
 	  var inputd=$("#id").val(); //폼 요소의 데이터를 받아서...
 
 	    if(inputd.length < 6){		
@@ -63,9 +64,36 @@ function checkId(){
 	  
 }//checkId() 함수 종료 
 
+
+
+
+function pwCheck(){
+	var pw=$("#pw").val(); 
+	if(pw.length <8){
+		document.getElementById("newpw001").innerHTML="비밀번호는 8자 이상 등록하십시오.";
+	}
+	else if(pw.length >=8){
+		document.getElementById("newpw001").innerHTML="사용가능한 비밀번호입니다."; 
+	}
+
+} // pwCheck() 함수 종료 
+
+
+
+function pwCheckCheck(){
+	
+	var pw=$("#pw").val(); 
+	var cpw=$("#cpw").val(); 
+	if(pw==cpw){
+		document.getElementById("newpw002").innerHTML="비밀번호 확인"; 
+	}else{
+		document.getElementById("newpw002").innerHTML="비밀번호가 다릅니다. "; 		
+	}
+	
+}// pwCheckCheck()함수 종료 
+
 	</script>
 </head>	
-
 <body style="margin:0 auto;">
    <div id="header">
       <jsp:include page="../common/header.jsp" />
@@ -77,13 +105,13 @@ function checkId(){
 			<table width="1000" align="center" border="1">
 			<tr>
 					<td>아이디 :</td>
-					<td> <input type="text"  name="id"  id="id"  placeholder="아이디는 6자 이상입니다."  oninput="checkId()"><span id="isid" style="color:red"></sapn></td>
+					<td> <input type="text"  name="id"  id="id"  oninput="checkId()"><span id="isid" style="color:red"></sapn></td>
 			</tr>
 			<tr>
-					<td>비밀번호 : </td><td><input type="password" name="pw" id="pw"></td>
+					<td>비밀번호 : </td><td><input type="password" name="pw" id="pw" oninput="pwCheck()"><span id="newpw001" style="color:red"></sapn></td>
 			</tr>
 			<tr>
-					<td>비밀번호 확인 : </td><td><input type="password" name="cpw" id="cpw"></td>
+					<td>비밀번호 확인 : </td><td><input type="password" name="cpw" id="cpw"  oninput="pwCheckCheck()"><span id="newpw002" style="color:red"></sapn></td>
 			</tr>
 			<tr>
 					<td>이름 :</td><td><input type="text" name="name" id="name" ></td>
