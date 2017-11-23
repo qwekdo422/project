@@ -24,6 +24,7 @@
 <script type="text/javascript">
 //	행사일정들(json형태)
 var schedule = ${SCHEDULE};
+//관리자, 사용자 (상태여부)
 var status = "${status}";
 </script>
 </head>

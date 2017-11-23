@@ -2,7 +2,6 @@ package com.jjack.web.scheduler.controller;
 
 
 import java.util.Calendar;
-import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -134,7 +133,6 @@ public class SchedulerContorller {
 	 */
 	@RequestMapping("/applyProc")
 	public String ghApplyProc(GuestApplyVO vo, HttpSession session) {
-		System.out.println("입소신청 컨트롤러 진입");
 		scService.ghApply(vo, session);
 		return "redirect:./list.do?status=U";
 	}

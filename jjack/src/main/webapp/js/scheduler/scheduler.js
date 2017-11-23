@@ -163,7 +163,7 @@ $(document).ready(function() {
 	//	행사 일정 등록버튼 이벤트 (관리자)
 	$("#wBtn").click(function(){
 		//	무결성 검사
-		validationAdmin();
+		validation();
 		//	무결성 검사에 걸렸을 겅우 다음을 수행하지 않고 리턴
 		if(isFlag()) return;
 		//	등록완료 alert창을 띄우고 서브밋을 한다.
@@ -173,8 +173,8 @@ $(document).ready(function() {
 	//	행사 일정 수정버튼 이벤트 (관리자)
 	$("#mBtn").click(function(){
 		//	무결성 검사
-		validationAdmin();
-		//	무결성 검사에 걸렸을 겅우 다음을 수행하지 않고 리턴
+		validation();
+		//	무결성 검사에 걸렸을 겅우 다음을 수행하지 않고 리턴 (true 일경우 무결성 검사 걸린 경우)
 		if(isFlag()) return;
 		//	수정완료 alert창을 띄우고 서브밋을 한다.
 		completAlert("수정");
@@ -188,11 +188,19 @@ $(document).ready(function() {
 	
 	//	입소신청버튼 이벤트 (사용자)
 	$("#applyBtn").click(function(){
+		//	무결성 검사
+		validation();
+		//	무결성 검사에 걸렸을 겅우 다음을 수행하지 않고 리턴 (true 일경우 무결성 검사 걸린 경우)
+		if(isFlag()) return;
 		$("#applyFrm").attr("action", "./applyProc.do").submit();
 	});
 	
 	//	입소신청서 수정버튼(사용자)
 	$("#uBtn").click(function(){
+		//	무결성 검사
+		validation();
+		//	무결성 검사에 걸렸을 겅우 다음을 수행하지 않고 리턴 (true 일경우 무결성 검사 걸린 경우)
+		if(isFlag()) return;
 		$("#applyFrm").attr("action", "./applyModify.do").submit();
 	});
 	
@@ -200,8 +208,6 @@ $(document).ready(function() {
 	$("#resetBtn").click(function(){
 		$("#applyFrm").attr("action", "./applyCondStatus.do?aNo="+$("#aNo").val()).submit();
 	});
-	
-	
 	
 	//	입소신청시 사진등록을 누르면 등록한 사진을 화면에서 바로 볼수 있도록 처리(사용자)
   	$('#imageUpload').change(function(){
@@ -244,7 +250,7 @@ $(document).ready(function() {
 });	// document 종료
 
 
-//	입소상태에 따라 처리해주는 함수
+//	입소상태에 따라 멘트 출력하는 함수
 function condStatus(msg) {
 	$("#applyFrm").hide();
 	$(".applyText").text(msg);
@@ -325,8 +331,9 @@ function isFlag() {
 	return false;
 }
 
-//	무결성 검사 함수 (관리자)
-function validationAdmin () {
+//	무결성 검사 함수 (관리자, 사용자)
+function validation () {
+	//	관리자화면
 	var gisoo = $("#gisoo");			// 기수
 	var eventdate = $("#eventdate");	// 이벤트 시작일
 	var eventend = $("#eventend");		//	이벤트 종료일
@@ -334,15 +341,20 @@ function validationAdmin () {
 	var age = $("#age");				//	대상 연령대
 	var title = $("#title");			//	제목
 	var contents = $("#contents");		//	내용
+	//	사용자화면
+	var tel = $("#tel");				//	전화번호
+	var interest = $("#interest");		//	관심사
+	var img = $("#imageUpload");		//	사진
 	//	무결성 검사할 태그 배열생성
-	var frmArr = [gisoo, eventdate, eventend, loc, age, title, contents];
+	var frmArr = [img, gisoo, eventdate, eventend, loc, age, title, contents, tel, interest];
+	//	무결성 검사에 걸린 태그 알림문자를 담을 변수
+	var frmStr;
 	//	무결성 검사할 배열의 갯수만큼 반복
 	for (var i = 0; i < frmArr.length; i++) {
 		//	태그 (gisoo ~ contents)
 		var vTag = frmArr[i];
-		var frmStr;
 		if(vTag.val() == "") {
-			flag = true;	//	무결성 검사에 걸렸을 때 true로 변환
+			flag = true;	//	무결성 검사에 걸렸을 때 true로 변경(버튼클릭 이벤트때 사용)
 			switch (vTag) {
 			case gisoo: frmStr = "기수"; break;
 			case eventdate: frmStr = "시작일"; break;
@@ -351,18 +363,16 @@ function validationAdmin () {
 			case age: frmStr = "연령대"; break;
 			case title: frmStr = "제목"; break;
 			case contents: frmStr = "내용"; break;
+			case tel: frmStr = "전화번호"; break;
+			case interest: frmStr = "관심사"; break;
+			case img: frmStr = "사진"; break;
 			}
-			frmStr += "을(를) 입력하세요."; 
-			//	입력안된 태그에 알럿창을 띄우고 해당 태그에 foucs를 준다.
+			frmStr += "을(를) 등록하세요."; 
+			//	입력안된 태그에 입려하라는 알림창을 띄우고 해당 태그에 foucs를 준다.
 			alertify.alert(frmStr, function() {vTag.focus(); return;});
 			break;
-		}
+		} 
 	} // 무결성 검사 반복문 종료
 } // 무결성 검사 함수 종료
 
 
-//	무결성검사 (사용자)
-function validationUser () {
-	var tel = $("#tel");	//	전화번호
-	
-}
