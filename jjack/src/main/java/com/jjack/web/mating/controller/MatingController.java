@@ -20,8 +20,21 @@ public class MatingController {
 	public MatingService ms;
 	
 	@RequestMapping("/forLunch")
-	public void forLunch() {
+	public ModelAndView forLunch(ModelAndView mv) {
+		// 현재 날짜 확인
+		String edate = ms.getEdate();
+		// 여자 리스트 가져오기
+		List<MatingVO> women = ms.WomenForLunch(edate);
+		// 남자 리스트 가져오기
+		List<MatingVO> men = ms.MenForLunch(edate);
+		// 표시할 사다리 줄수 가져오기
+		int ladder = ms.makeLadder(edate);
 		
+		// 뷰 호출
+		mv.addObject("mList", men);
+		mv.addObject("fList", women);
+		mv.addObject("ladderSize", ladder);
+		return mv;
 	}
 	
 	@RequestMapping("/Arrows")
