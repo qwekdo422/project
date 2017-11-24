@@ -17,8 +17,10 @@
 	<!-- 인터셉터 설정 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<!-- 일정관리, 입소신청 -->
-			<mvc:mapping path="/scheduler/list.do"/>
+			<!-- 일정관리-->
+			<mvc:mapping path="/scheduler/list.do?status=U"/>
+			<!-- 입소신청 -->
+			<mvc:mapping path="/scheduler/list.do?status=A"/>
 			<!-- 신청자 -->
 			<mvc:mapping path="/applicantList/ManageList.do"/>
 			<!-- 짝짓기 -->
