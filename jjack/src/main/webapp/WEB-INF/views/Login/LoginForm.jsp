@@ -26,8 +26,9 @@
 
 		<div id="main">
 	<form method="POST" id="lfrm" action="../Login/LoginProc.do">
+	<%-- 인터셉터 걸렸을 경우 요청 url를 기억할 파라메터--%>
 	<c:if test="${!empty url}">
-	<input type="hidden" name="url" value="${url}">
+		<input type="hidden" name="url" value="${url}">
 	</c:if>
 	<table width="500" align="center" board="1">
 		<tr>
