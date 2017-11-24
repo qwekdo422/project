@@ -25,6 +25,8 @@
 			<mvc:mapping path="/mating/**"/>
 			<!-- 공지 -->
 			<mvc:mapping path="/Nboard/**"/>
+			<!-- 데이트코스 -->
+			<mvc:mapping path="/datecourse/**"/>
 			<!-- 
 			<mvc:exclude-mapping path="/intro/thisGHis.do" />
 			<mvc:exclude-mapping path="/Rboard/RboardList.do" />
