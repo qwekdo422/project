@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>짝 게스트하우스</title>
 <%-- ====================== 필수  ======================  --%>
 <link rel="stylesheet" href="../css/common/header.css" />
 <link rel="stylesheet" href="../css/common/footer.css" />

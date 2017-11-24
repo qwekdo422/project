@@ -49,7 +49,6 @@ public class LoginController {
 	 */
 	@RequestMapping("/LoginProc")
 	public ModelAndView LoginProc(HttpServletRequest req, HttpSession session, ProfileVO pVO){
-		System.out.println("실행되니?");
 		ModelAndView mv= new ModelAndView(); 
 		String id=req.getParameter("id"); 
 		String pw=req.getParameter("pw"); 
@@ -57,7 +56,7 @@ public class LoginController {
 		
 	
 		if(result==1){
-			
+			int Auth = lService.getAuth(id);
 			
 			int mNo=lService.mNo(id);//로그인에 성공하여 그 아이디의 회원 번호를 받았다. 
 			session.setAttribute("MNO", mNo);//세션을 저장하였다. 
@@ -67,6 +66,7 @@ public class LoginController {
 																							//사용할 수 있다.
 			
 			session.setAttribute("UID", id);//세션을 부여하겠다는 의미이다.
+			session.setAttribute("Auth", Auth);	// 세션에 권한 등록
 			mv.addObject("OBJECT",result); 
 			mv.addObject("UID", id);
 			//	파라메터에 url값이 존재한다면 인터셉터를 거치고 온 상태이다.

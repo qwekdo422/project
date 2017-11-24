@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	
-	//로그인 무결성 검사 처리 
-	$("#lBtn").click(function(){
-	
+	//로그인 무결성 검사 처리 함수
+	$logIn = function(){
+		
 		var id=$("#id").val(); 
 		var pw=$("#pw").val(); 
 		
@@ -19,6 +19,19 @@ $(document).ready(function(){
 		}
 
 		$("#lfrm").submit(); 
+	} 
+	
+	// 로그인 버튼 클릭시 로그인
+	$("#lBtn").click(function(){
+		$logIn();
+	});
+	
+	// 비밀번호창에서 엔터쳤을때 로그인. 안됨
+	$("#pw").keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+			$logIn();
+		}
 	});
 
 });

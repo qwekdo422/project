@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	// 모든 입소자가 상대를 선택하지 않았을 때 나타나는 문구
 	if(allClear != 0) {
+		$('#arrowsDiv').html("");
 		$('#arrowsDiv').prepend("<h3 id='choiceClear'>아직 " + allClear + "명이 상대를 선택하지 않았습니다.</h3>");
 	}
 

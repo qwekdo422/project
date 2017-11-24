@@ -54,5 +54,11 @@ public class LoginService {
 		
 		lDAO.memberModifyProc(pVO);
 	}
+
+	// 로그인시 권한 설정
+	public int getAuth(String id){
+		return lDAO.getAuth(id);
+	}
+	
 	
 }

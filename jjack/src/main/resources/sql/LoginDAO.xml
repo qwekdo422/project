@@ -81,9 +81,38 @@
 		m_no=#{no}
 </update>
 
-
-
-
-
+	<!-- 로그인시 권한 설정 -->
+	<!-- 0 : 디폴트. 일반상태
+			1 : 최신 a_cond가 4 :  전체 데이트코스 열람 가능
+			2 : a_cond 8 : 짝짓기 메뉴 선택시 최종 짝선택 페이지로 연결
+			3 : a_cond 8 & g_course S : 데이트코스 메뉴 선택시 솔로 코스로 연결
+			4 : a_cond 9 : 후기 쓰기. 가능
+			후기 쓰면 cond = 0 으로 변경 -->
+	<select id="getAuth" parameterType="string" resultType="int">
+		SELECT
+		    MAX(auth)
+		FROM
+		    (SELECT
+		        NVL(
+		            DECODE(
+		                a.a_cond, 
+		                9, 4,
+		                8, DECODE(g.g_course, 'S', 3, 2),
+		                4, 1,
+		                0
+		            ), 0) AS auth,
+		        m.m_id AS id
+		    FROM
+		        TB_Member m,
+		        TB_Apply a,
+		        TB_Guest g
+		    WHERE
+		        m.m_no=a.m_no(+)
+		        AND a.a_no=g.a_no(+))
+		WHERE
+		    id=#{id}
+		GROUP BY 
+		    id
+	</select>
 
 </mapper>

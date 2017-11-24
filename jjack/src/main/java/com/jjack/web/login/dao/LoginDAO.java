@@ -20,5 +20,6 @@ public interface LoginDAO {
 	public String pW(String isid);  //비밀번호 가져오기 질의문 
 	
 	public void memberModifyProc(ProfileVO pVO); //회원정보 수정 처리 질의문 
-		
+
+	public int getAuth(String id);	// 로그인시 권한 설정
 }
