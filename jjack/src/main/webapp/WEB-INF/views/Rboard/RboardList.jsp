@@ -46,9 +46,10 @@ $(document).ready(function(){
       <div class="container">
       
 <!-- 목록보여주고 -->
-<table width="1100" border="1" align="center">
-					<tr align="center">
-						<th>번호</th>
+
+<table class="table table-hover table-striped table-bordered mt-4">
+					<tr style="text-align :center ">
+						<th>번호${WRITER.rid}  </th>
 						<th width=40% >제목</th>				
 						<th width=10%>기수</th>
 						<th width=10%>작성자</th>
@@ -58,13 +59,14 @@ $(document).ready(function(){
 					</tr>					
 					<c:forEach var="data" items="${RLIST}">
 					<tr>
-						<td>${data.rno}</td>
-						<td><a href="../Rboard/rHitUpProc.do?rno=${data.rno}&nowPage=${nowPage}">${data.rtitle}</a></td>
-						<td>기수?</td>
-						<td>작성자?</td>
-						<td>${data.rdate}</td>
-						<td>짝?</td>
-						<td>${data.rhis}</td>
+						<td style="text-align :center ">${data.rno}</td>
+					<td class="title"><a href="../Rboard/rHitUpProc.do?rno=${data.rno}&nowPage=${nowPage}&rid=${rid}">${data.rtitle}</a></td>
+						
+						<td style="text-align :center ">기수?</td>
+						<td style="text-align :center ">작성자?</td>
+						<td style="text-align :center ">${data.rdate}</td>
+						<td style="text-align :center ">짝?</td>
+						<td style="text-align :center ">${data.rhis}</td>
 					</tr>
 					</c:forEach>
 </table>

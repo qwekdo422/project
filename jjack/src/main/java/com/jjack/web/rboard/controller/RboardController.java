@@ -47,7 +47,6 @@ public class RboardController {
 		mv.addObject("nowPage",pInfo.getNowPage()); 
 		mv.addObject("totalPage",pInfo.getTotalPage());
 		mv.addObject("RLIST",list); 
-		
 		mv.setViewName("Rboard/RboardList");
 		return mv; 
 	}
@@ -81,8 +80,12 @@ public class RboardController {
 	
 	//후기 게시판 글쓰기 폼 
 	@RequestMapping("/RboardForm")
-	public ModelAndView rboardWriteForm(){
-	ModelAndView mv= new ModelAndView(); 
+	public ModelAndView rboardWriteForm(HttpSession session){
+	String id=(String)session.getAttribute("UID"); 
+		
+		ModelAndView mv= new ModelAndView(); 
+	
+	mv.addObject("writer", id); 
 	mv.setViewName("Rboard/RWriteForm");
 	return mv; 
 		
@@ -92,6 +95,9 @@ public class RboardController {
 	@RequestMapping("/RboardProc")
 	public ModelAndView rboardWriteProc(RboardVO rVO){
 		
+		String writer=rVO.getRid(); 
+
+
 		HashMap map= new HashMap(); 
 		map.put("rtitle",rVO.getRtitle()); 
 		map.put("rcontents",rVO.getRcontents()); 
@@ -99,8 +105,13 @@ public class RboardController {
 		rService.rboardWrite(map);
 		
 		ModelAndView mv= new ModelAndView(); 
+	 
 		RedirectView rv= new RedirectView("../Rboard/RboardList.do");
+		rv.addStaticAttribute("WRITER",writer);
 		mv.setView(rv);
+
+//		mv.setViewName("Rboard/ImsiWriteForm");
+		
 		return mv; 
 
 	}
@@ -170,11 +181,17 @@ public class RboardController {
 	//리뷰 상세보기 
 	@RequestMapping("/RboardView")
 	public ModelAndView rboardView(RboardVO rVO,  @RequestParam(value="rno") int rno,HttpSession session){
-		String id=(String)session.getAttribute("UID"); 
+	
+		ModelAndView mv= new ModelAndView(); 
+
+	String uid=(String)session.getAttribute("UID"); 
+		System.out.println(rVO.getRid() + "????????????????????????????????????????????");
+//	if(rVO.getRid() == id){
+//				mv.addObject("RID",id);
+//	}
 		
 		RboardVO VO=rService.rboardView(rno); 
 		
-		ModelAndView mv= new ModelAndView(); 
 		mv.addObject("VO",VO); 
 		mv.setViewName("Rboard/RboardView");
 		return mv; 

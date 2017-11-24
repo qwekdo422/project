@@ -38,7 +38,7 @@ $(document).ready(function(){
       <div class="container">
 		
 <form method="post" id="vfrm"action="">
-	<table width="1100" border="1" align="center">
+	<table class="table table-hover table-striped table-bordered mt-4">
 			<tr>
 				<td>
 			작성일 :${VO.rdate}		 | 		공지 번호 :${VO.rno}		| 	  	${VO.rtitle}
@@ -67,9 +67,12 @@ $(document).ready(function(){
 	</table>
 	
 	<div align="center">
-	<input type="button" id="lBtn" value="목록보기" align="right">	
+	<input type="button" id="lBtn" value="목록보기" align="right">		
+	<c:if test="${sessionScope.UID eq RID}">
 	<input type="button" id="dBtn" value="삭제하기" align="right">
 	<input type="button" id="mtn" value="수정하기" align="right">
+	</c:if>
+	
 	</div>
 		</form>
 

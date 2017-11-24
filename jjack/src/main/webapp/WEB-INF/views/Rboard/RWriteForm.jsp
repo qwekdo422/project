@@ -73,6 +73,7 @@ $(document).ready(function(){
 			
 <!-- 글쓰기 폼  -->
 <form method="post" id="nfrm"action="../Rboard/RboardProc.do">
+<input type="hidden" name="rid" value="${writer}">
 	<table width="800"  border="1" align="center">
 		<tr>
 			<td>

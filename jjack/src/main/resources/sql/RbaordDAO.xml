@@ -21,6 +21,21 @@ VALUES
 		TB_Review), 14, sysdate,#{rtitle},#{rcontents}, 0 , 'Y')
 </insert>
 
+<!-- 후기쓰기용 gno 구하기 -->
+<select id="">
+	SELECT
+		g.g_no		
+	FROM
+		TB_Guest g, TB_Apply a
+	WHERE
+		g.a_no=a.a_no
+		AND a.a_cond=9
+		AND a.m_no =#{m_no}
+</select>
+
+
+
+
 <!-- 리뷰게시판 목록 가져오기  -->
 <select id="rboardList"  resultType="rboardvo" parameterType="hashMap">
 SELECT 
