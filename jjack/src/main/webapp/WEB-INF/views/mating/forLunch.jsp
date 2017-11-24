@@ -54,11 +54,44 @@
 					</div>
 					<!-- 여자리스트 종료 -->
 					
-					<div id="arrowsDiv" class="col-lg-8">
-					
+					<!-- 사다리 영역 시작 -->
+					<div id="ladderDiv" class="col-lg-8">
 						<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-						
-						
+							<!-- 가로선 -->
+							<line x1="20" y1="70" x2="500" y2="70" class="ldHrz" />
+							<line x1="20" y1="225" x2="500" y2="225" class="ldHrz" />
+							<line x1="20" y1="385" x2="500" y2="385" class="ldHrz" />
+							<line x1="20" y1="540" x2="500" y2="540" class="ldHrz" />
+							<line x1="20" y1="695" x2="500" y2="695" class="ldHrz" />
+							
+							<!-- 첫줄 세로선 -->
+							<line x1="64" x2="64" y1="70" y2="70" class="ldVrt v1" />
+							<line x1="151" x2="151" y1="70" y2="70" class="ldVrt v1" />
+							<line x1="238" x2="238" y1="70" y2="70" class="ldVrt v1" />
+							<line x1="325" x2="325" y1="70" y2="70" class="ldVrt v1" />
+							<line x1="412" x2="412" y1="70" y2="70" class="ldVrt v1" />
+							
+							<!-- 둘째줄 세로선 -->
+							<line x1="107" x2="107" y1="225" y2="225" class="ldVrt v2" />
+							<line x1="194" x2="194" y1="225" y2="225" class="ldVrt v2" />
+							<line x1="282" x2="282" y1="225" y2="225" class="ldVrt v2" />
+							<line x1="369" x2="369" y1="225" y2="225" class="ldVrt v2" />
+							<line x1="456" x2="456" y1="225" y2="225" class="ldVrt v2" />
+							
+							<!-- 셋째줄 세로선 -->
+							<line x1="64" x2="64" y1="385" y2="385" class="ldVrt v3" />
+							<line x1="151" x2="151" y1="385" y2="385" class="ldVrt v3" />
+							<line x1="238" x2="238" y1="385" y2="385" class="ldVrt v3" />
+							<line x1="325" x2="325" y1="385" y2="385" class="ldVrt v3" />
+							<line x1="412" x2="412" y1="385" y2="385" class="ldVrt v3" />
+							
+							<!-- 넷째줄 세로선 -->
+							<line x1="107" x2="107" y1="540" y2="540" class="ldVrt v4" />
+							<line x1="194" x2="194" y1="540" y2="540" class="ldVrt v4" />
+							<line x1="282" x2="282" y1="540" y2="540" class="ldVrt v4" />
+							<line x1="369" x2="369" y1="540" y2="540" class="ldVrt v4" />
+							<line x1="456" x2="456" y1="540" y2="540" class="ldVrt v4" />
+							
 						</svg>
 					</div>
 					<!-- 사다리 영역 종료 -->

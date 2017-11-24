@@ -1,6 +1,21 @@
 $(document).ready(function(){
-	// 점의 y 좌표
+	// 좌표
 	var lineY = [70, 225, 385, 540, 695];
+	var lineX1 = [64, 151, 238, 325, 412];
+	var lineX2 = [107, 194, 282, 369, 456];
+	
+	// 사다리 가로선 그리기
+	for(var i = 0 ; i < ladderSize; i++) {
+		//${'svg'}.append("");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// 사진 클릭시 사랑의 작대기 그리기
 	$('figure img, figcaption').click(function(){
