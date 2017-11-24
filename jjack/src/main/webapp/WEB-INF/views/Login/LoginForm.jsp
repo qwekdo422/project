@@ -26,6 +26,7 @@
 
 		<div id="main">
 	<form method="POST" id="lfrm" action="../Login/LoginProc.do">
+	<input type="hidden" name="url" value="${url}">
 	<table width="500" align="center" board="1">
 		<tr>
 			<td>아이디</td>

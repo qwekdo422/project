@@ -14,6 +14,7 @@ public class ProfileVO {
 	private Date birth; 
 	private String email; 
 	private String loc;
+	private String url;	// 인터셉터 url 기억할 변수
 	
 	private int no; //myBatis에 의해 추가된 변수임 
 	
@@ -22,6 +23,13 @@ public class ProfileVO {
 	private int age;
 
 	
+	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	public int getAge() {
 		return age;
 	}

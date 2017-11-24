@@ -46,10 +46,15 @@ public class InterceptorUtil extends HandlerInterceptorAdapter {
 		*/
 		//	위와 같은 개념으로 필요한 요청은 무조건 컨트롤러를 타도록 처리하면
 		//	버전 낮은 스프링에서도 처리가 가능하다.
-		String	url = request.getRequestURI();
+		String url = "";
+		url = request.getRequestURI();
+		String pram = "";
+		pram = request.getParameter("status");
+		if(pram != null){
+			url = url+"?status="+pram;
+		}
+		url = url.replaceAll("/jjack", "..");
 		System.out.println(url);
-		
-		
 		HttpSession session = request.getSession();
 		boolean	isLogin = SessionUtil.isLogin(session);
 		
@@ -59,7 +64,7 @@ public class InterceptorUtil extends HandlerInterceptorAdapter {
 		}
 		else {
 			//	이사람은 로그인한 사람이 아니므로 컨트롤러를 실행하면 곤란하다.
-			response.sendRedirect("../Login/LoginForm.do");
+			response.sendRedirect("../Login/LoginForm.do?url="+url);
 			//	대신 로그인 폼으로 리다이렉트 시키고자 한다.
 			return false;
 		}

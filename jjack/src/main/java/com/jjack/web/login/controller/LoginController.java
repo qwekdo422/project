@@ -31,11 +31,10 @@ public class LoginController {
 	 * @return : ModelandView
 	 */
 	@RequestMapping("/LoginForm")
-	public ModelAndView LoginForm(ProfileVO pVO){
-		
-		ModelAndView mv= new ModelAndView(); 
+	public ModelAndView LoginForm(ProfileVO pVO, String url){
+		ModelAndView mv= new ModelAndView();
+		mv.addObject("url", url);
 		mv.setViewName("Login/LoginForm");
-		
 		return mv; 
 	}
 	
@@ -65,12 +64,19 @@ public class LoginController {
 																							//즉 로그인 했을 때, 즉 세션이 필요한 곳에서
 																							//getAttribute("키값"); 하면 
 																							//그 세션이 있는 곳에서는 저 키값에 저장된 변수를 
-																							//사용할 수 있다. 
+																							//사용할 수 있다.
 			
 			session.setAttribute("UID", id);//세션을 부여하겠다는 의미이다.
 			mv.addObject("OBJECT",result); 
-			mv.addObject("UID", id); 
-			mv.setViewName("Login/SubLoginForm");
+			mv.addObject("UID", id);
+			//	파라메터로 url이 존재한다면 인터셉터를 거치고 온 상태이다.
+			//	로그인 전 요청한 url을 로그인 완료후 리다이렉트한다.
+			if(pVO.getUrl() != null) {
+				RedirectView rv = new RedirectView(pVO.getUrl());
+				mv.setView(rv);
+			} else {
+				mv.setViewName("Login/SubLoginForm");
+			}
 
 		return mv; 
 		}else{
