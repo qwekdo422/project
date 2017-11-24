@@ -69,8 +69,8 @@ public class LoginController {
 			session.setAttribute("UID", id);//세션을 부여하겠다는 의미이다.
 			mv.addObject("OBJECT",result); 
 			mv.addObject("UID", id);
-			//	파라메터로 url이 존재한다면 인터셉터를 거치고 온 상태이다.
-			//	로그인 전 요청한 url을 로그인 완료후 리다이렉트한다.
+			//	파라메터에 url값이 존재한다면 인터셉터를 거치고 온 상태이다.
+			//	로그인 처리 완료 후 로그인 전 요청한 url로 리다이렉트한다.
 			if(pVO.getUrl() != null) {
 				RedirectView rv = new RedirectView(pVO.getUrl());
 				mv.setView(rv);
