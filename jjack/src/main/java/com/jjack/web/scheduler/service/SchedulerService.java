@@ -48,7 +48,6 @@ public class SchedulerService {
 			jObj.put("contents", schedule.getContents());
 			jArr.add(jObj);
 		}
-		System.out.println(jArr);
 		return jArr;
 	}
 	
