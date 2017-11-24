@@ -18,13 +18,11 @@
 <script>
 	// 선택을 아직 하지 않은 사람 수
 	var allClear = ${numbers.tCount} -${numbers.cCount};
-	
-	// 선 그리기
-	function drawLine(e){
-		e[0].beginElement();
-		e[1].beginElement();
-	}
-	
+	// 전체 입소자 수
+	var tCount = ${numbers.tCount};
+	// 작대기 완료 후 결과 정리된 텍스트
+	var sumText ='<c:forEach var="cp" items="${cList}">${cp.nick} <span style="color:red;">♥</span> ${cp.loveNick}<br /></c:forEach>';
+	// 작대기 완료 후 결과를 정리해 보여주는 함수
 </script>
 </head>
 <body style="margin:0 auto;">
@@ -137,11 +135,17 @@
 					</div>
 					<!-- 여자리스트 종료 -->
 				</div>
-				<!-- row -->
+				<!-- row 종료 -->
+				<!-- 결과 정리 화면 시작 -->
+				<div class="">
+					
+				
+				</div>
+				<!-- 결과 정리 화면 종료 -->
 			</div>
-			<!-- 본 화면 -->
+			<!-- 본 화면 종료 -->
 		</div>
-		<!-- 전체 화면 -->
+		<!-- 전체 화면 종료 -->
 	</div>
 	<!--  /.container -->
 	<!---------------------------------------------->

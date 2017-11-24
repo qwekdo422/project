@@ -54,13 +54,23 @@ public class RboardController {
 	
 	//후기 게시판 검색 결과 리스트 가져오기 
 	@RequestMapping("/RboardSearch")
-	public ModelAndView rboardSearch(RboardVO rVO){
+	public ModelAndView rboardSearch(@RequestParam(value="nowPage" ,defaultValue="1") int nowPage , RboardVO rVO){
+
+		//검색결과에 대한 총 데이터의 갯수를 가져오고
+		int total = rService.searchTotalList(); 
+
 		
-		System.out.println(rVO.getKind());
-		System.out.println(rVO.getRsearch());
-		
-		
+		//검색결과에대한 데이터의 리스트결과 
 		ModelAndView mv= new ModelAndView(); 
+		PageUtil pInfo= new PageUtil(nowPage, total); 
+		ArrayList list= rService.getRboardSearch(rVO, pInfo); 
+		
+		mv.addObject("startPage",pInfo.getStartPage());
+		mv.addObject("endPage",pInfo.getEndPage());
+		mv.addObject("nowPage",pInfo.getNowPage()); 
+		mv.addObject("totalPage",pInfo.getTotalPage());
+		mv.addObject("SLIST",list); 
+		mv.addObject("TOTAL",total);
 		mv.setViewName("Rboard/RboardSearchList");
 		return mv; 
 	}
@@ -89,7 +99,8 @@ public class RboardController {
 		rService.rboardWrite(map);
 		
 		ModelAndView mv= new ModelAndView(); 
-		mv.setViewName("Rboard/RboardList");
+		RedirectView rv= new RedirectView("../Rboard/RboardList.do");
+		mv.setView(rv);
 		return mv; 
 
 	}
@@ -158,8 +169,8 @@ public class RboardController {
 	
 	//리뷰 상세보기 
 	@RequestMapping("/RboardView")
-	public ModelAndView rboardView(RboardVO rVO,  @RequestParam(value="rno") int rno){
-		
+	public ModelAndView rboardView(RboardVO rVO,  @RequestParam(value="rno") int rno,HttpSession session){
+		String id=(String)session.getAttribute("UID"); 
 		
 		RboardVO VO=rService.rboardView(rno); 
 		

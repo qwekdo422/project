@@ -34,4 +34,19 @@ public interface RboardDAO {
 	
 	//게시물 목록 가져오기 질의명령
 	public ArrayList rboardList(HashMap map); 
+	
+	
+	
+	
+	//검색결과 리스트 가져오기 질의명령 
+	public ArrayList rboardSearchList(RboardVO rVO); 
+	
+	//검색시 각 주제에 대한 데이터의 총 갯수 가져오기 질의명령 
+	public int searchTotalList(); 
+	
+	
+	
+	
+	
+	
 }

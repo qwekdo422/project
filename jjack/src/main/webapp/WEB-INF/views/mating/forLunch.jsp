@@ -42,6 +42,7 @@
 		 	<div id="main" class="col-lg-9">
 				<div class="row">
 				
+					<!-- 여자리스트 시작 -->
 					<div id="women" class="col-lg-2">
  						<c:forEach var="fl" items="${fList}">
 							<div class="col-xs-2 mx-auto">
@@ -53,7 +54,6 @@
 						</c:forEach>
 					</div>
 					<!-- 여자리스트 종료 -->
-					
 					<!-- 사다리 영역 시작 -->
 					<div id="ladderDiv" class="col-lg-8">
 						<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
@@ -95,7 +95,7 @@
 						</svg>
 					</div>
 					<!-- 사다리 영역 종료 -->
-					
+					<!-- 남자리스트 시작 -->
 					<div id="men" class="col-lg-2">
  						<c:forEach var="ml" items="${mList}" varStatus="vs">
 							<div class="col-xs-2 mx-auto">
@@ -106,7 +106,7 @@
 							</div>
 						</c:forEach>
 					</div>
-					<!-- 남자리스트 영역 종료 -->
+					<!-- 남자리스트 종료 -->
 				</div>
 				<!-- row -->
 			</div>
