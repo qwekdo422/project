@@ -62,7 +62,10 @@ public class MatingService {
 		md.coupling(edate);
 	}
 	
-	
+	// 커플 목록 가져오기
+	public List<MatingVO> whoAreCouples(String edate) {
+		return md.whoAreCouples(edate);
+	}
 	
 	
 	/*

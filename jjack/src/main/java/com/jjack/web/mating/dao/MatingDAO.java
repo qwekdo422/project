@@ -39,7 +39,8 @@ public interface MatingDAO {
 	public List<MatingVO> WomenForArrows(String edate);
 	// 커플맺고 코스 입력
 	public void coupling(String edate);
-
+	// 커플 목록 가져오기
+	public List<MatingVO> whoAreCouples(String edate);
 	
 	/*
 	 *  짝 선택화면

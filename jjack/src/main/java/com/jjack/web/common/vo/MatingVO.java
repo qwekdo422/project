@@ -17,11 +17,18 @@ public class MatingVO {
 	private String course;
 	private String interest;
 	private int loveNo;	// 선택한 상대가 몇 호인지
+	private int loveNick;	// 선택한 사람의 호칭
 	
 	private int cCount;		// 선택을 완료한 사람 수
 	private int tCount;		// 전체 사람 수
 	
 	
+	public int getLoveNick() {
+		return loveNick;
+	}
+	public void setLoveNick(int loveNick) {
+		this.loveNick = loveNick;
+	}
 	public int getLoveNo() {
 		return loveNo;
 	}

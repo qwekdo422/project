@@ -50,11 +50,14 @@ public class MatingController {
 		// 입소자들 정보 가져오기
 		List<MatingVO> men = ms.MenForArrows(edate);
 		List<MatingVO> women = ms.WomenForArrows(edate);
+		// 커플 정보 가져오기
+		List<MatingVO> couples = ms.whoAreCouples(edate);
 		
 		// 뷰 호출
 		mv.addObject("numbers", noVO);
 		mv.addObject("mList", men);
 		mv.addObject("fList", women);
+		mv.addObject("cList", couples);
 		return mv;
 	}
 	

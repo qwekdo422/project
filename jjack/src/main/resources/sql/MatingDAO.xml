@@ -107,7 +107,7 @@
 		    a_no IN (SELECT a_no FROM TB_Apply WHERE e_eventdate = #{edate})
 	</update>
 
-	<!-- 입소자 수 구하기. 전체수, 선택완료한 사람수, 남자수, 여자수, 커플수 구하기 -->
+	<!-- 입소자 수 구하기. 전체수, 선택완료한 사람수 구하기 -->
 	<select id="getNumbers" resultType="matingvo" parameterType="string">
 		SELECT
 			tCount,	-- 입소자 수
@@ -154,6 +154,24 @@
 		ORDER BY
 			g.g_nick
 	</select>
+
+	<select id="whoAreCouples" parameterType="string" resultType="matingvo">
+		SELECT
+			mg.g_nick AS nick,
+			pg.g_nick AS loveNick
+		FROM
+			TB_Guest mg, TB_Apply ma, TB_Member mm, TB_Guest pg
+		WHERE
+			mg.a_no=ma.a_no
+			AND ma.m_no = mm.m_no
+			AND mg.g_choice = pg.g_no
+			AND mg.g_course IN ('A', 'B', 'C')
+			AND mm.m_sex='F'
+			AND ma.e_eventdate=#{edate}
+		ORDER BY
+			mg.g_nick
+	</select>
+
 
 
 
