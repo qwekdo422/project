@@ -22,15 +22,24 @@ VALUES
 </insert>
 
 <!-- 리뷰게시판 목록 가져오기  -->
-<select id="rboardList"  resultType="rboardvo">
-
+<select id="rboardList"  resultType="rboardvo" parameterType="hashMap">
 SELECT 
-	r_no, AS  r_title, r_wdate AS rdate ,r_hits AS
+		realTotal.rno AS rno , realTotal.rtitle AS rtitle, realTotal.rdate AS rdate , realTotal.rhis AS rhis, realTotal.rcontents AS rcontents
 FROM
-
+		(SELECT 
+					rownum AS resultno,
+					total.rno AS rno , total.rtitle AS rtitle, total.rdate AS rdate , total.rhis AS rhis, total.rcontents AS rcontents
+		FROM
+   			 (SELECT 
+        			r_no AS rno , r_title AS rtitle, r_wdate AS rdate ,r_hits AS rhis, r_contents AS rcontents
+    			 FROM
+        			TB_Review
+   				 WHERE
+        			r_IsShow='Y'
+    			ORDER BY
+       				 r_no DESC) total) realTotal
 WHERE
-
-ORDER BY
+		resultno BETWEEN #{start} AND #{end}
 </select>
 
 
@@ -99,7 +108,7 @@ SELECT
 FROM 
 	TB_Review
 WHERE
-	r_isshow='Y'; 
+	r_isshow='Y'
 	
 </select>
 

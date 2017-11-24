@@ -1,6 +1,7 @@
 package com.jjack.web.rboard.controller;
 
 import java.lang.ProcessBuilder.Redirect;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import com.jjack.web.common.vo.NboardVO;
 import com.jjack.web.common.vo.RboardVO;
 import com.jjack.web.rboard.service.RboardService;
 import com.jjack.web.util.FileUtil;
+import com.jjack.web.util.PageUtil;
 @Controller
 @RequestMapping("/Rboard")
 public class RboardController {
@@ -26,13 +28,28 @@ public class RboardController {
 	
 	//후기 게시판 목록보기
 	@RequestMapping("/RboardList")
-	public ModelAndView rboardList(HttpSession session){
+	public ModelAndView rboardList(@RequestParam(value="nowPage" ,defaultValue="1") int nowPage,HttpSession session){
 		
 		ModelAndView mv= new ModelAndView(); 
+		String id= (String)session.getAttribute("UID"); 
 		
+		if(id==null){ //세션이 없으면 로그인 폼으로 가라 
+			RedirectView rv= new RedirectView("../Login/LoginForm.do");
+			mv.setView(rv);
+			return mv; 
+		}
+		
+		int total=rService.getTotalList(); //총 데이터의 갯수를 받아오고 
+		PageUtil pInfo= new PageUtil(nowPage, total);	//페이징 처리 
+		ArrayList list= rService.rboardList(nowPage, pInfo); 
+		mv.addObject("startPage",pInfo.getStartPage());
+		mv.addObject("endPage",pInfo.getEndPage());
+		mv.addObject("nowPage",pInfo.getNowPage()); 
+		mv.addObject("totalPage",pInfo.getTotalPage());
+		mv.addObject("RLIST",list); 
 		
 		mv.setViewName("Rboard/RboardList");
-		return null; 
+		return mv; 
 	}
 	
 	
@@ -132,7 +149,7 @@ public class RboardController {
 		
 		ModelAndView mv= new ModelAndView(); 
 		mv.addObject("VO",VO); 
-		mv.setViewName("Nboard/NboardView");
+		mv.setViewName("Rboard/RboardView");
 		return mv; 
 		
 	}

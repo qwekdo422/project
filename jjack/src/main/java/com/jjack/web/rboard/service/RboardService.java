@@ -1,5 +1,6 @@
 package com.jjack.web.rboard.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.log4j.NDC;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.jjack.web.common.vo.RboardVO;
 import com.jjack.web.rboard.dao.RboardDAO;
+import com.jjack.web.util.PageUtil;
 
 @Service
 public class RboardService {
@@ -72,7 +74,19 @@ public class RboardService {
 		return total; 
 	}
 
-	
+	//리뷰 리스트 가져오기 처리 함수 
+	public ArrayList rboardList(int nowPage, PageUtil pInfo){
+		
+		int start=(nowPage-1)*(pInfo.getListCount())+1; //시작페이지
+		int end=start+(pInfo.getListCount()-1); //종료위치 
+		
+		HashMap map = new HashMap();
+		map.put("start",start); 
+		map.put("end",end); 
+		ArrayList list= rDAO.rboardList(map); 
+		
+		return list; 
+	}
 	
 	
 	

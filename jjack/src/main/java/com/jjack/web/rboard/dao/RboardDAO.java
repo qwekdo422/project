@@ -1,5 +1,6 @@
 package com.jjack.web.rboard.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.jjack.web.common.vo.RboardVO;
@@ -30,4 +31,7 @@ public interface RboardDAO {
 	
 	//총 데이터 갯수 가져오기 질의명령 
 	public int getTotalList(); 
+	
+	//게시물 목록 가져오기 질의명령
+	public ArrayList rboardList(HashMap map); 
 }

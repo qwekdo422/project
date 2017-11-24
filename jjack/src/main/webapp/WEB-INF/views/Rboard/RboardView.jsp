@@ -24,12 +24,12 @@
 	<table width="1100" border="1" align="center">
 			<tr>
 				<td>
-			작성일 :${VO.nday}		 | 		공지 번호 :${VO.nno}		| 	  	${VO.ntitle}
+			작성일 :${VO.rdate}		 | 		공지 번호 :${VO.rno}		| 	  	${VO.rtitle}
 				</td>
 			  </tr>
 			<tr>
-			<!--  <td colspan="2" ><textarea  id="nbody" name="ncontents" row="10" cols="110"   disabled >${VO.ncontents}</textarea></td>-->	
-						<td colspan="2"><div>${VO.ncontents}</div></td>
+			<%--  <td colspan="2" ><textarea  id="nbody" name="ncontents" row="10" cols="110"   disabled >${VO.ncontents}</textarea></td>--%>	
+						<td colspan="2"><div>${VO.rcontents}</div></td>
 			</tr> 
 	</table>
 <%-- 	
