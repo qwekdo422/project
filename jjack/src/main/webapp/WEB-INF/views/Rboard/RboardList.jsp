@@ -59,7 +59,7 @@ $(document).ready(function(){
 					<c:forEach var="data" items="${RLIST}">
 					<tr>
 						<td>${data.rno}</td>
-						<td><a href="../Rboard/rHitUpProc.do?rno=${data.rno}&nowPage=${nowPage}">${data.rtitle}</a></td>
+						<td class="title"><a href="../Rboard/rHitUpProc.do?rno=${data.rno}&nowPage=${nowPage}">${data.rtitle}</a></td>
 						<td>기수?</td>
 						<td>작성자?</td>
 						<td>${data.rdate}</td>
