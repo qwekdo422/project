@@ -64,8 +64,6 @@ $(document).ready(function() {
 						//	데이터 초기화 작업
 						//	입소상태에 따라 보여질 텍스트 문구를 숨긴다.
 						$(".applyText").hide();
-						//	입소신청폼을 보여준다.
-						$("#applyFrm").show();
 						//	관심사 선택창을 디폴트로 잡아준다.
 						$("#interest").val("").prop("selected", true);
 						//	전화번호 정보를 초기화
@@ -74,7 +72,8 @@ $(document).ready(function() {
 						$("#uBtn").css("display", "none");
 						//	사진등록에 쓸 기본이미지 출력
 						$("#imagePreview").prop("src", "../img/houseApply/basic.jpg");
-						
+						// 입소대기 상태에서 클릭 막은작업 원상복구
+						formEnable();
 						//	해당날짜에 이벤트 신청을 안한사람
 						if(cond == 0) {
 							//	신청버튼을 사용할 수 있게한다.
@@ -109,22 +108,28 @@ $(document).ready(function() {
 						//	입금하세요.
 						} else if (cond == 3) {
 							condStatus("입금하세요. 계좌번호: 기업은행 010-7131-2014");
+							formDisabled();
 						//	입소예정
 						} else if (cond == 4) {
 							condStatus("입소 예정입니다.");
+							formDisabled();
 						//	해당행사에 입소취소를 취소한사람
 						} else if (cond == 6) {
 							//	마감
 							condStatus("마감되었습니다.");
+							formDisabled();
 						} else if (cond == 7) {
 							//	입소취소
 							condStatus("입소를 취소하셨습니다.");
+							formDisabled();
 						} else if (cond == 8){
 							//	입소
 							condStatus("일정에 맞게 입소바랍니다.");
+							formDisabled();
 						} else if (cond == 9 || cond == 10 ) {
 							//	신청할 수 없는 이벤트(행사 종료되었을 때)
 							condStatus("이벤트가 종료되었습니다.");
+							formDisabled();
 						}
 					},
 					error: function(e) {
@@ -253,9 +258,36 @@ $(document).ready(function() {
 });	// document 종료
 
 
+//	입소 신청후 승인대기, 입소취소, 입소대기 상태일때 form의 클릭을 원상복구하는  함수
+function formEnable() {
+	$("#applyBtn").show();
+	$("#uBtn").hide();
+	//	form에 투명도를 준다.
+	//	해당 태그클릭을 막는다.
+	$("#applyFrm").css("opacity", "1");
+	$("#imageUpload").attr("disabled", false);
+	$("#tel").attr("disabled", false);
+	$("#interest").attr("disabled", false);
+	$("#uBtn").attr("disabled", false);
+	$("#resetBtn").attr("disabled", false);
+}
+
+//	입소 신청후 승인대기, 입소취소, 입소대기 상태일때 form의 클릭을 방지 하는 함수
+function formDisabled() {
+	$("#applyBtn").hide();
+	$("#uBtn").show();
+	//	form에 투명도를 준다.
+	//	해당 태그클릭을 막는다.
+	$("#applyFrm").css("opacity", "0.3");
+	$("#imageUpload").attr("disabled", true);
+	$("#tel").attr("disabled", true);
+	$("#interest").attr("disabled", true);
+	$("#uBtn").attr("disabled", true);
+	$("#resetBtn").attr("disabled", true);
+}
+
 //	입소상태에 따라 멘트 출력하는 함수
 function condStatus(msg) {
-	$("#applyFrm").hide();
 	$(".applyText").text(msg);
 	$(".applyText").show();
 }

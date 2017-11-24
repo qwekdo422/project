@@ -20,7 +20,9 @@
 table#eventView{
 	/* background: #f0fff1; */
 }
-.col-md-4.rDiv {
+
+/* 입소신청서 배경색깔 */
+.applyDiv {
 	background: beige;
 }
 

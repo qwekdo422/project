@@ -59,10 +59,9 @@ public class InterceptorUtil extends HandlerInterceptorAdapter {
 		}
 		else {
 			//	이사람은 로그인한 사람이 아니므로 컨트롤러를 실행하면 곤란하다.
-			
-			response.sendRedirect("../login/loginForm.sun");
-			return false;
+			response.sendRedirect("../Login/LoginForm.do");
 			//	대신 로그인 폼으로 리다이렉트 시키고자 한다.
+			return false;
 		}
 		
 	}
