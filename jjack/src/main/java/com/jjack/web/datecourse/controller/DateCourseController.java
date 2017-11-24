@@ -46,11 +46,9 @@ public class DateCourseController {
 	//커플코스(수정후)
 	@RequestMapping("/CoupleCourse")
 	public ModelAndView coupleCourse(HttpSession session){
-		System.out.println("coupleCourse-1");
 		int mno = (Integer)session.getAttribute("MNO");
 		String sCourse = ds.getGuestInfo(mno);
 		ModelAndView mv = new ModelAndView();
-		//mv.addObject("dateguest",dvo);
 		mv.addObject("course", sCourse);
 		return mv;
 	}	
