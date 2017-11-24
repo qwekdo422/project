@@ -26,7 +26,9 @@
 
 		<div id="main">
 	<form method="POST" id="lfrm" action="../Login/LoginProc.do">
+	<c:if test="${!empty url}">
 	<input type="hidden" name="url" value="${url}">
+	</c:if>
 	<table width="500" align="center" board="1">
 		<tr>
 			<td>아이디</td>
