@@ -17,11 +17,19 @@
 <script>
 $(document).ready(function(){
 	$("#rBtn").click(function(){
-	//버튼 누르면 글쓰기 폼으로 가진다. 
+	//후기 남기기 버튼 누르면 글쓰기 폼으로 가진다. 
 		$(location).attr("href","../Rboard/RboardForm.do"); 
 		
 	}); 
+	
+	//검색 버튼 누르면 검색결과가 목록으로 나온다. 
+ 		$("#sBtn").click(function(){
+		
+		$("#search").submit(); 
+	}); 
 });
+
+
 </script>
 
 
@@ -103,7 +111,7 @@ $(document).ready(function(){
 </c:if>
 			
 <%-- 검색창 --%>
-<form method="post" action="">
+<form method="post"   id="search" action="../Rboard/RboardSearch.do">
 		<table align="center">
 				<tr>
 					<td>

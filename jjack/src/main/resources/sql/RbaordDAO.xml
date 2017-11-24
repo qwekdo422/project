@@ -109,9 +109,43 @@ FROM
 	TB_Review
 WHERE
 	r_isshow='Y'
-	
 </select>
 
+<!-- 리뷰검색결과보기  -->
+<select id="rboardSearchList" parameterType="rboardvo" resultType="rboardvo">
+SELECT 
+		realTotal.rno AS rno , realTotal.rtitle AS rtitle, realTotal.rdate AS rdate , realTotal.rhis AS rhis, realTotal.rcontents AS rcontents
+FROM
+		(SELECT 
+					rownum AS resultno,
+					total.rno AS rno , total.rtitle AS rtitle, total.rdate AS rdate , total.rhis AS rhis, total.rcontents AS rcontents
+		FROM
+   			 (SELECT 
+        			r_no AS rno , r_title AS rtitle, r_wdate AS rdate ,r_hits AS rhis, r_contents AS rcontents
+    			 FROM
+        			TB_Review
+   				 WHERE
+        			r_IsShow='Y' AND 
+                    <if test="kind eq 'writer'">
+                     r_title LIKE '%' || ${rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'rtitle'">
+                     r_title LIKE '%' || ${rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'rgisu'">
+                      r_title LIKE '%' || ${rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'rdate'">
+                    	r_wdate LIKE '%' || ${rdate} || '%'
+                    </if>
+                    <if test="kind eq 'rcontents'">
+                    r_contents LIKE '%' || ${rcontents} || '%'
+                    </if>
+    			ORDER BY
+       				 r_no DESC) total) realTotal
+WHERE
+		resultno BETWEEN #{start} AND #{end}
+</select>
 
 
 </mapper>

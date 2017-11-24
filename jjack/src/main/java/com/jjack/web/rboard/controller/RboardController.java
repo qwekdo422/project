@@ -52,6 +52,22 @@ public class RboardController {
 		return mv; 
 	}
 	
+	//후기 게시판 검색 결과 리스트 가져오기 
+	@RequestMapping("/RboardSearch")
+	public ModelAndView rboardSearch(RboardVO rVO){
+		
+		System.out.println(rVO.getKind());
+		System.out.println(rVO.getRsearch());
+		
+		
+		ModelAndView mv= new ModelAndView(); 
+		mv.setViewName("Rboard/RboardSearchList");
+		return mv; 
+	}
+	
+	
+	
+	
 	
 	//후기 게시판 글쓰기 폼 
 	@RequestMapping("/RboardForm")

@@ -18,6 +18,10 @@ private int nowPage; //페이징 처리를 위해 추가된 변수
 private int startPage;
 private int endPage; 
 
+//검색에 필요한 데이터 
+private String kind; 
+private String rsearch;
+
 // 짝, 기수 는 ApplicantCountVO에서 받아오도록 하자.
 public int getNowPage() {
 	return nowPage;
@@ -52,9 +56,7 @@ public int getResultno() {
 public void setResultno(int resultno) {
 	this.resultno = resultno;
 }
-//검색에 필요한 데이터 
-private String kind; 
-private String rsearch;
+
 
 
 
