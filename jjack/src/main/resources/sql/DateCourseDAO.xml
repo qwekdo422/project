@@ -4,14 +4,9 @@
 <mapper namespace="com.jjack.web.datecourse.dao.DateCourseDAO">
 
 	<!-- 짝 최종 입소자 정보 가져오기 -->
-	<select id="GuestgetInfo" parameterType="int" resultType="DateCourseVO">
+	<select id="getGuestInfo" parameterType="int" resultType="string">
 
 		SELECT
-			m.m_no AS mno,
-			a.a_no AS ano,
-			g.g_no AS gno,
-			m.m_sex AS sex,
-			g.g_nick AS nick,
 			g.g_course AS course
 		FROM
 			TB_Member m, TB_Apply a, TB_Guest g

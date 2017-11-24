@@ -11,7 +11,7 @@ public class DateCourseService {
 	public DateCourseDAO dd;
 
 	//게스트 남녀 정보 가져오기
-	public DateCourseVO getGuestInfo(int mno){
+	public String getGuestInfo(int mno){
 		return dd.getGuestInfo(mno);
 	}
 }

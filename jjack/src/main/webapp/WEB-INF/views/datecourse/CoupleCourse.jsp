@@ -60,8 +60,8 @@ function open_food_frame(url){
 			</div>
 			<!-- 본 화면 -->
 		 	<div id="CoupleMain" class="col-lg-9">
-				
-				
+				<!-- View에서 받아온 값 확인 -->
+		
 				<br>
 			    <!-- Map url -->
 				<button onclick='open_map_frame("https://www.google.com/maps/d/embed?mid=1z5yQJh_pAHZ8F8dbyF2qNvtJ1vGTg2r3");
@@ -69,18 +69,34 @@ function open_food_frame(url){
 					style="padding:0px">
 					<img src="../img/datecourse/east_course.png">
 				</button>
-				<img src="../img/datecourse/love_icon.gif" width="130">
-				<img src="../img/datecourse/recommend_icon.png">
+				<c:if test="${course eq 'A'}">
+			
+					<img src="../img/datecourse/love_icon.gif" width="130">
+					<img src="../img/datecourse/recommend_icon.png" width="100">
+				</c:if>
+
 				<br>
 				<br>
    			    <button onclick='open_map_frame("https://www.google.com/maps/d/embed?mid=1BNuO89rX3ZuCRCND53p6Gj9pTnzBSzCU");
    			    	open_food_frame("https://m.store.naver.com/restaurants/listMap?back=false&category=%EB%B6%84%EC%8B%9D&menu=6&query=%EC%A0%9C%EC%A3%BC%EB%8F%84%20%EB%A7%9B%EC%A7%91&searchQuery=%EC%A0%9C%EC%A3%BC%EB%8F%84%20%EB%A7%9B%EC%A7%91&level=bottom&age=30")' 
-   			    	style="padding:0px"><img src="../img/datecourse/west_course.png"></button>
+   			    	style="padding:0px"><img src="../img/datecourse/west_course.png">
+   			    </button>
+   			    <c:if test="${course eq 'B'}">
+   		
+					<img src="../img/datecourse/love_icon.gif" width="130">
+					<img src="../img/datecourse/recommend_icon.png" width="100">
+				</c:if>
 				<br>
 				<br>
 			    <button onclick='open_map_frame("https://www.google.com/maps/d/embed?mid=124b3u065zmVLoVFXD6rzHq5kMqsSum89");
 			    	open_food_frame("https://m.store.naver.com/restaurants/listMap?back=false&category=%EB%B6%84%EC%8B%9D&menu=6&query=%EC%A0%9C%EC%A3%BC%EB%8F%84%20%EB%A7%9B%EC%A7%91&searchQuery=%EC%A0%9C%EC%A3%BC%EB%8F%84%20%EB%A7%9B%EC%A7%91&level=bottom&age=30")'
-			    style="padding:0px"><img src="../img/datecourse/south_course.png"></button>
+			    style="padding:0px"><img src="../img/datecourse/south_course.png">
+			    </button>
+			    <c:if test="${course eq 'C'}">
+	
+					<img src="../img/datecourse/love_icon.gif" width="130">
+					<img src="../img/datecourse/recommend_icon.png" width="100">
+				</c:if>
 				<br>
 				<br>
 				<button class="btn_map_hide" >지도 숨김</button>

@@ -4,8 +4,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.jjack.web.common.vo.DateCourseVO;
 import com.jjack.web.datecourse.service.DateCourseService;
@@ -32,28 +33,28 @@ public class DateCourseController {
 		return "datecourse/BasicCourse";
 	}
 	
+	/*
 	//커플코스(수정전)
 	@RequestMapping("/CoupleCourse")
 	public String coupleCourse(){
 
 		return "datecourse/BasicCourse";
 	}
+	*/
 	
-	/*
+	
 	//커플코스(수정후)
 	@RequestMapping("/CoupleCourse")
 	public ModelAndView coupleCourse(HttpSession session){
-		
+		System.out.println("coupleCourse-1");
 		int mno = (Integer)session.getAttribute("MNO");
-		DateCourseVO dvo = ds.getGuestInfo(mno);
-		
+		String sCourse = ds.getGuestInfo(mno);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("dateguest",dvo);
-		
-		System.out.println("mv:" + mv.getView());
+		//mv.addObject("dateguest",dvo);
+		mv.addObject("course", sCourse);
 		return mv;
 	}	
-	*/
+	
 	
 	//솔로코스
 	@RequestMapping("/SoloCourse")
