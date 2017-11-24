@@ -24,13 +24,10 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
-	//	행사일정들(json형태)
-	var schedule = $
-	{
-		SCHEDULE
-	};
-	//관리자, 사용자 (상태여부)
-	var status = "${status}";
+//	행사일정들(json형태)
+var schedule = ${SCHEDULE};
+//관리자, 사용자 (상태여부)
+var status = "${status}";
 </script>
 </head>
 
