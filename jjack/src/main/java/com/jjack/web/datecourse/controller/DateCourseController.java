@@ -1,11 +1,16 @@
 package com.jjack.web.datecourse.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jjack.web.common.vo.DateCourseVO;
 import com.jjack.web.datecourse.service.DateCourseService;
+import java.util.*;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -20,22 +25,37 @@ public class DateCourseController {
 	@Autowired
 	public DateCourseService ds;
 	
+	//기본코스
 	@RequestMapping("/BasicCourse")
 	public String basicCourse(){
 		//System.out.println("BasicCourse");
 		return "datecourse/BasicCourse";
 	}
-	@RequestMapping("/CoupleCourse")
-	public ModelAndView coupleCourse(ModelAndView mv){
-		
-		//입소자들 정보 가져오기
-		  //서비스를 호출해서 리스트 및 맵 정보를 가져온다
-		
-		//뷰 호출
-		  // 서비스에서 가져온 리스트 및 맵정보를 Model에 받아서 뷰에 돌려준다.
 	
-		return mv;
+	//커플코스(수정전)
+	@RequestMapping("/CoupleCourse")
+	public String coupleCourse(){
+
+		return "datecourse/BasicCourse";
 	}
+	
+	/*
+	//커플코스(수정후)
+	@RequestMapping("/CoupleCourse")
+	public ModelAndView coupleCourse(HttpSession session){
+		
+		int mno = (Integer)session.getAttribute("MNO");
+		DateCourseVO dvo = ds.getGuestInfo(mno);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("dateguest",dvo);
+		
+		System.out.println("mv:" + mv.getView());
+		return mv;
+	}	
+	*/
+	
+	//솔로코스
 	@RequestMapping("/SoloCourse")
 	public String soloCourse(){
 		//System.out.println("SoloCourse");

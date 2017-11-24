@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../css/common/footer.css" />
 <link rel="stylesheet" href="../css/alert/alertify.core.css" />
 <link rel="stylesheet" href="../css/alert/alertify.default.css" />
+<link rel="stylesheet" href="../css/datecourse/couple.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
 
@@ -82,8 +83,8 @@ function open_food_frame(url){
 			    style="padding:0px"><img src="../img/datecourse/south_course.png"></button>
 				<br>
 				<br>
-				<button class="btn_map_hide" style="padding:3px">지도 숨김</button>
-				<button class="btn_food_hide" style="padding:3px">맛집 숨김</button>
+				<button class="btn_map_hide" >지도 숨김</button>
+				<button class="btn_food_hide" >맛집 숨김</button>
 				<br>
 				<br>
 				<div class="map_class">

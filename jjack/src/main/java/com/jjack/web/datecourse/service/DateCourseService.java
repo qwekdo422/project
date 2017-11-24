@@ -7,6 +7,11 @@ import com.jjack.web.datecourse.dao.DateCourseDAO;
 
 @Service
 public class DateCourseService {
+	@Autowired
+	public DateCourseDAO dd;
 
-	//쿼리문 수행
+	//게스트 남녀 정보 가져오기
+	public DateCourseVO getGuestInfo(int mno){
+		return dd.getGuestInfo(mno);
+	}
 }

@@ -10,9 +10,12 @@
 <link rel="stylesheet" href="../css/common/footer.css" />
 <link rel="stylesheet" href="../css/alert/alertify.core.css" />
 <link rel="stylesheet" href="../css/alert/alertify.default.css" />
+<link rel="stylesheet" href="../css/main/WordCloud.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
+
+
 
 <script>
 
@@ -41,9 +44,14 @@ $(function(){
  
 				<div class="col-lg-3" align="center">
 					<br>
-					<h5 align="center"> [실시간 워드 클라우드] </h5> <br>
+					<!--  <h5 align="center"> [실시간 워드 클라우드] </h5> <br> -->
+					<div id ="ani" class="title_word1">Word Cloud</div>
+					<br>
+					<br>
                     <img class="card-img-top" src="../img/main/real_word.jpg">
-                    <button class="btn_word">실시간 워드 버튼</button>
+                    <br>
+                    <br>
+                    <button class="btn_word">후기 업데이트</button> 
 				</div>
 
 				<!-- /.col-lg-3 -->
