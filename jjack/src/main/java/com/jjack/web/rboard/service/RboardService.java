@@ -88,6 +88,30 @@ public class RboardService {
 		return list; 
 	}
 	
+	//리뷰 검색 결과 리스트 
+//	public ArrayList rboardSearchList(RboardVO rVO){
+//		
+//		ArrayList list= rDAO.rboardSearchList(rVO); 
+//		return list; 
+//	}
+	public ArrayList getRboardSearch(RboardVO rVO, PageUtil pInfo){
+		
+		int start=(pInfo.getNowPage()-1)*(pInfo.getListCount())+1; //시작페이지
+		int end=start+(pInfo.getListCount()-1); //종료위치 
+		
+		rVO.setStartPage(start);
+		rVO.setEndPage(end);
+		
+		ArrayList list=rDAO.rboardSearchList(rVO); 
+		return list; 
+	}
+	
+	
+	public int searchTotalList(){
+		
+		int total= rDAO.searchTotalList(); 
+		return total; 
+	}
 	
 	
 	

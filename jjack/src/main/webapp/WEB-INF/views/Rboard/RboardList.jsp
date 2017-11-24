@@ -120,6 +120,7 @@ $(document).ready(function(){
 							<option value="rcontents">내용</option>
 							<option value="rgisu">기수</option>
 							<option value="rdate">작성일</option>
+							<option value="both">제목+내용</option>
 							<input type="text" id="rsearch" name="rsearch">
 							<input type="button" id="sBtn" value="검색">
 						</select>

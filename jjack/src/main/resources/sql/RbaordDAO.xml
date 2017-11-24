@@ -125,28 +125,55 @@ FROM
     			 FROM
         			TB_Review
    				 WHERE
-        			r_IsShow='Y' AND 
+        			r_isshow='Y'
                     <if test="kind eq 'writer'">
-                     r_title LIKE '%' || ${rsearch} || '%'
+                    AND  r_title LIKE '%' || #{rsearch} || '%'
                     </if>
                     <if test="kind eq 'rtitle'">
-                     r_title LIKE '%' || ${rsearch} || '%'
+                    AND  r_title LIKE '%' || #{rsearch} || '%'
                     </if>
                     <if test="kind eq 'rgisu'">
-                      r_title LIKE '%' || ${rsearch} || '%'
+                     AND r_title LIKE '%' || #{rsearch} || '%'
                     </if>
                     <if test="kind eq 'rdate'">
-                    	r_wdate LIKE '%' || ${rdate} || '%'
+                    AND	r_wdate LIKE '%' || #{rsearch} || '%'
                     </if>
                     <if test="kind eq 'rcontents'">
-                    r_contents LIKE '%' || ${rcontents} || '%'
+                    AND r_contents LIKE '%' || #{rsearch} || '%'
                     </if>
     			ORDER BY
        				 r_no DESC) total) realTotal
 WHERE
-		resultno BETWEEN #{start} AND #{end}
+		resultno BETWEEN #{startPage} AND #{endPage}
 </select>
 
+<!-- 검색시 각 주제에 대한 데이터의 총 갯수 가져오기 -->
+<select id="searchTotalList" resultType="int">
+	SELECT 
+		COUNT(*)
+	FROM
+		TB_Review
+	WHERE
+		      	r_isshow='Y'
+					 <if test="kind eq 'writer'">
+                      AND r_title LIKE '%' || #{rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'rtitle'">
+                      AND r_title LIKE '%' || #{rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'rgisu'">
+                      AND r_title LIKE '%' || #{rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'rdate'">
+                    	 AND r_wdate LIKE '%' || #{rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'rcontents'">
+                   AND  r_contents LIKE '%' || #{rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'both'">
+                      AND  (r_title LIKE '%' || #{rsearch} || '%' OR  r_contents LIKE '%' || #{rsearch} || '%')
+                    </if>
+</select>
 
 </mapper>
 

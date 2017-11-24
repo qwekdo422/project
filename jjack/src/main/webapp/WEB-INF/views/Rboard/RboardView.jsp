@@ -14,6 +14,23 @@
 	<script src="../js/alert/alertify.min.js"></script>
 	<%-- ====================== 필수  ======================  --%>
 </head>
+<script>
+$(document).ready(function(){
+	
+	//목록보기 버튼 눌렀을 때 요청처리 
+	$("#lBtn").click(function(){
+		$(location).atrr("href" , "../Rboard/RboardList.do"); 
+	}); 
+	
+	//
+	
+}); 
+
+</script>
+
+
+
+
 <body style="margin:0 auto;">
    <div id="header">
       <jsp:include page="../common/header.jsp" />
@@ -46,18 +63,16 @@
 			<td>▼다음글</td><td><a href="../Nboard/NboardView.do?nno=${PRENEXT.nextNo}">${PRENEXT.next}</a></td><td>작성일 : ${PRENEXT.nextday}</td>
 	</c:if>
 	</tr>
-
+--%>			
 	</table>
 	
 	<div align="center">
 	<input type="button" id="lBtn" value="목록보기" align="right">	
-	<c:if test="${sessionScope.UID eq 'admin'}">
 	<input type="button" id="dBtn" value="삭제하기" align="right">
 	<input type="button" id="mtn" value="수정하기" align="right">
-	</c:if>
 	</div>
 		</form>
---%>			
+
 		</div>
    <div id="footer">
       <jsp:include page="../common/footer.jsp" />
