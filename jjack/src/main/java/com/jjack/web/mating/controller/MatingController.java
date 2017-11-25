@@ -93,4 +93,10 @@ public class MatingController {
 		mv.addObject("myLove", loveVO);
 		return mv;
 	}
+	
+	// 일반회원이 접근했을때 경고창 보여줄 임시페이지
+	@RequestMapping("/ComeHere")
+	public void ComeHere() {
+	}
+	
 }

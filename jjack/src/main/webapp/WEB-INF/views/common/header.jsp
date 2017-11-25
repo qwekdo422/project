@@ -45,11 +45,9 @@
 					</c:if>
  --%>
 					<li class="nav-item">
-						<%-- 일반적인 회원은 접근불가 --%>
-						<%-- 경고창을 띄워야하는데 안되네 --%>
+						<%-- 일반 회원은 접근불가 --%>
 						<c:if test="${sessionScope.Auth ne 2 and sessionScope.Auth ne 3 and sessionScope.UID ne 'admin'}">
-							<a  class="nav-link" href="#" id="noMating">짝짓기</a>
-							<!-- <span class="nav-link" id="noMating">짝짓기</span> -->
+							<a  class="nav-link" href="../mating/ComeHere.do">짝짓기</a>
 						</c:if>
 						<%-- 관리자는 사다리타기, 사랑의 작대기로 연결 --%>
 						<c:if test="${sessionScope.UID eq 'admin'}">
