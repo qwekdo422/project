@@ -18,6 +18,9 @@ $(document).ready(function(){
 	
 	// 사다리 만들기
 	var makeLadder = function() {
+		// 기존 분기점 삭제
+		branchP.length=0;
+		
 		for(var i =0; i < 4; i++) {
 			// 기존 위치 삭제
 			rowNo[i].length=0;
@@ -26,7 +29,6 @@ $(document).ready(function(){
 				// 현재 위치를 알아내 이미 선이 만들어졌을 경우 초기화
 				var y1c = Number($(".ldVrt").eq(i*5+l).attr("y1"));
 				var y2c = Number($(".ldVrt").eq(i*5+l).attr("y2"));
-				//alert(y1c + ", " + y2c);
 				if(y1c != y2c) {
 					$(".ldVrt").eq(i*5+l).attr("y2", y2c-155);
 				}
@@ -54,7 +56,6 @@ $(document).ready(function(){
 						bp = rowAbc[i+1] + (2*no+2);
 						branchP.push(bp);
 					}
-					
 				}
 				j++;
 				if(rowNo[i].length<3 && j==5) {
@@ -68,6 +69,7 @@ $(document).ready(function(){
 				$(".ldVrt").eq(i*5+rowNo[i][k]).attr("y2", y2v+155);
 			}
 		}
+		alert(branchP);
 	}
 	
 	

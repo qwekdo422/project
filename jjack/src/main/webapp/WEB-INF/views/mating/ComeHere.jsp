@@ -13,8 +13,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
 <script>
+	var go = function(){
+		location.href="../main/mainForm.do"
+	}
 	$(document).ready(function(){
-		alertify.alert("짝을 만나고 싶다면 <짝 게스트하우스>로 오세요!");
+		alertify.alert("짝을 만나고 싶다면 <짝 게스트하우스>로 오세요!", go());
 		// 이 다음에 리다이렉트
 		
 	});
