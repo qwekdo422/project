@@ -18,8 +18,7 @@
 <script>
 	var ladderSize = ${ladderSize};
 
-
-
+	
 </script>
 </head>
 <body style="margin:0 auto;">
@@ -32,10 +31,12 @@
  			<!-- 서브메뉴 -->
 			<div class="col-lg-3">
 				<h2>짝짓기</h2><br />
-				<div class="list-group text-right">
+				<div class="list-group text-right mb-4">
 					<a href="../mating/forLunch.do" class="list-group-item">도시락 사다리</a> 
 					<a href="../mating/Arrows.do" class="list-group-item">사랑의 작대기</a>
-					<a href="../mating/myLove.do" class="list-group-item">[임시]짝선택</a>
+				</div>
+				<div class="container">
+					<button class="btn btn-success btn-lg btn-block" id="changeLadder">사다리 변경</button>
 				</div>
 			</div>
 			<!-- 본 화면 -->
@@ -65,32 +66,32 @@
 							<line x1="20" y1="695" x2="500" y2="695" class="ldHrz" />
 							
 							<!-- 첫줄 세로선 -->
-							<line x1="64" x2="64" y1="70" y2="70" class="ldVrt v1" />
-							<line x1="151" x2="151" y1="70" y2="70" class="ldVrt v1" />
-							<line x1="238" x2="238" y1="70" y2="70" class="ldVrt v1" />
-							<line x1="325" x2="325" y1="70" y2="70" class="ldVrt v1" />
-							<line x1="412" x2="412" y1="70" y2="70" class="ldVrt v1" />
+							<line x1="64" x2="64" y1="70" y2="70" class="ldVrt" />
+							<line x1="151" x2="151" y1="70" y2="70" class="ldVrt" />
+							<line x1="238" x2="238" y1="70" y2="70" class="ldVrt" />
+							<line x1="325" x2="325" y1="70" y2="70" class="ldVrt" />
+							<line x1="412" x2="412" y1="70" y2="70" class="ldVrt" />
 							
 							<!-- 둘째줄 세로선 -->
-							<line x1="107" x2="107" y1="225" y2="225" class="ldVrt v2" />
-							<line x1="194" x2="194" y1="225" y2="225" class="ldVrt v2" />
-							<line x1="282" x2="282" y1="225" y2="225" class="ldVrt v2" />
-							<line x1="369" x2="369" y1="225" y2="225" class="ldVrt v2" />
-							<line x1="456" x2="456" y1="225" y2="225" class="ldVrt v2" />
+							<line x1="107" x2="107" y1="225" y2="225" class="ldVrt" />
+							<line x1="194" x2="194" y1="225" y2="225" class="ldVrt" />
+							<line x1="282" x2="282" y1="225" y2="225" class="ldVrt" />
+							<line x1="369" x2="369" y1="225" y2="225" class="ldVrt" />
+							<line x1="456" x2="456" y1="225" y2="225" class="ldVrt" />
 							
 							<!-- 셋째줄 세로선 -->
-							<line x1="64" x2="64" y1="385" y2="385" class="ldVrt v3" />
-							<line x1="151" x2="151" y1="385" y2="385" class="ldVrt v3" />
-							<line x1="238" x2="238" y1="385" y2="385" class="ldVrt v3" />
-							<line x1="325" x2="325" y1="385" y2="385" class="ldVrt v3" />
-							<line x1="412" x2="412" y1="385" y2="385" class="ldVrt v3" />
+							<line x1="64" x2="64" y1="385" y2="385" class="ldVrt" />
+							<line x1="151" x2="151" y1="385" y2="385" class="ldVrt" />
+							<line x1="238" x2="238" y1="385" y2="385" class="ldVrt" />
+							<line x1="325" x2="325" y1="385" y2="385" class="ldVrt" />
+							<line x1="412" x2="412" y1="385" y2="385" class="ldVrt" />
 							
 							<!-- 넷째줄 세로선 -->
-							<line x1="107" x2="107" y1="540" y2="540" class="ldVrt v4" />
-							<line x1="194" x2="194" y1="540" y2="540" class="ldVrt v4" />
-							<line x1="282" x2="282" y1="540" y2="540" class="ldVrt v4" />
-							<line x1="369" x2="369" y1="540" y2="540" class="ldVrt v4" />
-							<line x1="456" x2="456" y1="540" y2="540" class="ldVrt v4" />
+							<line x1="107" x2="107" y1="540" y2="540" class="ldVrt" />
+							<line x1="194" x2="194" y1="540" y2="540" class="ldVrt" />
+							<line x1="282" x2="282" y1="540" y2="540" class="ldVrt" />
+							<line x1="369" x2="369" y1="540" y2="540" class="ldVrt" />
+							<line x1="456" x2="456" y1="540" y2="540" class="ldVrt" />
 							
 						</svg>
 					</div>

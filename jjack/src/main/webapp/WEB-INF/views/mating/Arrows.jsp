@@ -38,7 +38,6 @@
 				<div class="list-group text-right">
 					<a href="../mating/forLunch.do" class="list-group-item">도시락 사다리</a> 
 					<a href="../mating/Arrows.do" class="list-group-item">사랑의 작대기</a>
-					<a href="../mating/myLove.do" class="list-group-item">[임시]짝선택</a>
 				</div>
 			</div>
 			<!-- 본 화면 -->

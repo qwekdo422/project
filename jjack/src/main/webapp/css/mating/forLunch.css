@@ -18,9 +18,14 @@ svg {
 }
 line {
 	stroke:DarkOrange;
-	stroke-linecap:round;
 	stroke-width:12px;
 	/* mix-blend-mode: screen; */
+}
+.ldHrz {
+	stroke-linecap:round;
+}
+.ldVrt {
+	stroke-linecap:butt;
 }
 g {
 	isolation: isolate;
