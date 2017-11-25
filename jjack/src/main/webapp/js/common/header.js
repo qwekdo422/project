@@ -22,5 +22,10 @@ $(document).ready(function(){
 	} else if(pn.match(/LogIn/)){
 		$('#mLogIn').addClass('active');
 	}
+		
+	$("#noMating").click(function(){
+		// 이걸 띄워야하는데 실행이 안되네!!!!
+		alertify.alert("짝을 만나고 싶다면 게스트하우스로 오세요!");
+	});
 	
 });

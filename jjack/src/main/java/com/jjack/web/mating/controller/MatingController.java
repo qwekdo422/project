@@ -42,7 +42,7 @@ public class MatingController {
 		// 현재 날짜 확인
 		String edate = ms.getEdate();
 		// 모든 사람이 짝을 선택했는지 확인
-		MatingVO noVO = ms.getNumbers(edate);	// 근데 이러면 커플수가 0 나와. 커플수 필요하면 따로 빼자
+		MatingVO noVO = ms.getNumbers(edate);
 		if(noVO.gettCount() - noVO.getcCount() == 0) {
 			ms.coupling(edate);
 		}

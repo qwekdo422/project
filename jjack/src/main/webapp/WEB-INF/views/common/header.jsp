@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="../css/common/bootstrap.min.css" />
+<script src="../js/common/header.js"></script>
+<script src="../js/main/bootstrap.bundle.min.js"></script>
+
 <div id="top">
 	<a href="../main/mainForm.do">
 		<picture>
@@ -30,27 +33,55 @@
 			
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="../intro/thisGHis.do" id="mIntro">소개</a></li>
-					<c:if test="${sessionScope.MNO ne 0}">
+					<c:if test="${sessionScope.UID ne 'admin'}">
 					<li class="nav-item"><a class="nav-link" href="../scheduler/list.do?status=U" id="mHouseApply">애정촌입소신청</a></li>
 					</c:if>
 <%-- admin 계정이면 볼 수 있는  메뉴. 작업하기 귀찮으니까 주석처리해둠
-					<c:if test="${sessionScope.MNO eq 0}">
+					<c:if test="${sessionScope.UID eq 'admin'}">
  --%>
 					<li class="nav-item"><a class="nav-link" href="../applicantList/ManageList.do">[신청자]</a></li>
 					<li class="nav-item"><a class="nav-link" href="../scheduler/list.do?status=A">[일정관리]</a></li>
 <%-- 
 					</c:if>
  --%>
-					<li class="nav-item"><a class="nav-link" href="../mating/forLunch.do" id="mMating">짝짓기</a></li>
-					<li class="nav-item"><a class="nav-link" href="../datecourse/BasicCourse.do" id="mDatecourse">데이트코스</a>
+					<li class="nav-item">
+						<%-- 일반적인 회원은 접근불가 --%>
+						<%-- 경고창을 띄워야하는데 안되네 --%>
+						<c:if test="${sessionScope.Auth ne 2 and sessionScope.Auth ne 3 and sessionScope.UID ne 'admin'}">
+							<a  class="nav-link" href="#" id="noMating">짝짓기</a>
+							<!-- <span class="nav-link" id="noMating">짝짓기</span> -->
+						</c:if>
+						<%-- 관리자는 사다리타기, 사랑의 작대기로 연결 --%>
+						<c:if test="${sessionScope.UID eq 'admin'}">
+							<a class="nav-link" href="../mating/forLunch.do" id="mMating">짝짓기</a>
+						</c:if>
+						<%-- 입소한 사람은 짝 선택으로 연결 --%>
+						<c:if test="${sessionScope.Auth eq 2 or sessionScope.Auth eq 3}">
+							<a class="nav-link" href="../mating/myLove.do" id="mMating">짝선택</a>
+						</c:if>
+					</li>
+					<li class="nav-item">
+						<%-- 일반 회원 및 후기미완 퇴소자는 짝 기본 코스로 연결 --%>
+						<c:if test="${sessionScope.Auth eq 0 or sessionScope.Auth eq 4}">
+							<a class="nav-link" href="../datecourse/BasicCourse.do" id="mDatecourse">데이트코스</a>
+						</c:if>
+						<%-- 입소 확정자 및 입소자는 커플코스 페이지로 연결 --%>
+						<c:if test="${sessionScope.Auth eq 1 or sessionScope.Auth eq 2}">
+							<a class="nav-link" href="../datecourse/CoupleCourse.do" id="mDatecourse">데이트코스</a>
+						</c:if>
+						<%-- 솔로 확정자는 솔로 코스로 연결 --%>
+						<c:if test="${sessionScope.Auth eq 3}">
+							<a class="nav-link" href="../datecourse/SoloCourse.do" id="mDatecourse">데이트코스</a>
+						</c:if>
+					</li>
 					<li class="nav-item"><a class="nav-link" href="../Rboard/RboardList.do" id="mReview">후기</a></li>
-					<li class="nav-item"><a class="nav-link" href="../Nboard/NboardList.do" id="mNotice">공지</a></li>
+					<li class="nav-item mr-4"><a class="nav-link" href="../Nboard/NboardList.do" id="mNotice">공지</a></li>
 					<c:if test="${empty sessionScope.UID }">
-						<li class="nav-item" style="margin-left:30px"> <a class="nav-link" href="../Login/LoginForm.do" id="mLogIn">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="../Login/LoginForm.do" id="mLogIn">로그인</a></li>
 						<li class="nav-item"><a class="nav-link" href="../SignUp/SignUpForm.do" id="mSignUp">회원가입</a></li>
 					</c:if>
 					<c:if test="${!empty sessionScope.UID }">
-						<li class="nav-item"  style="float:right">	<font color="red"><a href="../Login/modifyForm.do">${sessionScope.UID}</a></font><font color="white"> 님 환영합니다. </font></li>
+						<li class="nav-item"><font color="red"><a href="../Login/modifyForm.do">${sessionScope.UID}</a></font><font color="white"> 님 환영합니다. </font></li>
 						<li class="nav-item"><a class="nav-link" href="../Login/Logout.do" id="mLogout">로그아웃</a></li>
 					</c:if>
 				</ul>
@@ -58,5 +89,3 @@
 	</nav>
 </div>
 
-<script src="../js/common/header.js"></script>
-<script src="../js/main/bootstrap.bundle.min.js"></script>
