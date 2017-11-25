@@ -69,7 +69,6 @@ $(document).ready(function(){
 				$(".ldVrt").eq(i*5+rowNo[i][k]).attr("y2", y2v+155);
 			}
 		}
-		alert(branchP);
 	}
 	
 	
