@@ -1,11 +1,9 @@
 package com.jjack.web.main.controller;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.jjack.web.common.vo.ProfileVO;
 import com.jjack.web.test.service.TestService;
 import com.jjack.web.test.service.impl.TestServiceImpl;
@@ -28,11 +26,8 @@ public class MainController {
 	 * @return : 
 	 */
 	@RequestMapping("/main/mainForm")
-	public String mainForm () {
-
-		return "main/mainForm";
+	public void mainForm (@RequestParam(value="come", required=false) String come, Model model) {
+		model.addAttribute("come", come);
 	}
-	
-
 	
 }

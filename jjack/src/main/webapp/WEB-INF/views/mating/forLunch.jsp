@@ -58,6 +58,8 @@
 					<!-- 사다리 영역 시작 -->
 					<div id="ladderDiv" class="col-lg-8">
 						<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+						
+							<!-- 사다리 그리기 -->
 							<!-- 가로선 -->
 							<line x1="20" y1="70" x2="500" y2="70" class="ldHrz" />
 							<line x1="20" y1="225" x2="500" y2="225" class="ldHrz" />
@@ -93,7 +95,9 @@
 							<line x1="369" x2="369" y1="540" y2="540" class="ldVrt" />
 							<line x1="456" x2="456" y1="540" y2="540" class="ldVrt" />
 							
-						</svg>
+							<!-- 사다리 그리기 종료 -->							
+						
+						
 					</div>
 					<!-- 사다리 영역 종료 -->
 					<!-- 남자리스트 시작 -->

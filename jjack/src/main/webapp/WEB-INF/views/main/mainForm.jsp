@@ -14,11 +14,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
-
+<script src="../js/main/mainForm.js"></script>
 
 
 <script>
-
+var come = "${come}";
 $(function(){
 	$('.btn_word').click(function(){
 		<!--jQuery 이미지 리로드가 되지 않을때 처리 방법-->

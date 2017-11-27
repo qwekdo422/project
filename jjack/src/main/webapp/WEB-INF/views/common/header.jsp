@@ -45,13 +45,9 @@
 					</c:if>
  --%>
 					<li class="nav-item">
-						<%-- 일반 회원은 접근불가 --%>
-						<c:if test="${sessionScope.Auth ne 2 and sessionScope.Auth ne 3 and sessionScope.UID ne 'admin'}">
-							<a  class="nav-link" href="../mating/ComeHere.do">짝짓기</a>
-						</c:if>
-						<%-- 관리자는 사다리타기, 사랑의 작대기로 연결 --%>
-						<c:if test="${sessionScope.UID eq 'admin'}">
-							<a class="nav-link" href="../mating/forLunch.do" id="mMating">짝짓기</a>
+						<%-- 입소자 외에는 커넥터로 연결 --%>
+						<c:if test="${sessionScope.Auth ne 2 and sessionScope.Auth ne 3}">
+							<a  class="nav-link" href="../mating/matingConnector.do" id="mMating">짝짓기</a>
 						</c:if>
 						<%-- 입소한 사람은 짝 선택으로 연결 --%>
 						<c:if test="${sessionScope.Auth eq 2 or sessionScope.Auth eq 3}">
