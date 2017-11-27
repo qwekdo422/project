@@ -22,7 +22,5 @@ $(document).ready(function(){
 	} else if(pn.match(/LogIn/)){
 		$('#mLogIn').addClass('active');
 	}
-
-	
 	
 });
