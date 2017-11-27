@@ -4,20 +4,41 @@
 
 ########### 관리자 일정관리 ###########
 ##	일정 목록
-요청	:	../scheduler/list.do
-뷰	:	scheduler/list
+요청			:	../scheduler/list.do
+뷰			:	scheduler/list
+파라메터		:	status=A
 
 ##	일정 등록
-요청	:	../scheduler/write.do
+요청			:	../scheduler/writeProc.do
 redirect	:	./list.do
+파라메터		:	status=A
 
 ##	일정 수정
-요청: ../scheduler/modify.do
+요청			:	../scheduler/modifyProc.do
 redirect	:	./list.do
+파라메터		:	status=A
 
-##	기수 체크
+##	일정 삭제
+요청			:	../scheduler/delete.do
+redirect	:	./list.do
+파라메터		:	status=A
+
+##	기수 체크 (Ajax)
+요청			:	../scheduler/gisooCheck.do
 
 ########### 관리자 일정관리 ###########
 
 
 ########### 사용자 입소신청 ###########
+##	일정 목록
+요청			:	../scheduler/applyForm.do
+뷰			:	scheduler/applyForm
+파라메터		:	status=A
+
+##	입소 신청
+요청			:	../scheduler/applyProc.do
+redirect	:	./list.do
+파라메터		:	status=U
+########### 사용자 입소신청 ###########
+
+

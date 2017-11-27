@@ -72,6 +72,7 @@ $(document).ready(function() {
 						$("#uBtn").css("display", "none");
 						//	사진등록에 쓸 기본이미지 출력
 						$("#imagePreview").prop("src", "../img/houseApply/basic.jpg");
+						$("#imageUpload").next().text("사진등록");
 						// 입소대기 상태에서 클릭 막은작업 원상복구
 						formEnable();
 						//	해당날짜에 이벤트 신청을 안한사람
@@ -84,52 +85,32 @@ $(document).ready(function() {
 							$("#resetBtn").css("display", "none");
 						//	해당날짜에 이벤트를 신청한사람 (승인대기 상태)
 						} else if(cond == 1 || cond == 2 || cond == 5) {
-							//	입소신청정보를 보여준다.
-							//	입소신청번튼을 승인대기로 체인지
-							$("#applyBtn").val("승인대기");
-							//	승인대기버튼 클릭막기
-							$("#applyBtn").prop("disabled", true);
-							//	수정버튼 보이기
-							$("#uBtn").css("display", "block");
-							//	입소취소버튼 보이기
-							$("#resetBtn").css("display", "block");
-							//	전화번호
-							$("#tel").val(gApply.tel);
-							//	관심사 자동체크
-							$("#interest").val(gApply.interest).prop("selected", true);
-							//	사진등록버튼 이름을 사진수정버튼으로 수정
-							$("#imageUpload").next().text("사진수정");
-							//	입소신청때 등록한 사진을 보여준다.
-							$("#imagePreview").prop("src", "../file/"+gApply.pic);
-							//	히든에 숨겨놓을 입소신청 번호
-							$("#aNo").val(gApply.aNo);
-							//	히든에 숨겨놓을 사진이름
-							$("#pic").val(gApply.pic);
+							//	수정폼 보여주기
+							applyModify(gApply);
 						//	입금하세요.
 						} else if (cond == 3) {
-							condStatus("입금하세요. 계좌번호: 기업은행 010-7131-2014");
-							formDisabled();
+							condStatus("입금하세요. 계좌번호: 기업은행 010-7131-2014"); formDisabled();
 						//	입소예정
 						} else if (cond == 4) {
-							condStatus("입소 예정입니다.");
-							formDisabled();
-						//	해당행사에 입소취소를 취소한사람
+							applyModify(gApply);
+							condStatus("입소 예정입니다."); formDisabled();
+						//	행사가 마감 되었을때
 						} else if (cond == 6) {
 							//	마감
-							condStatus("마감되었습니다.");
-							formDisabled();
+							condStatus("마감되었습니다."); formDisabled();
+						//	해당행사에 입소취소를 취소한사람
 						} else if (cond == 7) {
+							applyModify(gApply);
 							//	입소취소
-							condStatus("입소를 취소하셨습니다.");
-							formDisabled();
+							condStatus("입소를 취소하셨습니다."); formDisabled();
+						//	입소가 완료된 사람
 						} else if (cond == 8){
+							applyModify(gApply);
 							//	입소
-							condStatus("일정에 맞게 입소바랍니다.");
-							formDisabled();
+							condStatus("일정에 맞게 입소바랍니다.");formDisabled();
 						} else if (cond == 9 || cond == 10 ) {
 							//	신청할 수 없는 이벤트(행사 종료되었을 때)
-							condStatus("이벤트가 종료되었습니다.");
-							formDisabled();
+							condStatus("이벤트가 종료되었습니다.");formDisabled();
 						}
 					},
 					error: function(e) {
@@ -203,11 +184,13 @@ $(document).ready(function() {
 	
 	//	입소신청서 수정버튼(사용자)
 	$("#uBtn").click(function(){
+		//	수정버튼을 클릭했을 때 true (사진이미지)
 		uBtnStatus = true;
 		//	무결성 검사
 		validation();
 		//	무결성 검사에 걸렸을 겅우 다음을 수행하지 않고 리턴 (true 일경우 무결성 검사 걸린 경우)
 		if(isFlag()) return;
+		//	무결성 종류 후 초기화 (사진 이미지)
 		uBtnStatus = false;
 		$("#applyFrm").attr("action", "./applyModify.do").submit();
 	});
@@ -257,6 +240,31 @@ $(document).ready(function() {
 	}); // 기수종복체크 종료
 	
 });	// document 종료
+
+//	입소신청서 수정처리 함수
+function applyModify(gApply) {
+	//	입소신청정보를 보여준다.
+	//	입소신청번튼을 승인대기로 체인지
+	$("#applyBtn").val("승인대기");
+	//	승인대기버튼 클릭막기
+	$("#applyBtn").prop("disabled", true);
+	//	수정버튼 보이기
+	$("#uBtn").css("display", "block");
+	//	입소취소버튼 보이기
+	$("#resetBtn").css("display", "block");
+	//	전화번호
+	$("#tel").val(gApply.tel);
+	//	관심사 자동체크
+	$("#interest").val(gApply.interest).prop("selected", true);
+	//	사진등록버튼 이름을 사진수정버튼으로 수정
+	$("#imageUpload").next().text("사진수정");
+	//	입소신청때 등록한 사진을 보여준다.
+	$("#imagePreview").prop("src", "../file/"+gApply.pic);
+	//	히든에 숨겨놓을 입소신청 번호
+	$("#aNo").val(gApply.aNo);
+	//	히든에 숨겨놓을 사진이름
+	$("#pic").val(gApply.pic);
+}
 
 
 //	입소 신청후 승인대기, 입소취소, 입소대기 상태일때 form의 클릭을 원상복구하는  함수
@@ -376,7 +384,8 @@ function validation () {
 	var interest = $("#interest");		//	관심사
 	var img = $("#imageUpload");		//	사진
 	//	무결성 검사할 태그 배열생성
-	var frmArr = [img, gisoo, eventdate, eventend, loc, age, title, contents, tel, interest];
+	var frmArr = [img, gisoo, eventdate, eventend, loc,
+					age,title, contents, tel, interest];
 	//	무결성 검사에 걸린 태그 알림문자를 담을 변수
 	var frmStr;
 	//	무결성 검사할 배열의 갯수만큼 반복
@@ -388,7 +397,7 @@ function validation () {
 		if(vTag.attr("id") == 'imageUpload' && uBtnStatus == true) {
 			continue;
 		}
-		//	데이터가 있을 경우 flag값을 false로 바꿔준다.
+		//	데이터가 있을 경우 flag값을 false로 바꿔준다(서브밋 가능상태).
 		//	데이터가 없을 경우 true이고 서브밋이 안된다.
 		if(vTag.val() != "") {
 			flag = false;
