@@ -4,6 +4,21 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.jjack.web.scheduler.dao.SchedulerDAO">
+	<!-- 행사일정 등록 (관리자) -->
+	<insert id="insertSchedule" parameterType="SchedulerVO">
+		INSERT INTO TB_EVENT(
+			E_EVENTDATE,
+			E_EVENTEND,
+			E_GISOO,
+			E_LOC,
+			E_AGE,
+			E_TITLE,
+			E_CONTENTS	
+		)
+		values (
+			#{eventdate}, #{eventend}, #{gisoo}, #{loc}, #{age}, #{title}, #{contents}  		
+		)
+	</insert>
 	
 	<!-- 반환값을 schedulervo와 매칭시키기 위한 resultMap설정 -->
 	<resultMap type="SchedulerVO" id="scheduleList">
@@ -30,21 +45,6 @@
 			TB_EVENT	
 	</select>
 	
-	<!-- 행사일정 등록 (관리자) -->
-	<insert id="insertSchedule" parameterType="SchedulerVO">
-		INSERT INTO TB_EVENT(
-			E_EVENTDATE,
-			E_EVENTEND,
-			E_GISOO,
-			E_LOC,
-			E_AGE,
-			E_TITLE,
-			E_CONTENTS	
-		)
-		values (
-			#{eventdate}, #{eventend}, #{gisoo}, #{loc}, #{age}, #{title}, #{contents}  		
-		)
-	</insert>
 	
 	<!-- 행사일정 수정 (관리자) -->
 	<update id="updateSchedule" parameterType="SchedulerVO">

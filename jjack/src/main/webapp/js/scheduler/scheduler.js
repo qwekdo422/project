@@ -12,7 +12,7 @@ $(document).ready(function() {
 		},
 		defaultDate : date.getTime(),
 		editable : true,
-		eventLimit : true, // allow "more" link when too many events
+		eventLimit : true,
 		events : schedule,
 		eventClick : function(event) {
 			//	관리자 일경우
@@ -242,7 +242,8 @@ $(document).ready(function() {
 					//	data가 1이면  데이터베이스에 기수가 존재한다.
 					if(data == 1 && gisoo != eGisoo) {
 						$("#gisoo").css("color", "red");
-						$("#gisoo").siblings().text("기수: 중복된 기수는 사용할 수 없습니다.").css("color", "red");
+						$("#gisoo").siblings().text("기수: 중복된 기수는 사용할 수 없습니다.")
+						.css("color", "red");
 					} else {
 						$("#gisoo").css("color", "black");
 						$("#gisoo").siblings().text("기수:").css("color", "black");
@@ -329,7 +330,6 @@ function modalView(target, event) {
 		$("#mBtn").css("display", "block");
 		$("#dBtn").css("display", "block");
 	} 
-	
 	//	행사일정이 없을 때
 	if(event == null) {
 		//	숨겨진 모달의 정보를 초기화 해준다.
