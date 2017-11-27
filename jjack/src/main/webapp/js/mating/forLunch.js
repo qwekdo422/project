@@ -3,6 +3,7 @@ $(document).ready(function(){
 	var lineY = [70, 225, 385, 540, 695];
 	var lineX1 = [64, 151, 238, 325, 412];
 	var lineX2 = [107, 194, 282, 369, 456];
+	var lineX = [20, 64, 107, 151, 194, 238, 282, 325, 369, 412, 456, 500];
 	
 	// 사다리 가로선 그리기
 	for(var i = 0 ; i < ladderSize; i++) {

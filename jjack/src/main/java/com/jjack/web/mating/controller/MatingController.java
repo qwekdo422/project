@@ -7,6 +7,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.jjack.web.common.vo.MatingVO;
 import com.jjack.web.mating.service.MatingService;
 import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 /**
  * 
@@ -18,6 +20,27 @@ import javax.servlet.http.HttpSession;
 public class MatingController {
 	@Autowired
 	public MatingService ms;
+
+	// 권한에 따라 다르게 리다이렉트해주는 컨트롤러
+	@RequestMapping("/matingConnector")
+	public ModelAndView matingConnector(HttpSession hs, ModelAndView mv, RedirectView rv) {
+		int auth = (Integer)hs.getAttribute("Auth");
+		String uid = (String)hs.getAttribute("UID");
+		
+		if(uid.equals("admin")) {
+			// 관리자일 경우 사다리타기, 사랑의 작대기로 연결
+			rv.setUrl("./forLunch.do");
+		} else if(auth==2 || auth==3) {
+			// 입소한 사람은 짝 선택으로 연결
+			rv.setUrl("./myLove.do");
+		} else {
+			// 권한이 없는 경우 다시 메인화면으로
+			rv.setUrl("../main/mainForm.do");
+			rv.addStaticAttribute("come", "here");
+		}
+		mv.setView(rv);
+		return mv;
+	}
 	
 	@RequestMapping("/forLunch")
 	public ModelAndView forLunch(ModelAndView mv) {
