@@ -3,6 +3,7 @@ package com.jjack.web.rboard.controller;
 import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -33,22 +34,24 @@ public class RboardController {
 		ModelAndView mv= new ModelAndView(); 
 		String id= (String)session.getAttribute("UID"); 
 		
-		if(id==null){ //세션이 없으면 로그인 폼으로 가라 
-			RedirectView rv= new RedirectView("../Login/LoginForm.do");
-			mv.setView(rv);
-			return mv; 
-		}
+//		if(id==null){ //세션이 없으면 로그인 폼으로 가라 
+//			RedirectView rv= new RedirectView("../Login/LoginForm.do");
+//			mv.setView(rv);
+//			return mv; 
+//		}
 
 		int total=rService.getTotalList(); //총 데이터의 갯수를 받아오고
-		System.out.println(total +"총 데이터");
 		PageUtil pInfo= new PageUtil(nowPage, total);	//페이징 처리 
-		ArrayList list= rService.rboardList(nowPage, pInfo); 
+		List list= rService.rboardList(nowPage, pInfo); 
+		
+		//기수랑 닉네임 가져오기 위한 질의문 실행
+
+
 		mv.addObject("startPage",pInfo.getStartPage());
 		mv.addObject("endPage",pInfo.getEndPage());
 		mv.addObject("nowPage",pInfo.getNowPage()); 
 		mv.addObject("totalPage",pInfo.getTotalPage());
 		mv.addObject("RLIST",list); 
-		System.out.println(list.size());
 		mv.setViewName("Rboard/RboardListback");
 		return mv; 
 	}
@@ -185,21 +188,40 @@ public class RboardController {
 	public ModelAndView rboardView(RboardVO rVO,  @RequestParam(value="rno") int rno,HttpSession session){
 	
 		ModelAndView mv= new ModelAndView(); 
-
 	String uid=(String)session.getAttribute("UID"); 
-		System.out.println(rVO.getRid() + "????????????????????????????????????????????");
-//	if(rVO.getRid() == id){
-//				mv.addObject("RID",id);
-//	}
-		
-		RboardVO VO=rService.rboardView(rno); 
-		
+
+
+		ArrayList list=rService.reList(rno); //리플 리스트 가져오기 위한 로직 
+		RboardVO VO=rService.rboardView(rno);  //게시물 상세보기 로직 
+		RboardVO PRENEXT=rService.preNext(rno); 
+
+	
 		mv.addObject("VO",VO); 
+		mv.addObject("RE",list); 
+		mv.addObject("PRENEXT", PRENEXT);
 		mv.setViewName("Rboard/RboardView");
 		return mv; 
 		
 	}
 	
+	
+	//댓글 작성 함수 
+	@RequestMapping("/reContentsProc")
+	public ModelAndView reContentsProc(RboardVO rVO, HttpSession session){
+		int mno=(Integer)session.getAttribute("MNO"); 
+		rVO.setMno(mno);
+		
+		rService.reContentsProc(rVO);
+		
+		ModelAndView mv= new ModelAndView(); 
+		RedirectView rv= new RedirectView("../Rboard/RboardView.do");
+		rv.addStaticAttribute("rno",rVO.getRno());
+		mv.setView(rv);
+		return mv; 
+	}
+	
+	
+
 	
 	
 	

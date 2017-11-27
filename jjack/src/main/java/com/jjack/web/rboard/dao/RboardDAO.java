@@ -2,6 +2,7 @@ package com.jjack.web.rboard.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.jjack.web.common.vo.RboardVO;
 
@@ -33,7 +34,7 @@ public interface RboardDAO {
 	public int getTotalList(); 
 	
 	//게시물 목록 가져오기 질의명령
-	public ArrayList rboardList(HashMap map); 
+	public List rboardList(HashMap map); 
 	
 	
 	
@@ -48,8 +49,16 @@ public interface RboardDAO {
 	//글쓴이 기수랑 닉네임가져오기 위한 질의명령 
 	public RboardVO userNickAndGisoo(String id); 
 	
+	//기수와 닉네임 가져오기 
+	public RboardVO gisooNick(int gno);
+
+	// 댓글 작성 insert질의문
+	public void reContentsProc(RboardVO rVO); 
 	
+	//댓글 리스트 가져오기 select 문
+	public List reList(int rno); 
 	
-	
+	//리뷰 게시판 이전글 다음글 
+	public RboardVO preNext(int rno);
 	
 }

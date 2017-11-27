@@ -34,48 +34,37 @@ where
 
 <!-- 리뷰게시판 목록 가져오기  -->
 <select id="rboardList"  resultType="rboardvo" parameterType="hashMap">
-SELECT 
-		realTotal.rno AS rno , realTotal.rtitle AS rtitle, realTotal.rdate AS rdate , realTotal.rhis AS rhis, realTotal.rcontents AS rcontents, realTotal.nickname AS nickname, realTotal.gisoo AS gisoo, realTotal.jjackname
-FROM
-		(SELECT 
-					rownum AS resultno,
-					total.rno AS rno , total.rtitle AS rtitle, total.rdate AS rdate , total.rhis AS rhis, total.rcontents AS rcontents, total.nickname AS nickname, total.gisoo AS gisoo, total.jjackname AS jjackname
-		FROM
-   			 (SELECT 
-        			r_no AS rno , r_title AS rtitle, r_wdate AS rdate ,r_hits AS rhis, r_contents AS rcontents,  nickAndGisoo.nickname AS nickname, nickAndGisoo.gisoo AS gisoo, jjack.jjackname AS jjackname
-    			 FROM
-        			TB_Review, (SELECT 
-   														G.G_NICK AS nickname,  E.E_GISOO AS gisoo
-													FROM
- 														TB_MEMBER M,TB_APPLY A, TB_GUEST G , TB_EVENT E , tb_review r
-													WHERE
-														M.M_NO = A.M_NO 
-														AND A.A_NO = G.A_NO
-																										
-														AND A.E_EVENTDATE = E.E_EVENTDATE 
-														) nickAndGisoo,(SELECT 
-    																																		G.G_NICK AS jjackname
-																																		FROM
-    																																		(SELECT 
-      																																				G.G_CHOICE AS CHOICE, G.G_COURSE AS COURSE, G.G_NICK AS jjack_name, g.g_no as g_no
-    																																		 FROM
-      																																			  TB_MEMBER M,TB_APPLY A, TB_GUEST G , TB_EVENT E  , tb_review r
-   																																			 WHERE
-        																																		M.M_NO = A.M_NO 
-       																																			 AND A.A_NO = G.A_NO
-        																																		AND A.E_EVENTDATE = E.E_EVENTDATE 
-       																																				 
-    																																		ORDER BY 
-        																																		G.A_NO DESC) JJACK , TB_GUEST G
-																																		WHERE
-																																					G.G_NO =JJACK.CHOICE AND JJACK.COURSE IN('A' , 'B' , 'C')) jjack
-        			
-   				 WHERE
-        			r_IsShow='Y'
-    			ORDER BY
-       				 r_no DESC) total) realTotal
-WHERE
-		resultno BETWEEN #{start} AND #{end} 
+select
+    rt.*
+from
+     (select
+        rownum as resultno,
+        r.r_no AS rno,
+        TO_CHAR(r.r_wdate) AS rdate,
+        e.e_gisoo AS gisoo,
+        gm.g_nick AS nickname,
+        DECODE(gm.g_course, 'S', '-', gp.g_nick) AS jjackname,
+        r.r_title AS rtitle,
+        (SELECT COUNT(cc.r_no) AS cCount FROM TB_Comment cc WHERE cc.c_Isshow='Y' AND r.r_no = cc.r_no) AS recnt,
+        r.r_hits AS rhis
+    FROM
+        TB_Review r,
+        TB_Event e,
+        TB_Guest gm,
+        TB_Guest gp,
+        TB_Apply a,
+        TB_Member m    
+    WHERE
+        m.m_no = a.m_no
+        AND gm.a_no = a.a_no
+        AND r.g_no = gm.g_no
+        AND gm.g_choice= gp.g_no
+        AND a.e_eventdate=e.e_eventdate
+        AND r.r_Isshow='Y'  
+    ORDER BY
+        r.r_no DESC ) rt 
+where 
+     resultno BETWEEN #{start}  AND #{end}
 </select>
 
 
@@ -211,6 +200,54 @@ WHERE
                     </if>
 </select>
 
+
+<!-- 리뷰 게시판 이전글, 다음글 꺼내기 질의명령 -->
+<select id="preNext" parameterType="int" resultType="rboardvo">
+SELECT
+    	total.pre AS pre, total.next AS next,total.preday AS preday, total.nextday AS nextday,total.nNo AS nextNo, total.pNo AS preNo
+FROM
+	(SELECT
+		r_no, r_title, LAG(r_title, 1 , '이전글 없음') OVER(ORDER BY r_no desc) AS pre,
+									 LAG(r_wdate,1,TO_DATE('11-11-1111','MM-DD-YY')) OVER(ORDER BY r_no desc) AS preday, 
+									 LAG(r_no, 1, 999) OVER(ORDER BY r_no desc) AS pNo,
+									lead(r_title,1,'다음글 없음') OVER(ORDER BY r_no desc) AS next,		  
+                         			lead(r_wdate,1,TO_DATE('11-11-1111','MM-DD-YYYY')) OVER(ORDER BY r_no desc) AS nextday,
+                          			lead(r_no,1,999) OVER(ORDER BY r_no DESC) AS nNo 
+          FROM
+          	TB_REVIEW
+          WHERE
+          	r_IsShow ='Y'
+          ORDER BY 
+          	r_no desc) total
+ WHERE
+ 	r_no = #{rno}
+</select>
+
+
+
+<!-- 댓글작성 insert 질의문 -->
+<insert id="reContentsProc" parameterType="rboardvo">
+INSERT
+INTO 
+TB_Comment	
+VALUES((SELECT 
+		NVL(MAX(c_no),0)+1
+	FROM
+		TB_Comment) , sysdate, #{recontents},'Y', #{mno},   #{rno})
+</insert>
+
+<!-- 댓글 리스트 가져오기 질의명령 -->
+<select id="reList" parameterType="int" resultType="rboardvo">
+SELECT 
+ 	tc.c_no AS cno,
+ 	tc.c_wdate AS cwdate,
+	 tc.c_contents AS cctentents,
+     m.m_id        as rid
+FROM
+	TB_Comment tc , tb_member m
+where
+ tc.m_no = m.m_no and tc.r_no = #{rno}
+</select>
 </mapper>
 
 
@@ -245,7 +282,64 @@ WHERE
 
 
 
+<!--  SELECT 
+					realTotal.rno AS rno , realTotal.rtitle AS rtitle, realTotal.gisoo AS gisoo, realTotal.nickname AS nickname, realTotal.rdate AS rdate, realTotal.rhis AS rhis, realTotal.jjack AS jjack
+FROM
+		(SELECT 
+					rownum AS resultno,
+					total.rno AS rno , total.rtitle AS rtitle, total.gisoo AS gisoo, total.nickname AS nickname, total.rdate AS rdate, total.rhis AS rhis, total.jjack AS jjack
+		FROM
+   			 (select 
+r.r_no AS rno , r.r_title AS rtitle ,  e.E_GISOO AS gisoo, g.g_nick AS nickname, r.r_wdate AS rdate, r.r_hits AS rhis, j.jjack AS jjack
+from
+tb_apply a  , TB_EVENT e , tb_guest g , tb_review r , (SELECT 
+    JJACK.JJACK_NAME as jjack
+FROM
+    (SELECT 
+        M.M_ID , G.G_NO, G.G_NICK AS JJACK_NAME, A.A_INTEREST ,  E.E_GISOO AS JJACK_GISOO ,  G.G_CHOICE AS CHOICE, G.G_COURSE AS COURSE
+    FROM
+        TB_MEMBER M,TB_APPLY A, TB_GUEST G , TB_EVENT E
+    WHERE
+        M.M_NO = A.M_NO 
+        AND A.A_NO = G.A_NO
+        AND A.E_EVENTDATE = E.E_EVENTDATE 
 
+    ORDER BY 
+        G.A_NO DESC) JJACK
+WHERE
+    JJACK.CHOICE = JJACK.CHOICE AND JJACK.COURSE IN('A' , 'B' , 'C')) j
+where
+A.E_EVENTDATE = E.E_EVENTDATE 
+and   A.A_NO = G.A_No and g.g_no = r.g_no and r.r_no=r.r_no) total) realTotal 
+WHERE		
+		resultno BETWEEN #{start} AND #{end} -->
+<!-- 		
+select
+    r.r_no AS rno,
+    TO_CHAR(r.r_wdate) AS rdate,
+    e.e_gisoo AS gisoo,
+    gm.g_nick AS nickname,
+    DECODE(gm.g_course, 'S', '-', gp.g_nick) AS jjackname,
+    r.r_title AS rtitle,
+    r.r_hits AS rhis
+FROM
+    TB_Review r,
+    TB_Event e,
+    TB_Guest gm,
+    TB_Guest gp,
+    TB_Apply a,
+    TB_Member m    
+WHERE
+    m.m_no = a.m_no
+    AND gm.a_no = a.a_no
+    AND r.g_no = gm.g_no
+    AND gm.g_choice= gp.g_no
+    AND a.e_eventdate=e.e_eventdate
+    AND r.r_Isshow='Y'   
+ORDER BY
+    r.r_no DESC
+     -->
+      
 
 
 

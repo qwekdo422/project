@@ -82,17 +82,17 @@ $(document).ready(function(){
 			</tr> 
 	</table>
 	
-	<br>
+		<br>
 	<table border="1" align="center" width="800">
 		<tr>
 			<c:if test="${PRENEXT.pre ne '이전글 없음'}">		
-			<td>▲이전글</td><td><a href="../Nboard/NboardView.do?nno=${PRENEXT.preNo}">${PRENEXT.pre}</a></td><td>작성일 : ${PRENEXT.preday}</td>
+			<td>▲이전글</td><td><a href="../Nboard/NboardView.do?rno=${PRENEXT.preNo}">${PRENEXT.pre}</a></td><td>작성일 : ${PRENEXT.preday}</td>
 			</c:if>
 		</tr>
 		
 	<tr>
 	<c:if test="${PRENEXT.next ne '다음글 없음'}">		
-			<td>▼다음글</td><td><a href="../Nboard/NboardView.do?nno=${PRENEXT.nextNo}">${PRENEXT.next}</a></td><td>작성일 : ${PRENEXT.nextday}</td>
+			<td>▼다음글</td><td><a href="../Nboard/NboardView.do?rno=${PRENEXT.nextNo}">${PRENEXT.next}</a></td><td>작성일 : ${PRENEXT.nextday}</td>
 	</c:if>
 	</tr>
 

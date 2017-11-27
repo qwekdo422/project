@@ -24,6 +24,11 @@ $(document).ready(function(){
 	
 	//
 	
+	$("#rBtn").click(function(){
+		var 
+		$("#refrm").submit(); 
+	}); 
+	
 }); 
 
 </script>
@@ -49,6 +54,7 @@ $(document).ready(function(){
 						<td colspan="2"><div>${VO.rcontents}</div></td>
 			</tr> 
 	</table>
+
 <%-- 	
 	<br>
 	<table border="1" align="center" width="800">
@@ -66,6 +72,7 @@ $(document).ready(function(){
 --%>			
 	</table>
 	
+	
 	<div align="center">
 	<input type="button" id="lBtn" value="목록보기" align="right">		
 	<c:if test="${sessionScope.UID eq RID}">
@@ -75,6 +82,70 @@ $(document).ready(function(){
 	
 	</div>
 		</form>
+	
+<table  class="table table-hover table-striped table-bordered mt-4">
+					<tr align="center">
+						<th width=10%>번호</th>	
+						<th width=30%>작성자</th>
+						<th>댓글내용</th>
+						<th width=30%>작성일</th>
+						</tr>					
+					<c:forEach var="data" items="${RE}">
+					<tr>
+						<td align="center">${data.cno}</td>
+						<td align="center">${data.rid}</td>
+						<td align="center">${data.cctentents}</td>
+						<td align="center">${data.cwdate}</td>
+					</tr>
+					</c:forEach>
+</table>
+	
+	
+	<form type="post" action="../Rboard/reContentsProc.do" id="refrm">
+	<input type="hidden"  name ="rno" value="${VO.rno}">
+	<table  class="table table-hover table-striped table-bordered mt-4">
+		<c:if test="${!empty sessionScope.UID}">
+		<tr>
+			<td>
+				${sessionScope.UID}  : 
+			</td>
+			<td>
+			<textarea id="recontents" name="recontents" row="10" cols="110"></textarea>
+			</td>
+			<td>
+			<input type="button" value="댓글쓰기" id="rBtn" >
+			</td>
+		</tr>
+		</c:if>
+		<c:if test="${empty sessionScope.UID}">
+			<td>
+				작성자 :
+			</td>
+			<td>
+			<textarea id="recontents" name="recontents" row="10" cols="110" placeholder="로그인 하십시오."></textarea>
+			</td>
+		</tr>
+		</c:if>
+	</table>
+	</form>
+	
+		<br>
+	<table class="table table-hover table-striped table-bordered mt-4">
+		<tr>
+			<c:if test="${PRENEXT.pre ne '이전글 없음'}">		
+			<td>▲이전글</td><td><a href="../Rboard/RboardView.do?rno=${PRENEXT.preNo}">${PRENEXT.pre}</a></td><td align="center">작성일 : ${PRENEXT.preday}</td>
+			</c:if>
+		</tr>
+		
+	<tr>
+	<c:if test="${PRENEXT.next ne '다음글 없음'}">		
+			<td>▼다음글</td><td><a href="../Rboard/RboardView.do?rno=${PRENEXT.nextNo}">${PRENEXT.next}</a></td><td align="center">작성일 : ${PRENEXT.nextday}</td>
+	</c:if>
+	</tr>
+
+	</table>
+
+
 
 		</div>
    <div id="footer">

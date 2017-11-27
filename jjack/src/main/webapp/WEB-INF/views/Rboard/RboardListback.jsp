@@ -59,7 +59,7 @@ $(document).ready(function(){
 					<c:forEach var="data" items="${RLIST}">
 					<tr>
 						<td align="center">${data.rno}</td>
-						<td class="title"><a href="../Rboard/rHitUpProc.do?rno=${data.rno}&nowPage=${nowPage}">${data.rtitle}</a></td>
+						<td class="title"><a href="../Rboard/rHitUpProc.do?rno=${data.rno}&nowPage=${nowPage}">${data.rtitle}</a>[${data.recnt}]</td>
 						<td align="center">${data.gisoo}</td>
 						<td align="center">${data.nickname} </td>
 						<td align="center">${data.jjackname}</td>
@@ -106,7 +106,7 @@ $(document).ready(function(){
 <%-- 후기남기기 버튼 --%>
 <c:if test="${sessionScope.Auth eq '4'}"><!-- session이 있을때면 이 버튼이 보이도록 조치한다. -->
 	<div align="center">
-		<input type="button" id="rBtn" value="후기 남기기" align="center">	
+		<input type="button" class="btn btn-info" id="rBtn" value="후기 남기기" align="center">	
 	<div>
 </c:if>
 			

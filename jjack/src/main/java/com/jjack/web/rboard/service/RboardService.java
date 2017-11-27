@@ -2,6 +2,7 @@ package com.jjack.web.rboard.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -77,16 +78,19 @@ public class RboardService {
 	}
 
 	//리뷰 리스트 가져오기 처리 함수 
-	public ArrayList rboardList(int nowPage, PageUtil pInfo){
-		
+	public List rboardList(int nowPage, PageUtil pInfo){
+		//int nowPage, PageUtil pInfo
 		int start=(nowPage-1)*(pInfo.getListCount())+1; //시작페이지
 		int end=start+(pInfo.getListCount()-1); //종료위치 
-
+		
+		System.out.println("start = "+start);
+		System.out.println("end= "+end);
+		
 		HashMap map = new HashMap();
 		map.put("start",start); 
 		map.put("end",end); 
 
-		ArrayList list= rDAO.rboardList(map); 
+		List list= rDAO.rboardList(map); 
 		
 		return list; 
 	}
@@ -101,6 +105,7 @@ public class RboardService {
 		
 		int start=(pInfo.getNowPage()-1)*(pInfo.getListCount())+1; //시작페이지
 		int end=start+(pInfo.getListCount()-1); //종료위치 
+		
 		
 		rVO.setStartPage(start);
 		rVO.setEndPage(end);
@@ -119,12 +124,33 @@ public class RboardService {
 	
 	//회원 기수랑 닉네임 가져오기 질의명령 
 	
-	public RboardVO userNickAndGisoo(String id){
+	public RboardVO gisooNick(int gno){
+	
+		RboardVO vo  = rDAO.gisooNick(gno); 
+
+		return vo; 
+	}
+
+	//댓글 입력 로직 
+	public void reContentsProc(RboardVO rVO) {
+		rDAO.reContentsProc(rVO);
 		
-		RboardVO rVO=rDAO.userNickAndGisoo(id); 
-		return rVO; 
+		return ; 
+	}
+	//댓글 리스트 가져오기 위한 질의명령 실행 
+	public ArrayList reList(int rno){ 
+		System.out.println("서비스 = "+rno);
+		ArrayList list=(ArrayList)rDAO.reList(rno); 
+		return list; 
+
 	}
 	
+	//리뷰 이전글 다음글 뽑기 위한 로직 
+	public RboardVO preNext(int rno){
+		
+		return (RboardVO) rDAO.preNext(rno); 
+	}
+
 	
 	
 	

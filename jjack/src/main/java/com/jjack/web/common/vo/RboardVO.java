@@ -7,10 +7,10 @@ public class RboardVO {
 //기본적인 게시판 데이터 
 private String rtitle; //게시글 제목
 private String rcontents;//게시글 내용
-private Date rdate;//게시글 작성일
+private String rdate;//게시글 작성일
 private int rhis; //게시글 조회수
 private int rno; //게시글 번호
-private String rid; 
+ 
 
 private int resultno;  //입력한 순서대로 뽑기 위해준비한 변수 
 
@@ -21,9 +21,98 @@ private int endPage;
 private String nickname; 
 private int gisoo; 
 private String jjackname; 
+private int recnt;
+private String recontents;
 
 
+//댓글 리스트 가져오기 위한 변수 
+private int mno;//회원번호
+private int cno; 
+private Date cwdate; 
+private  String cctentents;
+private String rid;
 
+//리뷰 게시판 이전글 다음글을 위한 변수 
+private String pre;		//이전글 다음글 처리를 위해 myBatis에 의해 추가된 변수  
+private String next; 
+private Date preday; 
+private Date nextday; 
+private int preNo;
+private int nextNo; 
+
+
+public String getPre() {
+	return pre;
+}
+public void setPre(String pre) {
+	this.pre = pre;
+}
+public String getNext() {
+	return next;
+}
+public void setNext(String next) {
+	this.next = next;
+}
+public Date getPreday() {
+	return preday;
+}
+public void setPreday(Date preday) {
+	this.preday = preday;
+}
+public Date getNextday() {
+	return nextday;
+}
+public void setNextday(Date nextday) {
+	this.nextday = nextday;
+}
+public int getPreNo() {
+	return preNo;
+}
+public void setPreNo(int preNo) {
+	this.preNo = preNo;
+}
+public int getNextNo() {
+	return nextNo;
+}
+public void setNextNo(int nextNo) {
+	this.nextNo = nextNo;
+}
+public int getCno() {
+	return cno;
+}
+public void setCno(int cno) {
+	this.cno = cno;
+}
+public Date getCwdate() {
+	return cwdate;
+}
+public void setCwdate(Date cwdate) {
+	this.cwdate = cwdate;
+}
+public String getCctentents() {
+	return cctentents;
+}
+public void setCctentents(String cctentents) {
+	this.cctentents = cctentents;
+}
+public int getMno() {
+	return mno;
+}
+public void setMno(int mno) {
+	this.mno = mno;
+}
+public int getRecnt() {
+	return recnt;
+}
+public void setRecnt(int recnt) {
+	this.recnt = recnt;
+}
+public String getRecontents() {
+	return recontents;
+}
+public void setRecontents(String recontents) {
+	this.recontents = recontents;
+}
 public String getJjackname() {
 	return jjackname;
 }
@@ -103,10 +192,10 @@ public String getRcontents() {
 public void setRcontents(String rcontents) {
 	this.rcontents = rcontents;
 }
-public Date getRdate() {
+public String getRdate() {
 	return rdate;
 }
-public void setRdate(Date rdate) {
+public void setRdate(String rdate) {
 	this.rdate = rdate;
 }
 public int getRhis() {
