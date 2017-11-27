@@ -19,15 +19,10 @@
 
 <script>
 
-$(function(){
-	$('.btn_word').click(function(){
-		<!--jQuery 이미지 리로드가 되지 않을때 처리 방법-->
-		<!--크롬의 경우에는 removeAttr를 썼더라도 src 속성이 이전 속성과 같아버리면 이미지를 새로 받아오지 않고 기존의 이미지를 셋팅해버립니다..-->
-        <!--그래서 크롬을 속여서 다른 주소이게끔 착각하게 뒤에 타임스탬프의 허위 매개변수를 셋팅해 줘야 합니다 -->
-  	     
-		$('.col-lg-3 img').attr('src','../img/main/real_word.jpg?timestamp='+new Date().getTime());
-	});
-});
+
+  playAlert = setInterval(function(){$('.col-lg-3 img').attr('src','../img/main/real_word.jpg?timestamp='+new Date().getTime());},1000);
+
+
 </script>
 
 </head>
@@ -51,7 +46,9 @@ $(function(){
                     <img class="card-img-top" src="../img/main/real_word.jpg">
                     <br>
                     <br>
-                    <button class="btn_word">후기 업데이트</button> 
+                    <!--  <button class="btn_word" id="btn">후기 업데이트</button> -->
+                 
+                   
 				</div>
 
 				<!-- /.col-lg-3 -->
