@@ -4,8 +4,20 @@
 
 ########### 관리자 일정관리 ###########
 ##	일정 목록
-요청: ../scheduler/list.do
+요청	:	../scheduler/list.do
+뷰	:	scheduler/list
+
 ##	일정 등록
-요청: ../scheduler/write.do
+요청	:	../scheduler/write.do
+redirect	:	./list.do
+
 ##	일정 수정
 요청: ../scheduler/modify.do
+redirect	:	./list.do
+
+##	기수 체크
+
+########### 관리자 일정관리 ###########
+
+
+########### 사용자 입소신청 ###########
