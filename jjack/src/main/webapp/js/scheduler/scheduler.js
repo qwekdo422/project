@@ -388,6 +388,11 @@ function validation () {
 		if(vTag.attr("id") == 'imageUpload' && uBtnStatus == true) {
 			continue;
 		}
+		//	데이터가 있을 경우 flag값을 false로 바꿔준다.
+		//	데이터가 없을 경우 true이고 서브밋이 안된다.
+		if(vTag.val() != "") {
+			flag = false;
+		}
 		if(vTag.val() == "") {
 			flag = true;	//	무결성 검사에 걸렸을 때 true로 변경(버튼클릭 이벤트때 사용)
 			switch (vTag) {
