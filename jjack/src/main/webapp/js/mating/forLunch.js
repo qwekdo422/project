@@ -1,15 +1,27 @@
 $(document).ready(function(){
 	// 좌표
 	var lineY = [70, 225, 385, 540, 695];
-	var lineX1 = [64, 151, 238, 325, 412];
-	var lineX2 = [107, 194, 282, 369, 456];
 	var lineX = [20, 64, 107, 151, 194, 238, 282, 325, 369, 412, 456, 500];
+	
+	// 선긋기 색깔 지정
+	var goLineColor = ['OrangeRed', 'yellow', 'SpringGreen', 'DeepSkyBlue', 'MediumOrchid'];
+	
+	// 패스긋기를 한번이라도 했으면 1
+	var goPath = 0;
+	
+	// 점심 파트너를 저장할 배열
+	var lunchP = [];
 	
 	// 사다리 가로선 그리기
 	for(var i = 0 ; i < ladderSize; i++) {
 		//${'svg'}.append("");
 	}
 
+	// 선긋기용 시작점 색 표시
+	for(var i=0; i<5; i++) {
+		$('.startPoint').eq(i).css('fill', goLineColor[i]);
+	}
+	
 	// 사다리 세로선 위치를 저장할 변수
 	var rowNo = [[], [], [], []];
 
@@ -63,7 +75,6 @@ $(document).ready(function(){
 					j--;
 				}
 			}	// while문 종료
-			
 			// 위에서 생성한 위치에 기반해 사다리 만들기
 			for(var k=0; k<rowNo[i].length; k++) {
 				var y2v = Number($(".ldVrt").eq(i*5+rowNo[i][k]).attr("y2"));
@@ -71,33 +82,101 @@ $(document).ready(function(){
 			}
 		}
 	}
-	
-	
+		
 	// 처음 페이지 로딩시 사다리 생성
 	makeLadder();
 	
-	
+	// 사다리 변경 클릭시 사다리 생성
 	$("#changeLadder").click(function(){
+		if(goPath==1) {
+			alertify.alert("게임을 진행하는 도중에는 사다리를 변경할 수 없습니다");
+			return;
+		}
 		makeLadder();
 	});
 	
+	// 클릭한 사다리 경로 구성하기 함수
+	var makePath = function(e){
+		var goLinePath = [];
+		var y = rowAbc[e];
+		var xy;
+		goLinePath.push(lineX[0] + ',' + lineY[rowAbc.indexOf(y)]);
+		// lineY = [70, 225, 385, 540, 695];
+		// lineX = [20, 64, 107, 151, 194, 238, 282, 325, 369, 412, 456, 500];
+		// rowAbc = ['a', 'b', 'c', 'd', 'e'];
+		for(var x=1; x<12; x++) {	// 한칸 전진
+			// 현재 위치를 확인
+			xy = y + x;
+			// 현재 위치가 branchP에 있는지 확인
+			if(branchP.indexOf(xy) != -1) {		// 현재 위치가 분기점이라면
+				// 현재 위치를 저장하고
+				goLinePath.push(lineX[x] + ',' + lineY[rowAbc.indexOf(y)]);
+				if((rowAbc.indexOf(y)%2==1 && x%2==0) || (rowAbc.indexOf(y)%2==0 && x%2==1)){
+					// 짝수번째 행의 짝수번째 열이거나 홀수번째 행의 홀수번째 열이라면 아래로
+					y = rowAbc[rowAbc.indexOf(y)+1];
+				} else {
+					// 짝수번째 행의 홀수번째 열이거나 홀수번째 행의 짝수번째 열이라면 위로
+					y = rowAbc[rowAbc.indexOf(y)-1];
+				}
+				// 행의 위치를 변환한 후 저장
+				goLinePath.push(lineX[x] + ',' + lineY[rowAbc.indexOf(y)]);
+			}
+		}
+		goLinePath.push(lineX[11] + ',' + lineY[rowAbc.indexOf(y)]);
+		return goLinePath.join(' '); 
+	}
 	
 	
-	
-	
-	
-	
-	// 사진 클릭시 사랑의 작대기 그리기
-	$('figure img, figcaption').click(function(){
-		//몇번째를 선택한건지 확인
-		clickWho = $("figure").index($(this).parent());
-		// 클릭한 사람이 선택한 상대의 순서를 알아내기
-		lno = $(".lno").eq(clickWho).val();
+	// 선 그리기 함수
+	// 참조 : https://codepen.io/hari_shanx/pen/RPZqqM
+	var offset = [0, 0, 0, 0, 0];
+    function polylineToPath(clickWho, linePath) {
+    	var lid = '#l' + clickWho;
+    	//var polylines = document.querySelectorAll('.goLine');
+    	//var polyline = polylines[clickWho];
+    	var polyline = document.querySelector(lid);
+        var svgNS = polyline.ownerSVGElement.namespaceURI;
+        var path = document.createElementNS(svgNS, 'path');
+        var coords = linePath;
+        //var coords = polyline.getAttribute('points');
+        path.setAttribute('d', 'M' + coords);
+        var pname = 'p' + clickWho;
+        path.setAttribute('id', pname);
+        path.setAttribute('style', 'stroke:' + goLineColor[clickWho] + ';');
+        var len = path.getTotalLength();
+        path.style.strokeDashoffset = len;
+        path.style.strokeDasharray = len + ',' + len;
+        
+        polyline.parentNode.appendChild(path);
+        polyline.remove();
+        //polyline.parentNode.replaceChild(path, polyline);
+        animate(len, clickWho);
+    }
+
+    function animate(len, clickWho) {
+        if (!offset[clickWho]) offset[clickWho] = len;
+        var pid = '#p' + clickWho
+        var path = document.querySelector(pid);
+        offset[clickWho] -= 3.5;
+        path.style.strokeDashoffset = offset[clickWho];
+        if (offset[clickWho] <= 0) 
+            window.cancelAnimationFrame(anim);
+        else anim = window.requestAnimationFrame(function(){
+            animate(len, clickWho);
+        });
+    }
 		
+	// 사진 클릭시 사다리 그리기
+	$('#women figure img, #women figcaption').click(function(){
+		// 사다리를 한번이라도 그었는지 체크 (flag)
+		goPath=1;
+		//몇번째를 선택한건지 확인
+		var clickWho = $("figure").index($(this).parent());
+		// 해당되는 선의 경로를 파악하기
+		var linePath = makePath(clickWho);
+		// 경로에 따라 선을 그리기
+		polylineToPath(clickWho, linePath);
 	});
-	
-	
-	
 	
 	
 	

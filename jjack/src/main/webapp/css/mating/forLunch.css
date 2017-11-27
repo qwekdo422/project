@@ -17,8 +17,8 @@ svg {
 	height:760px;'
 }
 line {
-	stroke:DarkOrange;
-	stroke-width:12px;
+	stroke:Orange;
+	stroke-width:15px;
 	/* mix-blend-mode: screen; */
 }
 .ldHrz {
@@ -31,12 +31,16 @@ g {
 	isolation: isolate;
 }
 
+path {
+    fill: none;
+    stroke-width: 6;
+    stroke:blue;
+    stroke-linecap:round;
+}
 
-
-
-
-
-
+.endPoint {
+	fill:snow;
+}
 
 
 

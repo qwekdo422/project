@@ -17,8 +17,7 @@
 <script src="../js/mating/forLunch.js"></script>
 <script>
 	var ladderSize = ${ladderSize};
-
-	
+	var lineX = [20, 64, 107, 151, 194, 238, 282, 325, 369, 412, 456, 500];
 </script>
 </head>
 <body style="margin:0 auto;">
@@ -97,6 +96,28 @@
 							
 							<!-- 사다리 그리기 종료 -->							
 						
+							<!-- 선 잇기 시작점 -->
+							<circle cx="20" cy="70" r="3" class="startPoint" />
+							<circle cx="20" cy="225" r="3" class="startPoint" />
+							<circle cx="20" cy="385" r="3" class="startPoint" />
+							<circle cx="20" cy="540" r="3" class="startPoint" />
+							<circle cx="20" cy="695" r="3" class="startPoint" />
+
+							<!-- 선잇기 끝점 -->
+							<circle cx="500" cy="70" r="3" class="endPoint" />
+							<circle cx="500" cy="225" r="3" class="endPoint" />
+							<circle cx="500" cy="385" r="3" class="endPoint" />
+							<circle cx="500" cy="540" r="3" class="endPoint" />
+							<circle cx="500" cy="695" r="3" class="endPoint" />
+
+							<!-- 선 잇기 -->
+							<g id="goLines">
+								<polyline points='' id = "l0"/>
+								<polyline points='' id = "l1" />
+								<polyline points='' id = "l2" />
+								<polyline points='' id = "l3" />
+								<polyline points='' id = "l4" />
+							</g>
 						
 					</div>
 					<!-- 사다리 영역 종료 -->
