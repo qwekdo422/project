@@ -3,6 +3,8 @@ package com.jjack.web.rboard.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.NDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,10 +81,11 @@ public class RboardService {
 		
 		int start=(nowPage-1)*(pInfo.getListCount())+1; //시작페이지
 		int end=start+(pInfo.getListCount()-1); //종료위치 
-		
+
 		HashMap map = new HashMap();
 		map.put("start",start); 
 		map.put("end",end); 
+
 		ArrayList list= rDAO.rboardList(map); 
 		
 		return list; 
@@ -114,6 +117,13 @@ public class RboardService {
 	}
 	
 	
+	//회원 기수랑 닉네임 가져오기 질의명령 
+	
+	public RboardVO userNickAndGisoo(String id){
+		
+		RboardVO rVO=rDAO.userNickAndGisoo(id); 
+		return rVO; 
+	}
 	
 	
 	

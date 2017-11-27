@@ -16,22 +16,18 @@ VALUES
 (
 	(SELECT 
 		NVL(MAX(r_no),0)+1
-
 	FROM
-		TB_Review), 14, sysdate,#{rtitle},#{rcontents}, 0 , 'Y')
+		TB_Review), (select 
+ g.g_no
+from
+tb_apply a, tb_guest g
+where
+
+    a.a_no = g.a_no and
+    a.a_cond=9)  , sysdate,#{rtitle},#{rcontents}, 0 , 'Y')
 </insert>
 
-<!-- 후기쓰기용 gno 구하기 -->
-<select id="">
-	SELECT
-		g.g_no		
-	FROM
-		TB_Guest g, TB_Apply a
-	WHERE
-		g.a_no=a.a_no
-		AND a.a_cond=9
-		AND a.m_no =#{m_no}
-</select>
+
 
 
 
@@ -39,22 +35,47 @@ VALUES
 <!-- 리뷰게시판 목록 가져오기  -->
 <select id="rboardList"  resultType="rboardvo" parameterType="hashMap">
 SELECT 
-		realTotal.rno AS rno , realTotal.rtitle AS rtitle, realTotal.rdate AS rdate , realTotal.rhis AS rhis, realTotal.rcontents AS rcontents
+		realTotal.rno AS rno , realTotal.rtitle AS rtitle, realTotal.rdate AS rdate , realTotal.rhis AS rhis, realTotal.rcontents AS rcontents, realTotal.nickname AS nickname, realTotal.gisoo AS gisoo, realTotal.jjackname
 FROM
 		(SELECT 
 					rownum AS resultno,
-					total.rno AS rno , total.rtitle AS rtitle, total.rdate AS rdate , total.rhis AS rhis, total.rcontents AS rcontents
+					total.rno AS rno , total.rtitle AS rtitle, total.rdate AS rdate , total.rhis AS rhis, total.rcontents AS rcontents, total.nickname AS nickname, total.gisoo AS gisoo, total.jjackname AS jjackname
 		FROM
    			 (SELECT 
-        			r_no AS rno , r_title AS rtitle, r_wdate AS rdate ,r_hits AS rhis, r_contents AS rcontents
+        			r_no AS rno , r_title AS rtitle, r_wdate AS rdate ,r_hits AS rhis, r_contents AS rcontents,  nickAndGisoo.nickname AS nickname, nickAndGisoo.gisoo AS gisoo, jjack.jjackname AS jjackname
     			 FROM
-        			TB_Review
+        			TB_Review, (SELECT 
+   														G.G_NICK AS nickname,  E.E_GISOO AS gisoo
+													FROM
+ 														TB_MEMBER M,TB_APPLY A, TB_GUEST G , TB_EVENT E , tb_review r
+													WHERE
+														M.M_NO = A.M_NO 
+														AND A.A_NO = G.A_NO
+																										
+														AND A.E_EVENTDATE = E.E_EVENTDATE 
+														) nickAndGisoo,(SELECT 
+    																																		G.G_NICK AS jjackname
+																																		FROM
+    																																		(SELECT 
+      																																				G.G_CHOICE AS CHOICE, G.G_COURSE AS COURSE, G.G_NICK AS jjack_name, g.g_no as g_no
+    																																		 FROM
+      																																			  TB_MEMBER M,TB_APPLY A, TB_GUEST G , TB_EVENT E  , tb_review r
+   																																			 WHERE
+        																																		M.M_NO = A.M_NO 
+       																																			 AND A.A_NO = G.A_NO
+        																																		AND A.E_EVENTDATE = E.E_EVENTDATE 
+       																																				 
+    																																		ORDER BY 
+        																																		G.A_NO DESC) JJACK , TB_GUEST G
+																																		WHERE
+																																					G.G_NO =JJACK.CHOICE AND JJACK.COURSE IN('A' , 'B' , 'C')) jjack
+        			
    				 WHERE
         			r_IsShow='Y'
     			ORDER BY
        				 r_no DESC) total) realTotal
 WHERE
-		resultno BETWEEN #{start} AND #{end}
+		resultno BETWEEN #{start} AND #{end} 
 </select>
 
 

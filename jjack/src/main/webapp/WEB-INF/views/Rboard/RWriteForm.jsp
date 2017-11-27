@@ -74,7 +74,7 @@ $(document).ready(function(){
 <!-- 글쓰기 폼  -->
 <form method="post" id="nfrm"action="../Rboard/RboardProc.do">
 <input type="hidden" name="rid" value="${writer}">
-	<table width="800"  border="1" align="center">
+	<table class="table table-hover table-striped table-bordered mt-4">
 		<tr>
 			<td>
 				<input type="text" name="rtitle" id="rtitle"  style="width:100%" placeholder="제목을 입력해주세요">

@@ -45,6 +45,9 @@ public interface RboardDAO {
 	public int searchTotalList(); 
 	
 	
+	//글쓴이 기수랑 닉네임가져오기 위한 질의명령 
+	public RboardVO userNickAndGisoo(String id); 
+	
 	
 	
 	

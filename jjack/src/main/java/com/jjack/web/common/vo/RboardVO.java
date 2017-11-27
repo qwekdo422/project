@@ -18,6 +18,30 @@ private int nowPage; //페이징 처리를 위해 추가된 변수
 private int startPage;
 private int endPage; 
 
+private String nickname; 
+private int gisoo; 
+private String jjackname; 
+
+
+
+public String getJjackname() {
+	return jjackname;
+}
+public void setJjackname(String jjackname) {
+	this.jjackname = jjackname;
+}
+public String getNickname() {
+	return nickname;
+}
+public void setNickname(String nickname) {
+	this.nickname = nickname;
+}
+public int getGisoo() {
+	return gisoo;
+}
+public void setGisoo(int gisoo) {
+	this.gisoo = gisoo;
+}
 //검색에 필요한 데이터 
 private String kind; 
 private String rsearch;

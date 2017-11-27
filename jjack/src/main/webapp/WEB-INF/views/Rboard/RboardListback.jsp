@@ -46,25 +46,25 @@ $(document).ready(function(){
       <div class="container">
       
 <!-- 목록보여주고 -->
-<table width="1100" border="1" align="center">
+<table  class="table table-hover table-striped table-bordered mt-4">
 					<tr align="center">
 						<th>번호</th>
 						<th width=40% >제목</th>				
 						<th width=10%>기수</th>
 						<th width=10%>작성자</th>
-						<th>작성일</th>
 						<th width=10%>짝</th>
+						<th>작성일</th>
 						<th>조회수</th>
 					</tr>					
 					<c:forEach var="data" items="${RLIST}">
 					<tr>
-						<td>${data.rno}</td>
+						<td align="center">${data.rno}</td>
 						<td class="title"><a href="../Rboard/rHitUpProc.do?rno=${data.rno}&nowPage=${nowPage}">${data.rtitle}</a></td>
-						<td>기수?</td>
-						<td>작성자?</td>
-						<td>${data.rdate}</td>
-						<td>짝?</td>
-						<td>${data.rhis}</td>
+						<td align="center">${data.gisoo}</td>
+						<td align="center">${data.nickname} </td>
+						<td align="center">${data.jjackname}</td>
+						<td align="center">${data.rdate}</td>
+						<td align="center">${data.rhis}</td>
 					</tr>
 					</c:forEach>
 </table>

@@ -38,8 +38,9 @@ public class RboardController {
 			mv.setView(rv);
 			return mv; 
 		}
-		
-		int total=rService.getTotalList(); //총 데이터의 갯수를 받아오고 
+
+		int total=rService.getTotalList(); //총 데이터의 갯수를 받아오고
+		System.out.println(total +"총 데이터");
 		PageUtil pInfo= new PageUtil(nowPage, total);	//페이징 처리 
 		ArrayList list= rService.rboardList(nowPage, pInfo); 
 		mv.addObject("startPage",pInfo.getStartPage());
@@ -47,7 +48,8 @@ public class RboardController {
 		mv.addObject("nowPage",pInfo.getNowPage()); 
 		mv.addObject("totalPage",pInfo.getTotalPage());
 		mv.addObject("RLIST",list); 
-		mv.setViewName("Rboard/RboardList");
+		System.out.println(list.size());
+		mv.setViewName("Rboard/RboardListback");
 		return mv; 
 	}
 	
@@ -63,7 +65,7 @@ public class RboardController {
 		ModelAndView mv= new ModelAndView(); 
 		PageUtil pInfo= new PageUtil(nowPage, total); 
 		ArrayList list= rService.getRboardSearch(rVO, pInfo); 
-		
+		System.out.println(list.size() + "몇개냐");
 		mv.addObject("startPage",pInfo.getStartPage());
 		mv.addObject("endPage",pInfo.getEndPage());
 		mv.addObject("nowPage",pInfo.getNowPage()); 
@@ -107,7 +109,7 @@ public class RboardController {
 		ModelAndView mv= new ModelAndView(); 
 	 
 		RedirectView rv= new RedirectView("../Rboard/RboardList.do");
-		rv.addStaticAttribute("WRITER",writer);
+
 		mv.setView(rv);
 
 //		mv.setViewName("Rboard/ImsiWriteForm");
