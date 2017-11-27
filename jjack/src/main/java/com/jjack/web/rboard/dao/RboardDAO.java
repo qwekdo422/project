@@ -61,4 +61,15 @@ public interface RboardDAO {
 	//리뷰 게시판 이전글 다음글 
 	public RboardVO preNext(int rno);
 	
+	//리뷰 게시판 삭제하기 
+	public void rbaordDelete(int rno);
+
+	//리뷰 게시판 수정하기 폼
+ 	public RboardVO rboardModify(int rno);
+
+
+ 	//리뷰 게시판 수정 실행함수 
+	public void rboardModifyProc(RboardVO rVO); 
+	
+	
 }

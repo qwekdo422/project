@@ -150,6 +150,28 @@ public class RboardService {
 		
 		return (RboardVO) rDAO.preNext(rno); 
 	}
+	
+	//리뷰 삭제
+	public void rbaordDelete(int rno){
+		
+		rDAO.rbaordDelete(rno);
+		return ; 
+	}
+	
+	//리뷰 수정 폼
+	public RboardVO rboardModify(int rno) {
+
+	return rDAO.rboardModify(rno); 
+	}
+
+	//리뷰 수정 실행함수
+	public void rboardModifyProc(RboardVO rVO) {
+
+		rDAO.rboardModifyProc(rVO);
+		return; 
+	}
+	
+
 
 	
 	

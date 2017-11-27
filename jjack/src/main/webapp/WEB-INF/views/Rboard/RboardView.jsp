@@ -19,14 +19,34 @@ $(document).ready(function(){
 	
 	//목록보기 버튼 눌렀을 때 요청처리 
 	$("#lBtn").click(function(){
-		$(location).atrr("href" , "../Rboard/RboardList.do"); 
+		$(location).attr("href" , "../Rboard/RboardList.do"); 
 	}); 
 	
-	//
 	
+	//댓글쓰기 버튼 실행
 	$("#rBtn").click(function(){
-		var 
+		var rebody=$("#recontents").val(); 
+		if(rebody == ""){
+			alert("댓글을 입력하십시오"); 
+			return ; 
+		}
 		$("#refrm").submit(); 
+	}); 
+	
+	//리뷰 게시판 수정하기 
+		$("#mBtn").click(function(){
+	
+			
+		$(location).attr("href" , "../Rboard/RboardModify.do?rno=${VO.rno}"); 
+		
+	}); 
+	
+	
+	//리뷰 게시판 삭제하기 
+	$("#dBtn").click(function(){
+		alert("게시글이 삭제되었습니다."); 
+		$(location).attr("href" , "../Rboard/RboardDelete.do?rno=${VO.rno}"); 
+		
 	}); 
 	
 }); 
@@ -55,29 +75,13 @@ $(document).ready(function(){
 			</tr> 
 	</table>
 
-<%-- 	
-	<br>
-	<table border="1" align="center" width="800">
-		<tr>
-			<c:if test="${PRENEXT.pre ne '이전글 없음'}">		
-			<td>▲이전글</td><td><a href="../Nboard/NboardView.do?nno=${PRENEXT.preNo}">${PRENEXT.pre}</a></td><td>작성일 : ${PRENEXT.preday}</td>
-			</c:if>
-		</tr>
-		
-	<tr>
-	<c:if test="${PRENEXT.next ne '다음글 없음'}">		
-			<td>▼다음글</td><td><a href="../Nboard/NboardView.do?nno=${PRENEXT.nextNo}">${PRENEXT.next}</a></td><td>작성일 : ${PRENEXT.nextday}</td>
-	</c:if>
-	</tr>
---%>			
-	</table>
 	
 	
 	<div align="center">
 	<input type="button" id="lBtn" value="목록보기" align="right">		
-	<c:if test="${sessionScope.UID eq RID}">
+	<c:if test="${sessionScope.MNO eq  VO.writerno}">
 	<input type="button" id="dBtn" value="삭제하기" align="right">
-	<input type="button" id="mtn" value="수정하기" align="right">
+	<input type="button" id="mBtn" value="수정하기" align="right">
 	</c:if>
 	
 	</div>
@@ -132,14 +136,14 @@ $(document).ready(function(){
 		<br>
 	<table class="table table-hover table-striped table-bordered mt-4">
 		<tr>
-			<c:if test="${PRENEXT.pre ne '이전글 없음'}">		
-			<td>▲이전글</td><td><a href="../Rboard/RboardView.do?rno=${PRENEXT.preNo}">${PRENEXT.pre}</a></td><td align="center">작성일 : ${PRENEXT.preday}</td>
+			<c:if test="${PRENEXT.pre ne '다음글 없음'}">		
+			<td>▲다음글</td><td><a href="../Rboard/RboardView.do?rno=${PRENEXT.preNo}">${PRENEXT.pre}</a></td><td align="center">작성일 : ${PRENEXT.preday}</td>
 			</c:if>
 		</tr>
-		
+
 	<tr>
-	<c:if test="${PRENEXT.next ne '다음글 없음'}">		
-			<td>▼다음글</td><td><a href="../Rboard/RboardView.do?rno=${PRENEXT.nextNo}">${PRENEXT.next}</a></td><td align="center">작성일 : ${PRENEXT.nextday}</td>
+	<c:if test="${PRENEXT.next ne '이전글 없음'}">		
+			<td>▼이전글</td><td><a href="../Rboard/RboardView.do?rno=${PRENEXT.nextNo}">${PRENEXT.next}</a></td><td align="center">작성일 : ${PRENEXT.nextday}</td>
 	</c:if>
 	</tr>
 

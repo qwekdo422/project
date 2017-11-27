@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -221,7 +222,52 @@ public class RboardController {
 	}
 	
 	
+	
+	//리뷰 게시판 삭제하기 
+	@RequestMapping("/RboardDelete")
+	public ModelAndView rbaordDelete(@RequestParam(value="rno") int rno){
+		
+		rService.rbaordDelete(rno);//게시글 삭제하기 
+		ModelAndView mv= new ModelAndView(); 
+		RedirectView rv= new RedirectView("../Rboard/RboardList.do");
+		mv.setView(rv);
+		return mv; 
+	}
 
+	
+	//리뷰 게시판 수정폼
+	@RequestMapping("/RboardModify")
+	public ModelAndView rbaordModify(@RequestParam(value="rno") int rno){
+		ModelAndView mv= new ModelAndView(); 
+		RboardVO rVO = rService.rboardModify(rno);
+		rVO.setRno(rno);
+		System.out.println(rVO.getRno() + "게시물 번호냐?");
+
+		mv.addObject("rVO", rVO);
+		mv.setViewName("Rboard/RWriteFormModify");
+		return mv; 
+	}
+	
+	
+	//리뷰 게시판 수정하기 실행함수 
+	@RequestMapping("/RbaordProc")
+	public ModelAndView rboardModifyProc(RboardVO rVO){
+		System.out.println(rVO.getRcontents()+"내용");
+		System.out.println(rVO.getRno()+"게시물 번호");
+		rService.rboardModifyProc(rVO); 
+
+		
+		
+		ModelAndView mv= new ModelAndView(); 	 
+		RedirectView rv= new RedirectView("../Rboard/RboardList.do");
+		mv.setView(rv);
+
+//		mv.setViewName("Rboard/ImsiWriteForm");
+		
+		return mv; 
+		
+		
+	}
 	
 	
 	

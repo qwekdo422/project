@@ -119,11 +119,15 @@ WHERE
 <!-- 리뷰 상세보기  -->
 <select id="rboardView" resultType="rboardvo" parameterType="int">
 SELECT
-	r_no AS rno,  r_wdate AS rdate, r_title AS rtitle, r_contents AS rcontents
+	tr.r_no AS rno,  tr.r_wdate AS rdate, tr.r_title AS rtitle, tr.r_contents AS rcontents, ta.m_no AS writerno
 FROM 
-	TB_Review
+	tb_review tr , tb_guest tg ,tb_apply ta
 WHERE
-	r_no=#{rno}
+	tr.G_NO = tg.g_no 
+and
+	ta.a_no = tg.a_no 
+and 
+	tr.r_no=#{rno}
 </select>
 
 <!-- 리뷰 리스트를 가지오 오기 위한 총 데이터의 갯수 -->
@@ -207,10 +211,10 @@ SELECT
     	total.pre AS pre, total.next AS next,total.preday AS preday, total.nextday AS nextday,total.nNo AS nextNo, total.pNo AS preNo
 FROM
 	(SELECT
-		r_no, r_title, LAG(r_title, 1 , '이전글 없음') OVER(ORDER BY r_no desc) AS pre,
+		r_no, r_title, LAG(r_title, 1 , '다음글 없음') OVER(ORDER BY r_no desc) AS pre,
 									 LAG(r_wdate,1,TO_DATE('11-11-1111','MM-DD-YY')) OVER(ORDER BY r_no desc) AS preday, 
 									 LAG(r_no, 1, 999) OVER(ORDER BY r_no desc) AS pNo,
-									lead(r_title,1,'다음글 없음') OVER(ORDER BY r_no desc) AS next,		  
+									lead(r_title,1,'이전글 없음') OVER(ORDER BY r_no desc) AS next,		  
                          			lead(r_wdate,1,TO_DATE('11-11-1111','MM-DD-YYYY')) OVER(ORDER BY r_no desc) AS nextday,
                           			lead(r_no,1,999) OVER(ORDER BY r_no DESC) AS nNo 
           FROM
@@ -248,6 +252,45 @@ FROM
 where
  tc.m_no = m.m_no and tc.r_no = #{rno}
 </select>
+
+
+
+
+
+
+<!-- 리뷰 게시판 삭제하기 질의명령 -->
+<update id="rbaordDelete" parameterType="int" >
+UPDATE 
+	TB_Review
+SET
+	r_IsShow ='N'
+WHERE
+	r_no=#{rno}
+</update>
+
+<!-- 리뷰 수정폼 질의명령  -->
+<select id="rboardModify" parameterType="int" resultType="rboardvo">
+SELECT 
+ 	r_title AS rtitle, 
+ 	r_contents AS rcontents,
+	 r_no AS rno
+FROM
+	TB_REVIEW
+WHERE
+	r_no=#{rno}
+</select>
+
+<!-- 리뷰 수정 질의명령 -->
+<update id="rboardModifyProc"  parameterType="rboardvo">
+UPDATE 
+	TB_REVIEW
+SET
+	r_title=#{rtitle} , 
+	r_contents=#{rcontents}
+WHERE
+	r_no=#{rno}
+</update>
+
 </mapper>
 
 
