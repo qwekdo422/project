@@ -179,7 +179,7 @@ $(document).ready(function(){
 				${sessionScope.UID}  : 
 			</td>
 			<td>
-			<textarea id="recontents" name="recontents" row="10" cols="110"></textarea>
+			<textarea id="recontents" name="recontents" row="10" cols="100"></textarea>
 			</td>
 			<td>
 			<input type="button" class="btn btn-info" value="댓글쓰기" id="rBtn" >
@@ -191,7 +191,7 @@ $(document).ready(function(){
 				작성자 :
 			</td>
 			<td>
-			<textarea id="recontents" name="recontents" row="10" cols="110" placeholder="로그인 하십시오."></textarea>
+			<textarea id="recontents" name="recontents" row="10" cols="100" placeholder="로그인 하십시오."></textarea>
 			</td>
 		</tr>
 		</c:if>

@@ -33,6 +33,8 @@ public class RboardController {
 	@RequestMapping("/RboardList")
 	public ModelAndView rboardList(@RequestParam(value="nowPage" ,defaultValue="1") int nowPage,HttpSession session){
 		
+		System.out.println("현재페이지 = "+nowPage);
+		
 		ModelAndView mv= new ModelAndView(); 
 		String id= (String)session.getAttribute("UID"); 
 		
