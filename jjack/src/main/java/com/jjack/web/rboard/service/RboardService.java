@@ -176,6 +176,13 @@ public class RboardService {
 		
 		rDAO.reModifycontents(rVO); 
 	}
+
+	//댓글 삭제 실행함수 
+	public void replyDelete(RboardVO rVO) {
+
+		rDAO.replyDelete(rVO); 
+		return ;
+	}
 	
 
 

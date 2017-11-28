@@ -70,6 +70,26 @@ where
 	     resultno BETWEEN #{start} AND ${end}
 </select>
 
+<!-- 리뷰 상세보기  -->
+<select id="rboardView" resultType="rboardvo" parameterType="int">
+SELECT
+	tr.r_no AS rno,  tr.r_wdate AS rdate, tr.r_title AS rtitle, tr.r_contents AS rcontents, ta.m_no AS writerno,
+	DECODE(tg.g_course, 'S', '-', tp.g_nick) AS jjackname,
+	tg.g_nick AS nickname
+FROM 
+	tb_review tr , 
+	tb_guest tg ,
+	tb_guest tp,
+	tb_apply ta
+WHERE
+	tr.G_NO = tg.g_no 
+and
+	ta.a_no = tg.a_no 
+and
+	tg.g_choice = tp.g_no
+and 
+	tr.r_no=#{rno}
+</select>
 
 <!--                              조회수 증가                   관련                         로직  -->
 	<!-- 이미 본 글 번호를 조회할 질의 명령 -->
@@ -119,19 +139,7 @@ WHERE
 
 
 
-<!-- 리뷰 상세보기  -->
-<select id="rboardView" resultType="rboardvo" parameterType="int">
-SELECT
-	tr.r_no AS rno,  tr.r_wdate AS rdate, tr.r_title AS rtitle, tr.r_contents AS rcontents, ta.m_no AS writerno
-FROM 
-	tb_review tr , tb_guest tg ,tb_apply ta
-WHERE
-	tr.G_NO = tg.g_no 
-and
-	ta.a_no = tg.a_no 
-and 
-	tr.r_no=#{rno}
-</select>
+
 
 <!-- 리뷰 리스트를 가지오 오기 위한 총 데이터의 갯수 -->
 <select  id="getTotalList" resultType="int">
@@ -258,7 +266,7 @@ VALUES((SELECT
 
 <!-- 댓글 리스트 가져오기 질의명령 -->
 <select id="reList" parameterType="int" resultType="rboardvo">
-SELECT 
+<!--  SELECT 
  	tc.c_no AS cno,
  	tc.c_wdate AS cwdate,
 	 tc.c_contents AS cctentents,
@@ -269,6 +277,30 @@ where
  tc.m_no = m.m_no and tc.r_no = #{rno}
  ORDER BY 
  tc.c_no 
+ -->
+ SELECT
+    c.c_no AS cno,   -- 수정시 필요
+    cm.m_id AS rid,  -- 수정시 필요
+    (SELECT mng.g_nick FROM TB_Guest mng WHERE mg.g_no = mng.g_no AND cm.m_no=ma.m_no) AS nickname,
+    (SELECT png.g_nick FROM TB_Guest png, TB_Apply pna 
+     WHERE mg.g_choice=png.g_no AND png.a_no = pna.a_no AND pna.m_no = cm.m_no AND mg.g_course IN ('A', 'B', 'C')) AS jjackname,
+    c.c_wdate AS cwdate,
+    c.c_contents AS cctentents
+FROM
+    TB_Comment c,
+    TB_Review r,
+    TB_Guest mg,    -- 후기작성자
+    TB_Apply ma,    -- 후기작성자
+    TB_Member cm    -- 댓글작성자
+WHERE
+    c.r_no = r.r_no
+    AND c.r_no = #{rno}
+    AND c.c_IsShow = 'Y'
+    AND c.m_no = cm.m_no
+    AND r.g_no = mg.g_no
+    AND mg.a_no = ma.a_no
+ORDER BY
+    c.c_wdate
 </select>
 
 <update id="reModifycontents" parameterType="rboardvo">

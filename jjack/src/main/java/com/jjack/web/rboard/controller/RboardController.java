@@ -227,11 +227,7 @@ public class RboardController {
 	@RequestMapping("/reModify")
 	public ModelAndView reModify(RboardVO rBoard){
 		
-		System.out.println("댓글 수정하기 컨트롤러" + rBoard.getCno());
-		System.out.println("댓글 수정하기 컨트롤러" +rBoard.getRmcontents());
 		rService.reModifycontents(rBoard);
-		
-		
 		ModelAndView mv= new ModelAndView(); 
 		RedirectView rv= new RedirectView("../Rboard/RboardView.do");
 		rv.addStaticAttribute("rno",rBoard.getRno());
@@ -241,7 +237,13 @@ public class RboardController {
 	}
 	
 	//댓글 삭제하기 
-	public ModelAndView reDelete(){
+	@RequestMapping("/reDelete")
+	public ModelAndView reDelete(RboardVO rVO){
+		
+			rService.replyDelete(rVO);
+		
+		
+		ModelAndView mv=new ModelAndView(); 
 		
 		return null;
 	}

@@ -73,7 +73,10 @@ public interface RboardDAO {
 
 
 	//댓글 내용 수정 질의명령 실행 
-	public void reModifycontents(RboardVO rVO); 
+	public void reModifycontents(RboardVO rVO);
+
+	//댓글 내용 삭제 질의명령 실행 
+	public void replyDelete(RboardVO rVO); 
 	
 	
 }

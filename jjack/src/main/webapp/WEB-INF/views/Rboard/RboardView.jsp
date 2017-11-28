@@ -22,7 +22,8 @@ function uBtn(btn){
 	var rmcontents = $("#mInput").val();
 	$("#cno").val(cno);
 	$("#rmcontents").val(rmcontents);
-	$("#replyUpdate").submit();
+	$("#replyUpdate").attr("action", "reModify.do").submit();
+											//attr 아이디가 replyUpdate 인 html의 action 속성에 reModify.do을 넣어서 submit()을 해주겠다. 
 	
 	/*
 	var value=document.getElementById('modify').value; 
@@ -47,6 +48,11 @@ function resetBtn(btn){
 	 
 }
 
+function replyDeleteBtn(btn){
+	var cno=$(btn).prev().attr("data-cno") ; //나의-전의 data-cno를 저장시킴 
+	$("#cno").val(cno);
+	$("#replyUpdate").attr("action", "reDelete.do").submit();
+}
 
 $(document).ready(function(){
 
@@ -123,7 +129,16 @@ $(document).ready(function(){
 	<table class="table table-hover table-striped table-bordered mt-4">
 			<tr>
 				<td>
-			작성일 :${VO.rdate}		 | 		공지 번호 :${VO.rno}		| 	  	${VO.rtitle}
+					후기번호 :${VO.rno}	
+				</td>
+				<td>
+					작성일 :${VO.rdate}			                        
+				</td>
+				<td>
+					 제목 : 	${VO.rtitle}  
+				</td>
+				<td>
+						${VO.nickname} <c:if test="${!empty VO.jjackname}"><font color="tomato" >♥</font> ${VO.jjackname}</c:if>
 				</td>
 			  </tr>
 			<tr>
@@ -132,10 +147,10 @@ $(document).ready(function(){
 			</tr> 
 	</table>
 		</form>
-	<form method='post'  id='replyUpdate' name='mmm' action='reModify.do'>
+	<form method='post'  id='replyUpdate' name='mmm' action=''>
 			<input type="hidden"  name="cno"  id="cno">
 			<input type="hidden"  name="rmcontents" id="rmcontents">			
-			<input type="hidden"  name ="rno" value="${VO.rno}">
+			<input type="hidden"  class ="tempRno"name ="rno" value="${VO.rno}">
 	</form>	
 	<table  class="table table-hover table-striped table-bordered mt-4">
 				<tr align="center">
@@ -149,8 +164,8 @@ $(document).ready(function(){
 						<td align="center">${vs.count}</td>
 						<td align="center">
 							<c:if test="${empty data.nickname and empty data.jjackname}">${data.rid}</c:if>
-							<c:if test="${!empty data.nickname}">${data.nickname}</c:if>
-							<c:if test="${!empty data.jjackname}">${data.jjackname}</c:if>
+							<c:if test="${!empty data.nickname}"><font color="tomato">${data.nickname}</font></c:if>
+							<c:if test="${!empty data.jjackname}"><font color="tomato" >${data.jjackname}</font></c:if>
 						</td>
 						<td align="center">${data.cwdate}</td>
 						<input type="hidden" class="tempValue" value="${data.cctentents}">			
@@ -160,7 +175,7 @@ $(document).ready(function(){
 									<input type="button"  class="remBtn btn btn-success mr-1"  value="수정">
 									<input type="button"  style="display:none;" class="uBtn btn btn-success mr-1" value="완료" onclick="uBtn(this)"
 										data-cno="${data.cno}" >
-									<input type="button" class="redBtn btn btn-success" value="삭제" >
+									<input type="button" class="redBtn btn btn-success" value="삭제" onclick="replyDeleteBtn(this)">
 									<input type="button" style="display:none;" class="resetBtn btn btn-success" value="취소" onclick="resetBtn(this)">
 								</div>
 							</c:if>
