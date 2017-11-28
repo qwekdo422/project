@@ -9,7 +9,7 @@ public interface MatingDAO {
 	
 	// 입소한 사람들이 있는 현재 날짜 구하기
 	public String getEdate();
-	
+
 	
 	/*
 	 *  점심 사다리타기

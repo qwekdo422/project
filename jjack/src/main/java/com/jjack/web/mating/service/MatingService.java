@@ -11,6 +11,17 @@ public class MatingService {
 	public MatingDAO md;
 	
 	/*
+	 *  공통
+	 */
+	
+	// 현재 날짜, 기수 구하기
+	public String getEdate() {
+		return md.getEdate();
+	}
+
+	
+	
+	/*
 	 *  점심 사다리 타기
 	 */
 	
@@ -42,11 +53,6 @@ public class MatingService {
 	/*
 	 *  사랑의 작대기
 	 */
-	
-	// 현재 날짜, 기수 구하기
-	public String getEdate() {
-		return md.getEdate();
-	}
 	
 	// 이번기수의 사람수 구하기
 	public MatingVO getNumbers(String edate){
