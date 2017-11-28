@@ -51,7 +51,7 @@
 						</c:if>
 					</li>
 					<li class="nav-item">
-							<a class="nav-link" href="../datecourse/DateCourse.do" id="mDatecourse">데이트코스</a>
+							<a class="nav-link" href="../datecourse/DateCourse.do" id="mDatecourse">데이트 코스</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="../Rboard/RboardList.do" id="mReview">후기</a></li>
 					<li class="nav-item mr-4"><a class="nav-link" href="../Nboard/NboardList.do" id="mNotice">공지</a></li>
