@@ -44,6 +44,7 @@ function resetBtn(btn){
 	 $(btn).siblings(".remBtn").show();
 	 $(btn).siblings(".uBtn").hide();
 	 $(btn).siblings(".redBtn").show();
+	 
 }
 
 
