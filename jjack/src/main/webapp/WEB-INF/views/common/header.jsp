@@ -38,7 +38,7 @@
 					</c:if>
 					<c:if test="${sessionScope.UID eq 'admin'}">
 					<li class="nav-item"><a class="nav-link" href="../applicantList/ManageList.do" id="mManageList">신청자관리</a></li>
-					<li class="nav-item"><a class="nav-link" href="../scheduler/list.do?status=A" id="mSchedulerA">일정관리</a></li>
+					<li class="nav-item"><a class="nav-link" href="../scheduler/list.do?status=A" id="mScheduler">일정관리</a></li>
 					</c:if>
 					<li class="nav-item">
 						<%-- 입소자 외에는 커넥터로 연결 --%>
