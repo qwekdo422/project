@@ -101,57 +101,61 @@ function pwCheckCheck(){
       <div class="container">
 
 		<div id="main">
-				<form method="post" action="../SignUp/SignUpProc.do" id="Sfrm">
-			<table width="1000" align="center" border="1">
-			<tr>
-					<td>아이디 :</td>
-					<td> <input type="text"  name="id"  id="id"  oninput="checkId()"><span id="isid" style="color:red"></sapn></td>
-			</tr>
-			<tr>
-					<td>비밀번호 : </td><td><input type="password" name="pw" id="pw" oninput="pwCheck()"><span id="newpw001" style="color:red"></sapn></td>
-			</tr>
-			<tr>
-					<td>비밀번호 확인 : </td><td><input type="password" name="cpw" id="cpw"  oninput="pwCheckCheck()"><span id="newpw002" style="color:red"></sapn></td>
-			</tr>
-			<tr>
-					<td>이름 :</td><td><input type="text" name="name" id="name" ></td>
-			</tr>
-			<tr>
-					<td>성별 :</td> 
-					<td>
-					<input type="radio" name="sex" value="M" >남자
-					<input type="radio" name="sex" value="F" >여자
-					</td>
-			</tr>
-			<tr>
-					<td>생일 : </td><td><input type="text" name="birth" id="birth"  placeholder="YYYY-MM-DD" ></td>
-			</tr>
-			
-			<tr>
-					<td>E-MAIL : </td><td><input type="email" name="email" id="email" placeholder="abc@domain.com"></td>
-			</tr>
-			<tr>
-					<td>거주지 : </td>
-					<td>
-						<select name="loc" id="loc" >
-								<option value="">지역선택</option>
-								<option value="서울/경기">서울/경기</option>
-								<option value="강원도">강원도</option>
-								<option value="충청도">충청도</option>
-								<option value="경상도">경상도</option>
-								<option value="전라도">전라도</option>
-								<option value="제주도">제주도</option>
-						</select>
-					</td>
-			</tr>
-	
-			<tr>
-			<td colspan="2" align="center">
-			<input type="button" value="가입하기" id="sBtn"align="center">	
-			</tr>
-		
-			</table>
-			</form>
+			<div class="row">
+				<div class="col-lg-5 mx-auto">
+					<form method="post" action="../SignUp/SignUpProc.do" id="Sfrm">
+						<table class="table  table-striped table-bordered mt-4">
+						<tr>
+								<td align="center" width="30%">아이디 :</td>
+								<td> <input type="text"  name="id"  id="id"  class="form-control form-control-sm"  oninput="checkId()"><span id="isid" style="color:red"></span></td>
+						</tr>
+						<tr>
+								<td align="center">비밀번호  </td><td><input type="password" name="pw" id="pw" class="form-control form-control-sm"  oninput="pwCheck()"><span id="newpw001" style="color:red"></span></td>
+						</tr>
+						<tr>
+								<td align="center">비밀번호 확인 </td><td><input type="password" name="cpw" id="cpw"  class="form-control form-control-sm"  oninput="pwCheckCheck()"><span id="newpw002" style="color:red"></span></td>
+						</tr>
+						<tr>
+								<td align="center">이름 </td><td><input type="text" name="name" id="name" class="form-control form-control-sm" ></td>
+						</tr>
+						<tr>
+								<td align="center">성별 </td> 
+								<td>
+								<input type="radio" name="sex" value="M" >남자
+								<input type="radio" name="sex" value="F" >여자
+								</td>
+						</tr>
+						<tr>
+								<td align="center">생일 </td><td><input type="text" name="birth" id="birth"  placeholder="YYYY-MM-DD" class="form-control form-control-sm"  ></td>
+						</tr>
+						
+						<tr>
+								<td align="center">E-MAIL  </td><td><input type="email" name="email" id="email" placeholder="abc@domain.com" class="form-control form-control-sm" ></td>
+						</tr>
+						<tr>
+								<td align="center">거주지  </td>
+								<td>
+									<select name="loc" id="loc" >
+											<option value="">지역선택</option>
+											<option value="서울/경기">서울/경기</option>
+											<option value="강원도">강원도</option>
+											<option value="충청도">충청도</option>
+											<option value="경상도">경상도</option>
+											<option value="전라도">전라도</option>
+											<option value="제주도">제주도</option>
+									</select>
+								</td>
+						</tr>
+				
+						<tr>
+						<td colspan="2" align="center">
+						<input type="button" value="가입하기" id="sBtn"align="center" >	
+						</tr>
+					
+						</table>
+					</form>
+				</div>
+			</div>
 
 		</div>
 			</div>

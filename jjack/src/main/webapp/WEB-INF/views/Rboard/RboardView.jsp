@@ -47,10 +47,11 @@ function resetBtn(btn){
 	 $(btn).siblings(".redBtn").show();
 	 
 }
-
+//댓글 삭제 함수
 function replyDeleteBtn(btn){
 	var cno=$(btn).prev().attr("data-cno") ; //나의-전의 data-cno를 저장시킴 
 	$("#cno").val(cno);
+	alert("??"); 
 	$("#replyUpdate").attr("action", "reDelete.do").submit();
 }
 
@@ -138,7 +139,7 @@ $(document).ready(function(){
 					 제목 : 	${VO.rtitle}  
 				</td>
 				<td>
-						${VO.nickname} <c:if test="${!empty VO.jjackname}"><font color="tomato" >♥</font> ${VO.jjackname}</c:if>
+						${VO.nickname} <c:if test="${VO.jjackname ne '-'}"><font color="tomato" >♥</font> ${VO.jjackname}</c:if>
 				</td>
 			  </tr>
 			<tr>

@@ -303,6 +303,7 @@ ORDER BY
     c.c_wdate
 </select>
 
+<!-- 댓글 수정 질의명령 -->
 <update id="reModifycontents" parameterType="rboardvo">
 UPDATE
 	TB_Comment
@@ -312,7 +313,15 @@ WHERE
 	c_no=#{cno}
 </update>
 
-
+<!-- 댓글 삭제 질의명령 -->
+<update id="replyDelete" parameterType="rboardvo">
+UPDATE
+	TB_Comment
+SET
+	c_IsShow='N'
+WHERE
+	c_no=#{cno}
+</update>
 
 
 

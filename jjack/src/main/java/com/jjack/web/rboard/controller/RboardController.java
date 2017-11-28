@@ -239,13 +239,12 @@ public class RboardController {
 	//댓글 삭제하기 
 	@RequestMapping("/reDelete")
 	public ModelAndView reDelete(RboardVO rVO){
-		
-			rService.replyDelete(rVO);
-		
-		
+		rService.replyDelete(rVO);
 		ModelAndView mv=new ModelAndView(); 
-		
-		return null;
+		RedirectView rv= new RedirectView("../Rboard/RboardView.do");
+		rv.addStaticAttribute("rno",rVO.getRno());
+		mv.setView(rv);
+		return mv;
 	}
 	
 	
