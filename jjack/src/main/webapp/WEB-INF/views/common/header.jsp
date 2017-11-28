@@ -34,16 +34,12 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="../intro/thisGHis.do" id="mIntro">소개</a></li>
 					<c:if test="${sessionScope.UID ne 'admin'}">
-					<li class="nav-item"><a class="nav-link" href="../scheduler/list.do?status=U" id="mHouseApply">애정촌입소신청</a></li>
+					<li class="nav-item"><a class="nav-link" href="../scheduler/list.do?status=U" id="mScheduler">애정촌입소신청</a></li>
 					</c:if>
-<%-- admin 계정이면 볼 수 있는  메뉴. 작업하기 귀찮으니까 주석처리해둠
 					<c:if test="${sessionScope.UID eq 'admin'}">
- --%>
-					<li class="nav-item"><a class="nav-link" href="../applicantList/ManageList.do">[신청자]</a></li>
-					<li class="nav-item"><a class="nav-link" href="../scheduler/list.do?status=A">[일정관리]</a></li>
-<%-- 
+					<li class="nav-item"><a class="nav-link" href="../applicantList/ManageList.do" id="mManageList">신청자관리</a></li>
+					<li class="nav-item"><a class="nav-link" href="../scheduler/list.do?status=A" id="mSchedulerA">일정관리</a></li>
 					</c:if>
- --%>
 					<li class="nav-item">
 						<%-- 입소자 외에는 커넥터로 연결 --%>
 						<c:if test="${sessionScope.Auth ne 2 and sessionScope.Auth ne 3}">
@@ -55,18 +51,7 @@
 						</c:if>
 					</li>
 					<li class="nav-item">
-						<%-- 일반 회원 및 후기미완 퇴소자는 짝 기본 코스로 연결 --%>
-						<c:if test="${sessionScope.Auth eq 0 or sessionScope.Auth eq 4}">
-							<a class="nav-link" href="../datecourse/BasicCourse.do" id="mDatecourse">데이트코스</a>
-						</c:if>
-						<%-- 입소 확정자 및 입소자는 커플코스 페이지로 연결 --%>
-						<c:if test="${sessionScope.Auth eq 1 or sessionScope.Auth eq 2}">
-							<a class="nav-link" href="../datecourse/CoupleCourse.do" id="mDatecourse">데이트코스</a>
-						</c:if>
-						<%-- 솔로 확정자는 솔로 코스로 연결 --%>
-						<c:if test="${sessionScope.Auth eq 3}">
-							<a class="nav-link" href="../datecourse/SoloCourse.do" id="mDatecourse">데이트코스</a>
-						</c:if>
+							<a class="nav-link" href="../datecourse/DateCourse.do" id="mDatecourse">데이트코스</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="../Rboard/RboardList.do" id="mReview">후기</a></li>
 					<li class="nav-item mr-4"><a class="nav-link" href="../Nboard/NboardList.do" id="mNotice">공지</a></li>

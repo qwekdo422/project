@@ -7,15 +7,19 @@ $(document).ready(function(){
 	var pn = $(location).attr('pathname');
 	if(pn.match(/intro/)) {
 		$('#mIntro').addClass('active');
-	} else if(pn.match(/houseApply/)){
-		$('#mHouseApply').addClass('active');
+	} else if(pn.match(/list.do?status=U/)){
+		$('#mScheduler').addClass('active');
+	} else if(pn.match(/applicantList/)){
+		$('#mManageList').addClass('active');
+	} else if(pn.match(/list.do?status=A/)){
+		$('#mSchedulerA').addClass('active');
 	} else if(pn.match(/mating/)){
 		$('#mMating').addClass('active');
 	} else if(pn.match(/datecourse/)){
 		$('#mDatecourse').addClass('active');
-	} else if(pn.match(/review/)){
+	} else if(pn.match(/Rboard/)){
 		$('#mReview').addClass('active');
-	} else if(pn.match(/notice/)){
+	} else if(pn.match(/Nboard/)){
 		$('#mNotice').addClass('active');
 	} else if(pn.match(/SignUp/)){
 		$('#mSignUp').addClass('active');
