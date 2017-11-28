@@ -114,7 +114,7 @@ public class RboardService {
 		return list; 
 	}
 	
-	
+	//각검색 결과에대한 데이터 총 갯수를 구하는 로직 
 	public int searchTotalList(){
 		
 		int total= rDAO.searchTotalList(); 
@@ -122,8 +122,7 @@ public class RboardService {
 	}
 	
 	
-	//회원 기수랑 닉네임 가져오기 질의명령 
-	
+	//회원 기수랑 닉네임 가져오기 질의명령 	
 	public RboardVO gisooNick(int gno){
 	
 		RboardVO vo  = rDAO.gisooNick(gno); 
@@ -169,6 +168,13 @@ public class RboardService {
 
 		rDAO.rboardModifyProc(rVO);
 		return; 
+	}
+
+	
+	//댓글 수정 실행함수 
+	public void reModifycontents(RboardVO rVO) {
+		
+		rDAO.reModifycontents(rVO); 
 	}
 	
 

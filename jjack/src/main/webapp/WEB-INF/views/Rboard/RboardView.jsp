@@ -15,8 +15,35 @@
 	<%-- ====================== 필수  ======================  --%>
 </head>
 <script>
-$(document).ready(function(){
+//댓글 수정 완료
+function uBtn(btn){	
+	console.log();
+	var cno = $(btn).attr("data-cno");
+	var rmcontents = $("#mInput").val();
+	$("#cno").val(cno);
+	$("#rmcontents").val(rmcontents);
+	$("#replyUpdate").submit();
 	
+	/*
+	var value=document.getElementById('modify').value; 
+	alert(value); 
+	document.mmm.submit(); 
+	*/
+}
+
+//수정 취소 처리 
+function resetBtn(){
+	alert("취소버튼 활성화");
+
+
+	return; 
+	
+}
+$(document).ready(function(){
+
+
+	
+
 	//목록보기 버튼 눌렀을 때 요청처리 
 	$("#lBtn").click(function(){
 		$(location).attr("href" , "../Rboard/RboardList.do"); 
@@ -49,6 +76,45 @@ $(document).ready(function(){
 		
 	}); 
 	
+	
+	//댓글 수정폼 
+	$(".remBtn").click(function(){
+		var div = $(this).parent();
+	
+		 var td = div.parent();
+		 contents =  td.prev().val(); //전역변수 
+//<form method='post' id='mmm' action='../Rboard/reModify.do'></form>
+		 var input = "<input type='text' id='mInput'  value='"+contents+"' >";
+		//  var input = "<input type='text' id='modify' name='rmcontents' >";
+		 td.text("");
+		 td.append(input);
+		 td.append(div);
+		 $(this).hide();
+		 $(this).next().show();	 
+		 
+		 $(this).next().next().hide();
+		 $(this).next().next().next().show();
+	}); 
+	
+	
+
+	
+	//댓글 수정 취소 처리 
+		/*
+	$(".resetBtn").click(function(){
+		alert("aaa");
+		var div = $(this).parent();
+		 var td = div.parent();
+		var contents =  td.prev().val();
+		td.text("");
+		td.html(div);
+	}); 
+		*/
+	
+	$(".resetBtn").click(function(){
+		alert("qqqq");
+	});
+	
 }); 
 
 </script>
@@ -75,21 +141,40 @@ $(document).ready(function(){
 			</tr> 
 	</table>
 		</form>
-	
-<table  class="table table-hover table-striped table-bordered mt-4">
-					<tr align="center">
-						<th width=10%>번호</th>	
-						<th width=30%>작성자</th>
-						<th>댓글내용</th>
-						<th width=30%>작성일</th>
-						</tr>					
-					<c:forEach var="data" items="${RE}">
-					<tr>
-						<td align="center">${data.cno}</td>
-						<td align="center">${data.rid}</td>
-						<td align="center">${data.cctentents}</td>
-						<td align="center">${data.cwdate}</td>
+	<form method='post'  id='replyUpdate' name='mmm' action='reModify.do'>
+			<input type="hidden"  name="cno"  id="cno">
+			<input type="hidden"  name="rmcontents" id="rmcontents">			
+	</form>	
+	<table  class="table table-hover table-striped table-bordered mt-4">
+				<tr align="center">
+						<th >번호</th>	
+						<th>작성자</th>
+						<th >작성일</th>
+						<th width="70%">댓글내용</th>					
+				</tr>					
+				<c:forEach var="data" items="${RE}" varStatus="vs">				
+				<tr>
+						<td align="center">${vs.count}</td>
+						<td align="center">
+							<c:if test="${empty data.nickname and empty data.jjackname}">${data.rid}</c:if>
+							<c:if test="${!empty data.nickname}">${data.nickname}</c:if>
+							<c:if test="${!empty data.jjackname}">${data.jjackname}</c:if>
+						</td>
+						<td align="center">${data.cwdate}</td>						
+									
+						<td>${data.cctentents}
+							<c:if test="${sessionScope.UID eq data.rid}">
+								<div style="float:right;">
+									<input type="button"  class="remBtn btn btn-success mr-1"  value="수정">
+									<input type="button"  style="display:none;" class="uBtn btn btn-success mr-1" value="완료" onclick="uBtn(this)"
+										data-cno="${data.cno}" >
+									<input type="button" class="redBtn btn btn-success" value="삭제" >
+									<input type="button" style="display:none;" class="resetBtn btn btn-success" value="취소" onclick="resetBtn(this)">
+								</div>
+							</c:if>
+						</td>
 					</tr>
+			
 					</c:forEach>
 </table>
 	

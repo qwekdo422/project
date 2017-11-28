@@ -186,7 +186,7 @@ from
     ORDER BY
         r.r_no DESC ) rt 
 where 
-     resultno BETWEEN #{start}  AND #{end}
+     resultno BETWEEN #{startPage}  AND #{endPage}
 
 
 </select>
@@ -266,8 +266,18 @@ FROM
 	TB_Comment tc , tb_member m
 where
  tc.m_no = m.m_no and tc.r_no = #{rno}
+ ORDER BY 
+ tc.c_no 
 </select>
 
+<update id="reModifycontents" parameterType="rboardvo">
+UPDATE
+	TB_Comment
+SET
+	c_contents=#{rmcontents}
+WHERE
+	c_no=#{cno}
+</update>
 
 
 

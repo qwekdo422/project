@@ -42,6 +42,18 @@ private int preNo;
 private int nextNo; 
 
 
+//수정된 댓글 내용
+private String rmcontents; 
+
+
+
+public String getRmcontents() {
+	return rmcontents;
+}
+public void setRmcontents(String rmcontents) {
+	this.rmcontents = rmcontents;
+}
+
 
 public int getWriterno() {
 	return writerno;

@@ -31,7 +31,7 @@ $(document).ready(function(){
       
 <!--목록보여주기-->
 <table class="table table-hover table-striped table-bordered mt-4">
-			<tr>
+			<tr align="center">
 				<th>번호</th>
 				<th>작성일</th>
 				<th>제목</th>
