@@ -51,7 +51,6 @@ function resetBtn(btn){
 function replyDeleteBtn(btn){
 	var cno=$(btn).prev().attr("data-cno") ; //나의-전의 data-cno를 저장시킴 
 	$("#cno").val(cno);
-	alert("??"); 
 	$("#replyUpdate").attr("action", "reDelete.do").submit();
 }
 
@@ -129,16 +128,16 @@ $(document).ready(function(){
 <form method="post" id="vfrm"action="">
 	<table class="table table-striped table-bordered mt-4">
 			<tr>
-				<td>
-					후기번호 :${VO.rno}	
+				<td width="10%" align="center">
+					번호 :${VO.rno}	
 				</td>
-				<td>
+				<td width="25%">
 					작성일 :${VO.rdate}			                        
 				</td>
-				<td>
-					 제목 : 	${VO.rtitle}  
+				<td width="45%">
+					 <strong>제목 : 	${VO.rtitle}</strong>  
 				</td>
-				<td>
+				<td align="center">
 						${VO.nickname} <c:if test="${VO.jjackname ne '-'}"><font color="tomato" >♥</font> ${VO.jjackname}</c:if>
 				</td>
 			  </tr>
@@ -168,16 +167,15 @@ $(document).ready(function(){
 							<c:if test="${!empty data.nickname}"><font color="tomato">${data.nickname}</font></c:if>
 							<c:if test="${!empty data.jjackname}"><font color="tomato" >${data.jjackname}</font></c:if>
 						</td>
-							<td align="center">${data.cwdate}</td> 
-						<input type="hidden" class="tempValue" value="${data.cctentents}">			
+							<td align="center">${data.cwdate} <input type="hidden" class="tempValue" value="${data.cctentents}"></td> 
 						<td>${data.cctentents}
 							<c:if test="${sessionScope.UID eq data.rid}">
 								<div style="float:right;">
-									<input type="button"  class="remBtn btn btn-success mr-1"  value="수정">
-									<input type="button"  style="display:none;" class="uBtn btn btn-success mr-1" value="완료" onclick="uBtn(this)"
+									<input type="button"  class="remBtn btn btn-success mr-1 btn-sm"  value="수정">
+									<input type="button"  style="display:none;" class="uBtn btn btn-success mr-1 btn-sm" value="완료" onclick="uBtn(this)"
 										data-cno="${data.cno}" >
-									<input type="button" class="redBtn btn btn-success" value="삭제" onclick="replyDeleteBtn(this)">
-									<input type="button" style="display:none;" class="resetBtn btn btn-success" value="취소" onclick="resetBtn(this)">
+									<input type="button" class="redBtn btn btn-success btn-sm" value="삭제" onclick="replyDeleteBtn(this)">
+									<input type="button" style="display:none;" class="resetBtn btn btn-success btn-sm" value="취소" onclick="resetBtn(this)">
 								</div>
 							</c:if>
 						</td>
@@ -186,7 +184,7 @@ $(document).ready(function(){
 					</c:forEach>
 </table>
 	
-	<form type="post" action="../Rboard/reContentsProc.do" id="refrm">
+	<form method="post" action="../Rboard/reContentsProc.do" id="refrm">
 	<input type="hidden"  name ="rno" value="${VO.rno}">
 	<table  class="table table-hover table-striped table-bordered mt-4">
 		<c:if test="${!empty sessionScope.UID}">
@@ -203,6 +201,7 @@ $(document).ready(function(){
 		</tr>
 		</c:if>
 		<c:if test="${empty sessionScope.UID}">
+		<tr>
 			<td width="15%">
 				작성자 :
 			</td>
@@ -233,10 +232,10 @@ $(document).ready(function(){
 
 
 	<div align="center">
-	<input type="button" id="lBtn" class="btn btn-info" value="목록보기" align="right">		
+	<input type="button" id="lBtn" class="btn btn-info" value="목록보기">		
 	<c:if test="${sessionScope.MNO eq  VO.writerno}">
-	<input type="button" id="dBtn" class="btn btn-info" value="삭제하기" align="right">
-	<input type="button" id="mBtn"  class="btn btn-info" value="수정하기" align="right">
+	<input type="button" id="dBtn" class="btn btn-info" value="삭제하기">
+	<input type="button" id="mBtn"  class="btn btn-info" value="수정하기">
 	</c:if>	
 	</div>
 

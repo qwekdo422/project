@@ -96,22 +96,24 @@ function checkPw(){
    </div>
       <div class="container">
 		<div id="main">
+			<div class="row mt-4 mb-4">
+				<div class="col-lg-5 mx-auto">
 				<form method="post" action="../Login/modifyProc.do" id="Mfrm">
 				<input type="hidden" name="no" value="${PVO.no}">
-			<table width="800" align="center" border="1">
+			<table class="table  table-striped table-bordered mt-4">
 			<tr>
 					<td>아이디 :</td>
-					<td> <input type="text"  name="id"  id="id" value="${PVO.id }" readOnly>
+					<td> <input type="text"  name="id"  id="id" value="${PVO.id }" class="form-control form-control-sm" readOnly>
 			</tr>
 			
 			<tr>
-					<td>이름 변경</td><td><input type="text" name="name" id="name" value="${PVO.name}" ></td>
+					<td>이름 변경</td><td><input type="text" name="name" id="name"  class="form-control form-control-sm" value="${PVO.name}" ></td>
 			</tr>
 			<tr>
-				<td rowspan="3">비밀번호 변경 </td><td><input type="password" name="nowpw" id="nowpw" oninput="checkPw()" placeholder="사용중인 비밀번호"><span id="ispw" style="color:red"></sapn></td>
+				<td rowspan="3">비밀번호 변경 </td><td><input type="password" name="nowpw" id="nowpw" class="form-control form-control-sm" oninput="checkPw()" placeholder="사용중인 비밀번호"><span id="ispw" style="color:red"></sapn></td>
 			</tr>
-			<tr><td><input type="password" name="newpw01" id="newpw01" placeholder="새 비밀번호" oninput="newPwCheck()"><span id="newpw001" style="color:red"></sapn></td></tr>
-			<tr><td><input type="password" name="newpw02" id="newpw02" placeholder="새 비밀번호 확인"oninput="newPwCheckCheck()"><span id="newpw002" style="color:red"></td></tr>
+			<tr><td><input type="password" name="newpw01" id="newpw01" class="form-control form-control-sm" placeholder="새 비밀번호" oninput="newPwCheck()"><span id="newpw001" style="color:red"></sapn></td></tr>
+			<tr><td><input type="password" name="newpw02" id="newpw02" class="form-control form-control-sm" placeholder="새 비밀번호 확인"oninput="newPwCheckCheck()"><span id="newpw002" style="color:red"></td></tr>
 			<tr>
 					<td>성별 :</td> 
 					<td>
@@ -127,11 +129,11 @@ function checkPw(){
 					</td>
 			</tr>
 			<tr>
-					<td>생일 : </td><td><input type="text" name="birth" id="birth"  placeholder="YYYY-MM-DD" value="${PVO.birth}" readOnly></td>
+					<td>생일 : </td><td><input type="text" name="birth" id="birth" class="form-control form-control-sm"  placeholder="YYYY-MM-DD" value="${PVO.birth}" readOnly></td>
 			</tr>
 			
 			<tr>
-					<td>E-MAIL 변경 </td><td><input type="email" name="email" id="email" placeholder="abc@domain.com" value="${PVO.email}"></td>
+					<td>E-MAIL 변경 </td><td><input type="email" name="email" id="email" class="form-control form-control-sm"  placeholder="abc@domain.com" value="${PVO.email}"></td>
 			</tr>
 			<tr>
 					<td>거주지 변경 </td>
@@ -150,12 +152,13 @@ function checkPw(){
 	
 			<tr>
 			<td colspan="2" align="center">
-			<input type="button" value="수정하기" id="mBtn"align="center">	
+			<input type="button" value="수정하기" id="mBtn"align="center" class="btn btn-info btn-block">	
 			</tr>
 		
 			</table>
 			</form>
-
+				</div>
+			</div>
 		</div>
    <div id="footer">
       <jsp:include page="../common/footer.jsp" />
