@@ -27,7 +27,13 @@ public class MatingService {
 		return md.makeLadder(edate);
 	}
 	// 점심 파트너 입력
-	public void lunching(HashMap<String, Integer> map){
+	public void lunching(int g1, int g2){
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("gno", g1);
+		map.put("pno", g2);
+		md.lunching(map);
+		map.put("gno", g2);
+		map.put("pno", g1);
 		md.lunching(map);
 	}
 	

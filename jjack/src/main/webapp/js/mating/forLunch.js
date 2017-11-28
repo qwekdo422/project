@@ -95,10 +95,28 @@ $(document).ready(function(){
 		makeLadder();
 	});
 	
+	var updateLP = function(e){
+		$.ajax({
+		      url: "../mating/updateLP.do",
+		      method: "post",
+		      data: {"g0":e[0], "g1":e[1]},
+		      success: function(data) {
+		      },
+		      error:function(){
+		    	  alert("에러!");
+		      }
+		  });
+	}
+	
+	
 	// 클릭한 사다리 경로 구성하기 함수
 	var makePath = function(e){
 		var goLinePath = [];
 		var y = rowAbc[e];
+		// 선택한 주체의 gno를 저장
+		var lunchP = [];
+		var wgno = $('.wgno').eq(e).val();
+		lunchP.push(wgno);
 		var xy;
 		goLinePath.push(lineX[0] + ',' + lineY[rowAbc.indexOf(y)]);
 		// lineY = [70, 225, 385, 540, 695];
@@ -123,6 +141,15 @@ $(document).ready(function(){
 			}
 		}
 		goLinePath.push(lineX[11] + ',' + lineY[rowAbc.indexOf(y)]);
+		
+		// 현재 y의 위치가 점심파트너
+		var mIndex = rowAbc.indexOf(y);
+		var mgno = $('.mgno').eq(mIndex).val();
+		// 배열에 gno를 입력
+		lunchP.push(mgno);
+		// AJAX로 업데이트
+		updateLP(lunchP);
+
 		return goLinePath.join(' '); 
 	}
 	

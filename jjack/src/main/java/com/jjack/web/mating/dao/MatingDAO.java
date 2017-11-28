@@ -11,7 +11,6 @@ public interface MatingDAO {
 	public String getEdate();
 	
 	
-	
 	/*
 	 *  점심 사다리타기
 	 */
@@ -24,7 +23,6 @@ public interface MatingDAO {
 	public int makeLadder(String edate);
 	// 점심 파트너 입력
 	public void lunching(HashMap<String, Integer> map);
-	
 	
 	
 	/*

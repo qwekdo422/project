@@ -60,6 +60,12 @@ public class MatingController {
 		return mv;
 	}
 	
+	@RequestMapping("/updateLP")
+	@ResponseBody
+	public void UpdateLP(int g0, int g1){
+		ms.lunching(g0, g1);
+	}
+	
 	@RequestMapping("/Arrows")
 	public ModelAndView Arrows(ModelAndView mv) {
 		// 현재 날짜 확인

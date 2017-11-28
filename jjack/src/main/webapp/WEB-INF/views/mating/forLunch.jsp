@@ -49,6 +49,7 @@
 								<figure class="figure">
 									<img src="../file/${fl.pic}" class="figure-img img-fluid">
 									<figcaption class="text-center">${fl.nick}</figcaption>
+									<input type="hidden" value="${fl.gno}" class="wgno">
 								</figure>
 							</div>
 						</c:forEach>
@@ -128,6 +129,7 @@
 								<figure class="figure">
 									<img src="../file/${ml.pic}" class="figure-img img-fluid">
 									<figcaption class="text-center">${ml.nick}</figcaption>
+									<input type="hidden" value="${ml.gno}" class="mgno">
 								</figure>
 							</div>
 						</c:forEach>
