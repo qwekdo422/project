@@ -46,6 +46,14 @@ public class MatingController {
 	public ModelAndView forLunch(ModelAndView mv) {
 		// 현재 날짜 확인
 		String edate = ms.getEdate();
+		if(edate.equals("-")) {
+			// 입소자가 없으면 메인으로 리다이렉트
+			
+			
+			
+			
+			
+		}
 		// 여자 리스트 가져오기
 		List<MatingVO> women = ms.WomenForLunch(edate);
 		// 남자 리스트 가져오기

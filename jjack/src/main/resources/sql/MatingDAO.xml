@@ -6,7 +6,7 @@
 	<!-- 처음에 보여줄 날짜 정하기. 입소자가 있는 기수로 -->
 	<select id="getEdate" resultType="string">
 		SELECT
-			MAX(e_eventdate) AS edate
+			NVL((MAX(e_eventdate) AS edate), '-')
 		FROM
 			TB_Apply
 		WHERE
