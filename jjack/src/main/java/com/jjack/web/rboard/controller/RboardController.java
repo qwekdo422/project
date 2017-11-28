@@ -220,6 +220,17 @@ public class RboardController {
 		return mv; 
 	}
 	
+	//댓글 수정하기 
+	@RequestMapping("/reModify")
+	public ModelAndView reModify(){
+		
+		System.out.println("실행되니?");
+		ModelAndView mv= new ModelAndView(); 
+		mv.setViewName("Rboard/RboardView");
+
+		return null; 
+	}
+	
 	
 	
 	//리뷰 게시판 삭제하기 
