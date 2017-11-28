@@ -268,7 +268,6 @@ where
  tc.c_no 
 </select>
 
-<!-- 댓글수정하기 질의명령 -->
 <update id="reModifycontents" parameterType="rboardvo">
 UPDATE
 	TB_Comment
