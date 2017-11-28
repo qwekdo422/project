@@ -32,13 +32,21 @@ function uBtn(btn){
 }
 
 //수정 취소 처리 
-function resetBtn(){
-	alert("취소버튼 활성화");
-
-
-	return; 
+function resetBtn(btn){
+	var div =  $(btn).parent();
+	var td = $(btn).parents("td");//본인의 버튼의 조상들중에 td
+	contents =  td.prev().val(); //전역변수 
+	td.text("");
+	td.append(contents);
+	td.append(div);
 	
+	 $(btn).hide();
+	 $(btn).siblings(".remBtn").show();
+	 $(btn).siblings(".uBtn").hide();
+	 $(btn).siblings(".redBtn").show();
 }
+
+
 $(document).ready(function(){
 
 
@@ -83,38 +91,20 @@ $(document).ready(function(){
 	
 		 var td = div.parent();
 		 contents =  td.prev().val(); //전역변수 
-//<form method='post' id='mmm' action='../Rboard/reModify.do'></form>
 		 var input = "<input type='text' id='mInput'  value='"+contents+"' >";
-		//  var input = "<input type='text' id='modify' name='rmcontents' >";
 		 td.text("");
 		 td.append(input);
 		 td.append(div);
 		 $(this).hide();
-		 $(this).next().show();	 
-		 
-		 $(this).next().next().hide();
-		 $(this).next().next().next().show();
+		 $(this).siblings(".uBtn").show();
+		 $(this).siblings(".redBtn").hide();
+		 $(this).siblings(".resetBtn").show();
 	}); 
 	
 	
 
 	
-	//댓글 수정 취소 처리 
-		/*
-	$(".resetBtn").click(function(){
-		alert("aaa");
-		var div = $(this).parent();
-		 var td = div.parent();
-		var contents =  td.prev().val();
-		td.text("");
-		td.html(div);
-	}); 
-		*/
-	
-	$(".resetBtn").click(function(){
-		alert("qqqq");
-	});
-	
+
 }); 
 
 </script>
@@ -144,6 +134,7 @@ $(document).ready(function(){
 	<form method='post'  id='replyUpdate' name='mmm' action='reModify.do'>
 			<input type="hidden"  name="cno"  id="cno">
 			<input type="hidden"  name="rmcontents" id="rmcontents">			
+			<input type="hidden"  name ="rno" value="${VO.rno}">
 	</form>	
 	<table  class="table table-hover table-striped table-bordered mt-4">
 				<tr align="center">
@@ -160,8 +151,8 @@ $(document).ready(function(){
 							<c:if test="${!empty data.nickname}">${data.nickname}</c:if>
 							<c:if test="${!empty data.jjackname}">${data.jjackname}</c:if>
 						</td>
-						<td align="center">${data.cwdate}</td>						
-									
+						<td align="center">${data.cwdate}</td>
+						<input type="hidden" class="tempValue" value="${data.cctentents}">			
 						<td>${data.cctentents}
 							<c:if test="${sessionScope.UID eq data.rid}">
 								<div style="float:right;">

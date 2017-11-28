@@ -227,15 +227,22 @@ public class RboardController {
 		
 		System.out.println("댓글 수정하기 컨트롤러" + rBoard.getCno());
 		System.out.println("댓글 수정하기 컨트롤러" +rBoard.getRmcontents());
-		rService.reModifycontents(rVO);
+		rService.reModifycontents(rBoard);
 		
 		
 		ModelAndView mv= new ModelAndView(); 
-		mv.setViewName("Rboard/RboardView");
+		RedirectView rv= new RedirectView("../Rboard/RboardView.do");
+		rv.addStaticAttribute("rno",rBoard.getRno());
+		mv.setView(rv);
 
 		return mv; 
 	}
 	
+	//댓글 삭제하기 
+	public ModelAndView reDelete(){
+		
+		return null;
+	}
 	
 	
 	//리뷰 게시판 삭제하기 
