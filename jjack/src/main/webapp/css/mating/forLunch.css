@@ -19,7 +19,6 @@ svg {
 line {
 	stroke:Orange;
 	stroke-width:15px;
-	/* mix-blend-mode: screen; */
 }
 .ldHrz {
 	stroke-linecap:round;

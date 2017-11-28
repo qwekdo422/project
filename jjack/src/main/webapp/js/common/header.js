@@ -7,11 +7,10 @@ $(document).ready(function(){
 	var pn = $(location).attr('pathname');
 	if(pn.match(/intro/)) {
 		$('#mIntro').addClass('active');
-	} else if(pn.match(/list.do?status=U/)){
-		$('#mScheduler').addClass('active');
 	} else if(pn.match(/applicantList/)){
 		$('#mManageList').addClass('active');
-	} else if(pn.match(/list.do?status=A/)){
+	} else if(pn.match(/scheduler/)){
+		$('#mScheduler').addClass('active');
 		$('#mSchedulerA').addClass('active');
 	} else if(pn.match(/mating/)){
 		$('#mMating').addClass('active');

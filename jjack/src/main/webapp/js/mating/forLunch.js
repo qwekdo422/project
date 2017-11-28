@@ -179,16 +179,16 @@ $(document).ready(function(){
         //polyline.parentNode.replaceChild(path, polyline);
         animate(len, clickWho);
     }
-
+    var	anim = [];
     function animate(len, clickWho) {
         if (!offset[clickWho]) offset[clickWho] = len;
         var pid = '#p' + clickWho
         var path = document.querySelector(pid);
-        offset[clickWho] -= 3.5;
+        offset[clickWho] -= 5.5;
         path.style.strokeDashoffset = offset[clickWho];
         if (offset[clickWho] <= 0) 
-            window.cancelAnimationFrame(anim);
-        else anim = window.requestAnimationFrame(function(){
+            window.cancelAnimationFrame(anim[clickWho]);
+        else anim[clickWho] = window.requestAnimationFrame(function(){
             animate(len, clickWho);
         });
     }
