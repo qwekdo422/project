@@ -65,6 +65,8 @@ from
         r.r_no DESC ) rt 
 where 
      resultno BETWEEN #{start}  AND #{end}
+ORDER BY
+       rt.rno DESC    
 </select>
 
 
