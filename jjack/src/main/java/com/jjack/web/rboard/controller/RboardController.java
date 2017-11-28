@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -222,13 +223,17 @@ public class RboardController {
 	
 	//댓글 수정하기 
 	@RequestMapping("/reModify")
-	public ModelAndView reModify(){
+	public ModelAndView reModify(RboardVO rBoard){
 		
-		System.out.println("실행되니?");
+		System.out.println("댓글 수정하기 컨트롤러" + rBoard.getCno());
+		System.out.println("댓글 수정하기 컨트롤러" +rBoard.getRmcontents());
+		rService.reModifycontents(rVO);
+		
+		
 		ModelAndView mv= new ModelAndView(); 
 		mv.setViewName("Rboard/RboardView");
 
-		return null; 
+		return mv; 
 	}
 	
 	

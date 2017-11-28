@@ -169,6 +169,13 @@ public class RboardService {
 		rDAO.rboardModifyProc(rVO);
 		return; 
 	}
+
+	
+	//댓글 수정 실행함수 
+	public void reModifycontents(RboardVO rVO) {
+		
+		rDAO.reModifycontents(rVO); 
+	}
 	
 
 

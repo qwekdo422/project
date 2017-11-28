@@ -69,7 +69,11 @@ public interface RboardDAO {
 
 
  	//리뷰 게시판 수정 실행함수 
-	public void rboardModifyProc(RboardVO rVO); 
+	public void rboardModifyProc(RboardVO rVO);
+
+
+	//댓글 내용 수정 질의명령 실행 
+	public void reModifycontents(RboardVO rVO); 
 	
 	
 }
