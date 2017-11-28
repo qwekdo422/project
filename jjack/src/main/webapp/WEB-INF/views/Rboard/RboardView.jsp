@@ -74,17 +74,6 @@ $(document).ready(function(){
 						<td colspan="2"><div>${VO.rcontents}</div></td>
 			</tr> 
 	</table>
-
-	
-	
-	<div align="center">
-	<input type="button" id="lBtn" value="목록보기" align="right">		
-	<c:if test="${sessionScope.MNO eq  VO.writerno}">
-	<input type="button" id="dBtn" value="삭제하기" align="right">
-	<input type="button" id="mBtn" value="수정하기" align="right">
-	</c:if>
-	
-	</div>
 		</form>
 	
 <table  class="table table-hover table-striped table-bordered mt-4">
@@ -104,7 +93,6 @@ $(document).ready(function(){
 					</c:forEach>
 </table>
 	
-	
 	<form type="post" action="../Rboard/reContentsProc.do" id="refrm">
 	<input type="hidden"  name ="rno" value="${VO.rno}">
 	<table  class="table table-hover table-striped table-bordered mt-4">
@@ -117,7 +105,7 @@ $(document).ready(function(){
 			<textarea id="recontents" name="recontents" row="10" cols="110"></textarea>
 			</td>
 			<td>
-			<input type="button" value="댓글쓰기" id="rBtn" >
+			<input type="button" class="btn btn-info" value="댓글쓰기" id="rBtn" >
 			</td>
 		</tr>
 		</c:if>
@@ -133,6 +121,8 @@ $(document).ready(function(){
 	</table>
 	</form>
 	
+	
+	
 		<br>
 	<table class="table table-hover table-striped table-bordered mt-4">
 		<tr>
@@ -146,8 +136,16 @@ $(document).ready(function(){
 			<td>▼이전글</td><td><a href="../Rboard/RboardView.do?rno=${PRENEXT.nextNo}">${PRENEXT.next}</a></td><td align="center">작성일 : ${PRENEXT.nextday}</td>
 	</c:if>
 	</tr>
-
 	</table>
+
+
+	<div align="center">
+	<input type="button" id="lBtn" class="btn btn-info" value="목록보기" align="right">		
+	<c:if test="${sessionScope.MNO eq  VO.writerno}">
+	<input type="button" id="dBtn" class="btn btn-info" value="삭제하기" align="right">
+	<input type="button" id="mBtn"  class="btn btn-info" value="수정하기" align="right">
+	</c:if>	
+	</div>
 
 
 

@@ -86,7 +86,7 @@ $(document).ready(function(){
 		 </tr>
 		  <tr>
 				<td colspan="2" align="center">
-					<input type="button" id="rbtn" value="수정완료" >
+					<input type="button" class="btn btn-info" id="rbtn" value="수정완료" >
 				</td>
 			</tr>
 	</table>

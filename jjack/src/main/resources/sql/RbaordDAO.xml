@@ -142,38 +142,51 @@ WHERE
 
 <!-- 리뷰검색결과보기  -->
 <select id="rboardSearchList" parameterType="rboardvo" resultType="rboardvo">
-SELECT 
-		realTotal.rno AS rno , realTotal.rtitle AS rtitle, realTotal.rdate AS rdate , realTotal.rhis AS rhis, realTotal.rcontents AS rcontents
-FROM
-		(SELECT 
-					rownum AS resultno,
-					total.rno AS rno , total.rtitle AS rtitle, total.rdate AS rdate , total.rhis AS rhis, total.rcontents AS rcontents
-		FROM
-   			 (SELECT 
-        			r_no AS rno , r_title AS rtitle, r_wdate AS rdate ,r_hits AS rhis, r_contents AS rcontents
-    			 FROM
-        			TB_Review
-   				 WHERE
-        			r_isshow='Y'
-                    <if test="kind eq 'writer'">
-                    AND  r_title LIKE '%' || #{rsearch} || '%'
+select
+    rt.*
+from
+     (select
+        rownum as resultno,
+        r.r_no AS rno,
+        TO_CHAR(r.r_wdate) AS rdate,
+        e.e_gisoo AS gisoo,
+        gm.g_nick AS nickname,
+        DECODE(gm.g_course, 'S', '-', gp.g_nick) AS jjackname,
+        r.r_title AS rtitle,
+        (SELECT COUNT(cc.r_no) AS cCount FROM TB_Comment cc WHERE cc.c_Isshow='Y' AND r.r_no = cc.r_no) AS recnt,
+        r.r_hits AS rhis
+    FROM
+        TB_Review r,
+        TB_Event e,
+        TB_Guest gm,
+        TB_Guest gp,
+        TB_Apply a,
+        TB_Member m    
+    WHERE
+        m.m_no = a.m_no
+        AND gm.a_no = a.a_no
+        AND r.g_no = gm.g_no
+        AND gm.g_choice= gp.g_no
+        AND a.e_eventdate=e.e_eventdate
+        AND r.r_Isshow='Y'  
+                  <if test="kind eq 'rtitle'">
+                    AND  r.r_title LIKE '%' || #{rsearch} || '%'
                     </if>
-                    <if test="kind eq 'rtitle'">
-                    AND  r_title LIKE '%' || #{rsearch} || '%'
+		  			  <if test="kind eq 'rcontents'">
+                    AND r.r_contents LIKE '%' || #{rsearch} || '%'
                     </if>
                     <if test="kind eq 'rgisu'">
-                     AND r_title LIKE '%' || #{rsearch} || '%'
+                     AND e.e_gisoo LIKE '%' || #{rsearch} || '%'
                     </if>
                     <if test="kind eq 'rdate'">
-                    AND	r_wdate LIKE '%' || #{rsearch} || '%'
+                    AND r.r_wdate LIKE '%' || #{rsearch} || '%'
                     </if>
-                    <if test="kind eq 'rcontents'">
-                    AND r_contents LIKE '%' || #{rsearch} || '%'
-                    </if>
-    			ORDER BY
-       				 r_no DESC) total) realTotal
-WHERE
-		resultno BETWEEN #{startPage} AND #{endPage}
+    ORDER BY
+        r.r_no DESC ) rt 
+where 
+     resultno BETWEEN #{start}  AND #{end}
+
+
 </select>
 
 <!-- 검색시 각 주제에 대한 데이터의 총 갯수 가져오기 -->

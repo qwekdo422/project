@@ -69,7 +69,6 @@ public class RboardController {
 		ModelAndView mv= new ModelAndView(); 
 		PageUtil pInfo= new PageUtil(nowPage, total); 
 		ArrayList list= rService.getRboardSearch(rVO, pInfo); 
-		System.out.println(list.size() + "몇개냐");
 		mv.addObject("startPage",pInfo.getStartPage());
 		mv.addObject("endPage",pInfo.getEndPage());
 		mv.addObject("nowPage",pInfo.getNowPage()); 

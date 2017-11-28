@@ -70,7 +70,7 @@ $(document).ready(function(){
    </div>
       <div class="container">
 		<form method="post" id="vfrm"action="">
-	<table width="1100" border="1" align="center">
+	<table class="table table-hover table-striped table-bordered mt-4">
 			<tr>
 				<td>
 			작성일 :${VO.nday}		 | 		공지 번호 :${VO.nno}		| 	  	${VO.ntitle}
@@ -83,7 +83,7 @@ $(document).ready(function(){
 	</table>
 	
 		<br>
-	<table border="1" align="center" width="800">
+	<table class="table table-hover table-striped table-bordered mt-4">
 		<tr>
 			<c:if test="${PRENEXT.pre ne '이전글 없음'}">		
 			<td>▲이전글</td><td><a href="../Nboard/NboardView.do?rno=${PRENEXT.preNo}">${PRENEXT.pre}</a></td><td>작성일 : ${PRENEXT.preday}</td>
@@ -99,10 +99,10 @@ $(document).ready(function(){
 	</table>
 	
 	<div align="center">
-	<input type="button" id="lBtn" value="목록보기" align="right">	
+	<input type="button" id="lBtn" class="btn btn-info"  value="목록보기" align="right">	
 	<c:if test="${sessionScope.UID eq 'admin'}">
-	<input type="button" id="dBtn" value="삭제하기" align="right">
-	<input type="button" id="mtn" value="수정하기" align="right">
+	<input type="button" id="dBtn" class="btn btn-info"  value="삭제하기" align="right">
+	<input type="button" id="mtn" class="btn btn-info"  value="수정하기" align="right">
 	</c:if>
 	</div>
 		</form>

@@ -10,7 +10,7 @@ private String rcontents;//게시글 내용
 private String rdate;//게시글 작성일
 private int rhis; //게시글 조회수
 private int rno; //게시글 번호
-private int writerno;
+private int writerno; //글 작성자의 회원번호
 
 
 private int resultno;  //입력한 순서대로 뽑기 위해준비한 변수 

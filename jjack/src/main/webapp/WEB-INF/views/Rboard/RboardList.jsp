@@ -46,7 +46,7 @@ $(document).ready(function(){
       <div class="container">
       
 <!-- 목록보여주고 -->
-<table width="1100" border="1" align="center">
+<table class="table table-hover table-striped table-bordered mt-4">
 					<tr align="center">
 						<th>번호</th>
 						<th width=40% >제목</th>				

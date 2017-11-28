@@ -78,7 +78,7 @@ $(document).ready(function(){
 <!-- 수정하기 폼  -->
 <form method="post" id="nfrm"action="../Nboard/NboardModifyProc.do">
 <input type="hidden" id="nno" name="nno" value="${VO.nno}">
-		<table width="800"  border="1" align="center">
+		<tableclass="table table-hover table-striped table-bordered mt-4">
 			<tr>
 				<td>
 					<input type="text" name="ntitle" id="ntitle"  style="width:100%" placeholder="제목을 입력해주세요" value="${VO.ntitle}">
