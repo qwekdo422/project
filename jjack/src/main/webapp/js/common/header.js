@@ -11,7 +11,6 @@ $(document).ready(function(){
 		$('#mManageList').addClass('active');
 	} else if(pn.match(/scheduler/)){
 		$('#mScheduler').addClass('active');
-		$('#mSchedulerA').addClass('active');
 	} else if(pn.match(/mating/)){
 		$('#mMating').addClass('active');
 	} else if(pn.match(/datecourse/)){
