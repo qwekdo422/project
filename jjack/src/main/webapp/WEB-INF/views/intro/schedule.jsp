@@ -53,6 +53,7 @@
 					</div>
 					<div class="tab-pane fade" id="day2" role="tabpanel">
 						<img src="../img/intro/schedule2.png" class="introImg">
+						<p class="text-right mr-4">※ 여행 일정은 코스에 따라 달라질 수 있습니다</p>
 					</div>
 				</div> 
 				<br><br>
