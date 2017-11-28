@@ -101,7 +101,7 @@ function pwCheckCheck(){
       <div class="container">
 
 		<div id="main">
-			<div class="row">
+			<div class="row mt-4 mb-4">
 				<div class="col-lg-5 mx-auto">
 					<form method="post" action="../SignUp/SignUpProc.do" id="Sfrm">
 						<table class="table  table-striped table-bordered mt-4">
@@ -137,7 +137,7 @@ function pwCheckCheck(){
 								<td>
 									<select name="loc" id="loc" >
 											<option value="">지역선택</option>
-											<option value="서울/경기">서울/경기</option>
+											<option value="수도권">수도권</option>
 											<option value="강원도">강원도</option>
 											<option value="충청도">충청도</option>
 											<option value="경상도">경상도</option>
@@ -146,13 +146,8 @@ function pwCheckCheck(){
 									</select>
 								</td>
 						</tr>
-				
-						<tr>
-						<td colspan="2" align="center">
-						<input type="button" value="가입하기" id="sBtn"align="center" >	
-						</tr>
-					
 						</table>
+						<input type="button" value="가입하기" id="sBtn" align="center" class="btn btn-info btn-block">	
 					</form>
 				</div>
 			</div>

@@ -63,25 +63,25 @@ $(document).ready(function(){
 			<td align="center">
 				<%--	[이전] --%>
 				<c:if test="${nowPage ne 1}"><!--'nowPage=1 이 맨 앞으로' 니까nowPage가 1이 아닐 때만 보이게 하자.  -->
-						<a href="../Rboard/RboardList.do?nowPage=1">[맨 앞으로]</a>
+						<a href="../Rboard/RboardSearch.do?nowPage=1">[맨 앞으로]</a>
 				</c:if>		
 				<c:if test="${(startPage eq 1 || startPage ne 1) && nowPage ne 1}"><%-- ★★ nowPage가 1페이지면 [이전] 버튼이 사라지는 로직--%>
-						<a href="../Rboard/RboardList.do?nowPage=${nowPage -1}">[이전]</a>
+						<a href="../Rboard/RboardSearch.do?nowPage=${nowPage -1}">[이전]</a>
 				</c:if>
 				
 				<%--	[1][2][3] --%>
 				<c:forEach var="page" begin="${startPage}" end="${endPage}">
-					<a href="../Rboard/RboardList.do?nowPage=${page}">[${page}]</a>
+					<a href="../Rboard/RboardSearch.do?nowPage=${page}">[${page}]</a>
 				</c:forEach>
 			
 				<%--	[다음] --%>
 				<c:if test="${endPage ne totalPage || nowPage ne totalPage}">
 					<%--<c:if test="${endPage ne totalPage || endPage eq totalPage}"> --%>
-					<a href="../Rboard/RboardList.do?nowPage=${nowPage + 1}">[다음]</a>	
+					<a href="../Rboard/RboardSearch.do?nowPage=${nowPage + 1}">[다음]</a>	
 				</c:if>
 
 				<c:if test="${nowPage ne totalPage}"><!-- 맨 뒤로 가면 맨뒤로 이 버튼을 없애고 싶다. -->
-					<a href="../Rboard/RboardList.do?nowPage=${totalPage}">[맨 뒤로]</a>	
+					<a href="../Rboard/RboardSearch.do?nowPage=${totalPage}">[맨 뒤로]</a>	
 				</c:if>
 			</td>
 		</tr>

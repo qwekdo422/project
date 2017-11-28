@@ -25,6 +25,12 @@ $(document).ready(function(){
 	//검색 버튼 누르면 검색결과가 목록으로 나온다. 
  		$("#sBtn").click(function(){
 		
+ 			var rsearch=$("#rsearch").val();
+ 			if(rsearch==""){
+ 				alert("검색어를 입력하십시오"); 
+ 				return; 
+ 			}
+ 			
 		$("#search").submit(); 
 	}); 
 });
@@ -60,7 +66,7 @@ $(document).ready(function(){
 					<tr>
 						<td align="center">${data.rno}</td>
 						<td class="title"><a href="../Rboard/rHitUpProc.do?rno=${data.rno}&nowPage=${nowPage}">${data.rtitle}</a>[${data.recnt}]</td>
-						<td align="center">${data.gisoo}</td>
+						<td align="center">${data.gisoo} 기 </td>
 						<td align="center">${data.nickname} </td>
 						<td align="center">${data.jjackname}</td>
 						<td align="center">${data.rdate}</td>
@@ -82,11 +88,13 @@ $(document).ready(function(){
 				<c:if test="${(startPage eq 1 || startPage ne 1) && nowPage ne 1}"><%-- ★★ nowPage가 1페이지면 [이전] 버튼이 사라지는 로직--%>
 						<a href="../Rboard/RboardList.do?nowPage=${nowPage -1}">[이전]</a>
 				</c:if>
-				
-				<%--	[1][2][3] --%>
+ 	
+					<!-- [1][2][3] -->
 				<c:forEach var="page" begin="${startPage}" end="${endPage}">
 					<a href="../Rboard/RboardList.do?nowPage=${page}">[${page}]</a>
 				</c:forEach>
+
+			
 			
 				<%--	[다음] --%>
 				<c:if test="${endPage ne totalPage || nowPage ne totalPage}">
@@ -111,23 +119,33 @@ $(document).ready(function(){
 </c:if>
 			
 <%-- 검색창 --%>
-<form method="post"   id="search" action="../Rboard/RboardSearch.do">
-		<table align="center">
-				<tr>
-					<td>
-						<select id="kind" name="kind">
+	<div class="container mt-4">
+<form method="post"   id="search" action="../Rboard/RboardSearch.do" class="mb-4">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 mx-auto">
+	<div class="row">
+			<div class="col-lg-4">
+						<select id="kind" name="kind" class="form-control form-control" >
 							<option value="rtitle">제목</option>
 							<option value="rcontents">내용</option>
 							<option value="rgisu">기수</option>
 							<option value="rdate">작성일</option>
 							<option value="both">제목+내용</option>
-							<input type="text" id="rsearch" name="rsearch">
-							<input type="button" id="sBtn" class="btn btn-info" value="검색">
 						</select>
-					</td>
-				</tr>
-		</table>
+						</div>
+						<div class="col-lg-7">
+							<input type="text" id="rsearch" name="rsearch"class="form-control">
+						</div>
+						<div class="col-lg-1">
+							<input type="button" id="sBtn" class="btn btn-info" value="검색">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 </form>			
+	</div>
 				
 		</div>
    <div id="footer">

@@ -127,7 +127,7 @@ $(document).ready(function(){
       <div class="container">
 		
 <form method="post" id="vfrm"action="">
-	<table class="table table-hover table-striped table-bordered mt-4">
+	<table class="table table-striped table-bordered mt-4">
 			<tr>
 				<td>
 					후기번호 :${VO.rno}	
@@ -144,7 +144,7 @@ $(document).ready(function(){
 			  </tr>
 			<tr>
 			<%--  <td colspan="2" ><textarea  id="nbody" name="ncontents" row="10" cols="110"   disabled >${VO.ncontents}</textarea></td>--%>	
-						<td colspan="2"><div>${VO.rcontents}</div></td>
+						<td colspan="4"><div>${VO.rcontents}</div></td>
 			</tr> 
 	</table>
 		</form>
@@ -153,7 +153,7 @@ $(document).ready(function(){
 			<input type="hidden"  name="rmcontents" id="rmcontents">			
 			<input type="hidden"  class ="tempRno"name ="rno" value="${VO.rno}">
 	</form>	
-	<table  class="table table-hover table-striped table-bordered mt-4">
+	<table  class="table table-striped table-bordered mt-4">
 				<tr align="center">
 						<th >번호</th>	
 						<th>작성자</th>
@@ -168,7 +168,7 @@ $(document).ready(function(){
 							<c:if test="${!empty data.nickname}"><font color="tomato">${data.nickname}</font></c:if>
 							<c:if test="${!empty data.jjackname}"><font color="tomato" >${data.jjackname}</font></c:if>
 						</td>
-						<td align="center">${data.cwdate}</td>
+							<td align="center">${data.cwdate}</td> 
 						<input type="hidden" class="tempValue" value="${data.cctentents}">			
 						<td>${data.cctentents}
 							<c:if test="${sessionScope.UID eq data.rid}">
@@ -194,20 +194,20 @@ $(document).ready(function(){
 			<td>
 				${sessionScope.UID}  : 
 			</td>
-			<td>
-			<textarea id="recontents" name="recontents" row="10" cols="100"></textarea>
+			<td width="80%">
+			<input type="text" id="recontents"  class="form-control form-control-sm" name="recontents" >
 			</td>
 			<td>
-			<input type="button" class="btn btn-info" value="댓글쓰기" id="rBtn" >
+			<input type="button" class="btn btn-info btn-sm" value="댓글쓰기" id="rBtn" >
 			</td>
 		</tr>
 		</c:if>
 		<c:if test="${empty sessionScope.UID}">
-			<td>
+			<td width="15%">
 				작성자 :
 			</td>
 			<td>
-			<textarea id="recontents" name="recontents" row="10" cols="100" placeholder="로그인 하십시오."></textarea>
+			<input type="text" id="recontents"  class="form-control form-control-sm" name="recontents"  placeholder="로그인 하십시오.">
 			</td>
 		</tr>
 		</c:if>
