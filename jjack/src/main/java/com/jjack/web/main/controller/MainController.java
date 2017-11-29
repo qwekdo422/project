@@ -26,8 +26,11 @@ public class MainController {
 	 * @return : 
 	 */
 	@RequestMapping("/main/mainForm")
-	public void mainForm (@RequestParam(value="come", required=false) String come, Model model) {
+	public void mainForm (@RequestParam(value="come", required=false) String come, Model model,
+			@RequestParam(value="UID", required=false) String UID) {
 		model.addAttribute("come", come);
+		model.addAttribute("UID", UID); 
+		
 	}
 	
 }

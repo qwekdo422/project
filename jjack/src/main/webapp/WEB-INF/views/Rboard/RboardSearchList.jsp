@@ -43,10 +43,10 @@ $(document).ready(function(){
 						<th>작성일</th>
 						<th>조회수</th>
 					</tr>					
-					<c:forEach var="data" items="${SLIST}">
+					<c:forEach var="data" items="${SLIST}" varStatus="st">
 					<tr>
-						<td align="center">${data.rno}</td>
-						<td class="title"><a href="../Rboard/rHitUpProc.do?rno=${data.rno}&nowPage=${nowPage}">${data.rtitle}</a>[${data.recnt}]</td>
+						<td align="center">${(PINFO.nowPage - 1) * PINFO.listCount + st.count}</td>
+						<td class="title"><a href="../Rboard/rHitUpProc.do?rno=${data.rno}&nowPage=${nowPage}">${data.rtitle}</a><c:if test="${data.recnt ne 0}">&nbsp;&nbsp;<span class="badge badge-secondary">${data.recnt}</span></c:if></td>
 						<td align="center">${data.gisoo}</td>
 						<td align="center">${data.nickname} </td>
 						<td align="center">${data.jjackname}</td>
@@ -58,34 +58,63 @@ $(document).ready(function(){
 
 
 <%-- 페이징 처리하고 --%>
-<table width="1000"  align="center">
+<%-- <table width="1000"  align="center">
 		<tr>
 			<td align="center">
-				<%--	[이전] --%>
-				<c:if test="${nowPage ne 1}"><!--'nowPage=1 이 맨 앞으로' 니까nowPage가 1이 아닐 때만 보이게 하자.  -->
+					[이전]
+				<c:if test="${PINFO.nowPage ne 1}"><!--'nowPage=1 이 맨 앞으로' 니까nowPage가 1이 아닐 때만 보이게 하자.  -->
 						<a href="../Rboard/RboardSearch.do?nowPage=1">[맨 앞으로]</a>
 				</c:if>		
-				<c:if test="${(startPage eq 1 || startPage ne 1) && nowPage ne 1}"><%-- ★★ nowPage가 1페이지면 [이전] 버튼이 사라지는 로직--%>
-						<a href="../Rboard/RboardSearch.do?nowPage=${nowPage -1}">[이전]</a>
+				<c:if test="${(PINFO.startPage eq 1 || PINFO.startPage ne 1) && PINFO.nowPage ne 1}">★★ nowPage가 1페이지면 [이전] 버튼이 사라지는 로직
+						<a href="../Rboard/RboardSearch.do?nowPage=${PINFO.nowPage -1}">[이전]</a>
 				</c:if>
 				
-				<%--	[1][2][3] --%>
-				<c:forEach var="page" begin="${startPage}" end="${endPage}">
-					<a href="../Rboard/RboardSearch.do?nowPage=${page}">[${page}]</a>
+					[1][2][3]
+				<c:forEach var="page"  begin="${PINFO.startPage}" end="${PINFO.endPage}">
+					<a href="../Rboard/RboardSearch.do?nowPage=${page}" >[${page}]</a>
 				</c:forEach>
 			
-				<%--	[다음] --%>
-				<c:if test="${endPage ne totalPage || nowPage ne totalPage}">
-					<%--<c:if test="${endPage ne totalPage || endPage eq totalPage}"> --%>
-					<a href="../Rboard/RboardSearch.do?nowPage=${nowPage + 1}">[다음]</a>	
+					[다음]
+				<c:if test="${PINFO.endPage ne PINFO.totalPage || PINFO.nowPage ne PINFO.totalPage}">
+					<c:if test="${endPage ne totalPage || endPage eq totalPage}">
+					<a href="../Rboard/RboardSearch.do?nowPage=${PINFO.nowPage + 1}">[다음]</a>	
 				</c:if>
 
-				<c:if test="${nowPage ne totalPage}"><!-- 맨 뒤로 가면 맨뒤로 이 버튼을 없애고 싶다. -->
-					<a href="../Rboard/RboardSearch.do?nowPage=${totalPage}">[맨 뒤로]</a>	
+				<c:if test="${PINFO.nowPage ne PINFO.totalPage}"><!-- 맨 뒤로 가면 맨뒤로 이 버튼을 없애고 싶다. -->
+					<a href="../Rboard/RboardSearch.do?nowPage=${PINFO.totalPage}">[맨 뒤로]</a>	
 				</c:if>
 			</td>
 		</tr>
-</table>			
+</table>			 --%>
+
+<nav aria-label="Page navigation">
+	<ul class="pagination justify-content-center">
+		<%--	[이전] --%>
+		<c:if test="${PINFO.nowPage ne 1}"><!--'nowPage=1 이 맨 앞으로' 니까nowPage가 1이 아닐 때만 보이게 하자.  -->
+			<li class="page-item"><a class="page-link" href="../Rboard/RboardSearch.do?nowPage=1">맨 앞으로</a></li>
+		</c:if>		
+		<c:if test="${(PINFO.startPage eq 1 || PINFO.startPage ne 1) && PINFO.nowPage ne 1}"><%-- ★★ nowPage가 1페이지면 [이전] 버튼이 사라지는 로직--%>
+			<li class="page-item"><a class="page-link" href="../Rboard/RboardSearch.do?nowPage=${PINFO.nowPage -1}">이전</a></li>
+		</c:if>
+		<!-- [1][2][3] -->
+		<c:forEach var="page"  begin="${PINFO.startPage}" end="${PINFO.endPage}">
+			<li class="page-item <c:if test="${PINFO.nowPage eq page}">active</c:if>">
+				<a class="page-link"  href="../Rboard/RboardSearch.do?nowPage=${page}">${page}</a>
+			</li>
+		</c:forEach>
+		<%--	[다음] --%>
+		<c:if test="${PINFO.endPage ne PINFO.totalPage || PINFO.nowPage ne PINFO.totalPage}">
+			<%--<c:if test="${endPage ne totalPage || endPage eq totalPage}"> --%>
+			<li class="page-item"><a class="page-link" href="../Rboard/RboardSearch.do?nowPage=${PINFO.nowPage + 1}">다음</a></li>
+		</c:if>
+
+<%-- 맨 뒤로 가면 맨뒤로 이 버튼을 없애고 싶다. --%>
+		<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
+			<li class="page-item"><a class="page-link" href="../Rboard/RboardSearch.do?nowPage=${PINFO.totalPage}">맨 뒤로</a></li>
+		</c:if>
+	</ul>
+</nav>
+
 		</div>
    <div id="footer">
       <jsp:include page="../common/footer.jsp" />

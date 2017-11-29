@@ -76,7 +76,7 @@
 	UPDATE
 		tb_member
 	SET
-		m_name=#{name}, m_pw=#{newpw02},m_email=#{email}, m_loc=#{loc}
+		m_name=#{name}, m_email=#{email}, m_loc=#{loc}
 	WHERE
 		m_no=#{no}
 </update>

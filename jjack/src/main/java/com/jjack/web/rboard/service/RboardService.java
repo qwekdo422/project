@@ -101,25 +101,44 @@ public class RboardService {
 //		ArrayList list= rDAO.rboardSearchList(rVO); 
 //		return list; 
 //	}
-	public ArrayList getRboardSearch(RboardVO rVO, PageUtil pInfo){
+	public ArrayList getSearch(RboardVO rVO, PageUtil pInfo){
 		
 		int start=(pInfo.getNowPage()-1)*(pInfo.getListCount())+1; //시작페이지
-		int end=start+(pInfo.getListCount()-1); //종료위치 
-		
+//		int end=start+(pInfo.getListCount()-1); //종료위치 
+		int end=pInfo.getNowPage() * pInfo.getListCount(); 
+		System.out.println("start  = "+start);
+		System.out.println("end= "+end);
 		
 		rVO.setStartPage(start);
 		rVO.setEndPage(end);
-		
 		ArrayList list=rDAO.rboardSearchList(rVO); 
 		return list; 
 	}
 	
+
+	
 	//각검색 결과에대한 데이터 총 갯수를 구하는 로직 
-	public int searchTotalList(){
-		
-		int total= rDAO.searchTotalList(); 
-		return total; 
-	}
+//	public int subjectTotalList(RboardVO rVO){
+//		
+//		HashMap map= new HashMap();
+//		map.put("kind",rVO.getKind()); 
+//		map.put("rsearch", rVO.getRsearch());
+//		int subjectTotal = rDAO.searchTotalList(map); 
+//		return subjectTotal; 
+//	}
+public PageUtil getSearchTotal(RboardVO rVO){
+	HashMap map= new HashMap();
+	map.put("kind",rVO.getKind()); 
+	map.put("rsearch", rVO.getRsearch());
+	int subjectTotal = rDAO.searchTotalList(map); 
+	System.out.println("검색 갯수 = "+subjectTotal);
+	System.out.println("nowPage = "+rVO.getNowPage());
+	PageUtil pInfo= new PageUtil(rVO.getNowPage() , subjectTotal) ;
+	return pInfo; 
+	
+	
+}
+	
 	
 	
 	//회원 기수랑 닉네임 가져오기 질의명령 	

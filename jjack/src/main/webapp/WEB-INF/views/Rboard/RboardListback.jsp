@@ -65,7 +65,7 @@ $(document).ready(function(){
 					<c:forEach var="data" items="${RLIST}">
 					<tr>
 						<td align="center">${data.rno}</td>
-						<td class="title"><a href="../Rboard/rHitUpProc.do?rno=${data.rno}&nowPage=${nowPage}">${data.rtitle}</a>[${data.recnt}]</td>
+						<td class="title"><a href="../Rboard/rHitUpProc.do?rno=${data.rno}&nowPage=${nowPage}">${data.rtitle}</a><c:if test="${data.recnt ne 0}">&nbsp;&nbsp;<span class="badge badge-secondary">${data.recnt}</span></c:if></td>
 						<td align="center">${data.gisoo} 기 </td>
 						<td align="center">${data.nickname} </td>
 						<td align="center">${data.jjackname}</td>
@@ -78,14 +78,14 @@ $(document).ready(function(){
 				
 				
 <%-- 페이징 처리하고 --%>
-<table width="1000"  align="center">
+<%-- <table width="1000"  align="center">
 		<tr>
 			<td align="center">
-				<%--	[이전] --%>
+					[이전]
 				<c:if test="${nowPage ne 1}"><!--'nowPage=1 이 맨 앞으로' 니까nowPage가 1이 아닐 때만 보이게 하자.  -->
 						<a href="../Rboard/RboardList.do?nowPage=1">[맨 앞으로]</a>
 				</c:if>		
-				<c:if test="${(startPage eq 1 || startPage ne 1) && nowPage ne 1}"><%-- ★★ nowPage가 1페이지면 [이전] 버튼이 사라지는 로직--%>
+				<c:if test="${(startPage eq 1 || startPage ne 1) && nowPage ne 1}">★★ nowPage가 1페이지면 [이전] 버튼이 사라지는 로직
 						<a href="../Rboard/RboardList.do?nowPage=${nowPage -1}">[이전]</a>
 				</c:if>
  	
@@ -96,9 +96,9 @@ $(document).ready(function(){
 
 			
 			
-				<%--	[다음] --%>
+					[다음]
 				<c:if test="${endPage ne totalPage || nowPage ne totalPage}">
-					<%--<c:if test="${endPage ne totalPage || endPage eq totalPage}"> --%>
+					<c:if test="${endPage ne totalPage || endPage eq totalPage}">
 					<a href="../Rboard/RboardList.do?nowPage=${nowPage + 1}">[다음]</a>	
 				</c:if>
 
@@ -107,8 +107,9 @@ $(document).ready(function(){
 				</c:if>
 			</td>
 		</tr>
-</table>
+</table> --%>
 
+<%--부트스트랩 페이징처리  --%>
 <nav aria-label="Page navigation">
 	<ul class="pagination justify-content-center">
 		<%--	[이전] --%>
@@ -133,11 +134,6 @@ $(document).ready(function(){
 		<c:if test="${nowPage ne totalPage}"><!-- 맨 뒤로 가면 맨뒤로 이 버튼을 없애고 싶다. -->
 			<li class="page-item"><a class="page-link" href="../Rboard/RboardList.do?nowPage=${totalPage}">맨 뒤로</a></li>
 		</c:if>
-		
-		
-		
-		
-		
 	</ul>
 </nav>
 

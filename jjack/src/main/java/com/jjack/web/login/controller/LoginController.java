@@ -31,9 +31,11 @@ public class LoginController {
 	 * @return : ModelandView
 	 */
 	@RequestMapping("/LoginForm")
-	public ModelAndView LoginForm(ProfileVO pVO, String url){
+	public ModelAndView LoginForm(ProfileVO pVO, String url , @RequestParam(value="pwfail" ,defaultValue = "1")int pwfail){
 		ModelAndView mv= new ModelAndView();
 		mv.addObject("url", url);
+		
+		mv.addObject("pwfail", pwfail); 
 		mv.setViewName("Login/LoginForm");
 		return mv; 
 	}
@@ -48,7 +50,7 @@ public class LoginController {
 	 * @return : ModelandView
 	 */
 	@RequestMapping("/LoginProc")
-	public ModelAndView LoginProc(HttpServletRequest req, HttpSession session, ProfileVO pVO){
+	public ModelAndView LoginProc(HttpServletRequest req, HttpSession session, ProfileVO pVO , 	RedirectView rv){
 		ModelAndView mv= new ModelAndView(); 
 		String id=req.getParameter("id"); 
 		String pw=req.getParameter("pw"); 
@@ -67,23 +69,34 @@ public class LoginController {
 			
 			session.setAttribute("UID", id);//세션을 부여하겠다는 의미이다.
 			session.setAttribute("Auth", Auth);	// 세션에 권한 등록
-			mv.addObject("OBJECT",result); 
-			mv.addObject("UID", id);
+//			mv.addObject("OBJECT",result); 
+//			mv.addObject("UID", id);
+		
+			
 			//	파라메터에 url값이 존재한다면 인터셉터를 거치고 온 상태이다.
 			//	로그인 처리 완료 후 로그인 전 요청한 url로 리다이렉트한다.
 			if(pVO.getUrl() != null) {
-				RedirectView rv = new RedirectView(pVO.getUrl());
+				rv.setUrl(pVO.getUrl());
 				mv.setView(rv);
 			} else {
-				mv.setViewName("Login/SubLoginForm");
+				rv.setUrl("../main/mainForm.do");
+				rv.addStaticAttribute("come", "welcome");
+				rv.addStaticAttribute("UID",id);
+				mv.setView(rv); 
+				
 			}
 
 		return mv; 
 		}else{
-			mv.addObject("OBJECT",result); 
-			mv.addObject("ID",id); 
-			mv.addObject("PW",pw); 
-			mv.setViewName("Login/SubLoginForm");
+			
+			
+			rv.setUrl("../Login/LoginForm.do");
+			rv.addStaticAttribute("pwfail", result);
+			mv.setView(rv);
+//			mv.addObject("OBJECT",result); 
+//			mv.addObject("ID",id); 
+//			mv.addObject("PW",pw); 
+//			mv.setViewName("Login/SubLoginForm");
 			return mv; 
 		}
 

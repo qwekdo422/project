@@ -43,7 +43,7 @@ public interface RboardDAO {
 	public ArrayList rboardSearchList(RboardVO rVO); 
 	
 	//검색시 각 주제에 대한 데이터의 총 갯수 가져오기 질의명령 
-	public int searchTotalList(); 
+	public int searchTotalList(HashMap map); 
 	
 	
 	//글쓴이 기수랑 닉네임가져오기 위한 질의명령 

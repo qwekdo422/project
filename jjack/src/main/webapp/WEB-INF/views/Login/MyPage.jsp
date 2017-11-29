@@ -20,7 +20,7 @@
 		var loc ='${PVO.loc}';
 		$("#loc").val(loc);
 });
-
+var isPw = 0;
 function checkPw(){
 
 		var inputd=$("#nowpw").val(); //폼 요소의 데이터를 받아서...
@@ -31,7 +31,7 @@ function checkPw(){
 			  dataType : 'json',
 			  type : 'post',
 			  success : function(data){//요청에 성공
-			  var isPw= data.result;	//이 값이 1 이면 아이디와 비번이 일치한다.   
+			  isPw= data.result;	//이 값이 1 이면 아이디와 비번이 일치한다.   
 			  if(isPw == 1){
 			  	document.getElementById("ispw").innerHTML="비밀번호가 일치합니다. "; 
 				 	$("#newpw01").focus();
@@ -65,7 +65,7 @@ function checkPw(){
 		}
 
 	}
-	
+/*
 	function newPwCheckCheck(){
 		var newPw01=$("#newpw01").val(); 
 		var newPw02=$("#newpw02").val(); 
@@ -75,15 +75,28 @@ function checkPw(){
 			document.getElementById("newpw002").innerHTML="새 비밀번호가 다릅니다.";
 		}
 	}
-	
+	*/
 	$(document).ready(function(){
 		
-		
+
 		$("#mBtn").click(function(){
 			
-			alert("정보수정이 완료되었습니다."); 
+			var pw=$("#nowpw").val(); 
+			if(pw==""){
+				
+				alertify.alert("비밀번호를 입력해주십시오"); 
+				return; 
+			} else if(isPw != 1) {
+				alertify.alert("비밀번호를 정확히 입력하세요.");
+			}  else {
+				alertify.alert("정보수정이 완료되었습니다.", function(){
+					
+				$("#Mfrm").submit(); 
+				}); 
+				
+				
+			}
 			
-			$("#Mfrm").submit(); 
 			
 		}); 
 	}); 
@@ -110,11 +123,13 @@ function checkPw(){
 					<td>이름 변경</td><td><input type="text" name="name" id="name"  class="form-control form-control-sm" value="${PVO.name}" ></td>
 			</tr>
 			<tr>
-				<td rowspan="3">비밀번호 변경 </td><td><input type="password" name="nowpw" id="nowpw" class="form-control form-control-sm" oninput="checkPw()" placeholder="사용중인 비밀번호"><span id="ispw" style="color:red"></sapn></td>
+				<td >비밀번호 확인 </td><td><input type="password" name="nowpw" id="nowpw" class="form-control form-control-sm" oninput="checkPw()" placeholder="사용중인 비밀번호"><span id="ispw" style="color:red"></sapn></td>
 			</tr>
-			<tr><td><input type="password" name="newpw01" id="newpw01" class="form-control form-control-sm" placeholder="새 비밀번호" oninput="newPwCheck()"><span id="newpw001" style="color:red"></sapn></td></tr>
+			
+			<!-- <tr><td><input type="password" name="newpw01" id="newpw01" class="form-control form-control-sm" placeholder="새 비밀번호" oninput="newPwCheck()"><span id="newpw001" style="color:red"></sapn></td></tr>
 			<tr><td><input type="password" name="newpw02" id="newpw02" class="form-control form-control-sm" placeholder="새 비밀번호 확인"oninput="newPwCheckCheck()"><span id="newpw002" style="color:red"></td></tr>
-			<tr>
+			 -->
+			 	<tr>
 					<td>성별 :</td> 
 					<td>
 					<c:if test="${PVO.sex eq  'M'}">

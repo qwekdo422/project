@@ -1,4 +1,10 @@
 $(document).ready(function(){
+
+	if(pwfail == 0){
+		alertify.alert("아이디와 비밀번호가 유효하지 않습니다.");
+		
+	}
+	
 	
 	//로그인 무결성 검사 처리 함수
 	$logIn = function(){
@@ -33,5 +39,6 @@ $(document).ready(function(){
 			$logIn();
 		}
 	});
+	
 
 });

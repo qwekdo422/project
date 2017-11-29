@@ -17,7 +17,9 @@
 
 <!-- LoginForm.js javascript 경로 -->
  <script src="../js/LoginForm/LoGinForm.js"></script>
-
+<script>
+var pwfail =${pwfail}; 
+</script>
 <body style="margin:0 auto;">
    <div id="header">
       <jsp:include page="../common/header.jsp" />

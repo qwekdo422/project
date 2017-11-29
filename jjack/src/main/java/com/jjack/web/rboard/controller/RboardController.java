@@ -22,6 +22,7 @@ import com.jjack.web.common.vo.RboardVO;
 import com.jjack.web.rboard.service.RboardService;
 import com.jjack.web.util.FileUtil;
 import com.jjack.web.util.PageUtil;
+import com.jjack.web.util.StringUtil;
 @Controller
 @RequestMapping("/Rboard")
 public class RboardController {
@@ -61,26 +62,61 @@ public class RboardController {
 	}
 	
 	//후기 게시판 검색 결과 리스트 가져오기 
-	@RequestMapping("/RboardSearch")
-	public ModelAndView rboardSearch(@RequestParam(value="nowPage" ,defaultValue="1") int nowPage , RboardVO rVO){
+	
+	/*
+	public ModelAndView rboardSearch(@RequestParam(value="searchnowPage" , defaultValue="1") int searchnowPage , RboardVO rVO){
 
 		//검색결과에 대한 총 데이터의 갯수를 가져오고
-		int total = rService.searchTotalList(); 
-
+		int subjectTotal = rService.subjectTotalList(rVO); 
+		
+		System.out.println("검색결과에 대한 총 데이터 개수 = " + subjectTotal) ;
 		
 		//검색결과에대한 데이터의 리스트결과 
 		ModelAndView mv= new ModelAndView(); 
-		PageUtil pInfo= new PageUtil(nowPage, total); 
+		PageUtil pInfo= new PageUtil(searchnowPage, subjectTotal);  //페이징 처리
 		ArrayList list= rService.getRboardSearch(rVO, pInfo); 
 		mv.addObject("startPage",pInfo.getStartPage());
 		mv.addObject("endPage",pInfo.getEndPage());
 		mv.addObject("nowPage",pInfo.getNowPage()); 
 		mv.addObject("totalPage",pInfo.getTotalPage());
 		mv.addObject("SLIST",list); 
-		mv.addObject("TOTAL",total);
+		mv.addObject("TOTAL",subjectTotal);
 		mv.setViewName("Rboard/RboardSearchList");
 		return mv; 
 	}
+	*/
+	@RequestMapping("/RboardSearch")
+	public ModelAndView rboardSearch(HttpSession session,RboardVO rVO){
+		if(rVO.getNowPage() == 0) {
+			rVO.setNowPage(1);
+		}
+		boolean	isTarget = StringUtil.isNull(rVO.getKind());
+		if(isTarget == true) {
+			//	비어있으면....
+			rVO.setKind((String) session.getAttribute("kind"));
+			rVO.setRsearch((String) session.getAttribute("rsearch"));
+		}
+		//	★
+		//	다음을 위해서 세션에 필요한 데이터를 입력해 놓아야 한다.
+		session.setAttribute("kind" , rVO.getKind());
+		session.setAttribute("rsearch" , rVO.getRsearch());
+		
+		//	데이터베이스에서 검색하자.
+		PageUtil	pInfo = rService.getSearchTotal(rVO);
+		ArrayList	list = rService.getSearch(rVO, pInfo);
+		
+		System.out.println("사이즈 = "+list.size());
+		
+		//	뷰를 주세요
+		ModelAndView	mv = new ModelAndView();
+		mv.addObject("PINFO", pInfo);
+		mv.addObject("SLIST", list);
+		mv.setViewName("Rboard/RboardSearchList");
+	
+		return mv;
+	
+	}
+
 	
 	
 	
