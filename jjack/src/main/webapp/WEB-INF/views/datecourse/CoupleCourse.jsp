@@ -51,7 +51,7 @@ function open_food_frame(url){
 		<div class="row mt-4">
  			<!-- 서브메뉴 -->
 			<div class="col-lg-3">
-				<h4><커풀 데이트 코스></h4><br />
+				<h4><커플 데이트 코스></h4><br />
 				<!-- 
 				<div class="list-group text-right">
 					<a href="../datecourse/BasicCourse.do" class="list-group-item">기본 코스</a> 
