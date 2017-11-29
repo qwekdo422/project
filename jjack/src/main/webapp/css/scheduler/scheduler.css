@@ -9,6 +9,14 @@
 	opacity:0;
 	display: none;
 }
+
+.container.calendarInfo {
+    max-width: 700px;
+}
+
+div#calendar {
+    max-width: 700px;
+}
  
 #calendar {
 	/* max-width: 900px; */

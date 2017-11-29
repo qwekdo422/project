@@ -33,7 +33,7 @@ var status = "${status}";
 		<div id="header">
 			<jsp:include page="../common/header.jsp" />
 		</div>
-		<div class="container mt-4">
+		<div class="container mt-4 mb-4">
 			<%-- 관리자, 사용자 여부(관리자: ADMIN, 사용자: USER)  --%>
 			<div class="row">
 			<%-- ================ 달력 =============== --%>

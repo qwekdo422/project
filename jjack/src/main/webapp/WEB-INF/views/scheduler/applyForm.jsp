@@ -47,7 +47,7 @@ var status = "${status}";
 				<br>
 				<%-- 행사일정 상세정보 입소신청자만 보인다. --%>
 				<c:if test="${status eq 'USER'}">
-					<div class="container" style="padding: 0 0;">
+					<div class="container calendarInfo" style="padding: 0 0;">
 						<table class="table table-bordered" id="eventView">
 							<tr>
 								<th>기수</th>
@@ -81,7 +81,7 @@ var status = "${status}";
 				<div class="row">
 					<h3 class="applyText"></h3>
 					<div class="container applyDiv">
-						<div class="container mt-4">
+						<div class="container mt-4 mb-4">
 							<form method="post" id="applyFrm" action=""
 								enctype="multipart/form-data">
 								<input type="hidden" id="aNo" name="aNo" value=-1> <input
@@ -127,11 +127,11 @@ var status = "${status}";
 								</div>
 								<div class="container">
 									<div class="row">
-										<input type="button" class="btn btn-info col-sm-4"
-											id="applyBtn" value="입소신청"> <input type="button"
-											class="btn btn-info col-sm-4" id="uBtn" value="수정"> <input
-											type="button" class="btn btn-info col-sm-4" id="resetBtn"
-											value="입소취소">
+										<input type="button" class="btn btn-info mr-2"
+											id="applyBtn" value="신청"> <input type="button"
+											class="btn btn-info mr-2" id="uBtn" value="수정"> <input
+											type="button" class="btn btn-info" id="resetBtn"
+											value="취소">
 									</div>
 								</div>
 							</form>

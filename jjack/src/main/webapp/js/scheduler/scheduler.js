@@ -22,6 +22,7 @@ $(document).ready(function() {
 			} else {
 				//	사용자일 경우
 				//	이벤트일정을 클릭하면 행사 상세정보를 상단에서 하단으로 이동해서 보여주는 애니메이션작업
+				/*
 				var eventView = $("#eventView"); 
 				eventView.css("position", "absolute");
 				eventView.css("opacity", "0");
@@ -33,6 +34,8 @@ $(document).ready(function() {
 				}, 1000, function() {
 					eventView.css("position", "");
 				});
+				*/
+				
 				//	행사일정 상세정보 보여주는 영역에 상세정보 넣기
 				$("#eventdate").val(event.start._i);
 				$(".gisoo").text(event.gisoo);	
@@ -80,7 +83,7 @@ $(document).ready(function() {
 							//	신청버튼을 사용할 수 있게한다.
 							$("#applyBtn").prop("disabled", false);
 							//	버튼이름을 입소신청으로 만든다.
-							$("#applyBtn").val("입소신청");
+							$("#applyBtn").val("신청");
 							//	입소취소 버튼을 숨긴다.
 							$("#resetBtn").css("display", "none");
 						//	해당날짜에 이벤트를 신청한사람 (승인대기 상태)
