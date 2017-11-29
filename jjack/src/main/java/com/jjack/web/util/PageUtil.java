@@ -26,7 +26,7 @@ public class PageUtil {
 		//	한 화면에 보여질 리스트
 		this.listCount =9;
 		//	하단바에 표시되는 페이지
-		this.pageGroup =3 ;
+		this.pageGroup =5 ;
 		
 		calcTotalPage();
 		calcStartPage();
