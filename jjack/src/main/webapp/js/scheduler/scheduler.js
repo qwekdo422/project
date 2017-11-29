@@ -182,7 +182,9 @@ $(document).ready(function() {
 		validation();
 		//	무결성 검사에 걸렸을 겅우 다음을 수행하지 않고 리턴 (true 일경우 무결성 검사 걸린 경우)
 		if(isFlag()) return;
-		$("#applyFrm").attr("action", "./applyProc.do").submit();
+		
+		//	입소신청완료 alert창을 띄우고 서브밋을 한다.
+		completAlert("입소신청");
 	});
 	
 	//	입소신청서 수정버튼(사용자)
@@ -195,12 +197,14 @@ $(document).ready(function() {
 		if(isFlag()) return;
 		//	무결성 종류 후 초기화 (사진 이미지)
 		uBtnStatus = false;
-		$("#applyFrm").attr("action", "./applyModify.do").submit();
+		//	입소수정완료 alert창을 띄우고 서브밋을 한다.
+		completAlert("정보수정");
 	});
 	
 	//	입소신청취소 버튼 (사용자)
 	$("#resetBtn").click(function(){
-		$("#applyFrm").attr("action", "./applyCondStatus.do?aNo="+$("#aNo").val()).submit();
+		//	입소취소완료 alert창을 띄우고 서브밋을 한다.
+		completAlert("입소취소");
 	});
 	
 	//	입소신청시 사진등록을 누르면 등록한 사진을 화면에서 바로 볼수 있도록 처리(사용자)
@@ -307,12 +311,23 @@ function condStatus(msg) {
 //	완료알림창을 띄우고 서브밋처리하는 함수
 function completAlert(msg) {
 	alertify.alert(msg+"이(가) 완료되었습니다.", function(){
+		//	관리자 일정등록
 		if(msg == '등록') {
 			$("#scheduleFrm").attr("action", "./writeProc.do").submit();
+		//	관리자 일정수정
 		} else if (msg == '수정') {
 			$("#scheduleFrm").attr("action", "./modifyProc.do").submit();
+		//	관리자 일정삭제
 		} else if (msg == '삭제') {
 			$(location).attr("href", "./delete.do?eventdate="+$(eventdate).val());
+		//	사용자 입소신청
+		} else if (msg == '입소신청') {
+			$("#applyFrm").attr("action", "./applyProc.do").submit();
+		//	사용자 입소정보수정
+		} else if (msg == '정보수정') {
+			$("#applyFrm").attr("action", "./applyModify.do").submit();
+		} else if (msg == '입소취소') {
+			$("#applyFrm").attr("action", "./applyCondStatus.do?aNo="+$("#aNo").val()).submit();
 		}
 	});
 }
