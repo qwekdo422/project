@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	// 선긋기 색깔 지정
-	var goLineColor = ['OrangeRed', 'yellow', 'SpringGreen', 'DeepSkyBlue', 'MediumOrchid'];
+	var goLineColor = ['#fe5f5f', 'LightSalmon', 'LightGreen ', 'LightSkyBlue', 'Plum'];
 	
 	// 패스긋기를 한번이라도 했으면 1
 	var goPath = 0;

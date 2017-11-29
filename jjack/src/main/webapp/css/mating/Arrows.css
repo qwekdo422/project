@@ -29,14 +29,14 @@ g {
 	isolation: isolate;
 }
 .mLine {
-	stroke:DeepSkyBlue;
+	stroke:LightSkyBlue;
 }
 .fLine {
-	stroke:tomato;
+	stroke:LightPink;
 }
 .mCircle {
-	fill:DeepSkyBlue;
+	fill:LightSkyBlue;
 }
 .fCircle {
-	fill:tomato;
+	fill:LightPink;
 }
