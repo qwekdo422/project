@@ -48,7 +48,7 @@
  						<c:forEach var="ml" items="${mList}" varStatus="vs">
 							<div class="col-xs-2 mx-auto">
 								<figure class="figure">
-									<img src="../file/${ml.pic}" class="figure-img img-fluid">
+									<img src="../file/${ml.pic}" class="figure-img">
 									<figcaption class="text-center">${ml.nick}</figcaption>
 									<input type="hidden" class="lno" value="${ml.loveNo}">
 								</figure>
@@ -125,7 +125,7 @@
  						<c:forEach var="fl" items="${fList}">
 							<div class="col-xs-2 mx-auto">
 								<figure class="figure">
-									<img src="../file/${fl.pic}" class="figure-img img-fluid">
+									<img src="../file/${fl.pic}" class="figure-img">
 									<figcaption class="text-center">${fl.nick}</figcaption>
 									<input type="hidden" class="lno" value="${fl.loveNo}">
 								</figure>
@@ -135,12 +135,6 @@
 					<!-- 여자리스트 종료 -->
 				</div>
 				<!-- row 종료 -->
-				<!-- 결과 정리 화면 시작 -->
-				<div class="">
-					
-				
-				</div>
-				<!-- 결과 정리 화면 종료 -->
 			</div>
 			<!-- 본 화면 종료 -->
 		</div>

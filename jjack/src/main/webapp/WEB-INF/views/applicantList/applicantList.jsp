@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="../css/applicantList/applicantList.css" />
 <script src="../js/applicantList/applicantList.js"></script>
 <script>
-	var mail = ${mail.mail};
+	var mail = "${mail}";
 	var manCount = ${numbers.manCount};
 	var womanCount = ${numbers.womanCount};
 </script>

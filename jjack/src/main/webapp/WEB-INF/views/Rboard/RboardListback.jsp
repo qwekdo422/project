@@ -109,7 +109,37 @@ $(document).ready(function(){
 		</tr>
 </table>
 
+<nav aria-label="Page navigation">
+	<ul class="pagination justify-content-center">
+		<%--	[이전] --%>
+		<c:if test="${nowPage ne 1}"><!--'nowPage=1 이 맨 앞으로' 니까nowPage가 1이 아닐 때만 보이게 하자.  -->
+			<li class="page-item"><a class="page-link" href="../Rboard/RboardList.do?nowPage=1">맨 앞으로</a></li>
+		</c:if>		
+		<c:if test="${(startPage eq 1 || startPage ne 1) && nowPage ne 1}"><%-- ★★ nowPage가 1페이지면 [이전] 버튼이 사라지는 로직--%>
+			<li class="page-item"><a class="page-link" href="../Rboard/RboardList.do?nowPage=${nowPage -1}">이전</a></li>
+		</c:if>
+		<!-- [1][2][3] -->
+		<c:forEach var="page" begin="${startPage}" end="${endPage}">
+			<li class="page-item <c:if test="${nowPage eq page}">active</c:if>">
+				<a class="page-link" href="../Rboard/RboardList.do?nowPage=${page}">${page}</a>
+			</li>
+		</c:forEach>
+		<%--	[다음] --%>
+		<c:if test="${endPage ne totalPage || nowPage ne totalPage}">
+			<%--<c:if test="${endPage ne totalPage || endPage eq totalPage}"> --%>
+			<li class="page-item"><a class="page-link" href="../Rboard/RboardList.do?nowPage=${nowPage + 1}">다음</a></li>
+		</c:if>
 
+		<c:if test="${nowPage ne totalPage}"><!-- 맨 뒤로 가면 맨뒤로 이 버튼을 없애고 싶다. -->
+			<li class="page-item"><a class="page-link" href="../Rboard/RboardList.do?nowPage=${totalPage}">맨 뒤로</a></li>
+		</c:if>
+		
+		
+		
+		
+		
+	</ul>
+</nav>
 
 <%-- 후기남기기 버튼 --%>
 <c:if test="${sessionScope.Auth eq '4'}"><!-- session이 있을때면 이 버튼이 보이도록 조치한다. -->

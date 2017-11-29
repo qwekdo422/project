@@ -48,11 +48,10 @@ public class MatingController {
 		String edate = ms.getEdate();
 		if(edate.equals("-")) {
 			// 입소자가 없으면 메인으로 리다이렉트
-			
-			
-			
-			
-			
+			RedirectView rv = new RedirectView("../main/mainForm.do");
+			rv.addStaticAttribute("come", "please");
+			mv.setView(rv);
+			return mv;
 		}
 		// 여자 리스트 가져오기
 		List<MatingVO> women = ms.WomenForLunch(edate);

@@ -27,10 +27,10 @@ public class jMailUtil {
 		});
 		try {
             MimeMessage message = new MimeMessage(session);
-            String fromName = "LoveChon";
+            String fromName = "애정촌";
             // 발신자 이름 한글화
             try{
-                from = new InternetAddress(new String(fromName.getBytes("UTF-8"), "8859_1") + "<jjakjjakchon@gmail.com>");
+                from = new InternetAddress(new String(fromName.getBytes("EUC-KR"), "8859_1") + "<jjakjjakchon@gmail.com>");
             }catch(UnsupportedEncodingException uee){
                 uee.printStackTrace();
             }

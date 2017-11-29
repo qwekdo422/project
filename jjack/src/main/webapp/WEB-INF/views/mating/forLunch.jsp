@@ -17,6 +17,7 @@
 <script src="../js/mating/forLunch.js"></script>
 <script>
 	var ladderSize = ${ladderSize};
+	var lineY = [70, 225, 385, 540, 695];
 	var lineX = [20, 64, 107, 151, 194, 238, 282, 325, 369, 412, 456, 500];
 </script>
 </head>
@@ -47,7 +48,7 @@
  						<c:forEach var="fl" items="${fList}">
 							<div class="col-xs-2 mx-auto">
 								<figure class="figure">
-									<img src="../file/${fl.pic}" class="figure-img img-fluid">
+									<img src="../file/${fl.pic}" class="figure-img">
 									<figcaption class="text-center">${fl.nick}</figcaption>
 									<input type="hidden" value="${fl.gno}" class="wgno">
 								</figure>
@@ -127,7 +128,7 @@
  						<c:forEach var="ml" items="${mList}" varStatus="vs">
 							<div class="col-xs-2 mx-auto">
 								<figure class="figure">
-									<img src="../file/${ml.pic}" class="figure-img img-fluid">
+									<img src="../file/${ml.pic}" class="figure-img">
 									<figcaption class="text-center">${ml.nick}</figcaption>
 									<input type="hidden" value="${ml.gno}" class="mgno">
 								</figure>

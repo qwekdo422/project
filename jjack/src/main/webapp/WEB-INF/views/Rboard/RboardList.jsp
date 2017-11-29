@@ -103,6 +103,7 @@ $(document).ready(function(){
 
 
 
+
 <%-- 후기남기기 버튼 --%>
 <c:if test="${sessionScope.Auth eq '4'}"><!-- session이 있을때면 이 버튼이 보이도록 조치한다. -->
 	<div align="center">

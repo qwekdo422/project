@@ -1,8 +1,4 @@
 $(document).ready(function(){
-	// 좌표
-	var lineY = [70, 225, 385, 540, 695];
-	var lineX = [20, 64, 107, 151, 194, 238, 282, 325, 369, 412, 456, 500];
-	
 	// 선긋기 색깔 지정
 	var goLineColor = ['OrangeRed', 'yellow', 'SpringGreen', 'DeepSkyBlue', 'MediumOrchid'];
 	

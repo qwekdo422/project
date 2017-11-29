@@ -17,7 +17,7 @@ svg {
 	height:760px;'
 }
 line {
-	stroke:Orange;
+	stroke:Gainsboro;
 	stroke-width:15px;
 }
 .ldHrz {
@@ -33,7 +33,6 @@ g {
 path {
     fill: none;
     stroke-width: 6;
-    stroke:blue;
     stroke-linecap:round;
 }
 

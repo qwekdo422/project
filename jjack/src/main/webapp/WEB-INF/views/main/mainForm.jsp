@@ -10,21 +10,17 @@
 <link rel="stylesheet" href="../css/common/footer.css" />
 <link rel="stylesheet" href="../css/alert/alertify.core.css" />
 <link rel="stylesheet" href="../css/alert/alertify.default.css" />
-<link rel="stylesheet" href="../css/main/WordCloud.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
-
-
-
+<script src="../js/main/mainForm.js"></script>
+<link rel="stylesheet" href="../css/main/WordCloud.css" />
 <script>
-
+	var come = "${come}";
   //타이머 설정으로 워드 클라우드 이미지 등록 처리 작업
   playAlert = setInterval(function(){$('.col-lg-3 img').attr('src','../img/main/real_word.jpg?timestamp='+new Date().getTime());},1000);
 
-
 </script>
-
 </head>
 <body style="margin:0 auto;">
 
