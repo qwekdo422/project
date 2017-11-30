@@ -271,7 +271,41 @@ FROM
           FROM
           	TB_REVIEW
           WHERE
-          	r_IsShow ='Y'
+          	r_IsShow ='Y' 
+          ORDER BY 
+          	r_no desc) total
+ WHERE
+ 	r_no = #{rno}
+</select>
+
+<!-- 검색결과 이전글, 다음글 꺼내기 질의명령 -->
+<select id="searchPreNext" parameterType="hashMap" resultType="hashMap">
+SELECT
+    	total.pre AS pre, total.next AS next,total.preday AS preday, total.nextday AS nextday,total.nNo AS nextNo, total.pNo AS preNo
+FROM
+	(SELECT
+		r_no, r_title, LAG(r_title, 1 , '다음글 없음') OVER(ORDER BY r_no desc) AS pre,
+									 LAG(r_wdate,1,TO_DATE('11-11-1111','MM-DD-YY')) OVER(ORDER BY r_no desc) AS preday, 
+									 LAG(r_no, 1, 999) OVER(ORDER BY r_no desc) AS pNo,
+									lead(r_title,1,'이전글 없음') OVER(ORDER BY r_no desc) AS next,		  
+                         			lead(r_wdate,1,TO_DATE('11-11-1111','MM-DD-YYYY')) OVER(ORDER BY r_no desc) AS nextday,
+                          			lead(r_no,1,999) OVER(ORDER BY r_no DESC) AS nNo 
+          FROM
+          	TB_REVIEW
+          WHERE
+          	r_IsShow ='Y' 
+                            <if test="kind eq 'rtitle'">
+                    AND  r_title LIKE '%' || #{rsearch} || '%'
+                    </if>
+		  			  <if test="kind eq 'rcontents'">
+                    AND r_contents LIKE '%' || #{rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'rgisu'">
+                      AND e_gisoo LIKE '%' || #{rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'both'">
+                      AND  (r_title LIKE '%' || #{rsearch} || '%' OR  r_contents LIKE '%' || #{rsearch} || '%')
+                    </if>     
           ORDER BY 
           	r_no desc) total
  WHERE

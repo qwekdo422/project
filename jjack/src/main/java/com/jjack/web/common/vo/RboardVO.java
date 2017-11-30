@@ -51,13 +51,19 @@ private String rmcontents;
 //검색에 필요한 데이터 
 private String kind; 
 private String rsearch;
+private String status;
 
 
 
 
 
 
-
+public String getStatus() {
+	return status;
+}
+public void setStatus(String status) {
+	this.status = status;
+}
 public String getRmcontents() {
 	return rmcontents;
 }

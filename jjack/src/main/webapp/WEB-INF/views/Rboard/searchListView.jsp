@@ -231,13 +231,13 @@ $(document).ready(function(){
 	<table class="table table-hover table-striped table-bordered mt-4">
 		<tr>
 			<c:if test="${PRENEXT.pre ne '다음글 없음'}">		
-			<td>▲다음글</td><td><a href="../Rboard/RboardView.do?rno=${PRENEXT.preNo}">${PRENEXT.pre}</a></td><td align="center">작성일 : ${PRENEXT.preday}</td>
+			<td>▲다음글</td><td><a href="../Rboard/searchListView.do?rno=${searchPreNext.preNo}&status=${status}">${searchPreNext.pre}</a></td><td align="center">작성일 : ${searchPreNext.preday}</td>
 			</c:if>
 		</tr>
 
 	<tr>
 	<c:if test="${PRENEXT.next ne '이전글 없음'}">		
-			<td>▼이전글</td><td><a href="../Rboard/RboardView.do?rno=${PRENEXT.nextNo}">${PRENEXT.next}</a></td><td align="center">작성일 : ${PRENEXT.nextday}</td>
+			<td>▼이전글</td><td><a href="../Rboard/searchListView.do?rno=${searchPreNext.nextNo}&status=${status}">${searchPreNext.next}</a></td><td align="center">작성일 : ${searchPreNext.nextday}</td>
 	</c:if>
 	</tr>
 	</table>
@@ -252,7 +252,7 @@ $(document).ready(function(){
 	</div>
 
 
-,
+
 		</div>
    <div id="footer">
       <jsp:include page="../common/footer.jsp" />

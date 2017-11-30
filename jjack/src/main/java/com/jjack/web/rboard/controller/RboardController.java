@@ -244,16 +244,54 @@ public class RboardController {
 		RboardVO VO=rService.rboardView(rno);  //게시물 상세보기 로직 
 		System.out.println(session.getAttribute("MNO") + "회원번호");
 		System.out.println(VO.getWriterno() + "작성자 회원번호");
-		RboardVO PRENEXT=rService.preNext(rno); 
+		RboardVO PRENEXT=rService.preNext(rno); //상세보기 이전글 다음글 나오는 로직, 
+		
+//		HashMap map1 = new HashMap(); 
+//		map1.put("kind", (String)session.getAttribute("kind")); 
+//		map1.put("rsearch",(String)session.getAttribute("rsearch")); 
+//		HashMap map=rService.searchPreNext(rno, rVO.getStatus(),map1); 
 
-	
+		
+		
+//		mv.addObject("status",rVO.getStatus()); //검색 카테고리를 저장함. 
+//		mv.addObject("searchPreNext",map.get("searchPreNext")); 
 		mv.addObject("VO",VO); 
 		mv.addObject("RE",list); 
 		mv.addObject("PRENEXT", PRENEXT);
 		mv.setViewName("Rboard/RboardView");
 		return mv; 
-		
 	}
+	
+	//검색 결과 상세보기 
+	@RequestMapping("/searchListView")
+	public ModelAndView searchView(RboardVO rVO,  @RequestParam(value="rno") int rno,HttpSession session){
+		ModelAndView mv= new ModelAndView(); 
+		ArrayList list=rService.reList(rno); //리플 리스트 가져오기 위한 로직 
+		RboardVO VO=rService.rboardView(rno);  //게시물 상세보기 로직 
+		
+		HashMap map1 = new HashMap(); 
+//		map1.put("kind", (String)session.getAttribute("kind")); 
+//		map1.put("rsearch",(String)session.getAttribute("rsearch")); 
+//		HashMap map=rService.searchPreNext(rno, rVO.getStatus(),map1); 
+		map1.put("rsearch", (String)session.getAttribute("rsearch")); 
+		map1.put("kind",  (String)session.getAttribute("kind")); 
+		map1.put("rno",rno); 
+		HashMap searchPreNext=rService.searchPreNext(map1); 
+		HashMap rMap= new HashMap();
+		rMap.put("searchPreNext", searchPreNext); 
+		
+		
+		mv.addObject("VO",VO); 
+		mv.addObject("RE",list); 
+		mv.addObject("status",rVO.getStatus());
+		mv.addObject("searchPreNext", rMap.get("searchPreNext")); 
+
+		mv.setViewName("Rboard/searchListView");
+		
+		return mv; 
+	}
+	
+	
 	
 	
 	//댓글 작성 함수 

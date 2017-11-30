@@ -81,4 +81,7 @@ public interface RboardDAO {
 	//후기 남기기 버튼 안보이게 하기 휘한 질의문
 	public void changAcond(int mno); 
 	
+	//각 검색결과에 해당하는 이전글/다음글 구하기 
+	public HashMap searchPreNext(HashMap map);
+	
 }

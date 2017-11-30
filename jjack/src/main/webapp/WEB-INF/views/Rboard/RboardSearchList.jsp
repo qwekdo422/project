@@ -45,8 +45,8 @@ $(document).ready(function(){
 					</tr>					
 					<c:forEach var="data" items="${SLIST}" varStatus="st">
 					<tr>
-						<td align="center">${(PINFO.nowPage - 1) * PINFO.listCount + st.count}</td>
-						<td class="title"><a href="../Rboard/rHitUpProc.do?rno=${data.rno}&nowPage=${nowPage}">${data.rtitle}</a><c:if test="${data.recnt ne 0}">&nbsp;&nbsp;<span class="badge badge-secondary">${data.recnt}</span></c:if></td>
+						<td align="center">${(PINFO.nowPage - 1) * PINFO.listCount + st.count}</td>		
+						<td class="title"><a href="../Rboard/RboardView.do?rno=${data.rno}&nowPage=${PINFO.nowPage}&status=${kind}">${data.rtitle}</a><c:if test="${data.recnt ne 0}">&nbsp;&nbsp;<span class="badge badge-secondary">${data.recnt}</span></c:if></td>
 						<td align="center">${data.gisoo}</td>
 						<td align="center">${data.nickname} </td>
 						<td align="center">${data.jjackname}</td>
