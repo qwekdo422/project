@@ -27,9 +27,9 @@ $(document).ready(function(){
 		
  			var rsearch=$("#rsearch").val();
  			if(rsearch==""){
- 				alertify.alert("검색어를 입력하십시오"); 
- 				return; 
+ 				alert("검색어를 입력하십시오");
  			}
+				$("#search").submit(); 
 
 	}); 
 });
@@ -155,7 +155,6 @@ $(document).ready(function(){
 							<option value="rtitle">제목</option>
 							<option value="rcontents">내용</option>
 							<option value="rgisu">기수</option>
-							<option value="rdate">작성일</option>
 							<option value="both">제목+내용</option>
 						</select>
 						</div>

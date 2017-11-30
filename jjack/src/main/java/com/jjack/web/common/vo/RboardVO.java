@@ -19,28 +19,8 @@ private int nowPage; //페이징 처리를 위해 추가된 변수
 private int startPage;
 private int endPage; 
 
-private int searchnowpage; 
-private int searchstartpage; 
-private int searchendpage;
 
-public int getSearchnowpage() {
-	return searchnowpage;
-}
-public void setSearchnowpage(int searchnowpage) {
-	this.searchnowpage = searchnowpage;
-}
-public int getSearchstartpage() {
-	return searchstartpage;
-}
-public void setSearchstartpage(int searchstartpage) {
-	this.searchstartpage = searchstartpage;
-}
-public int getSearchendpage() {
-	return searchendpage;
-}
-public void setSearchendpage(int searchendpage) {
-	this.searchendpage = searchendpage;
-}
+
 private String nickname; 
 private int gisoo; 
 private String jjackname; 
@@ -71,6 +51,7 @@ private String rmcontents;
 //검색에 필요한 데이터 
 private String kind; 
 private String rsearch;
+
 
 
 

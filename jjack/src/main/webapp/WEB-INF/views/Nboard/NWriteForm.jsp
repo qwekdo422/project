@@ -70,7 +70,7 @@ $(document).ready(function(){
 		
 <!-- 글쓰기 폼  -->
 <form method="post" id="nfrm"action="../Nboard/NboardProc.do">
-	<table width="800"  border="1" align="center">
+	<table  class="table table-bordered mt-4">
 		<tr>
 			<td>
 				<input type="text" name="ntitle" id="ntitle"  style="width:100%" placeholder="제목을 입력해주세요">
@@ -78,12 +78,12 @@ $(document).ready(function(){
 		</tr>
 		 <tr>
 		 	<td colspan="2">
-		 		<textarea  id="nbody" name="ncontents" row="100" cols="110"  ></textarea>
+		 		<textarea  id="nbody" name="ncontents" row="100" cols="131" ></textarea>
 		  </td>
 		 </tr>
 		  <tr>
 				<td colspan="2" align="center">
-					<input type="button" id="nbtn" value="작성완료" >
+					<input type="button" id="nbtn" value="작성완료" class="btn btn-info" >
 				</td>
 			</tr>
 	</table>

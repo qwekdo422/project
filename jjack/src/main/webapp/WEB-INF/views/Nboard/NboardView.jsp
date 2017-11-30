@@ -72,27 +72,33 @@ $(document).ready(function(){
 		<form method="post" id="vfrm"action="">
 	<table class="table table-hover table-striped table-bordered mt-4">
 			<tr>
-				<td>
-			작성일 :${VO.nday}		 | 		공지 번호 :${VO.nno}		| 	  	${VO.ntitle}
+				<td width="10%" align="center">
+				번호 :${VO.nno}		
+				</td>
+				<td width="10%" align="center">
+				작성일 :${VO.nday}	
+				</td>
+				<td width="45%">
+					<strong>제목 :${VO.ntitle}</strong>
 				</td>
 			  </tr>
 			<tr>
 			<!--  <td colspan="2" ><textarea  id="nbody" name="ncontents" row="10" cols="110"   disabled >${VO.ncontents}</textarea></td>-->	
-						<td colspan="2"><div>${VO.ncontents}</div></td>
+						<td colspan="3"><div>${VO.ncontents}</div></td>
 			</tr> 
 	</table>
 	
 		<br>
 	<table class="table table-hover table-striped table-bordered mt-4">
 		<tr>
-			<c:if test="${PRENEXT.pre ne '이전글 없음'}">		
-			<td>▲이전글</td><td><a href="../Nboard/NboardView.do?rno=${PRENEXT.preNo}">${PRENEXT.pre}</a></td><td>작성일 : ${PRENEXT.preday}</td>
+			<c:if test="${PRENEXT.pre ne '다음글 없음'}">		
+			<td>▲다음글</td><td><a href="../Nboard/NboardView.do?nno=${PRENEXT.preNo}">${PRENEXT.pre}</a></td><td>작성일 : ${PRENEXT.preday}</td>
 			</c:if>
 		</tr>
 		
 	<tr>
-	<c:if test="${PRENEXT.next ne '다음글 없음'}">		
-			<td>▼다음글</td><td><a href="../Nboard/NboardView.do?rno=${PRENEXT.nextNo}">${PRENEXT.next}</a></td><td>작성일 : ${PRENEXT.nextday}</td>
+	<c:if test="${PRENEXT.next ne '이전글 없음'}">		
+			<td>▼이전글</td><td><a href="../Nboard/NboardView.do?nno=${PRENEXT.nextNo}">${PRENEXT.next}</a></td><td>작성일 : ${PRENEXT.nextday}</td>
 	</c:if>
 	</tr>
 

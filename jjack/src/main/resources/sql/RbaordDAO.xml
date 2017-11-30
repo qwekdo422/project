@@ -246,7 +246,7 @@ FROM
                     AND r.r_contents LIKE '%' || #{rsearch} || '%'
                     </if>
                     <if test="kind eq 'rgisu'">
-                     AND e.e_gisoo LIKE '%' || #{rsearch} || '%'
+                      AND e.e_gisoo LIKE '%' || #{rsearch} || '%'
                     </if>
                     <if test="kind eq 'both'">
                       AND  (r.r_title LIKE '%' || #{rsearch} || '%' OR  r.r_contents LIKE '%' || #{rsearch} || '%')

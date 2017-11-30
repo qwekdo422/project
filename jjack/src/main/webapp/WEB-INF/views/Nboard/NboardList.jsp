@@ -32,57 +32,55 @@ $(document).ready(function(){
 <!--목록보여주기-->
 <table class="table table-hover table-striped table-bordered mt-4">
 			<tr align="center">
-				<th>번호</th>
-				<th>작성일</th>
-				<th>제목</th>
+				<th >번호</th>
+				<th >작성일</th>
+				<th width="60%">제목</th>
 				<th>조회수</th>
 			</tr>
 				<c:forEach var="data" items="${NLIST}">
-			<tr>
-				<td>${data.nno}</td>
-				<td>${data.nday}</td>
+			<tralign="center">
+				<td align="center">${data.nno}</td>
+				<td align="center">${data.nday}</td>
 				<td><a href="../Nboard/HitUpProc.do?nno=${data.nno}&nowPage=${nowPage}">${data.ntitle}</a></td>
-				<td>${data.nhits}</td>
+				<td align="center">${data.nhits}</td>
 			</tr>
 				</c:forEach>
 </table>
 				
 			
 <!-- 페이징 처리 -->
-<table width="1000"  align="center">
-		<tr>
-			<td align="center">
-				<%--	[이전] --%>
-				<c:if test="${nowPage ne 1}"><!--'nowPage=1 이 맨 앞으로' 니까nowPage가 1이 아닐 때만 보이게 하자.  -->
-						<a href="../Nboard/NboardList.do?nowPage=1">[맨 앞으로]</a>
-				</c:if>		
-				<c:if test="${(startPage eq 1 || startPage ne 1) && nowPage ne 1}"><%-- ★★ nowPage가 1페이지면 [이전] 버튼이 사라지는 로직--%>
-						<a href="../Nboard/NboardList.do?nowPage=${nowPage -1}">[이전]</a>
-				</c:if>
-				
-				<%--	[1][2][3] --%>
-				<c:forEach var="page" begin="${startPage}" end="${endPage}">
-					<a href="../Nboard/NboardList.do?nowPage=${page}">[${page}]</a>
-				</c:forEach>
-			
-				<%--	[다음] --%>
-				<c:if test="${endPage ne totalPage || nowPage ne totalPage}">
-					<%--<c:if test="${endPage ne totalPage || endPage eq totalPage}"> --%>
-					<a href="../Nboard/NboardList.do?nowPage=${nowPage + 1}">[다음]</a>	
-				</c:if>
+<nav aria-label="Page navigation">
+	<ul class="pagination justify-content-center">
+		<%--	[이전] --%>
+		<c:if test="${nowPage ne 1}"><!--'nowPage=1 이 맨 앞으로' 니까nowPage가 1이 아닐 때만 보이게 하자.  -->
+			<li class="page-item"><a class="page-link" href="../Nboard/NboardList.do?nowPage=1">맨 앞으로</a></li>
+		</c:if>		
+		<c:if test="${(startPage eq 1 || startPage ne 1) && nowPage ne 1}"><%-- ★★ nowPage가 1페이지면 [이전] 버튼이 사라지는 로직--%>
+			<li class="page-item"><a class="page-link" href="../Nboard/NboardList.do?nowPage=${nowPage -1}">이전</a></li>
+		</c:if>
+		<!-- [1][2][3] -->
+		<c:forEach var="page" begin="${startPage}" end="${endPage}">
+			<li class="page-item <c:if test="${nowPage eq page}">active</c:if>">
+				<a class="page-link" href="../Nboard/NboardList.do?nowPage=${page}">${page}</a>
+			</li>
+		</c:forEach>
+		<%--	[다음] --%>
+		<c:if test="${endPage ne totalPage || nowPage ne totalPage}">
+			<%--<c:if test="${endPage ne totalPage || endPage eq totalPage}"> --%>
+			<li class="page-item"><a class="page-link" href="../Nboard/NboardList.do?nowPage=${nowPage + 1}">다음</a></li>
+		</c:if>
 
-				<c:if test="${nowPage ne totalPage}"><!-- 맨 뒤로 가면 맨뒤로 이 버튼을 없애고 싶다. -->
-					<a href="../Nboard/NboardList.do?nowPage=${totalPage}">[맨 뒤로]</a>	
-				</c:if>
-			</td>
-		</tr>
-</table>
+		<c:if test="${nowPage ne totalPage}"><!-- 맨 뒤로 가면 맨뒤로 이 버튼을 없애고 싶다. -->
+			<li class="page-item"><a class="page-link" href="../Nboard/NboardList.do?nowPage=${totalPage}">맨 뒤로</a></li>
+		</c:if>
+	</ul>
+</nav>
 			
 			
 <!-- 글쓰기 버튼 -->
 <div align="center">
 		<c:if test="${sessionScope.UID eq 'admin'}">
-				<input type="button" value="글쓰기" id="sBtn">
+				<input type="button" value="글쓰기" id="sBtn" class="btn btn-info">
 		</c:if>
 </div>
 			

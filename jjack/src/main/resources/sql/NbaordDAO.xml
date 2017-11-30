@@ -162,10 +162,10 @@ SELECT
     	total.pre AS pre, total.next AS next,total.preday AS preday, total.nextday AS nextday,total.nNo AS nextNo, total.pNo AS preNo
 FROM
 		(SELECT
-	 		n_no,N_TITLE, LAG(n_title,1,'이전글 없음') OVER(ORDER BY N_NO DESC) AS pre,
+	 		n_no,N_TITLE, LAG(n_title,1,'다음글 없음') OVER(ORDER BY N_NO DESC) AS pre,
 	 		         	 					LAG(n_date,1,TO_DATE('11-11-1111','MM-DD-YYYY')) OVER(ORDER BY N_NO DESC) AS preday,
 	 		         	 					LAG(n_no,1,999) OVER(ORDER BY n_no DESC) AS pNo,
-	 										lead(n_title,1,'다음글 없음') OVER(ORDER BY N_NO DESC) AS next,		  
+	 										lead(n_title,1,'이전글 없음') OVER(ORDER BY N_NO DESC) AS next,		  
                          					 lead(n_date,1,TO_DATE('11-11-1111','MM-DD-YYYY')) OVER(ORDER BY N_NO DESC) AS nextday,
                           					lead(n_no,1,999) OVER(ORDER BY n_no DESC) AS nNo             
  		FROM 
