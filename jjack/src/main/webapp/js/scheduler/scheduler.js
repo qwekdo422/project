@@ -224,6 +224,11 @@ $(document).ready(function() {
 	//	기수 중복체크 (키보드 누를때 마다)
 	$("#gisoo").keyup(function() {
 		var gisoo = $("#gisoo").val();
+		var reg = /^[0-9]*$/;
+		if(!reg.test(gisoo)) {
+			alertify.alert("숫자만 입력 가능합니다.");
+			$("#gisoo").val("");
+		}
 		if(gisoo != "" && gisoo.length < 9) {
 			$.ajax({
 				url: './gisooCheck.do',
@@ -240,7 +245,7 @@ $(document).ready(function() {
 					}
 				},
 				error: function(e) {
-					alert(e+"에러");
+					//alert(e+"에러");
 				}
 			});
 		}

@@ -15,6 +15,7 @@ public class ProfileVO {
 	private String email; 
 	private String loc;
 	private String url;	// 인터셉터 걸렸을 경우 요청 주소룰 기억할 변수 
+	private int rno;	//후기 게시물에서 로그인 안했을 경우 로그인폼으로 이동할 때 게시물번호 저장하는 변수
 	
 	private int no; //myBatis에 의해 추가된 변수임 
 	
@@ -24,6 +25,12 @@ public class ProfileVO {
 
 	
 	
+	public int getRno() {
+		return rno;
+	}
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
 	public String getUrl() {
 		return url;
 	}

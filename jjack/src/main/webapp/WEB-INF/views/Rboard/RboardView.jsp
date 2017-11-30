@@ -115,7 +115,11 @@ $(document).ready(function(){
 		 $(this).siblings(".resetBtn").show();
 	}); 
 	
-	
+	//로그인 안했을 시 댓글창 누르면 LoginForm 으로 가기 
+	$("#nosession").click(function(){
+		var tempRno=$(".tempRno").val(); 
+		$(location).attr("href" , "../Login/LoginForm.do?rno="+tempRno);
+	});
 
 	
 
@@ -214,7 +218,7 @@ $(document).ready(function(){
 				작성자 :
 			</td>
 			<td>
-			<input type="text" id="recontents"  class="form-control form-control-sm" name="recontents"  placeholder="로그인 하십시오.">
+			<input type="text" id="nosession"  class="form-control form-control-sm" name="recontents"  placeholder="로그인 하십시오.">
 			</td>
 		</tr>
 		</c:if>

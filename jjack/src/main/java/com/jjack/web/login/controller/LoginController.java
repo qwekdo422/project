@@ -32,6 +32,9 @@ public class LoginController {
 	 */
 	@RequestMapping("/LoginForm")
 	public ModelAndView LoginForm(ProfileVO pVO, String url , @RequestParam(value="pwfail" ,defaultValue = "1")int pwfail){
+		if(pVO.getRno() != 0) {
+			url ="../ Rboard/RboardView.do?rno="+pVO.getRno();
+		}
 		ModelAndView mv= new ModelAndView();
 		mv.addObject("url", url);
 		

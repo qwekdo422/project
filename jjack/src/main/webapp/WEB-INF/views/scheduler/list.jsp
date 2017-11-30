@@ -59,7 +59,7 @@ var status = "${status}";
 			            <!-- content goes here -->
 			              <div class="form-group">
 			                <label for="gisoo">기수:</label>
-			                <input type="text" class="form-control" id="gisoo" name="gisoo" placeholder="ex) 100 only Number">
+			                <input type="text" class="form-control" id="gisoo" name="gisoo" placeholder="ex) 100 only Number" maxlength="6">
 			              </div>
 			              <div class="form-group">
 			                <label for="eventdate">이벤트 시작일:</label>
