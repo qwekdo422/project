@@ -16,7 +16,6 @@ $(document).ready(function(){
 		//몇번째를 선택한건지 확인
 		clickWho = $("figure").index($(this).parent());
 		if(doneArrows.indexOf(clickWho) == -1) {
-		//if(!doneArrows.contains(clickWho)) {
 			// 선택한 사람을 실행시킨 사람들 목록에 추가
 			doneArrows.push(clickWho);
 			// 클릭한 사람이 선택한 상대의 순서를 알아내기
