@@ -42,6 +42,7 @@ public class MatingController {
 		return mv;
 	}
 	
+	
 	@RequestMapping("/forLunch")
 	public ModelAndView forLunch(ModelAndView mv) {
 		// 현재 날짜 확인
