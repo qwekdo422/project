@@ -23,8 +23,6 @@
 			<mvc:mapping path="/applicantList/**"/>
 			<!-- 짝짓기 -->
 			<mvc:mapping path="/mating/**"/>
-			<!-- 공지 -->
-			<mvc:mapping path="/Nboard/**"/>
 			<!-- 데이트 코스 -->
 			<mvc:mapping path="/datecourse/**"/>
 
