@@ -246,6 +246,8 @@ $(document).ready(function() {
 		}
 	}); // 기수종복체크 종료
 	
+
+	
 });	// document 종료
 
 //	입소신청서 수정처리 함수

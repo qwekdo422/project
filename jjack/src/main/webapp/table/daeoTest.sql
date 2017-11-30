@@ -199,5 +199,5 @@ where r_no = 51
 	     resultno BETWEEN 1 AND 9;
 			
 			
-			
+select * from TB_Review where r_no between 509 and 513;			
 			

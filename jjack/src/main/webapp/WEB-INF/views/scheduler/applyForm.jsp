@@ -28,6 +28,8 @@
 var schedule = ${SCHEDULE};
 //관리자, 사용자 (상태여부)
 var status = "${status}";
+
+var auth = ${sessionScope.Auth};
 </script>
 </head>
 
@@ -145,10 +147,17 @@ var status = "${status}";
 		</div>
 		<%-- 전체 row 끝 --%>
 
-
+	
 	</div>
+	<script>
+		if(auth == 4) {
+			alertify.alert("후기 작성 후에 이용가능 합니다.", function() {
+				location.href="../Rboard/RboardList.do";
+			});
+		}
+	</script>
 	<%-- 메인 끝 --%>
-
+	
 	<div id="footer">
 		<jsp:include page="../common/footer.jsp" />
 	</div>
