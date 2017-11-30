@@ -67,7 +67,7 @@ var status = "${status}";
 			              </div>
 			              <div class="form-group">
 			                <label for="eventend">이벤트 종료일:</label>
-			                <input type="date" class="form-control" id="eventend" name="eventend">
+			                <input type="text" class="form-control" id="eventend" name="eventend">
 			              </div>
 			              <div class="form-group">
 			                <label for="loc">대상 거주지역:</label>

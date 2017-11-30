@@ -372,9 +372,17 @@ function modalView(target, event) {
 		$("#title").val("");
 		$("#contents").val("");
 		$("#eventend").val("");
+		var startDate = $(target).data("date");
 		//	날짜클릭 시 그 날짜를 모달창 상세보기에 이벤트 시작일을 자동으로 입력
-		$("#eventdate").val($(target).data("date"));
-		var wDate = new Date();
+		$("#eventdate").val(startDate);
+		var tempDate = startDate.split("-");
+		//	종료일자 등록
+		var endDate = new Date(tempDate[0], tempDate[1]-1, tempDate[2]);
+		endDate.setDate(endDate.getDate() + 1);
+		var year = endDate.getFullYear();
+		var month = endDate.getMonth()+1;
+		var day = endDate.getDate();
+		$("#eventend").val(year+"-"+month+"-"+day);
 		// 행사일정이 없을때 등록버튼을 보이게 하고 수정버튼을 숨긴다.
 		$("#mBtn").css("display", "none");
 		$("#dBtn").css("display", "none");
