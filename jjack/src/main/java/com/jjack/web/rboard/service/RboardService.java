@@ -203,6 +203,14 @@ public PageUtil getSearchTotal(RboardVO rVO){
 		return ;
 	}
 	
+	//후기 남기기 버튼 안보이게 하기 로직 
+	public void changAcond(int mno){
+		System.out.println("changAcondSERVICE");
+		rDAO.changAcond(mno);
+		return; 
+	}
+
+	
 
 
 	

@@ -13,13 +13,13 @@ $(document).ready(function(){
 		var pw=$("#pw").val(); 
 		
 		if(id==""){
-			alert("아이디를 입력하십시오"); 
+			alertify.alert("아이디를 입력하십시오"); 
 			$("#id").focus(); 
 			return; 
 		}
 
 		if(pw==""){
-			alert("비밀번호를 입력하십시오"); 
+			alertify.alert("비밀번호를 입력하십시오"); 
 		
 			return ; 
 		}

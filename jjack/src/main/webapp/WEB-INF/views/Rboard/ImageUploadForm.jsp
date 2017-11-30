@@ -39,11 +39,11 @@
 		<table  class="table table-bordered mt-4">
 			<tr>
 				<td>첨부 이미지</td>
-				<td><input type="file" id="files" name="files"></td>
+				<td><input type="file"  class="btn btn-info"  id="files" name="files"></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="button" value="첨부하기" id="btn">
+					<input type="button" value="첨부하기" id="btn" class="btn btn-info">
 				</td>
 			</tr>
 		</table>

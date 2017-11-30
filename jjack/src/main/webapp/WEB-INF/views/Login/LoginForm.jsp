@@ -34,7 +34,7 @@ var pwfail =${pwfail};
 	<c:if test="${!empty url}">
 		<input type="hidden" name="url" value="${url}">
 	</c:if>
-	<table class="table  table-striped table-bordered mt-12">
+	<table class="table  table-bordered mt-12">
 		<tr>
 			<td align="center">아이디</td>
 			<td><input type="text" id="id" name="id" value="${param.ID}" class="form-control form-control-sm"></td>

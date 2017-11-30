@@ -135,7 +135,7 @@ function pwCheckCheck(){
 						<tr>
 								<td align="center">거주지  </td>
 								<td>
-									<select name="loc" id="loc" >
+									<select name="loc" id="loc"  class="form-control form-control" >
 											<option value="">지역선택</option>
 											<option value="수도권">수도권</option>
 											<option value="강원도">강원도</option>

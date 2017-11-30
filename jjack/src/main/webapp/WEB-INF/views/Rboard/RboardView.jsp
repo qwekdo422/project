@@ -69,7 +69,7 @@ $(document).ready(function(){
 	$("#rBtn").click(function(){
 		var rebody=$("#recontents").val(); 
 		if(rebody == ""){
-			alert("댓글을 입력하십시오"); 
+			alertify.alert("댓글을 입력하십시오"); 
 			return ; 
 		}
 		$("#refrm").submit(); 
@@ -86,9 +86,15 @@ $(document).ready(function(){
 	
 	//리뷰 게시판 삭제하기 
 	$("#dBtn").click(function(){
-		alert("게시글이 삭제되었습니다."); 
-		$(location).attr("href" , "../Rboard/RboardDelete.do?rno=${VO.rno}"); 
 		
+		alertify.alert("게시글이 삭제되었습니다.", function(){
+			
+			$(location).attr("href" , "../Rboard/RboardDelete.do?rno=${VO.rno}"); 
+			
+			}); 
+		
+
+
 	}); 
 	
 	
@@ -98,6 +104,7 @@ $(document).ready(function(){
 	
 		 var td = div.parent();
 		 contents =  td.prev().val(); //전역변수 
+
 		 var input = "<input type='text' id='mInput'  value='"+contents+"' >";
 		 td.text("");
 		 td.append(input);
@@ -167,7 +174,8 @@ $(document).ready(function(){
 							<c:if test="${!empty data.nickname}"><font color="tomato">${data.nickname}</font></c:if>
 							<c:if test="${!empty data.jjackname}"><font color="tomato" >${data.jjackname}</font></c:if>
 						</td>
-							<td align="center">${data.cwdate} <input type="hidden" class="tempValue" value="${data.cctentents}"></td> 
+							<td align="center">${data.cwdate} </td> 
+							<input type="hidden" class="tempValue" value="${data.cctentents}">
 						<td>${data.cctentents}
 							<c:if test="${sessionScope.UID eq data.rid}">
 								<div style="float:right;">
@@ -231,7 +239,7 @@ $(document).ready(function(){
 	</table>
 
 
-	<div align="center">
+	<div align="center" class="mb-4">
 	<input type="button" id="lBtn" class="btn btn-info" value="목록보기">		
 	<c:if test="${sessionScope.MNO eq  VO.writerno}">
 	<input type="button" id="dBtn" class="btn btn-info" value="삭제하기">

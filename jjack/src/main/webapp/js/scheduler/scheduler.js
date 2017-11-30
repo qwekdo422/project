@@ -369,6 +369,7 @@ function modalView(target, event) {
 		$("#eventend").val("");
 		//	날짜클릭 시 그 날짜를 모달창 상세보기에 이벤트 시작일을 자동으로 입력
 		$("#eventdate").val($(target).data("date"));
+		var wDate = new Date();
 		// 행사일정이 없을때 등록버튼을 보이게 하고 수정버튼을 숨긴다.
 		$("#mBtn").css("display", "none");
 		$("#dBtn").css("display", "none");

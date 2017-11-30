@@ -32,13 +32,18 @@ public class RboardController {
 	
 	//후기 게시판 목록보기
 	@RequestMapping("/RboardList")
-	public ModelAndView rboardList(@RequestParam(value="nowPage" ,defaultValue="1") int nowPage,HttpSession session){
+	public ModelAndView rboardList(@RequestParam(value="nowPage" ,defaultValue="1" ) int nowPage){
 		
 		System.out.println("현재페이지 = "+nowPage);
 		
 		ModelAndView mv= new ModelAndView(); 
-		String id= (String)session.getAttribute("UID"); 
-		
+//		String id= (String)session.getAttribute("UID"); 
+//		System.out.println("후기 게시판 목록보기" + id);
+//		int mno= (Integer)session.getAttribute("MNO"); 
+//		System.out.println("후기 게시판 목록보기"+mno);
+
+
+
 //		if(id==null){ //세션이 없으면 로그인 폼으로 가라 
 //			RedirectView rv= new RedirectView("../Login/LoginForm.do");
 //			mv.setView(rv);
@@ -137,17 +142,22 @@ public class RboardController {
 	
 	//후기 게시판 글쓰기 실행함수 
 	@RequestMapping("/RboardProc")
-	public ModelAndView rboardWriteProc(RboardVO rVO){
+	public ModelAndView rboardWriteProc(RboardVO rVO , HttpSession session){
 		
 		String writer=rVO.getRid(); 
-
+		int mno=(Integer)session.getAttribute("MNO"); 
 
 		HashMap map= new HashMap(); 
 		map.put("rtitle",rVO.getRtitle()); 
 		map.put("rcontents",rVO.getRcontents()); 
-		
+		map.put("mno",mno); 
+		map.put("rcontents", rVO.getRcontents()); 
 		rService.rboardWrite(map);
-		
+		System.out.println(mno+ "목록보기 리스트");
+		rService.changAcond(mno);
+		System.out.println("왜 안돼?");
+
+		session.setAttribute("Auth",0);
 		ModelAndView mv= new ModelAndView(); 
 	 
 		RedirectView rv= new RedirectView("../Rboard/RboardList.do");
@@ -232,6 +242,8 @@ public class RboardController {
 
 		ArrayList list=rService.reList(rno); //리플 리스트 가져오기 위한 로직 
 		RboardVO VO=rService.rboardView(rno);  //게시물 상세보기 로직 
+		System.out.println(session.getAttribute("MNO") + "회원번호");
+		System.out.println(VO.getWriterno() + "작성자 회원번호");
 		RboardVO PRENEXT=rService.preNext(rno); 
 
 	

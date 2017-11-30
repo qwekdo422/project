@@ -27,11 +27,10 @@ $(document).ready(function(){
 		
  			var rsearch=$("#rsearch").val();
  			if(rsearch==""){
- 				alert("검색어를 입력하십시오"); 
+ 				alertify.alert("검색어를 입력하십시오"); 
  				return; 
  			}
- 			
-		$("#search").submit(); 
+
 	}); 
 });
 
@@ -138,7 +137,7 @@ $(document).ready(function(){
 </nav>
 
 <%-- 후기남기기 버튼 --%>
-<c:if test="${sessionScope.Auth eq '4'}"><!-- session이 있을때면 이 버튼이 보이도록 조치한다. -->
+<c:if test="${sessionScope.Auth eq 4 }"><!-- session이 있을때면 이 버튼이 보이도록 조치한다. -->
 	<div align="center">
 		<input type="button" class="btn btn-info" id="rBtn" value="후기 남기기" align="center">	
 	<div>

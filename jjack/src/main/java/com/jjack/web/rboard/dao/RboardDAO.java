@@ -78,5 +78,7 @@ public interface RboardDAO {
 	//댓글 내용 삭제 질의명령 실행 
 	public void replyDelete(RboardVO rVO); 
 	
+	//후기 남기기 버튼 안보이게 하기 휘한 질의문
+	public void changAcond(int mno); 
 	
 }

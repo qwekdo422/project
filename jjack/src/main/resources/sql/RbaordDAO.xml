@@ -11,20 +11,20 @@
 <insert id="rboardWrite" parameterType="hashMap" >
 INSERT
 INTO 
-	TB_Review (r_no,g_no, r_wdate, r_title, r_contents, r_hits, r_IsShow)
+	TB_Review (r_no,g_no, r_wdate, r_title, r_contents, r_hits, r_IsShow, R_CONTENT)
 VALUES
 (
 	(SELECT 
 		NVL(MAX(r_no),0)+1
 	FROM
-		TB_Review), (select 
- g.g_no
+		TB_Review), (select
+tg.g_no
 from
-tb_apply a, tb_guest g
+tb_member tm, tb_apply ta , tb_guest tg
 where
-
-    a.a_no = g.a_no and
-    a.a_cond=9)  , sysdate,#{rtitle},#{rcontents}, 0 , 'Y')
+tm.m_no=ta.m_no and 
+ta.a_no = tg.a_no and
+tm.m_no=#{mno} and ta.a_cond=9)  , sysdate,#{rtitle},#{rcontents}, 0 , 'Y', #{rcontents})
 </insert>
 
 
@@ -69,6 +69,16 @@ where
 	where 
 	     resultno BETWEEN #{start} AND #{end}
 </select>
+
+<!-- 후기남기기 버튼 안보이게 하기 위한 로직 -->
+<update id="changAcond" parameterType="int">
+update 
+	TB_APPLY
+set
+	a_cond =a_cond+1
+where
+	m_no =#{mno} and a_cond=9
+</update>
 
 <!-- 리뷰 상세보기  -->
 <select id="rboardView" resultType="rboardvo" parameterType="int">

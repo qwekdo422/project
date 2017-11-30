@@ -48,17 +48,21 @@ $(document).ready(function(){
 		var	body = $("#rbody").val();
 	
 		if(rtitle==""){
-			alert("제목을 입력하십시오");
+			alertify.alert("제목을 입력하십시오");
 			return ; 
 		}
 		
 		if(body=="<p>&nbsp;</p>"){
-			alert("본문을 입력하십시오"); 
+			alertify.alert("본문을 입력하십시오"); 
 			return; 
 		}
 		
-		alert("게시물이 작성되었습니다."); 
-		$("#nfrm").submit(); 
+		alertify.alert("게시물이 작성되었습니다", function(){
+			
+			$("#nfrm").submit(); 
+			}); 
+		
+	
 	}); 
 }); 
 </script>
@@ -87,7 +91,7 @@ $(document).ready(function(){
 		 </tr>
 		  <tr>
 				<td colspan="2" align="center">
-					<input type="button" id="rbtn" value="작성완료" >
+					<input type="button" id="rbtn"  class="btn btn-info" value="작성완료" >
 				</td>
 			</tr>
 	</table>
