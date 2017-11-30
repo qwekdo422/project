@@ -24,7 +24,7 @@
 		<!-- Page Content -->
 		<div class="row mt-4">
 	 		<!-- 서브메뉴 -->
-			<div class="col-lg-3">
+			<div class="col-lg-3 mb-4">
 				<h2>소개</h2><br />
 				<div class="list-group text-right">
 					<a href="../intro/thisGHis.do" class="list-group-item"><img src="../img/common/logo.png" id="introLogo"><br>게스트하우스는</a> 
