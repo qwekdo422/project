@@ -28,9 +28,6 @@ public class ApplicantListController {
 			edate = as.getEdate();
 		}
 
-//		JSONObject jMail = new JSONObject();
-//		jMail.put("mail", mail);
-		
 		// 이벤트 날짜, 기수 목록을 구한다
 		List<ApplicantCountVO> elist = as.getEventList();
 		// 날짜, 기수, 신청자 목록 등을 구한다
