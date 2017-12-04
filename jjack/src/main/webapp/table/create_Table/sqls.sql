@@ -69,7 +69,6 @@ CREATE TABLE TB_Notice (
 	CONSTRAINT nIsShow_ck CHECK(n_IsShow IN ('Y', 'N')) 
 );
 
-
 -- 후기게시판
 CREATE TABLE TB_Review (
 	r_no NUMBER(10) CONSTRAINT rno_pk PRIMARY KEY, -- 후기번호 

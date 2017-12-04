@@ -22,14 +22,18 @@
 		<!-- Page Content -->
 		<div class="row mt-4">
  			<!-- 서브메뉴 -->
+ 			 
 			<div class="col-lg-3">
 				<h4><기본 코스></h4><br />
+				<!--
 				<div class="list-group text-right">
 					<a href="../datecourse/BasicCourse.do" class="list-group-item">기본 코스</a> 
 					<a href="../datecourse/CoupleCourse.do" class="list-group-item">커플 데이트 코스</a>
 					<a href="../datecourse/SoloCourse.do" class="list-group-item">솔로 코스</a>
 				</div>
+				 -->
 			</div>
+			
 			<!-- 본 화면 -->
 		 	<div id="BasicMain" class="col-lg-9">
 				

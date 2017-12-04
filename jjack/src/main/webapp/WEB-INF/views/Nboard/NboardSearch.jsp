@@ -23,7 +23,7 @@
       
       
 <h1>검색결과가 나오는 화면입니다.</h1>
-	<table width="1000" border="1" align="center">
+	<table class="table table-hover table-striped table-bordered mt-4">
 		<tr>
 			<th>번호</th>
 			<th>제목</th>

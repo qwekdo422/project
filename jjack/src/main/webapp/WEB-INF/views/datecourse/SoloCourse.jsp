@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../css/common/footer.css" />
 <link rel="stylesheet" href="../css/alert/alertify.core.css" />
 <link rel="stylesheet" href="../css/alert/alertify.default.css" />
+<link rel="stylesheet" href="../css/datecourse/couple.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
 
@@ -51,11 +52,13 @@ function open_food_frame(url){
  			<!-- 서브메뉴 -->
 			<div class="col-lg-3">
 				<h4><솔로 코스></h4><br />
+				<!-- 
 				<div class="list-group text-right">
 					<a href="../datecourse/BasicCourse.do" class="list-group-item">기본 코스</a> 
 					<a href="../datecourse/CoupleCourse.do" class="list-group-item">커플 데이트 코스</a>
 					<a href="../datecourse/SoloCourse.do" class="list-group-item">솔로 코스</a>
 				</div>
+				 -->
 			</div>
 			<!-- 본 화면 -->
 		 	<div id="SoloMain" class="col-lg-9">
@@ -63,8 +66,8 @@ function open_food_frame(url){
 				<img src="../img/datecourse/solo_course.png" width="480">
 				<br>
 				<br>
-				<button class="btn_map_hide" style="padding:3px">지도 감추기</button>
-				<button class="btn_food_hide" style="padding:3px">맛집 숨김</button>
+				<button class="btn_map_hide" >지도 숨김</button>
+				<button class="btn_food_hide" >맛집 숨김</button>
 					
 			    <!-- East(course3)-->
 			    <button name="btn_course3" type="button" onclick='open_in_frame("https://www.google.com/maps/d/embed?mid=1GnxvmgmYl8gshefdlNAZpwCTpZ1ML4-w");

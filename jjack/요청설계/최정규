@@ -1,0 +1,38 @@
+######### 입소신청자 관리 ##########
+
+1. 입소신청자 관리 메인
+  - 요청 : http://localhost:8080/jjack/applicantList/ManageList.do
+  - 컨트롤러 : com.jjack.web.applicantList.controller.java
+  - 함수 : public ModelAndView ListManage()
+  - 파라미터 : edate - 선택한 일자
+  					mail - 메일 발송여부
+  - 뷰 : ../applicantList/applicantList.jsp
+
+2. 입소신청자 상태 변경
+  - 요청 : http://localhost:8080/jjack/applicantList/changeCond.do
+  - 컨트롤러 : com.jjack.web.applicantList.controller.java
+  - 함수 : public ModelAndView comeProc()
+  - 파라미터 : edate - 선택한 일자
+  					ano - 신청번호
+  					nextStep - 변경할 상태 번호
+  - 뷰 : 리다이렉트 - /ManageList.do
+
+3. 메일 보내기
+  - 요청 : http://localhost:8080/jjack/applicantList/mailing.do
+  - 컨트롤러 : com.jjack.web.applicantList.controller.java
+  - 함수 : public ModelAndView comeProc()
+  - 파라미터 : apvo - 신청자 VO
+  					edate - 선택한 일자
+  - 뷰 : 리다이렉트 - /ManageList.do
+
+4. 입소 처리
+  - 요청 : http://localhost:8080/jjack/applicantList/newGuest.do
+  - 컨트롤러 : com.jjack.web.applicantList.controller.java
+  - 함수 : public ModelAndView newGuest()
+  - 파라미터 : apvo - 신청자 VO
+  					edate - 선택한 일자
+  - 뷰 : 리다이렉트 - /ManageList.do
+
+
+
+  

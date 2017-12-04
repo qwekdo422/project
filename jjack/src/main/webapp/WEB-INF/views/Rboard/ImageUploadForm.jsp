@@ -8,6 +8,20 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 </head>
+<style>
+#floater {
+  float: left; 
+  height: 50%; 
+  margin-bottom: -145px;
+}
+#content  {
+  clear: both; 
+  height: 290px; 
+  position: relative;
+}
+</style>
+<link rel="stylesheet" href="../css/common/bootstrap.min.css" />
+<script src="../js/main/bootstrap.bundle.min.js"></script>
 <script>
 	$(document).ready(function(){
 		$("#btn").click(function(){
@@ -17,24 +31,25 @@
 	});
 </script>
 
-<body>
-
-
+<body >
+<div height="300px">
+	<div id="floater"></div>
+	<div id="content">
 	<form method="POST" id="frm" action="../Rboard/ImageUploadProc.do" enctype="multipart/form-data">
-		<table width="400" border="1" align="center" >
+		<table  class="table table-bordered mt-4">
 			<tr>
 				<td>첨부 이미지</td>
-				<td><input type="file" id="files" name="files"></td>
+				<td><input type="file"  class="btn btn-info"  id="files" name="files"></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="button" value="첨부하기" id="btn">
+					<input type="button" value="첨부하기" id="btn" class="btn btn-info">
 				</td>
 			</tr>
 		</table>
 	</form>
-
-	
+</div>
+</div>
 	
 	
 </body>

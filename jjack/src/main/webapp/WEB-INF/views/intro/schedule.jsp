@@ -24,7 +24,7 @@
 		<!-- Page Content -->
 		<div class="row mt-4">
 	 		<!-- 서브메뉴 -->
-			<div class="col-lg-3">
+			<div class="col-lg-3 mb-4">
 				<h2>소개</h2><br />
 				<div class="list-group text-right">
 					<a href="../intro/thisGHis.do" class="list-group-item"><img src="../img/common/logo.png" id="introLogo"><br>게스트하우스는</a> 
@@ -53,6 +53,7 @@
 					</div>
 					<div class="tab-pane fade" id="day2" role="tabpanel">
 						<img src="../img/intro/schedule2.png" class="introImg">
+						<p class="text-right mr-4">※ 여행 일정은 코스에 따라 달라질 수 있습니다</p>
 					</div>
 				</div> 
 				<br><br>

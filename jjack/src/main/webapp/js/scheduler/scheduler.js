@@ -12,7 +12,7 @@ $(document).ready(function() {
 		},
 		defaultDate : date.getTime(),
 		editable : true,
-		eventLimit : true, // allow "more" link when too many events
+		eventLimit : true,
 		events : schedule,
 		eventClick : function(event) {
 			//	관리자 일경우
@@ -22,6 +22,7 @@ $(document).ready(function() {
 			} else {
 				//	사용자일 경우
 				//	이벤트일정을 클릭하면 행사 상세정보를 상단에서 하단으로 이동해서 보여주는 애니메이션작업
+				/*
 				var eventView = $("#eventView"); 
 				eventView.css("position", "absolute");
 				eventView.css("opacity", "0");
@@ -33,6 +34,8 @@ $(document).ready(function() {
 				}, 1000, function() {
 					eventView.css("position", "");
 				});
+				*/
+				
 				//	행사일정 상세정보 보여주는 영역에 상세정보 넣기
 				$("#eventdate").val(event.start._i);
 				$(".gisoo").text(event.gisoo);	
@@ -64,8 +67,6 @@ $(document).ready(function() {
 						//	데이터 초기화 작업
 						//	입소상태에 따라 보여질 텍스트 문구를 숨긴다.
 						$(".applyText").hide();
-						//	입소신청폼을 보여준다.
-						$("#applyFrm").show();
 						//	관심사 선택창을 디폴트로 잡아준다.
 						$("#interest").val("").prop("selected", true);
 						//	전화번호 정보를 초기화
@@ -74,57 +75,45 @@ $(document).ready(function() {
 						$("#uBtn").css("display", "none");
 						//	사진등록에 쓸 기본이미지 출력
 						$("#imagePreview").prop("src", "../img/houseApply/basic.jpg");
-						
+						$("#imageUpload").next().text("사진등록");
+						// 입소대기 상태에서 클릭 막은작업 원상복구
+						formEnable();
 						//	해당날짜에 이벤트 신청을 안한사람
 						if(cond == 0) {
 							//	신청버튼을 사용할 수 있게한다.
 							$("#applyBtn").prop("disabled", false);
 							//	버튼이름을 입소신청으로 만든다.
-							$("#applyBtn").val("입소신청");
+							$("#applyBtn").val("신청");
 							//	입소취소 버튼을 숨긴다.
 							$("#resetBtn").css("display", "none");
 						//	해당날짜에 이벤트를 신청한사람 (승인대기 상태)
 						} else if(cond == 1 || cond == 2 || cond == 5) {
-							//	입소신청정보를 보여준다.
-							//	입소신청번튼을 승인대기로 체인지
-							$("#applyBtn").val("승인대기");
-							//	승인대기버튼 클릭막기
-							$("#applyBtn").prop("disabled", true);
-							//	수정버튼 보이기
-							$("#uBtn").css("display", "block");
-							//	입소취소버튼 보이기
-							$("#resetBtn").css("display", "block");
-							//	전화번호
-							$("#tel").val(gApply.tel);
-							//	관심사 자동체크
-							$("#interest").val(gApply.interest).prop("selected", true);
-							//	사진등록버튼 이름을 사진수정버튼으로 수정
-							$("#imageUpload").next().text("사진수정");
-							//	입소신청때 등록한 사진을 보여준다.
-							$("#imagePreview").prop("src", "../file/"+gApply.pic);
-							//	히든에 숨겨놓을 입소신청 번호
-							$("#aNo").val(gApply.aNo);
-							//	히든에 숨겨놓을 사진이름
-							$("#pic").val(gApply.pic);
+							//	수정폼 보여주기
+							applyModify(gApply);
 						//	입금하세요.
 						} else if (cond == 3) {
-							condStatus("입금하세요. 계좌번호: 기업은행 010-7131-2014");
+							condStatus("입금하세요. 계좌번호: 기업은행 010-7131-2014"); formDisabled();
 						//	입소예정
 						} else if (cond == 4) {
-							condStatus("입소 예정입니다.");
-						//	해당행사에 입소취소를 취소한사람
+							applyModify(gApply);
+							condStatus("입소 예정입니다."); formDisabled();
+						//	행사가 마감 되었을때
 						} else if (cond == 6) {
 							//	마감
-							condStatus("마감되었습니다.");
+							condStatus("마감되었습니다."); formDisabled();
+						//	해당행사에 입소취소를 취소한사람
 						} else if (cond == 7) {
+							applyModify(gApply);
 							//	입소취소
-							condStatus("입소를 취소하셨습니다.");
+							condStatus("입소를 취소하셨습니다."); formDisabled();
+						//	입소가 완료된 사람
 						} else if (cond == 8){
+							applyModify(gApply);
 							//	입소
-							condStatus("일정에 맞게 입소바랍니다.");
+							condStatus("일정에 맞게 입소바랍니다.");formDisabled();
 						} else if (cond == 9 || cond == 10 ) {
 							//	신청할 수 없는 이벤트(행사 종료되었을 때)
-							condStatus("이벤트가 종료되었습니다.");
+							condStatus("이벤트가 종료되었습니다.");formDisabled();
 						}
 					},
 					error: function(e) {
@@ -193,23 +182,29 @@ $(document).ready(function() {
 		validation();
 		//	무결성 검사에 걸렸을 겅우 다음을 수행하지 않고 리턴 (true 일경우 무결성 검사 걸린 경우)
 		if(isFlag()) return;
-		$("#applyFrm").attr("action", "./applyProc.do").submit();
+		
+		//	입소신청완료 alert창을 띄우고 서브밋을 한다.
+		completAlert("입소신청");
 	});
 	
 	//	입소신청서 수정버튼(사용자)
 	$("#uBtn").click(function(){
+		//	수정버튼을 클릭했을 때 true (사진이미지)
 		uBtnStatus = true;
 		//	무결성 검사
 		validation();
 		//	무결성 검사에 걸렸을 겅우 다음을 수행하지 않고 리턴 (true 일경우 무결성 검사 걸린 경우)
 		if(isFlag()) return;
+		//	무결성 종류 후 초기화 (사진 이미지)
 		uBtnStatus = false;
-		$("#applyFrm").attr("action", "./applyModify.do").submit();
+		//	입소수정완료 alert창을 띄우고 서브밋을 한다.
+		completAlert("정보수정");
 	});
 	
 	//	입소신청취소 버튼 (사용자)
 	$("#resetBtn").click(function(){
-		$("#applyFrm").attr("action", "./applyCondStatus.do?aNo="+$("#aNo").val()).submit();
+		//	입소취소완료 alert창을 띄우고 서브밋을 한다.
+		completAlert("입소취소");
 	});
 	
 	//	입소신청시 사진등록을 누르면 등록한 사진을 화면에서 바로 볼수 있도록 처리(사용자)
@@ -229,6 +224,11 @@ $(document).ready(function() {
 	//	기수 중복체크 (키보드 누를때 마다)
 	$("#gisoo").keyup(function() {
 		var gisoo = $("#gisoo").val();
+		var reg = /^[0-9]*$/;
+		if(!reg.test(gisoo)) {
+			alertify.alert("숫자만 입력 가능합니다.");
+			$("#gisoo").val("");
+		}
 		if(gisoo != "" && gisoo.length < 9) {
 			$.ajax({
 				url: './gisooCheck.do',
@@ -237,25 +237,80 @@ $(document).ready(function() {
 					//	data가 1이면  데이터베이스에 기수가 존재한다.
 					if(data == 1 && gisoo != eGisoo) {
 						$("#gisoo").css("color", "red");
-						$("#gisoo").siblings().text("기수: 중복된 기수는 사용할 수 없습니다.").css("color", "red");
+						$("#gisoo").siblings().text("기수: 중복된 기수는 사용할 수 없습니다.")
+						.css("color", "red");
 					} else {
 						$("#gisoo").css("color", "black");
 						$("#gisoo").siblings().text("기수:").css("color", "black");
 					}
 				},
 				error: function(e) {
-					alert(e+"에러");
+					//alert(e+"에러");
 				}
 			});
 		}
 	}); // 기수종복체크 종료
 	
+
+	
 });	// document 종료
 
+//	입소신청서 수정처리 함수
+function applyModify(gApply) {
+	//	입소신청정보를 보여준다.
+	//	입소신청번튼을 승인대기로 체인지
+	$("#applyBtn").val("승인대기");
+	//	승인대기버튼 클릭막기
+	$("#applyBtn").prop("disabled", true);
+	//	수정버튼 보이기
+	$("#uBtn").css("display", "block");
+	//	입소취소버튼 보이기
+	$("#resetBtn").css("display", "block");
+	//	전화번호
+	$("#tel").val(gApply.tel);
+	//	관심사 자동체크
+	$("#interest").val(gApply.interest).prop("selected", true);
+	//	사진등록버튼 이름을 사진수정버튼으로 수정
+	$("#imageUpload").next().text("사진수정");
+	//	입소신청때 등록한 사진을 보여준다.
+	$("#imagePreview").prop("src", "../file/"+gApply.pic);
+	//	히든에 숨겨놓을 입소신청 번호
+	$("#aNo").val(gApply.aNo);
+	//	히든에 숨겨놓을 사진이름
+	$("#pic").val(gApply.pic);
+}
+
+
+//	입소 신청후 승인대기, 입소취소, 입소대기 상태일때 form의 클릭을 원상복구하는  함수
+function formEnable() {
+	$("#applyBtn").show();
+	$("#uBtn").hide();
+	//	form에 투명도를 준다.
+	//	해당 태그클릭을 막는다.
+	$("#applyFrm").css("opacity", "1");
+	$("#imageUpload").attr("disabled", false);
+	$("#tel").attr("disabled", false);
+	$("#interest").attr("disabled", false);
+	$("#uBtn").attr("disabled", false);
+	$("#resetBtn").attr("disabled", false);
+}
+
+//	입소 신청후 승인대기, 입소취소, 입소대기 상태일때 form의 클릭을 방지 하는 함수
+function formDisabled() {
+	$("#applyBtn").hide();
+	$("#uBtn").show();
+	//	form에 투명도를 준다.
+	//	해당 태그클릭을 막는다.
+	$("#applyFrm").css("opacity", "0.3");
+	$("#imageUpload").attr("disabled", true);
+	$("#tel").attr("disabled", true);
+	$("#interest").attr("disabled", true);
+	$("#uBtn").attr("disabled", true);
+	$("#resetBtn").attr("disabled", true);
+}
 
 //	입소상태에 따라 멘트 출력하는 함수
 function condStatus(msg) {
-	$("#applyFrm").hide();
 	$(".applyText").text(msg);
 	$(".applyText").show();
 }
@@ -263,12 +318,23 @@ function condStatus(msg) {
 //	완료알림창을 띄우고 서브밋처리하는 함수
 function completAlert(msg) {
 	alertify.alert(msg+"이(가) 완료되었습니다.", function(){
+		//	관리자 일정등록
 		if(msg == '등록') {
 			$("#scheduleFrm").attr("action", "./writeProc.do").submit();
+		//	관리자 일정수정
 		} else if (msg == '수정') {
 			$("#scheduleFrm").attr("action", "./modifyProc.do").submit();
+		//	관리자 일정삭제
 		} else if (msg == '삭제') {
 			$(location).attr("href", "./delete.do?eventdate="+$(eventdate).val());
+		//	사용자 입소신청
+		} else if (msg == '입소신청') {
+			$("#applyFrm").attr("action", "./applyProc.do").submit();
+		//	사용자 입소정보수정
+		} else if (msg == '정보수정') {
+			$("#applyFrm").attr("action", "./applyModify.do").submit();
+		} else if (msg == '입소취소') {
+			$("#applyFrm").attr("action", "./applyCondStatus.do?aNo="+$("#aNo").val()).submit();
 		}
 	});
 }
@@ -297,7 +363,6 @@ function modalView(target, event) {
 		$("#mBtn").css("display", "block");
 		$("#dBtn").css("display", "block");
 	} 
-	
 	//	행사일정이 없을 때
 	if(event == null) {
 		//	숨겨진 모달의 정보를 초기화 해준다.
@@ -307,8 +372,17 @@ function modalView(target, event) {
 		$("#title").val("");
 		$("#contents").val("");
 		$("#eventend").val("");
+		var startDate = $(target).data("date");
 		//	날짜클릭 시 그 날짜를 모달창 상세보기에 이벤트 시작일을 자동으로 입력
-		$("#eventdate").val($(target).data("date"));
+		$("#eventdate").val(startDate);
+		var tempDate = startDate.split("-");
+		//	종료일자 등록
+		var endDate = new Date(tempDate[0], tempDate[1]-1, tempDate[2]);
+		endDate.setDate(endDate.getDate() + 1);
+		var year = endDate.getFullYear();
+		var month = endDate.getMonth()+1;
+		var day = endDate.getDate();
+		$("#eventend").val(year+"-"+month+"-"+day);
 		// 행사일정이 없을때 등록버튼을 보이게 하고 수정버튼을 숨긴다.
 		$("#mBtn").css("display", "none");
 		$("#dBtn").css("display", "none");
@@ -344,7 +418,8 @@ function validation () {
 	var interest = $("#interest");		//	관심사
 	var img = $("#imageUpload");		//	사진
 	//	무결성 검사할 태그 배열생성
-	var frmArr = [img, gisoo, eventdate, eventend, loc, age, title, contents, tel, interest];
+	var frmArr = [img, gisoo, eventdate, eventend, loc,
+					age,title, contents, tel, interest];
 	//	무결성 검사에 걸린 태그 알림문자를 담을 변수
 	var frmStr;
 	//	무결성 검사할 배열의 갯수만큼 반복
@@ -355,6 +430,11 @@ function validation () {
 		//	수정은 디폴트로 입소 신청한 사진을 사용하므로
 		if(vTag.attr("id") == 'imageUpload' && uBtnStatus == true) {
 			continue;
+		}
+		//	데이터가 있을 경우 flag값을 false로 바꿔준다(서브밋 가능상태).
+		//	데이터가 없을 경우 true이고 서브밋이 안된다.
+		if(vTag.val() != "") {
+			flag = false;
 		}
 		if(vTag.val() == "") {
 			flag = true;	//	무결성 검사에 걸렸을 때 true로 변경(버튼클릭 이벤트때 사용)

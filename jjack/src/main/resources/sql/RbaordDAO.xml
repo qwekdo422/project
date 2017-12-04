@@ -11,28 +11,95 @@
 <insert id="rboardWrite" parameterType="hashMap" >
 INSERT
 INTO 
-	TB_Review (r_no,g_no, r_wdate, r_title, r_contents, r_hits, r_IsShow)
+	TB_Review (r_no,g_no, r_wdate, r_title, r_contents, r_hits, r_IsShow, R_CONTENT)
 VALUES
 (
 	(SELECT 
 		NVL(MAX(r_no),0)+1
-
 	FROM
-		TB_Review), 14, sysdate,#{rtitle},#{rcontents}, 0 , 'Y')
+		TB_Review), (select
+tg.g_no
+from
+tb_member tm, tb_apply ta , tb_guest tg
+where
+tm.m_no=ta.m_no and 
+ta.a_no = tg.a_no and
+tm.m_no=#{mno} and ta.a_cond=9)  , sysdate,#{rtitle},#{rcontents}, 0 , 'Y', #{rcontents})
 </insert>
 
+
+
+
+
+
 <!-- 리뷰게시판 목록 가져오기  -->
-<select id="rboardList"  resultType="rboardvo">
-
-SELECT 
-	r_no, AS  r_title, r_wdate AS rdate ,r_hits AS
-FROM
-
-WHERE
-
-ORDER BY
+<select id="rboardList"  resultType="rboardvo" parameterType="hashMap">
+	SELECT
+		*
+	FROM 
+		(select
+			rownum as resultno,
+		    rt.*
+		from
+		     (select
+		        r.r_no AS rno,
+		        TO_CHAR(r.r_wdate) AS rdate,
+		        e.e_gisoo AS gisoo,
+		        gm.g_nick AS nickname,
+		        DECODE(gm.g_course, 'S', '-', gp.g_nick) AS jjackname,
+		        r.r_title AS rtitle,
+		        (SELECT COUNT(cc.r_no) AS cCount FROM TB_Comment cc WHERE cc.c_Isshow='Y' AND r.r_no = cc.r_no) AS recnt,
+		        r.r_hits AS rhis
+		    FROM
+		        TB_Review r,
+		        TB_Event e,
+		        TB_Guest gm,
+		        TB_Guest gp,
+		        TB_Apply a,
+		        TB_Member m    
+		    WHERE
+		        m.m_no = a.m_no
+		        AND gm.a_no = a.a_no
+		        AND r.g_no = gm.g_no
+		        AND gm.g_choice= gp.g_no
+		        AND a.e_eventdate=e.e_eventdate
+		        AND r.r_Isshow='Y'  
+		    ORDER BY
+		        r.r_no DESC ) rt) 
+	where 
+	     resultno BETWEEN #{start} AND #{end}
 </select>
 
+<!-- 후기남기기 버튼 안보이게 하기 위한 로직 -->
+<update id="changAcond" parameterType="int">
+update 
+	TB_APPLY
+set
+	a_cond =a_cond+1
+where
+	m_no =#{mno} and a_cond=9
+</update>
+
+<!-- 리뷰 상세보기  -->
+<select id="rboardView" resultType="rboardvo" parameterType="int">
+SELECT
+	tr.r_no AS rno,  tr.r_wdate AS rdate, tr.r_title AS rtitle, tr.r_contents AS rcontents, ta.m_no AS writerno,
+	DECODE(tg.g_course, 'S', '-', tp.g_nick) AS jjackname,
+	tg.g_nick AS nickname
+FROM 
+	tb_review tr , 
+	tb_guest tg ,
+	tb_guest tp,
+	tb_apply ta
+WHERE
+	tr.G_NO = tg.g_no 
+and
+	ta.a_no = tg.a_no 
+and
+	tg.g_choice = tp.g_no
+and 
+	tr.r_no=#{rno}
+</select>
 
 <!--                              조회수 증가                   관련                         로직  -->
 	<!-- 이미 본 글 번호를 조회할 질의 명령 -->
@@ -82,15 +149,7 @@ WHERE
 
 
 
-<!-- 리뷰 상세보기  -->
-<select id="rboardView" resultType="rboardvo" parameterType="int">
-SELECT
-	r_no AS rno,  r_wdate AS rdate, r_title AS rtitle, r_contents AS rcontents
-FROM 
-	TB_Review
-WHERE
-	r_no=#{rno}
-</select>
+
 
 <!-- 리뷰 리스트를 가지오 오기 위한 총 데이터의 갯수 -->
 <select  id="getTotalList" resultType="int">
@@ -99,16 +158,272 @@ SELECT
 FROM 
 	TB_Review
 WHERE
-	r_isshow='Y'; 
-	
+	r_isshow='Y'
+</select>
+
+<!-- 리뷰검색결과보기  -->
+<select id="rboardSearchList" parameterType="rboardvo" resultType="rboardvo">
+select
+    rt.*
+from
+     (select
+        rownum as resultno,
+        r.r_no AS rno,
+        TO_CHAR(r.r_wdate) AS rdate,
+        e.e_gisoo AS gisoo,
+        gm.g_nick AS nickname,
+        DECODE(gm.g_course, 'S', '-', gp.g_nick) AS jjackname,
+        r.r_title AS rtitle,
+        (SELECT COUNT(cc.r_no) AS cCount FROM TB_Comment cc WHERE cc.c_Isshow='Y' AND r.r_no = cc.r_no) AS recnt,
+        r.r_hits AS rhis
+    FROM
+        TB_Review r,
+        TB_Event e,
+        TB_Guest gm,
+        TB_Guest gp,
+        TB_Apply a,
+        TB_Member m    
+    WHERE
+        m.m_no = a.m_no
+        AND gm.a_no = a.a_no
+        AND r.g_no = gm.g_no
+        AND gm.g_choice= gp.g_no
+        AND a.e_eventdate=e.e_eventdate
+        AND r.r_Isshow='Y'  
+                  <if test="kind eq 'rtitle'">
+                    AND  r.r_title LIKE '%' || #{rsearch} || '%'
+                    </if>
+		  			  <if test="kind eq 'rcontents'">
+                    AND r.r_contents LIKE '%' || #{rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'rgisu'">
+                     AND e.e_gisoo LIKE '%' || #{rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'both'">
+                      AND  (r.r_title LIKE '%' || #{rsearch} || '%' OR  r.r_contents LIKE '%' || #{rsearch} || '%')
+                    </if>
+    ORDER BY
+        r.R_WDATE DESC ) rt 
+where 
+     resultno BETWEEN #{startPage}  AND #{endPage}
+
+
+</select>
+
+<!-- 검색시 각 주제에 대한 데이터의 총 갯수 가져오기 -->
+<select id="searchTotalList" resultType="int" parameterType="hashMap">
+SELECT
+	count(*)
+FROM
+     (select
+        rownum as resultno,
+        r.r_no AS rno,
+        TO_CHAR(r.r_wdate) AS rdate,
+        e.e_gisoo AS gisoo,
+        gm.g_nick AS nickname,
+        DECODE(gm.g_course, 'S', '-', gp.g_nick) AS jjackname,
+        r.r_title AS rtitle,
+        (SELECT COUNT(cc.r_no) AS cCount FROM TB_Comment cc WHERE cc.c_Isshow='Y' AND r.r_no = cc.r_no) AS recnt,
+        r.r_hits AS rhis
+    FROM
+        TB_Review r,
+        TB_Event e,
+        TB_Guest gm,
+        TB_Guest gp,
+        TB_Apply a,
+        TB_Member m    
+    WHERE
+        m.m_no = a.m_no
+        AND gm.a_no = a.a_no
+        AND r.g_no = gm.g_no
+        AND gm.g_choice= gp.g_no
+        AND a.e_eventdate=e.e_eventdate
+        AND r.r_Isshow='Y'  
+                  <if test="kind eq 'rtitle'">
+                    AND  r.r_title LIKE '%' || #{rsearch} || '%'
+                    </if>
+		  			  <if test="kind eq 'rcontents'">
+                    AND r.r_contents LIKE '%' || #{rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'rgisu'">
+                      AND e.e_gisoo LIKE '%' || #{rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'both'">
+                      AND  (r.r_title LIKE '%' || #{rsearch} || '%' OR  r.r_contents LIKE '%' || #{rsearch} || '%')
+                    </if>     
+             ORDER BY
+        r.R_WDATE DESC ) rt      
 </select>
 
 
+<!-- 리뷰 게시판 이전글, 다음글 꺼내기 질의명령 -->
+<select id="preNext" parameterType="int" resultType="rboardvo">
+SELECT
+    	total.pre AS pre, total.next AS next,total.preday AS preday, total.nextday AS nextday,total.nNo AS nextNo, total.pNo AS preNo
+FROM
+	(SELECT
+		r_no, r_title, LAG(r_title, 1 , '다음글 없음') OVER(ORDER BY r_no desc) AS pre,
+									 LAG(r_wdate,1,TO_DATE('11-11-1111','MM-DD-YY')) OVER(ORDER BY r_no desc) AS preday, 
+									 LAG(r_no, 1, 999) OVER(ORDER BY r_no desc) AS pNo,
+									lead(r_title,1,'이전글 없음') OVER(ORDER BY r_no desc) AS next,		  
+                         			lead(r_wdate,1,TO_DATE('11-11-1111','MM-DD-YYYY')) OVER(ORDER BY r_no desc) AS nextday,
+                          			lead(r_no,1,999) OVER(ORDER BY r_no DESC) AS nNo 
+          FROM
+          	TB_REVIEW
+          WHERE
+          	r_IsShow ='Y' 
+          ORDER BY 
+          	r_no desc) total
+ WHERE
+ 	r_no = #{rno}
+</select>
+
+<!-- 검색결과 이전글, 다음글 꺼내기 질의명령 -->
+<select id="searchPreNext" parameterType="hashMap" resultType="hashMap">
+SELECT
+    	total.pre AS pre, total.next AS next,total.preday AS preday, total.nextday AS nextday,total.nNo AS nextNo, total.pNo AS preNo
+FROM
+	(SELECT
+		r_no, r_title, LAG(r_title, 1 , '다음글 없음') OVER(ORDER BY r_no desc) AS pre,
+									 LAG(r_wdate,1,TO_DATE('11-11-1111','MM-DD-YY')) OVER(ORDER BY r_no desc) AS preday, 
+									 LAG(r_no, 1, 999) OVER(ORDER BY r_no desc) AS pNo,
+									lead(r_title,1,'이전글 없음') OVER(ORDER BY r_no desc) AS next,		  
+                         			lead(r_wdate,1,TO_DATE('11-11-1111','MM-DD-YYYY')) OVER(ORDER BY r_no desc) AS nextday,
+                          			lead(r_no,1,999) OVER(ORDER BY r_no DESC) AS nNo 
+          FROM
+          	TB_REVIEW
+          WHERE
+          	r_IsShow ='Y' 
+                            <if test="kind eq 'rtitle'">
+                    AND  r_title LIKE '%' || #{rsearch} || '%'
+                    </if>
+		  			  <if test="kind eq 'rcontents'">
+                    AND r_contents LIKE '%' || #{rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'rgisu'">
+                      AND e_gisoo LIKE '%' || #{rsearch} || '%'
+                    </if>
+                    <if test="kind eq 'both'">
+                      AND  (r_title LIKE '%' || #{rsearch} || '%' OR  r_contents LIKE '%' || #{rsearch} || '%')
+                    </if>     
+          ORDER BY 
+          	r_no desc) total
+ WHERE
+ 	r_no = #{rno}
+</select>
+
+
+
+<!-- 댓글작성 insert 질의문 -->
+<insert id="reContentsProc" parameterType="rboardvo">
+INSERT
+INTO 
+TB_Comment	
+VALUES((SELECT 
+		NVL(MAX(c_no),0)+1
+	FROM
+		TB_Comment) , sysdate, #{recontents},'Y', #{mno},   #{rno})
+</insert>
+
+<!-- 댓글 리스트 가져오기 질의명령 -->
+<select id="reList" parameterType="int" resultType="rboardvo">
+<!--  SELECT 
+ 	tc.c_no AS cno,
+ 	tc.c_wdate AS cwdate,
+	 tc.c_contents AS cctentents,
+     m.m_id        as rid
+FROM
+	TB_Comment tc , tb_member m
+where
+ tc.m_no = m.m_no and tc.r_no = #{rno}
+ ORDER BY 
+ tc.c_no 
+ -->
+ SELECT
+    c.c_no AS cno,   -- 수정시 필요
+    cm.m_id AS rid,  -- 수정시 필요
+    (SELECT mng.g_nick FROM TB_Guest mng WHERE mg.g_no = mng.g_no AND cm.m_no=ma.m_no) AS nickname,
+    (SELECT png.g_nick FROM TB_Guest png, TB_Apply pna 
+     WHERE mg.g_choice=png.g_no AND png.a_no = pna.a_no AND pna.m_no = cm.m_no AND mg.g_course IN ('A', 'B', 'C')) AS jjackname,
+    c.c_wdate AS cwdate,
+    c.c_contents AS cctentents
+FROM
+    TB_Comment c,
+    TB_Review r,
+    TB_Guest mg,    -- 후기작성자
+    TB_Apply ma,    -- 후기작성자
+    TB_Member cm    -- 댓글작성자
+WHERE
+    c.r_no = r.r_no
+    AND c.r_no = #{rno}
+    AND c.c_IsShow = 'Y'
+    AND c.m_no = cm.m_no
+    AND r.g_no = mg.g_no
+    AND mg.a_no = ma.a_no
+ORDER BY
+    c.c_wdate
+</select>
+
+<!-- 댓글 수정 질의명령 -->
+<update id="reModifycontents" parameterType="rboardvo">
+UPDATE
+	TB_Comment
+SET
+	c_contents=#{rmcontents}
+WHERE
+	c_no=#{cno}
+</update>
+
+<!-- 댓글 삭제 질의명령 -->
+<update id="replyDelete" parameterType="rboardvo">
+UPDATE
+	TB_Comment
+SET
+	c_IsShow='N'
+WHERE
+	c_no=#{cno}
+</update>
+
+
+
+<!-- 리뷰 게시판 삭제하기 질의명령 -->
+<update id="rbaordDelete" parameterType="int" >
+UPDATE 
+	TB_Review
+SET
+	r_IsShow ='N'
+WHERE
+	r_no=#{rno}
+</update>
+
+<!-- 리뷰 수정폼 질의명령  -->
+<select id="rboardModify" parameterType="int" resultType="rboardvo">
+SELECT 
+ 	r_title AS rtitle, 
+ 	r_contents AS rcontents,
+	 r_no AS rno
+FROM
+	TB_REVIEW
+WHERE
+	r_no=#{rno}
+</select>
+
+<!-- 리뷰 수정 질의명령 -->
+<update id="rboardModifyProc"  parameterType="rboardvo">
+UPDATE 
+	TB_REVIEW
+SET
+	r_title=#{rtitle} , 
+	r_contents=#{rcontents}
+WHERE
+	r_no=#{rno}
+</update>
 
 </mapper>
 
 
 
+ 
 
 
 
@@ -138,8 +453,64 @@ WHERE
 
 
 
+<!--  SELECT 
+					realTotal.rno AS rno , realTotal.rtitle AS rtitle, realTotal.gisoo AS gisoo, realTotal.nickname AS nickname, realTotal.rdate AS rdate, realTotal.rhis AS rhis, realTotal.jjack AS jjack
+FROM
+		(SELECT 
+					rownum AS resultno,
+					total.rno AS rno , total.rtitle AS rtitle, total.gisoo AS gisoo, total.nickname AS nickname, total.rdate AS rdate, total.rhis AS rhis, total.jjack AS jjack
+		FROM
+   			 (select 
+r.r_no AS rno , r.r_title AS rtitle ,  e.E_GISOO AS gisoo, g.g_nick AS nickname, r.r_wdate AS rdate, r.r_hits AS rhis, j.jjack AS jjack
+from
+tb_apply a  , TB_EVENT e , tb_guest g , tb_review r , (SELECT 
+    JJACK.JJACK_NAME as jjack
+FROM
+    (SELECT 
+        M.M_ID , G.G_NO, G.G_NICK AS JJACK_NAME, A.A_INTEREST ,  E.E_GISOO AS JJACK_GISOO ,  G.G_CHOICE AS CHOICE, G.G_COURSE AS COURSE
+    FROM
+        TB_MEMBER M,TB_APPLY A, TB_GUEST G , TB_EVENT E
+    WHERE
+        M.M_NO = A.M_NO 
+        AND A.A_NO = G.A_NO
+        AND A.E_EVENTDATE = E.E_EVENTDATE 
 
-
+    ORDER BY 
+        G.A_NO DESC) JJACK
+WHERE
+    JJACK.CHOICE = JJACK.CHOICE AND JJACK.COURSE IN('A' , 'B' , 'C')) j
+where
+A.E_EVENTDATE = E.E_EVENTDATE 
+and   A.A_NO = G.A_No and g.g_no = r.g_no and r.r_no=r.r_no) total) realTotal 
+WHERE		
+		resultno BETWEEN #{start} AND #{end} -->
+<!-- 		
+select
+    r.r_no AS rno,
+    TO_CHAR(r.r_wdate) AS rdate,
+    e.e_gisoo AS gisoo,
+    gm.g_nick AS nickname,
+    DECODE(gm.g_course, 'S', '-', gp.g_nick) AS jjackname,
+    r.r_title AS rtitle,
+    r.r_hits AS rhis
+FROM
+    TB_Review r,
+    TB_Event e,
+    TB_Guest gm,
+    TB_Guest gp,
+    TB_Apply a,
+    TB_Member m    
+WHERE
+    m.m_no = a.m_no
+    AND gm.a_no = a.a_no
+    AND r.g_no = gm.g_no
+    AND gm.g_choice= gp.g_no
+    AND a.e_eventdate=e.e_eventdate
+    AND r.r_Isshow='Y'   
+ORDER BY
+    r.r_no DESC
+     -->
+      
 
 
 

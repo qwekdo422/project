@@ -33,7 +33,7 @@ var status = "${status}";
 		<div id="header">
 			<jsp:include page="../common/header.jsp" />
 		</div>
-		<div class="container mt-4 lDiv">
+		<div class="container mt-4 mb-4">
 			<%-- 관리자, 사용자 여부(관리자: ADMIN, 사용자: USER)  --%>
 			<div class="row">
 			<%-- ================ 달력 =============== --%>
@@ -59,7 +59,7 @@ var status = "${status}";
 			            <!-- content goes here -->
 			              <div class="form-group">
 			                <label for="gisoo">기수:</label>
-			                <input type="text" class="form-control" id="gisoo" name="gisoo" placeholder="기수를 등록하세요.">
+			                <input type="text" class="form-control" id="gisoo" name="gisoo" placeholder="ex) 100 only Number" maxlength="6">
 			              </div>
 			              <div class="form-group">
 			                <label for="eventdate">이벤트 시작일:</label>
@@ -67,23 +67,23 @@ var status = "${status}";
 			              </div>
 			              <div class="form-group">
 			                <label for="eventend">이벤트 종료일:</label>
-			                <input type="date" class="form-control" id="eventend" name="eventend" placeholder="이벤트 종료일을 선택하세요.">
+			                <input type="text" class="form-control" id="eventend" name="eventend">
 			              </div>
 			              <div class="form-group">
 			                <label for="loc">대상 거주지역:</label>
-			                <input type="text" class="form-control" id="loc" name="loc" placeholder="이벤트 대상 거주지역을 입력하세요.">
+			                <input type="text" class="form-control" id="loc" name="loc" placeholder="ex) 서울">
 			              </div>
 			              <div class="form-group">
 			                <label for="age">대상 연령대:</label>
-			                <input type="text" class="form-control" id="age" name="age" placeholder="이벤트 대상 연령대를 입력하세요.">
+			                <input type="text" class="form-control" id="age" name="age" placeholder="ex) 20대">
 			              </div>
 			              <div class="form-group">
 			                <label for="title">이벤트 제목:</label>
-			                <input type="text" class="form-control" id="title" name="title" placeholder="이벤트 제목을 입력하세요.">
+			                <input type="text" class="form-control" id="title" name="title" placeholder="ex) 20대  모임">
 			              </div>
 			              <div class="form-group">
 			                <label for="contents">이벤트 내용:</label>
-			                <input type="text" class="form-control" id="contents" name="contents" placeholder="이벤트 내용을 입력하세요.">
+			                <input type="text" class="form-control" id="contents" name="contents" placeholder="ex) 20대 를 불태웁시다.">
 			              </div>
 					</div>
 					<div class="modal-footer">

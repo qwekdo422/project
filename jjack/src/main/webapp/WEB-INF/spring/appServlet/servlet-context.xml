@@ -3,15 +3,39 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
+	
+	<!-- 인터셉터 설정 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 일정관리-->
+			<mvc:mapping path="/scheduler/**"/>
+			<!-- 신청자 -->
+			<mvc:mapping path="/applicantList/**"/>
+			<!-- 짝짓기 -->
+			<mvc:mapping path="/mating/**"/>
+			<!-- 데이트 코스 -->
+			<mvc:mapping path="/datecourse/**"/>
 
+			<!-- 
+			<mvc:exclude-mapping path="/intro/thisGHis.do" />
+			<mvc:exclude-mapping path="/Rboard/RboardList.do" />
+			<mvc:exclude-mapping path="/SignUp/SignUpForm.do" />
+			<mvc:exclude-mapping path="/datecourse/BasicCourse.do" />
+			 -->
+			<beans:bean id="myInterceptor" class="com.jjack.web.util.InterceptorUtil"></beans:bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+ 	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/js/**" location="/js/" />

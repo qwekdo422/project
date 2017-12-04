@@ -49,7 +49,7 @@ nhn.husky.SE2M_AttachQuickPhoto = jindo.$Class({
 	makePopupURL : function(){
 		//	var sPopupUrl = "./photo_uploader/popup/photo_uploader.html";
 		//var sPopupUrl = "../Common/SMUploadForm.dog";
-		var sPopupUrl = "http://localhost:8080/jjack/Rboard/ImageUploadForm.do"; 
+		var sPopupUrl = "http://192.168.137.222:8080/jjack/Rboard/ImageUploadForm.do"; 
 		return sPopupUrl;
 	},
 	

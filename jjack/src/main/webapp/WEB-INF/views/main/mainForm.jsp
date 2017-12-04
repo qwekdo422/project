@@ -13,20 +13,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/alert/alertify.min.js"></script>
 <%-- ====================== 필수  ======================  --%>
-
+<script src="../js/main/mainForm.js"></script>
+<link rel="stylesheet" href="../css/main/WordCloud.css" />
 <script>
+	var come = "${come}";
+	var uid ="${UID}";
+  //타이머 설정으로 워드 클라우드 이미지 등록 처리 작업
+  playAlert = setInterval(function(){$('.col-lg-3 img').attr('src','../img/main/real_word.jpg?timestamp='+new Date().getTime());},1000);
 
-$(function(){
-	$('.btn_word').click(function(){
-		<!--jQuery 이미지 리로드가 되지 않을때 처리 방법-->
-		<!--크롬의 경우에는 removeAttr를 썼더라도 src 속성이 이전 속성과 같아버리면 이미지를 새로 받아오지 않고 기존의 이미지를 셋팅해버립니다..-->
-        <!--그래서 크롬을 속여서 다른 주소이게끔 착각하게 뒤에 타임스탬프의 허위 매개변수를 셋팅해 줘야 합니다 -->
-
-		$('.col-lg-3 img').attr('src','../img/main/real_word.jpg?timestamp='+new Date().getTime());
-	});
-});
 </script>
-
 </head>
 <body style="margin:0 auto;">
 
@@ -41,9 +36,16 @@ $(function(){
  
 				<div class="col-lg-3" align="center">
 					<br>
-					<h5 align="center"> [실시간 워드 클라우드] </h5> <br>
+					<!--  <h5 align="center"> [실시간 워드 클라우드] </h5> <br> -->
+					<div id ="ani" class="title_word1">Word Cloud</div>
+					<br>
+					<br>
                     <img class="card-img-top" src="../img/main/real_word.jpg">
-                    <button class="btn_word">실시간 워드 버튼</button>
+                    <br>
+                    <br>
+                    <!--  <button class="btn_word" id="btn">후기 업데이트</button> -->
+                 
+                   
 				</div>
 
 				<!-- /.col-lg-3 -->

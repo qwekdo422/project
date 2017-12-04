@@ -11,13 +11,48 @@ public class MatingService {
 	public MatingDAO md;
 	
 	/*
-	 *  사랑의 작대기
+	 *  공통
 	 */
 	
 	// 현재 날짜, 기수 구하기
 	public String getEdate() {
 		return md.getEdate();
 	}
+
+	
+	
+	/*
+	 *  점심 사다리 타기
+	 */
+	
+	// 사다리용 여자 정보 가져오기
+	public List<MatingVO> WomenForLunch(String edate){
+		return md.WomenForLunch(edate);
+	}
+	// 사다리용 남자 정보 가져오기
+	public List<MatingVO> MenForLunch(String edate){
+		return md.MenForLunch(edate);
+	}
+	// 남자수, 여자수에 맞춰 사다리 가져오기
+	public int makeLadder(String edate){
+		return md.makeLadder(edate);
+	}
+	// 점심 파트너 입력
+	public void lunching(int g1, int g2){
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("gno", g1);
+		map.put("pno", g2);
+		md.lunching(map);
+		map.put("gno", g2);
+		map.put("pno", g1);
+		md.lunching(map);
+	}
+	
+	
+	
+	/*
+	 *  사랑의 작대기
+	 */
 	
 	// 이번기수의 사람수 구하기
 	public MatingVO getNumbers(String edate){
@@ -39,12 +74,10 @@ public class MatingService {
 		md.coupling(edate);
 	}
 	
-	
-	
-	
-	
-	
-	
+	// 커플 목록 가져오기
+	public List<MatingVO> whoAreCouples(String edate) {
+		return md.whoAreCouples(edate);
+	}
 	
 	
 	/*

@@ -31,11 +31,15 @@ public class LoginController {
 	 * @return : ModelandView
 	 */
 	@RequestMapping("/LoginForm")
-	public ModelAndView LoginForm(ProfileVO pVO){
+	public ModelAndView LoginForm(ProfileVO pVO, String url , @RequestParam(value="pwfail" ,defaultValue = "1")int pwfail){
+		if(pVO.getRno() != 0) {
+			url ="../ Rboard/RboardView.do?rno="+pVO.getRno();
+		}
+		ModelAndView mv= new ModelAndView();
+		mv.addObject("url", url);
 		
-		ModelAndView mv= new ModelAndView(); 
+		mv.addObject("pwfail", pwfail); 
 		mv.setViewName("Login/LoginForm");
-		
 		return mv; 
 	}
 	
@@ -49,8 +53,7 @@ public class LoginController {
 	 * @return : ModelandView
 	 */
 	@RequestMapping("/LoginProc")
-	public ModelAndView LoginProc(HttpServletRequest req, HttpSession session, ProfileVO pVO){
-		System.out.println("실행되니?");
+	public ModelAndView LoginProc(HttpServletRequest req, HttpSession session, ProfileVO pVO , 	RedirectView rv){
 		ModelAndView mv= new ModelAndView(); 
 		String id=req.getParameter("id"); 
 		String pw=req.getParameter("pw"); 
@@ -58,26 +61,45 @@ public class LoginController {
 		
 	
 		if(result==1){
-			
+			int Auth = lService.getAuth(id);
 			
 			int mNo=lService.mNo(id);//로그인에 성공하여 그 아이디의 회원 번호를 받았다. 
 			session.setAttribute("MNO", mNo);//세션을 저장하였다. 
 																							//즉 로그인 했을 때, 즉 세션이 필요한 곳에서
 																							//getAttribute("키값"); 하면 
 																							//그 세션이 있는 곳에서는 저 키값에 저장된 변수를 
-																							//사용할 수 있다. 
+																							//사용할 수 있다.
 			
 			session.setAttribute("UID", id);//세션을 부여하겠다는 의미이다.
-			mv.addObject("OBJECT",result); 
-			mv.addObject("UID", id); 
-			mv.setViewName("Login/SubLoginForm");
+			session.setAttribute("Auth", Auth);	// 세션에 권한 등록
+//			mv.addObject("OBJECT",result); 
+//			mv.addObject("UID", id);
+		
+			
+			//	파라메터에 url값이 존재한다면 인터셉터를 거치고 온 상태이다.
+			//	로그인 처리 완료 후 로그인 전 요청한 url로 리다이렉트한다.
+			if(pVO.getUrl() != null) {
+				rv.setUrl(pVO.getUrl());
+				mv.setView(rv);
+			} else {
+				rv.setUrl("../main/mainForm.do");
+				rv.addStaticAttribute("come", "welcome");
+				rv.addStaticAttribute("UID",id);
+				mv.setView(rv); 
+				
+			}
 
 		return mv; 
 		}else{
-			mv.addObject("OBJECT",result); 
-			mv.addObject("ID",id); 
-			mv.addObject("PW",pw); 
-			mv.setViewName("Login/SubLoginForm");
+			
+			
+			rv.setUrl("../Login/LoginForm.do");
+			rv.addStaticAttribute("pwfail", result);
+			mv.setView(rv);
+//			mv.addObject("OBJECT",result); 
+//			mv.addObject("ID",id); 
+//			mv.addObject("PW",pw); 
+//			mv.setViewName("Login/SubLoginForm");
 			return mv; 
 		}
 

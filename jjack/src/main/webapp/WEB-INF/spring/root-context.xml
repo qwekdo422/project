@@ -29,24 +29,19 @@
 	
 	<!-- myBatis 환경설정 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<!-- 기존방식일때 사용 / mapper XML 경로를 잡아준다. -->
-		<property name="configLocation" value="classpath:/mapper/myBatis-config.xml" />
 		<!-- 사용할 컨넥션 풀과 연결 -->
 		<property name="dataSource" ref="BaseBDDataSource" />
-		
 		<!-- 
-			새로운 방식 / 자동 Alias 설정  
+				자동 Alias 설정  
 			-	해당 패키지안에 VO를 만들면 자동 Alias가 생성된다.
 			-	MemberVO -> MemberVO or membervo 로 사용가능
 		-->
 		<property name="typeAliasesPackage" value="com.jjack.web.common.vo"/>
-		
-		
 		<!-- SQL.xml 문서들이 정의된 경로를 지정한다. -->
 		<property name="mapperLocations" value="classpath:sql/*DAO.xml" />
 	</bean>
 	
-	<!-- 새로운 방식일때 사용 / dao 스캔 -->
+	<!-- dao 스캔 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- DAO 인터페이스가 선언된 패키지 지정한다. -->
 		<!-- DAO 인터페이스와 SQL.xml 파일 맵핑하기 위한 작업 -->

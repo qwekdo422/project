@@ -21,13 +21,10 @@ public class FileUtil {
 	public static String upload(MultipartFile oriFile, String name, String path) {
 		//	oriFile -> 임시 저장된 파일의 정보
 		//	name, path -> 임시 파일을 복사할 위치와 복사할 파일의 이름
-		
 		//	복사하기 전에 지금 복사할 이름이 중복되면 바꾸어서 복사를 해야 한다.
 		name = renameFile(name, path);
-		
 		//	1.	복사할 파일을 File클래스로 만든다.
 		File copyFile = new File(path+"\\"+name); //이 경로에 있는 파일을 가져와서 쓸 계획이다. 
-	
 		//	2.	복사를 시도한다.
 		try {
 			oriFile.transferTo(copyFile);

@@ -183,10 +183,10 @@ map.put("nno",nVO.getNno());
 nService.nBoardModifyProc(map);
 
 ModelAndView mv= new ModelAndView(); 
-//RedirectView rv= new RedirectView("../Nboard/NboardView.do"); 
+RedirectView rv= new RedirectView("../Nboard/NboardList.do"); 
 //rv.addStaticAttribute("VO",nVO);
-//mv.setView(rv);
-mv.setViewName("main/mainForm");
+mv.setView(rv);
+//mv.setViewName("Nboard/NboardList");
 	
 	return mv; 
 }

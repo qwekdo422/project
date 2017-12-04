@@ -58,9 +58,22 @@ $(document).ready(function(){
 				body.focus(); 
 				return; 	
 			}
-			
+			//alert("게시물이 수정되었습니다."); 
 			//서브밋 시킨다. 
-			$("#nfrm").submit(); 
+			//$("#nfrm").submit(); 
+			
+			alertify.alert("게시물이 수정되었습니다.", function(){
+				
+				$("#nfrm").submit(); 
+				}); 
+			
+			
+			
+			
+			
+			
+			
+			
 			
 		});
 		
@@ -78,7 +91,7 @@ $(document).ready(function(){
 <!-- 수정하기 폼  -->
 <form method="post" id="nfrm"action="../Nboard/NboardModifyProc.do">
 <input type="hidden" id="nno" name="nno" value="${VO.nno}">
-		<table width="800"  border="1" align="center">
+		<table class="table table-hover table-striped table-bordered mt-4">
 			<tr>
 				<td>
 					<input type="text" name="ntitle" id="ntitle"  style="width:100%" placeholder="제목을 입력해주세요" value="${VO.ntitle}">
@@ -91,7 +104,7 @@ $(document).ready(function(){
 		 	</tr>
 		  	<tr>
 				<td colspan="2" align="center">
-					<input type="button" id="nbtn" value="수정완료" >
+					<input type="button" id="nbtn" class="btn btn-info"  value="수정완료" >
 				</td>
 			</tr>
 	</table>

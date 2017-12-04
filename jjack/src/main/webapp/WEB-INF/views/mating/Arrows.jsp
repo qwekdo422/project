@@ -18,13 +18,11 @@
 <script>
 	// 선택을 아직 하지 않은 사람 수
 	var allClear = ${numbers.tCount} -${numbers.cCount};
-	
-	// 선 그리기
-	function drawLine(e){
-		e[0].beginElement();
-		e[1].beginElement();
-	}
-	
+	// 전체 입소자 수
+	var tCount = ${numbers.tCount};
+	// 작대기 완료 후 결과 정리된 텍스트
+	var sumText ='<c:forEach var="cp" items="${cList}">${cp.nick} <span style="color:red;">♥</span> ${cp.loveNick}<br /></c:forEach>';
+	// 작대기 완료 후 결과를 정리해 보여주는 함수
 </script>
 </head>
 <body style="margin:0 auto;">
@@ -40,18 +38,17 @@
 				<div class="list-group text-right">
 					<a href="../mating/forLunch.do" class="list-group-item">도시락 사다리</a> 
 					<a href="../mating/Arrows.do" class="list-group-item">사랑의 작대기</a>
-					<a href="../mating/myLove.do" class="list-group-item">[임시]짝선택</a>
 				</div>
 			</div>
 			<!-- 본 화면 -->
-		 	<div id="introMain" class="col-lg-9">
+		 	<div id="main" class="col-lg-9">
 				<div class="row">
 				
 					<div id="men" class="col-lg-2">
  						<c:forEach var="ml" items="${mList}" varStatus="vs">
 							<div class="col-xs-2 mx-auto">
 								<figure class="figure">
-									<img src="../file/${ml.pic}" class="figure-img img-fluid">
+									<img src="../file/${ml.pic}" class="figure-img">
 									<figcaption class="text-center">${ml.nick}</figcaption>
 									<input type="hidden" class="lno" value="${ml.loveNo}">
 								</figure>
@@ -128,7 +125,7 @@
  						<c:forEach var="fl" items="${fList}">
 							<div class="col-xs-2 mx-auto">
 								<figure class="figure">
-									<img src="../file/${fl.pic}" class="figure-img img-fluid">
+									<img src="../file/${fl.pic}" class="figure-img">
 									<figcaption class="text-center">${fl.nick}</figcaption>
 									<input type="hidden" class="lno" value="${fl.loveNo}">
 								</figure>
@@ -137,11 +134,11 @@
 					</div>
 					<!-- 여자리스트 종료 -->
 				</div>
-				<!-- row -->
+				<!-- row 종료 -->
 			</div>
-			<!-- 본 화면 -->
+			<!-- 본 화면 종료 -->
 		</div>
-		<!-- 전체 화면 -->
+		<!-- 전체 화면 종료 -->
 	</div>
 	<!--  /.container -->
 	<!---------------------------------------------->

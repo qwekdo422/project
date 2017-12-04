@@ -1,22 +1,41 @@
+figure {
+	border: 1px solid black;
+	display:inline-block;
+}
+figure img {
+	width:105px;
+	height:105px;
+	border-bottom:1px solid black;
+	cursor:pointer;
+}
+figcaption {
+	cursor:pointer;
+}
 
+svg {
+	width:520px;
+	height:760px;'
+}
+line {
+	stroke:Gainsboro;
+	stroke-width:15px;
+}
+.ldHrz {
+	stroke-linecap:round;
+}
+.ldVrt {
+	stroke-linecap:butt;
+}
+g {
+	isolation: isolate;
+}
 
+path {
+    fill: none;
+    stroke-width: 6;
+    stroke-linecap:round;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.endPoint {
+	fill:snow;
+}
