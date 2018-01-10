@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!--  자동 주입 어노테이션 사용 -->
+	<context:annotation-config />
+	
+	<!-- 
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	    <property name="driverClassName" value="net.sf.log4jdbc.DriverSpy"/>
+	    <property name="url" value="jdbc:log4jdbc:oracle:thin:@192.168.0.100:1521:XE" />
+	    <property name="username" value="maxstudy"/>
+	    <property name="password" value="maxstudy"/>
+ 	</bean>
+ 	 -->	
+	<!-- 오라클 컨넥션 풀 설정 -->
+	<bean id="BaseBDDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	    <property name="driverClassName" value="net.sf.log4jdbc.DriverSpy"/>
+        <property name="url" value="jdbc:oracle:thin:@192.168.0.100:1521:XE" />
+        <property name="username" value="maxstudy"/>
+        <property name="password" value="maxstudy"/>
+	</bean>
+	
+	<!-- myBatis 환경설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 사용할 컨넥션 풀과 연결 -->
+		<property name="dataSource" ref="BaseBDDataSource" />
+		<!-- SQL.xml 문서들이 정의된 경로를 지정한다. -->
+		<property name="configLocation" value="classpath:/sqlmap/sql-mapper-config.xml" />
+		<property name="mapperLocations" value="classpath:/sqlmap/mappers/*.xml" />
+	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+	
+	
+	<!-- dao 스캔 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- DAO 인터페이스가 선언된 패키지 지정한다. -->
+		<!-- DAO 인터페이스와 SQL.xml 파일 맵핑하기 위한 작업 -->
+		<property name="basePackage" value="com.maxstudy.*.dao" />
+	</bean>
+	
+	<!-- 파일다운로드 빈 선언-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!--파일 업로드 환경 설정-->  
+    	<property name="maxUploadSize" value="1000000000" />
+        <property name="maxInMemorySize" value="1000000000" />
+		<property name="defaultEncoding" value="UTF-8" />
+    </bean>
+    
+   	<!-- 	사용자 뷰로 사용할 클래스를 bean 선언 -->
+  	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  		<property name="order" value="2" />
+		<property name="prefix" value="/WEB-INF/view/"/>
+		<property name="suffix" value=",jsp" />
+	</bean>
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="1"/>
+	</bean>
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+             <property name="order" value="0"/>
+             <property name="defaultErrorView" value="error"/>
+             <property name="exceptionMappings">
+                    <props>
+                           <prop key="RuntimeException">error</prop>
+                    </props>
+             </property>
+	</bean>
+    <!-- 생성된 엑셀뷰 지정 -->
+    <bean id="excelView" class="com.maxstudy.util.ExcelView"/>
+    <!-- 파일다운로드 뷰 -->
+    <bean id="download" class="com.maxstudy.util.DownloadView" />
+    	
+</beans>

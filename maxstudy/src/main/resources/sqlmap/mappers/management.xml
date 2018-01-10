@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maxstudy.management.dao.ManegementDAO">
+	
+	<!-- 직원교육관리 목록 총 개수 -->
+	<select id="manegementTotalCnt" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM
+			EMP_TRAINING
+	</select>
+	<!-- 직원교육관리 검색 총 개수 -->
+	<select id="manegementTotalSearchCnt" parameterType="managementVO" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM
+			EMP_TRAINING
+		WHERE
+	        1 = 1
+	        <if test="searchName != null and searchName !='' ">
+	        	AND M_NAME LIKE '%'|| #{searchName} ||'%'
+	        </if>
+	        <if test="searchTitle != null and searchTitle !='' ">
+	        	AND M_TITLE LIKE '%'|| #{searchTitle} ||'%'
+	        </if>
+	        <if test="searchEvaluation != null and searchEvaluation !='' ">
+	        	AND M_EVALUATION LIKE '%'|| #{searchEvaluation} ||'%'
+	        </if>
+	        <if test="searchStatus != null and searchStatus !='' ">
+       			AND M_STATUS IN
+      	        <foreach collection="searchStatus" item="type"  open="(" close=")" separator=",">
+         				 <if test='type.equals("1")'>'합격'</if>
+         				 <if test='type.equals("2")'>'진행중'</if>
+         				 <if test='type.equals("3")'>'불합격'</if>
+      			</foreach>
+	        </if>
+			<if test="searchStartDate != null and searchEndDate != null and searchStartDate != '' and searchEndDate != '' ">
+				<![CDATA[
+	        	AND M_STARTDATE >= #{searchStartDate}
+	        	AND M_ENDDATE <= #{searchEndDate}
+	        	]]>
+	        </if>
+	</select>
+	
+	<!-- 직원교육관리 전체목록 -->
+	<select id="manegementList" resultType="managementVO" parameterType="managementVO">
+		SELECT
+		    RNO, M_NO, M_NAME, M_STARTDATE, M_ENDDATE, M_TITLE, M_EVALUATION, M_STATUS
+		FROM
+		    (
+		    SELECT
+		        ROWNUM AS RNO,
+		        A.*
+		    FROM
+		        (
+		        SELECT
+		            M_NO, M_NAME, M_STARTDATE, M_ENDDATE, M_TITLE, M_EVALUATION, M_STATUS
+		        FROM
+		            EMP_TRAINING
+		        WHERE
+		        	1 = 1
+		        <if test="searchName != null and searchName !='' ">
+		        	AND M_NAME LIKE '%'|| #{searchName} ||'%'
+		        </if>
+		        <if test="searchTitle != null and searchTitle !='' ">
+		        	AND M_TITLE LIKE '%'|| #{searchTitle} ||'%'
+		        </if>
+		        <if test="searchEvaluation != null and searchEvaluation !='' ">
+		        	AND M_EVALUATION LIKE '%'|| #{searchEvaluation} ||'%'
+		        </if>
+		        <if test="searchStatus != null and searchStatus !='' ">
+         			AND M_STATUS IN
+        	        <foreach collection="searchStatus" item="type"  open="(" close=")" separator=",">
+           				 <if test='type.equals("1")'>'합격'</if>
+           				 <if test='type.equals("2")'>'진행중'</if>
+           				 <if test='type.equals("3")'>'불합격'</if>
+        			</foreach>
+		        </if>
+				<if test="searchStartDate != null and searchEndDate != null and searchStartDate != '' and searchEndDate != '' ">
+					<![CDATA[
+		        	AND M_STARTDATE >= #{searchStartDate}
+		        	AND M_ENDDATE <= #{searchEndDate}
+		        	]]>
+		        </if>
+		        ORDER BY M_NO DESC) A
+		    ) M
+		WHERE RNO BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 직원교육관리 이름조회 -->
+	<select id="managementSelect" parameterType="int" resultType="managementVO">
+		SELECT * FROM EMP_TRAINING WHERE M_NO = #{no} 
+	</select>
+	
+	
+	<!-- 직원교육관리등록 -->
+	<insert id="manegementWrite" parameterType="managementVO">
+		INSERT INTO EMP_TRAINING
+		VALUES(
+		    (SELECT NVL(MAX(M_NO), 0) + 1 FROM EMP_TRAINING),
+		    #{m_name},   
+			#{m_startdate},   
+			#{m_enddate},   
+			#{m_title},   
+			#{m_evaluation},   
+			#{m_status}
+		)
+		<selectKey keyProperty="m_no" resultType="int" order="AFTER">
+			SELECT MAX(M_NO) FROM EMP_TRAINING
+		</selectKey>
+	</insert>
+	
+	<!-- 직원교육관리상세 목록 -->
+	<select id="detailList" parameterType="int" resultType="detailVO">
+		SELECT
+			S_NO, M_NO, S_NAME, TO_CHAR(S_DATE, 'yyyy-MM-dd') AS S_DATE , S_DAY, S_CONTENT, S_EVALUATION, S_COMMENT
+		FROM
+			EMP_TRAINING_SUB
+		WHERE
+			M_NO = #{no}
+		ORDER BY
+			S_NO ASC		 
+	</select>
+	
+	<!-- 직원교육관리 상세등록 (복사후 등록했을 경우) -->
+	<insert id="detailInsert" parameterType="detailVO">
+		INSERT INTO EMP_TRAINING_SUB
+		VALUES(
+			(SELECT NVL(MAX(S_NO), 0) + 1 FROM EMP_TRAINING_SUB),
+			(SELECT MAX(M_NO) FROM EMP_TRAINING),			
+			#{s_name}, 			
+			#{s_date}, 			
+			#{s_day}, 			
+			#{s_content},
+			NULL, 
+			NULL	
+		)
+	</insert>
+	
+	<!-- 상세관리 정상 등록 및 엑셀 등록 -->
+	<insert id="manageInsert" parameterType="detailVO">
+		INSERT INTO EMP_TRAINING_SUB
+		VALUES(
+			(SELECT NVL(MAX(S_NO), 0) + 1 FROM EMP_TRAINING_SUB),
+			(SELECT MAX(M_NO) FROM EMP_TRAINING),			
+			#{s_name}, 			
+			#{s_date}, 			
+			#{s_day}, 			
+			#{s_content},
+			#{s_evaluation}, 
+			#{s_comment}	
+		)
+	</insert>
+	
+	<!-- 직원교육상세관리 업데이트 -->
+	<update id="manegeDetailUpdate" parameterType="detailVO">
+		UPDATE EMP_TRAINING_SUB
+		SET
+			S_NAME = #{s_name},
+			S_DATE = #{s_date},
+			S_DAY = #{s_day},
+			S_CONTENT = #{s_content},
+			S_EVALUATION = #{s_evaluation},
+			S_COMMENT = #{s_comment}
+		WHERE
+			M_NO = #{m_no}
+		AND
+			S_NO = #{s_no}
+	</update>
+	
+	<!-- 직원교육상세관리 등록 -->
+	<insert id="manageDetailInsert" parameterType="detailVO">
+		INSERT INTO EMP_TRAINING_SUB
+		VALUES(
+			(SELECT NVL(MAX(S_NO), 0) + 1 FROM EMP_TRAINING_SUB),
+			<if test="m_no != 0">
+				#{m_no},
+			</if>
+			<if test="m_no == 0">
+				(SELECT MAX(M_NO) FROM EMP_TRAINING),
+			</if>
+			#{s_name}, 			
+			#{s_date}, 			
+			#{s_day}, 			
+			#{s_content},
+			#{s_evaluation}, 
+			#{s_comment}	
+		)
+	</insert>
+	
+	<!-- 직원교육상세관리 삭제 -->
+	<delete id="manegeDetailDelete" parameterType="detailVO">
+		DELETE FROM EMP_TRAINING_SUB 
+		WHERE 
+			1 = 1
+		<if test="m_no > 0">
+			AND M_NO = #{m_no}
+		</if>
+		<if test="s_no > 0">
+			AND S_NO = #{s_no}
+		</if>
+	</delete>
+	<!-- 직원교육관리 삭제 -->
+	<delete id="manegementDelete" parameterType="int">
+		DELETE FROM EMP_TRAINING WHERE M_NO = #{no}
+	</delete>
+</mapper>
